@@ -9,6 +9,9 @@ const sequelizeOpts = DATABASE_URL? DATABASE_URL : {
   password: DB_PASSWORD,
   database: DB_DATABASE,
   dialect: 'postgres',
+  define: {
+    timestamps: false
+  }
 };
 
 const sequelize = new Sequelize(sequelizeOpts);
