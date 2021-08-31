@@ -8,7 +8,7 @@ Instalar las dependencias de `npm`
 $ npm install
 ```
 
-Crear un arhico `.env` en el root del proyecto teniendo como ejemplo el archivo `.env.sample` que contengan las variables de la base de datos de desarrollo.
+Crear un archivo `.env` en el root del proyecto teniendo como ejemplo el archivo `.env.sample` que contengan las variables de la base de datos de desarrollo.
 
 ```bash
 DB_USERNAME=<username>
