@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Main</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/index.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="relative md:flex">
-      <%- include('../partials/drawer.ejs') %>
-      <div class="flex-grow">
-        <%- include('../partials/navbar.ejs') %>
-        <div class="sm:mx-2 md:mx-12 lg:mx-20 xl:mx-auto xl:max-w-5xl py-3">
-          <%- body %>
-        </div>
-      </div>
-    </div>
-  </body>
-  <%- script %>
+
+<head>
+  <title>
+    <%- (typeof title != "undefined" ? title : "") %>
+  </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS Boostrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <!-- CSS local -->
+  <link href="/css/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- body %>
+</body>
+<%- script %>
+
 </html>
