@@ -1,17 +1,120 @@
-<header>
-  <%- include('header') %>
-</header>
 <main class="container">
   <div>
     <%- include('modal_adopcion') %>
   </div>
-  <div class="text-purple-700">
-    Aquí irá el template de adopción :D
-  </div>
+  <form class="row my-3 p-2 border-2 g-3">
+    <h1 class="fw-bold">1. Datos:</h1>
+    <div class="col-md-4">
+      <label for="" class="form-label">Nombre:</label>
+      <input type="text" class="form-control" id="validationDefault01" placeholder="Nombre de la mascota" value=""
+        required>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Especie:</label>
+      <select class="form-select" id="specie_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Perro</option>
+        <option>Gato</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Sexo:</label>
+      <select class="form-select" id="gender_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Macho</option>
+        <option>Hembra</option>
+      </select>
+    </div>
+    </div>
+
+    <div class="col-md-4">
+      <label for="" class="form-label">Fecha de nacimiento(Aprox.):</label>
+      <input type="date" class="form-control" id="birthdate_id" required>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Tamaño:</label>
+      <select class="form-select" id="size_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Pequeño</option>
+        <option>Mediano</option>
+        <option>Grande</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Nivel de Actividad:</label>
+      <select class="form-select" id="activitylevel_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Desconocida</option>
+        <option>Nula</option>
+        <option>Nula</option>
+        <option>Baja</option>
+        <option>Media</option>
+        <option>Alta</option>
+        <option>Muy alta</option>
+
+      </select>
+    </div>
+    </div>
+
+    <div class="col-12">
+      <label for="" class="form-label">Descripción:</label>
+      <textarea class="form-control" id="description_id" rows=4 maxlength="300"
+        placeholder="Breve descripción de la mascota" style="resize: none;" required></textarea>
+    </div>
+
+    <h1 class="fw-bold">2. Se entrega:</h1>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Vacunado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Desparasitado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Sano</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Esterelizado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Identificado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Microchip</label>
+      </div>
+    </div>
+
+
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+        <label class="form-check-label" for="invalidCheck2">
+          Agree to terms and conditions
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+  </form>
 </main>
 
-<%- include('footer') %>
 
 
-  <script src="/js/adopcion.js"></script>
-  <script src="/js/index.js"></script>
+<script src="/js/adopcion.js"></script>
