@@ -7,9 +7,9 @@ module.exports = {
    *
    */
 
-  getInicioAdopcion: async (req, res) => {
+  getAnuncios: (req, res) => {
     try{
-      return res.render('adopcion',{title:'Dar en adopcion'});
+      return res.render('anuncios',{title:'Anuncios'});
     }
     catch{}
   }

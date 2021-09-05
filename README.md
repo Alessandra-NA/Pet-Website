@@ -17,13 +17,6 @@ DB_DATABASE=<database>
 DB_HOST=<host>
 ```
 
-Compilar tailwindcss y se genera un archivo en el path `./src/public/css/index.css`
-> Esto se realizará cada vez que se cambie alguna configuración de tailwindcss
-
-```bash
-$ npm run dev:tailwind
-```
-
 Correr el script de desarrollo
 
 ```bash
