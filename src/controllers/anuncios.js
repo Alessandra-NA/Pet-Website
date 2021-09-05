@@ -1,4 +1,4 @@
-const {  /* los modelos que vayas a usar */ } = require('../models');
+const {  Post } = require('../models');
 
 module.exports = {
   /**
@@ -9,7 +9,10 @@ module.exports = {
 
   getAnuncios: (req, res) => {
     try{
-      return res.render('anuncios',{title:'Anuncios'});
+      Post.findAll().then((result) => {
+        console.log(result);
+        res.render('anuncios',{title:'Anuncios', posts: result})
+      });
     }
     catch{}
   }
