@@ -4,6 +4,8 @@ const { mainPage } = require('../controllers');
 const userRoutes = require('./user');
 const adopcionRoutes = require('./adopcion')
 const matchRoutes = require('./match')
+const anunciosRouter = require('./anuncios')
+
 
 /**
   * @param {express.Express} app
@@ -14,6 +16,7 @@ const routerConnection = (app) => {
   app.use('/user', userRoutes);
   app.use('/adopcion', adopcionRoutes);
   app.use('/match', matchRoutes);
+  app.use('/anuncios', anunciosRouter);
 
   app.use((_, res) => {
     res.render('notFound');
