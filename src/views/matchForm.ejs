@@ -1,0 +1,60 @@
+<main class="container-lg my-10">
+    <h1 class="mb-3">Formulario para encontrar a mi mascota ideal</h1>
+    <form action="post">
+        <div class="d-flex flex-column">
+            <div>
+                <label class="mb-2">Me gustaría adoptar un...</label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
+                    <label> <input type="radio" name="perro"> Perro</label>
+                    <label> <input type="radio" name="gato"> Gato</label>
+                </div>
+            </div>
+            <div>
+                <label class="mb-2">Actualmente vivo en una...</label>
+                <select class="mx-auto form-control py-2 mb-3" style="width: 75%">
+                    <option value="1">Casa pequeña o departamento</option>
+                    <option value="2">Casa mediana</option>
+                    <option value="3">Casa amplia</option>
+                </select>
+            </div>
+            <div>
+                <label class="mb-2">¿Cuento con presupuesto para cubrir gastos inesperados (como problemas de salud)?</label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
+                    <label> <input type="radio" name="gastosTrue"> Sí </label>
+                    <label> <input type="radio" name="gastosFalse"> No </label>
+                </div>
+            </div>
+            <div>
+                <label class="mb-2">¿Suelo cambiar de hogar regularmente?</label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
+                    <label> <input type="radio" name=""> Sí </label>
+                    <label> <input type="radio" name=""> No </label>
+                </div>
+            </div>
+            <div>
+                <label class="mb-2">¿Tengo otros animales en casa o planeo adoptar más de uno?</label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
+                    <label> <input type="radio" name=""> Sí </label>
+                    <label> <input type="radio" name=""> No </label>
+                </div>
+            </div>
+            <div>
+                <label class="mb-2">¿Cuento con tiempo para realizar actividades físicas o de juego con mi mascota?</label>
+                <select class="mx-auto form-control py-2 mb-3" style="width: 75%">
+                    <option value="1">Sí, bastante tiempo</option>
+                    <option value="2">Solo lo necesario</option>
+                    <option value="3">No, no tengo tiempo</option>
+                </select>
+            </div>
+            <div>
+                <label class="mb-2">(en perros) De preferencia, me gustaría un perro de tamaño...</label>
+                <div class="mx-auto d-flex flex-column flex-sm-row py-2 mb-3 justify-content-sm-around justify-content-center border-1 border-gray-300 rounded-md" style="width: 75%">
+                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Miniatura</label>
+                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Pequeño</label>
+                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Mediano</label>
+                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Grande</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
