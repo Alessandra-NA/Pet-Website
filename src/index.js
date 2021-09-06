@@ -48,9 +48,3 @@ app.listen(PORT, async () => {
     console.log(err);
   }
 });
-
-app.get('/adopcion'), async (req, res) => {
-  console.log("gg")
-  res.render('adopcion');
-}
-

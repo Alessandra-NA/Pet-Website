@@ -3,7 +3,7 @@ const express = require('express');
 const { mainPage } = require('../controllers');
 const userRoutes = require('./user');
 const adopcionRoutes = require('./adopcion')
-const crearUsuario = require('./user')
+const anunciosRouter = require('./anuncios')
 
 /**
   * @param {express.Express} app
@@ -13,7 +13,7 @@ const routerConnection = (app) => {
   app.use('^/$', mainPage);
   app.use('/user', userRoutes);
   app.use('/adopcion', adopcionRoutes);
-  app.use('/crear_usuario', crearUsuario);
+  app.use('/anuncios', anunciosRouter);
 
   app.use((_, res) => {
     res.render('notFound');

@@ -1,40 +1,150 @@
-<!--
-  <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Carousel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </header>
--->
-<main>
+<main class="container">
   <div>
     <%- include('modal_adopcion') %>
   </div>
-  <div class="text-success">
-    ZzzzPerro
-  </div>
+  <form class="row my-3 p-2 border-2 g-3">
+    <h1 class="fw-bold">1. Datos:</h1>
+    <div class="col-md-4">
+      <label for="" class="form-label">Nombre:</label>
+      <input type="text" class="form-control" id="validationDefault01" placeholder="Nombre de la mascota" value=""
+        required>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Especie:</label>
+      <select class="form-select" id="specie_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Perro</option>
+        <option>Gato</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Sexo:</label>
+      <select class="form-select" id="gender_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Macho</option>
+        <option>Hembra</option>
+      </select>
+    </div>
+    </div>
+
+    <div class="col-md-4">
+      <label for="" class="form-label">Fecha de nacimiento(Aprox.):</label>
+      <input type="date" class="form-control" id="birthdate_id" required>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Tamaño:</label>
+      <select class="form-select" id="size_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Pequeño</option>
+        <option>Mediano</option>
+        <option>Grande</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="form-label">Nivel de Actividad:</label>
+      <select class="form-select" id="activitylevel_id" required>
+        <option selected disabled value="">Choose...</option>
+        <option>Desconocida</option>
+        <option>Nula</option>
+        <option>Nula</option>
+        <option>Baja</option>
+        <option>Media</option>
+        <option>Alta</option>
+        <option>Muy alta</option>
+
+      </select>
+    </div>
+    </div>
+
+    <div class="col-12">
+      <label for="" class="form-label">Descripción:</label>
+      <textarea class="form-control" id="description_id" rows=4 maxlength="300"
+        placeholder="Breve descripción de la mascota" style="resize: none;" required></textarea>
+    </div>
+
+    <h1 class="fw-bold">2. Se entrega:</h1>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Vacunado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Desparasitado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Sano</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Esterelizado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Identificado</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="">
+        <label class="form-check-label" for="">Microchip</label>
+      </div>
+    </div>
+
+    <h1 class="fw-bold">3. Fotos:</h1>
+    <div class="col-md-4">
+      <label for="" class="form-label">Foto de perfil:</label>
+      <input type="file" class="file form-control" id="" required>
+      <img src="./img/80x80.png" id="preview" class="img-fluid">
+    </div>
+
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+        <label class="form-check-label text-blue-700" for="invalidCheck2">
+          Agree to terms and conditions
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+  </form>
+
+  <script>
+    $(document).on("click", ".browse", function () {
+      var file = $(this)
+        .parent()
+        .parent()
+        .parent()
+        .find(".file");
+      file.trigger("click");
+    });
+    $('input[type="file"]').change(function (e) {
+      var fileName = e.target.files[0].name;
+      $("#file").val(fileName);
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("preview").src = e.target.result;
+      };
+      // read the image file as a data URL.
+      reader.readAsDataURL(this.files[0]);
+    });
+
+  </script>
 </main>
+
+
 
 <script src="/js/adopcion.js"></script>
