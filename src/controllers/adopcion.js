@@ -9,7 +9,7 @@ module.exports = {
 
   getInicioAdopcion: async (req, res) => {
     try{
-        return res.render('adopcion',{title:'Dar en adopcion'});
+      return res.render('adopcion',{title:'Dar en adopcion'});
     }
     catch{}
   }

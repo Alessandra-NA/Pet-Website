@@ -1,0 +1,18 @@
+<h1>Portal de anuncios</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4">
+    <% posts.forEach(function(post){ %>
+
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Post #<%=post.id%>
+                    </h5>
+                    <p class="card-text">Post text</p>
+                </div>
+            </div>
+        </div>
+
+
+        <% }) %>
+</div>
