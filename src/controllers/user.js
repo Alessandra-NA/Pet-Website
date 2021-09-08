@@ -9,8 +9,10 @@ module.exports = {
    *
    */
 
-  /* getProfilet: async (req, res) => {
-    try{}
+  crearUsuario: async (req, res) => {
+    try{
+      return res.render('crear_usuario', {title : 'Crear Usuario'})
+    }
     catch{}
-  } */
+  } 
 };
