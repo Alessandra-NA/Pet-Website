@@ -1,4 +1,5 @@
 # Build tailwindcss
+src/public/css/index.css
 .vscode
 # Logs
 logs
