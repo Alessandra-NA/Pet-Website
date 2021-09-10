@@ -1,13 +1,13 @@
 const { Router } = require('express');
 const {} = require("../middlewares/auth")
-const { crearUsuario } = require('../controllers/user');
+const { getAnuncios } = require('../controllers/anuncios');
 const router = Router();
+
 
 /*
   EXAMPLE:
-  router.get('/', nameAuth, getProfile)
+  router.get('/', nameAuth, getPetPost)
 */
-
-router.get('/', crearUsuario)
+router.get('/', getAnuncios)
 
 module.exports = router;
