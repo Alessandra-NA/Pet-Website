@@ -17,10 +17,7 @@ const routerConnection = (app) => {
   app.use('/adopcion', adopcionRoutes);
   app.use('/match', matchRoutes);
   app.use('/anuncios', anunciosRouter);
-<<<<<<< HEAD
   app.use('/signup', signupRouter);
-=======
->>>>>>> cdc8861e4f1950eca9083ff1831b87fa7948836d
 
   app.use((_, res) => {
     res.render('notFound');
