@@ -5,10 +5,6 @@ const userRoutes = require('./user');
 const adopcionRoutes = require('./adopcion')
 const matchRoutes = require('./match')
 const anunciosRouter = require('./anuncios')
-<<<<<<< HEAD
-const crearUsuarioRouter = require('./user')
-=======
->>>>>>> Issue2
 
 /**
   * @param {express.Express} app
