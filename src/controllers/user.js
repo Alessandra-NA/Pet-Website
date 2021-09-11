@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const {  User, } = require('../models');
+const {  User } = require('../models');
 const { SESSION_NAME, SALT_ROUNDS } = require('../config/env');
 
 module.exports = {
@@ -8,9 +8,13 @@ module.exports = {
    * @param {import('express').Response} res
    *
    */
-
-  /* getProfilet: async (req, res) => {
-    try{}
+   getEditarUsuario: async(req,res) => {
+    try{
+      return res.render('editar_usuario', {title : 'Editar usuario'})
+    }
     catch{}
-  } */
+  }
+
+  
+
 };

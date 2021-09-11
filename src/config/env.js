@@ -2,9 +2,9 @@ require('dotenv').config();
 
 const {
   PORT = 3000,
-  DB_USERNAME = 'root',
-  DB_PASSWORD = null,
-  DB_DATABASE = 'db-dev',
+  DB_USERNAME = 'petadmin',
+  DB_PASSWORD = '12345',
+  DB_DATABASE = 'petdb',
   DB_HOST = '127.0.0.1',
   SESSION_NAME = 'connectsid',
   SECRET_KEY = 'secret',

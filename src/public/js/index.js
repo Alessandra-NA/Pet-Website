@@ -24,6 +24,14 @@ function OnclickNavbar(){
     }
 }
 
+function highlightNavbar(index) {
+    var navbarList = document.getElementsByClassName("nav-link")
+    for (var i = 0; i < navbarList.length; i++) {
+        navbarList.item(i).setAttribute("class", "nav-link")
+    }
+    navbarList.item(index).setAttribute("class", "nav-link active")
+}
+
 var main = function(){
     document.getElementById("button_navbar").onclick = OnclickNavbar;
 }

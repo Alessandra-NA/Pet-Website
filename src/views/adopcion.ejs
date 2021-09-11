@@ -3,7 +3,13 @@
     <%- include('modal_adopcion') %>
   </div>
   <form class="row my-3 p-2 border-2 g-3">
+<<<<<<< HEAD
+    
     <h1 class="fw-bold">1. Datos:</h1>
+
+=======
+    <h1 class="fw-bold">1. Datos:</h1>
+>>>>>>> main
     <div class="col-md-4">
       <label for="" class="form-label">Nombre:</label>
       <input type="text" class="form-control" id="validationDefault01" placeholder="Nombre de la mascota" value=""
@@ -25,12 +31,16 @@
         <option>Hembra</option>
       </select>
     </div>
-    </div>
+
 
     <div class="col-md-4">
       <label for="" class="form-label">Fecha de nacimiento(Aprox.):</label>
       <input type="date" class="form-control" id="birthdate_id" required>
     </div>
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
     <div class="col-md-4">
       <label for="" class="form-label">Tamaño:</label>
       <select class="form-select" id="size_id" required>
@@ -54,7 +64,7 @@
 
       </select>
     </div>
-    </div>
+
 
     <div class="col-12">
       <label for="" class="form-label">Descripción:</label>
@@ -115,9 +125,11 @@
         </label>
       </div>
     </div>
+
     <div class="col-12">
       <button class="btn btn-primary" type="submit">Submit form</button>
     </div>
+
   </form>
 
   <script>
@@ -141,7 +153,8 @@
       // read the image file as a data URL.
       reader.readAsDataURL(this.files[0]);
     });
-
+    // para cambiar el color de texto de la sección en el navbar
+    highlightNavbar(4)
   </script>
 </main>
 
