@@ -8,11 +8,7 @@ const router = Router();
   router.get('/', nameAuth, getProfile)
 */
 
-
-
-router.get('/', crearUsuario)
-
-router.get('/', editarUsuario)
+router.get('/editar', editarUsuario)
 
 
 

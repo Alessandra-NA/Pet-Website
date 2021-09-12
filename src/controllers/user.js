@@ -9,14 +9,7 @@ module.exports = {
    *
    */
 
-  crearUsuario: async (req, res) => {
-    try{
-      return res.render('crear_usuario', {title : 'Crear nuevo usuario'})
-    }
-    catch{}
-  },
-
-  editarUsuario: async(req,res) => {
+  editarUsuario: async (req, res) => {
     try{
       return res.render('editar_usuario', {title : 'Editar usuario'})
     }
