@@ -36,4 +36,3 @@ var main = function(){
     document.getElementById("button_navbar").onclick = OnclickNavbar;
 }
 
-window.addEventListener("load", main)
