@@ -10,7 +10,6 @@ module.exports = {
   getAnuncios: (req, res) => {
     try{
       Post.findAll({ include: { all: true }}).then((response) => {
-        //console.log(result);
         //let image64 = Buffer.from(response[0].pet.photo).toString('base64')
         res.render('anuncios',{title:'Anuncios', posts: imagesToBase64(response)})
       });
