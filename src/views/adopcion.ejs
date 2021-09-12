@@ -5,106 +5,112 @@
   <!--ver el "border-2" mezcla de clase en Boostrap y Tailwind-->
   <form action="/" method="post" class="row my-3 p-2 border border-gray-500 g-3">
     <h3 class="fw-bold">1. Datos:</h3>
-    <div class="col-md-4">
-      <label for="" class="form-label">Nombre:</label>
-      <input type="text" class="form-control" id="validationDefault01" placeholder="Nombre de la mascota" value=""
-        required>
-    </div>
-    <div class="col-md-4">
-      <label for="" class="form-label">Especie:</label>
-      <select class="form-select" id="specie_id" required>
-        <option selected disabled value="">Choose...</option>
-        <option>Perro</option>
-        <option>Gato</option>
-      </select>
-    </div>
-    <div class="col-md-4">
-      <label for="" class="form-label">Sexo:</label>
-      <select class="form-select" id="gender_id" required>
-        <option selected disabled value="">Choose...</option>
-        <option>Macho</option>
-        <option>Hembra</option>
-      </select>
+    <div class="row input-group">
+      <div class="col-md-4">
+        <label for="" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" placeholder="Nombre de la mascota" name="name" value=""
+          required>
+      </div>
+      <div class="col-md-4">
+        <label for="" class="form-label">Especie:</label>
+        <select class="form-select" name="specie" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Perro</option>
+          <option>Gato</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="" class="form-label">Sexo:</label>
+        <select class="form-select" name="gender" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Macho</option>
+          <option>Hembra</option>
+        </select>
+      </div>
     </div>
 
-
-    <div class="col-md-4">
-      <label for="" class="form-label">Fecha de nacimiento(Aprox.):</label>
-      <input type="date" class="form-control" id="birthdate_id" required>
-    </div>
-    <div class="col-md-4">
-      <label for="" class="form-label">Tamaño:</label>
-      <select class="form-select" id="size_id" required>
-        <option selected disabled value="">Choose...</option>
-        <option>Pequeño</option>
-        <option>Mediano</option>
-        <option>Grande</option>
-      </select>
-    </div>
-    <div class="col-md-4">
-      <label for="" class="form-label">Nivel de Actividad:</label>
-      <select class="form-select" id="activitylevel_id" required>
-        <option selected disabled value="">Choose...</option>
-        <option>Desconocida</option>
-        <option>Nula</option>
-        <option>Nula</option>
-        <option>Baja</option>
-        <option>Media</option>
-        <option>Alta</option>
-        <option>Muy alta</option>
-
-      </select>
+    <div class="row input-group">
+      <div class="col-md-4">
+        <label for="" class="form-label">Fecha de nacimiento(Aprox.):</label>
+        <input type="date" class="form-control" name="birthdate" required>
+      </div>
+      <div class="col-md-4">
+        <label for="" class="form-label">Tamaño:</label>
+        <select class="form-select" name="size" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Pequeño</option>
+          <option>Mediano</option>
+          <option>Grande</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="" class="form-label">Nivel de Actividad:</label>
+        <select class="form-select" name="activitylevel" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Desconocida</option>
+          <option>Nula</option>
+          <option>Nula</option>
+          <option>Baja</option>
+          <option>Media</option>
+          <option>Alta</option>
+          <option>Muy alta</option>
+        </select>
+      </div>
     </div>
 
 
     <div class="col-12">
       <label for="" class="form-label">Descripción:</label>
-      <textarea class="form-control" id="description_id" rows=4 maxlength="300"
+      <textarea class="form-control" name="story" rows=4 maxlength="300"
         placeholder="Breve descripción de la mascota" style="resize: none;" required></textarea>
     </div>
 
     <h3 class="fw-bold">2. Se entrega:</h3>
-    <div class="col-4">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="">
-        <label class="form-check-label" for="">Vacunado</label>
+    <div class="btn-group" role="group">
+      <div class="col-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="">
+          <label class="form-check-label" for="">Vacunado</label>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="">
+          <label class="form-check-label" for="">Desparasitado</label>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="">
+          <label class="form-check-label" for="">Sano</label>
+        </div>
       </div>
     </div>
-    <div class="col-4">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="">
-        <label class="form-check-label" for="">Desparasitado</label>
+    <div class="btn-group" role="group">
+      <div class="col-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="">
+          <label class="form-check-label" for="">Esterelizado</label>
+        </div>
       </div>
-    </div>
-    <div class="col-4">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="">
-        <label class="form-check-label" for="">Sano</label>
+      <div class="col-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="">
+          <label class="form-check-label" for="">Identificado</label>
+        </div>
       </div>
-    </div>
-    <div class="col-4">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="">
-        <label class="form-check-label" for="">Esterelizado</label>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="">
-        <label class="form-check-label" for="">Identificado</label>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="">
-        <label class="form-check-label" for="">Microchip</label>
+      <div class="col-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="">
+          <label class="form-check-label" for="">Microchip</label>
+        </div>
       </div>
     </div>
 
     <h3 class="fw-bold">3. Fotos:</h3>
-    <div class="col-md-12">
-      <label for="" class="form-label">Foto de perfil:</label>
-      <div class="">
+    <div class="row">
+      <label for="" class="form-label text-center">Foto de perfil:</label>
+      <div class="d-grid gap-1">
         <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto" type="button">
           <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative" id="image-field"
             width="200" height="200">
