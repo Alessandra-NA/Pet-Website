@@ -1,32 +1,88 @@
 // node 
-/*
-const { sequelize, Equipo, Partida, Ronda, Torneo, Usuario } = require('./src/models');
 
-// USUARIOS
-const usuarios = [
-  // ADMIN id 1
-  { nombre_completo: 'Pepe Gonzales', correo: 'ppelcrack@gmail.com', contraseña: 'ppelcrack', rol: 'admin' },
-  // ORGANIZADOR (LO DEBERÍA PODER CREAR EL ADMIN) id 2
-  { nombre_completo: 'Armando Barreras', correo: 'abarreras@gmail.com', contraseña: 'abarreras', rol: 'org' },
-  // LIDER id 3
-  { nombre_completo: 'Jose Cardenas', correo: 'jcardenas@gmail.com', contraseña: 'jcaradenas', rol: 'lider' },
-  { nombre_completo: 'Jose Cardenas', correo: 'jcardenas@gmail.com', contraseña: 'jcaradenas', rol: 'lider' }
+const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, User, UserType } = require('./src/models');
 
+const nivelesActividad = [
+  { name: 'Desconocida' },
+  { name: 'Nula' },
+  { name: 'Baja' },
+  { name: 'Media' },
+  { name: 'Alta' },
+  { name: 'Muy alta' }
 ];
+
+const generos = [
+  { name: 'Macho' },
+  { name: 'Hembra' },
+  { name: 'Masculino' },
+  { name: 'Femenino' },
+  { name: 'Sin especificar' }
+];
+
+const tamanhos = [
+  { name: 'Pequeño' },
+  { name: 'Mediano' },
+  { name: 'Grande' }
+];
+
+const especies = [
+  { name: 'Perro' },
+  { name: 'Gato' }
+];
+
+const tiposUsuarios = [
+  { name: 'Administrador' },
+  { name: 'Persona' },
+  { name: 'Albergue' }
+];
+
 const main = async () => {
   try {
-    await sequelize.sync({ force: true});
+    await sequelize.sync({ force: true });
 
-    usuarios.forEach(async usr => {
+    nivelesActividad.forEach(async nivel => {
       try {
-        await Usuario.create(usr);
-      } catch(err) {
+        await ActivityLevel.create(nivel);
+      } catch (err) {
         console.log(err);
       }
     });
-} catch(err) {
+
+    generos.forEach(async genero => {
+      try {
+        await Gender.create(genero);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    tamanhos.forEach(async tamahno => {
+      try {
+        await Size.create(tamahno);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    especies.forEach(async especie => {
+      try {
+        await Specie.create(especie);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    tiposUsuarios.forEach(async tipo => {
+      try {
+        await UserType.create(tipo);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+  } catch (err) {
     console.log(err);
   }
 }
 main();
-*/
+
