@@ -5,11 +5,10 @@ const adopcionRoutes = require('./adopcion')
 
 const matchRoutes = require('./match')
 const anunciosRouter = require('./anuncios')
-const signupRouter = require('./signup')
 const crearUsuarioRouter = require('./user')
+const signupRouter = require('./signup')
 const signinRouter = require('./signin')
 const postRouter = require('./post')
-const signinRouter = require('./signin')
 
 /**
   * @param {express.Express} app
@@ -22,10 +21,9 @@ const routerConnection = (app) => {
   app.use('/match', matchRoutes);
   app.use('/anuncios', anunciosRouter);
   app.use('/signup', signupRouter);
+  app.use('/signin', signinRouter);
   app.use('/crear_usuario', crearUsuarioRouter);
-  app.use('/signin', signinRouter);
   app.use('/post', postRouter);
-  app.use('/signin', signinRouter);
 
   app.use((_, res) => {
     res.render('notFound');

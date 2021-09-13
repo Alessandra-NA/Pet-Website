@@ -50,18 +50,12 @@ function urlToBlob(url) {
 
 let file = "G:/cat.jpeg"
 
+sequelize.query("insert into 'Pets'(photo) values(pg_read_binary_file("+file+"))", { type: sequelize.QueryTypes.SELECT})
+  .then(function(users) {
+    // We don't need spread here, since only the results will be returned for select queries
+  })
+
 let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor. Proin ultrices, nulla et luctus facilisis, risus augue rutrum turpis, finibus";
-/*
-fs.readFile(file).then((error, data) => {
-  if (!error) {
-    img64 = data.toString('base64');
-    buffer = Buffer.from(img64, 'base64');
-    const mascotas = [
-      { name: 'Firulais', photo: buffer, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 }
-    ]
-  }
-})
-*/
 
 const mascotas = [
   { name: 'Firulais', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 },
@@ -71,7 +65,6 @@ const mascotas = [
   { name: 'Sami', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 5, size: 2, specie_id: 2, gender_id: 2 },
   { name: 'Boby', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 6, size: 3, specie_id: 1, gender_id: 1 },
   { name: 'Tango', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 }
-
 ];
 
 const localizaciones = [

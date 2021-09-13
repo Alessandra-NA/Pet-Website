@@ -14,6 +14,7 @@
         <label for="" class="form-label">Especie:</label>
         <select class="form-select" name="specie" required>
           <option selected disabled value="">Choose...</option>
+          <% console.log(especies) %>
           <% especies.forEach(function(especie){ %>
             <option value= <%=especie.id%> > <%=especie.name%></option>
           <% }) %>
