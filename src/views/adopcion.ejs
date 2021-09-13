@@ -5,11 +5,10 @@
   <!--ver el "border-2" mezcla de clase en Boostrap y Tailwind-->
   <form action="/" method="post" class="row my-3 p-2 border border-gray-500 g-3">
     <h3 class="fw-bold">1. Datos:</h3>
-    <div class="row input-group">
+    <div class="row input-group mb-3">
       <div class="col-md-4">
         <label for="" class="form-label">Nombre:</label>
-        <input type="text" class="form-control" placeholder="Nombre de la mascota" name="name" value=""
-          required>
+        <input type="text" class="form-control" placeholder="Nombre de la mascota" name="name" value="" required>
       </div>
       <div class="col-md-4">
         <label for="" class="form-label">Especie:</label>
@@ -29,7 +28,7 @@
       </div>
     </div>
 
-    <div class="row input-group">
+    <div class="row input-group mb-3">
       <div class="col-md-4">
         <label for="" class="form-label">Fecha de nacimiento(Aprox.):</label>
         <input type="date" class="form-control" name="birthdate" required>
@@ -59,14 +58,14 @@
     </div>
 
 
-    <div class="col-12">
+    <div class="col-12 mt-0">
       <label for="" class="form-label">Descripción:</label>
-      <textarea class="form-control" name="story" rows=4 maxlength="300"
-        placeholder="Breve descripción de la mascota" style="resize: none;" required></textarea>
+      <textarea class="form-control" name="story" rows=4 maxlength="300" placeholder="Breve descripción de la mascota"
+        style="resize: none;" required></textarea>
     </div>
 
     <h3 class="fw-bold">2. Se entrega:</h3>
-    <div class="btn-group" role="group">
+    <div class="btn-group mt-0 mb-3" role="group">
       <div class="col-4">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="">
@@ -86,7 +85,7 @@
         </div>
       </div>
     </div>
-    <div class="btn-group" role="group">
+    <div class="btn-group mt-0" role="group">
       <div class="col-4">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="">
