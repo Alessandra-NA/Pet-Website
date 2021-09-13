@@ -1,4 +1,5 @@
-const {  /* los modelos que vayas a usar */ } = require('../models');
+const { ActivityLevel, Gender, Size, Specie, UserType } = require('../models');
+const { Op } = require("sequelize");
 
 module.exports = {
   /**
@@ -8,9 +9,17 @@ module.exports = {
    */
 
   getInicioAdopcion: async (req, res) => {
-    try{
-      return res.render('adopcion',{title:'Dar en adopcion'});
+    try {
+      ActivityLevel.findAll({ include: { all: true } }).then((actividades) => {
+        Gender.findAll({ where: { [Op.or]: [{ id: 1 }, { id: 2 }] } }).then((generos) => {
+          Size.findAll({ include: { all: true } }).then((tamanhos) => {
+            Specie.findAll({ include: { all: true } }).then((especies) => {
+                return res.render('adopcion', { title: 'Dar en adopcion', actividades: actividades, generos: generos, tamanhos: tamanhos, especies: especies });
+              })
+            })
+          })
+        })
     }
-    catch{}
+    catch { }
   }
 };
