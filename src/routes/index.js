@@ -7,6 +7,7 @@ const matchRoutes = require('./match')
 const anunciosRouter = require('./anuncios')
 const signupRouter = require('./signup')
 const crearUsuarioRouter = require('./user')
+const signinRouter = require('./signin')
 const postRouter = require('./post')
 const signinRouter = require('./signin')
 
@@ -22,6 +23,7 @@ const routerConnection = (app) => {
   app.use('/anuncios', anunciosRouter);
   app.use('/signup', signupRouter);
   app.use('/crear_usuario', crearUsuarioRouter);
+  app.use('/signin', signinRouter);
   app.use('/post', postRouter);
   app.use('/signin', signinRouter);
 
