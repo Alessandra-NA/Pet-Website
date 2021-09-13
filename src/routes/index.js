@@ -1,5 +1,4 @@
 const express = require('express');
-
 const { mainPage } = require('../controllers');
 const userRoutes = require('./user');
 const adopcionRoutes = require('./adopcion')
@@ -11,7 +10,6 @@ const signupRouter = require('./signup')
   * @param {express.Express} app
   */
 const routerConnection = (app) => {
-
   app.use('^/$', mainPage);
   app.use('/user', userRoutes);
   app.use('/adopcion', adopcionRoutes);
@@ -23,7 +21,6 @@ const routerConnection = (app) => {
     res.render('notFound');
   });
 }
-
 module.exports = {
   routerConnection,
 }
