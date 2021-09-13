@@ -20,7 +20,7 @@ Pet.init(
         },
         photo: {
             type: DataTypes.BLOB,
-            allowNull: false,
+            allowNull: true,
         },
         birthdate: {
             type: DataTypes.DATEONLY,

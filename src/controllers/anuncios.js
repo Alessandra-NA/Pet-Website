@@ -10,6 +10,7 @@ module.exports = {
   getAnuncios: (req, res) => {
     try {
       if (req.query.type) {
+        console.log("===========================1");
         Post.findAll({
           include: [
             {
@@ -25,7 +26,10 @@ module.exports = {
           res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) })
         });
       } else {
-        Post.findAll({include: {all: true}}).then(response => res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) }))
+        console.log("===========================2");
+        Post.findAll({ include: { all: true } }).then((response) => {
+          res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) })
+        });
       }
     }
     catch { }

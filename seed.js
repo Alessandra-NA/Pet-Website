@@ -50,21 +50,16 @@ function urlToBlob(url) {
 
 let file = "G:/cat.jpeg"
 
-sequelize.query("insert into 'Pets'(photo) values(pg_read_binary_file("+file+"))", { type: sequelize.QueryTypes.SELECT})
-  .then(function(users) {
-    // We don't need spread here, since only the results will be returned for select queries
-  })
-
 let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor. Proin ultrices, nulla et luctus facilisis, risus augue rutrum turpis, finibus";
 
 const mascotas = [
-  { name: 'Firulais', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 },
-  { name: 'Dharma', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 2, size: 2, specie_id: 1, gender_id: 2 },
-  { name: 'Moly', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 3, size: 3, specie_id: 2, gender_id: 2 },
-  { name: 'Grumpy', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 4, size: 1, specie_id: 2, gender_id: 1 },
-  { name: 'Sami', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 5, size: 2, specie_id: 2, gender_id: 2 },
-  { name: 'Boby', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 6, size: 3, specie_id: 1, gender_id: 1 },
-  { name: 'Tango', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 }
+  { name: 'Firulais', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size_id: 1, specie_id: 2, gender_id: 1 },
+  { name: 'Dharma', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 2, size_id: 2, specie_id: 1, gender_id: 2 },
+  { name: 'Moly', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 3, size_id: 3, specie_id: 2, gender_id: 2 },
+  { name: 'Grumpy', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 4, size_id: 1, specie_id: 2, gender_id: 1 },
+  { name: 'Sami', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 5, size_id: 2, specie_id: 2, gender_id: 2 },
+  { name: 'Boby', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 6, size_id: 3, specie_id: 1, gender_id: 1 },
+  { name: 'Tango', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size_id: 1, specie_id: 2, gender_id: 1 }
 ];
 
 const localizaciones = [

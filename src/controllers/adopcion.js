@@ -10,16 +10,13 @@ module.exports = {
 
   getInicioAdopcion: async (req, res) => {
     try {
-      ActivityLevel.findAll({ include: { all: true } }).then((actividades) => {
-        Gender.findAll({ where: { [Op.or]: [{ id: 1 }, { id: 2 }] } }).then((generos) => {
-          Size.findAll({ include: { all: true } }).then((tamanhos) => {
-            Specie.findAll({ include: { all: true } }).then((especies) => {
-                return res.render('adopcion', { title: 'Dar en adopcion', actividades: actividades, generos: generos, tamanhos: tamanhos, especies: especies });
-              })
-            })
-          })
-        })
+      const listActivityLevel = await ActivityLevel.findAll()
+      const listGender = await Gender.findAll({ where: { [Op.or]: [{ id: 1 }, { id: 2 }] } })
+      const listSize = await Size.findAll()
+      const listSpecie = await Specie.findAll()
+
+      return res.render('adopcion', { title: 'Dar en adopcion', actividades: listActivityLevel, generos: listGender, tamanhos: listSize, especies: listSpecie });
     }
-    catch { }
-  }
+    catch {}
+}
 };

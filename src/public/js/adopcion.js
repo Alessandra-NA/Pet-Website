@@ -8,7 +8,6 @@
 
 var main = function(){
     $('#avisoAdopcionModal').modal({ show: true, backdrop: 'static', keyboard: false })
-    seleccionarFotoOnClick();
     // CambiarHeader();
 }
 

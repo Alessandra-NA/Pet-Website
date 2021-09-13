@@ -14,10 +14,9 @@
         <label for="" class="form-label">Especie:</label>
         <select class="form-select" name="specie" required>
           <option selected disabled value="">Choose...</option>
-          <% console.log(especies) %>
           <% especies.forEach(function(especie){ %>
-            <option value= <%=especie.id%> > <%=especie.name%></option>
-          <% }) %>
+            <option value=<%=especie.id%> > <%=especie.name%></option>
+            <% }) %>
         </select>
       </div>
       <div class="col-md-4">
@@ -25,8 +24,9 @@
         <select class="form-select" name="gender" required>
           <option selected disabled value="">Choose...</option>
           <% generos.forEach(function(genero){ %>
-            <option value= <%=genero.id%> > <%=genero.name%> </option>
-          <% }) %>
+            <option value=<%=genero.id%> > <%=genero.name%>
+            </option>
+            <% }) %>
         </select>
       </div>
     </div>
@@ -41,8 +41,9 @@
         <select class="form-select" name="size" required>
           <option selected disabled value="">Choose...</option>
           <% tamanhos.forEach(function(tamanho){ %>
-            <option value= <%=tamanho.id%> > <%=tamanho.name%></option>
-          <% }) %>
+            <option value=<%=tamanho.id%> > <%=tamanho.name%>
+            </option>
+            <% }) %>
         </select>
       </div>
       <div class="col-md-4">
@@ -50,8 +51,9 @@
         <select class="form-select" name="activitylevel" required>
           <option selected disabled value="">Choose...</option>
           <% actividades.forEach(function(actividad){ %>
-            <option value= <%=actividad.id%> > <%=actividad.name%></option>
-          <% }) %>
+            <option value=<%=actividad.id%> > <%=actividad.name%>
+            </option>
+            <% }) %>
         </select>
       </div>
     </div>
@@ -136,8 +138,6 @@
     highlightNavbar(4)
   </script>
 </main>
-
-
 
 <script src="/js/adopcion.js"></script>
 <script src="/js/selectFoto.js"></script>
