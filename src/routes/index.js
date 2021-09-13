@@ -6,6 +6,7 @@ const adopcionRoutes = require('./adopcion')
 const matchRoutes = require('./match')
 const anunciosRouter = require('./anuncios')
 const signupRouter = require('./signup')
+const signinRouter = require('./signin')
 const postRouter = require('./post')
 
 /**
@@ -19,6 +20,7 @@ const routerConnection = (app) => {
   app.use('/match', matchRoutes);
   app.use('/anuncios', anunciosRouter);
   app.use('/signup', signupRouter);
+  app.use('/signin', signinRouter);
   app.use('/post', postRouter);
 
   app.use((_, res) => {
