@@ -8,6 +8,6 @@ const router = Router();
   EXAMPLE:
   router.get('/', nameAuth, getPetPost)
 */
-router.get('/', getFormularioMatch)
+router.get('/', getFormularioMatch )
 
 module.exports = router;
