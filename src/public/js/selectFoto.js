@@ -1,3 +1,5 @@
+const { BLOB } = require("sequelize");
+
 var activarFotoFile = function(){
     var inputFoto = document.querySelector("#input_foto")
     inputFoto.click();
