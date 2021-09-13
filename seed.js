@@ -1,6 +1,6 @@
 // node 
-
 const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, User, UserType } = require('./src/models');
+const fs = require('fs');
 
 const nivelesActividad = [
   { name: 'Desconocida' },
@@ -36,45 +36,62 @@ const tiposUsuarios = [
   { name: 'Albergue' }
 ];
 
-/*function createFile(url){
-  let response = await fetch('http://127.0.0.1:8080/test.jpg');
-  let data = await response.blob();
-  let metadata = {
-    type: 'image/*'
-  };
-  let file = new File([data], url, metadata);
-  // ... do something with the file or return it
-}*/
+function urlToBlob(url) {
+  try {
+    fs.readFile(url, (err, data) => {
+      if (err) throw err;
+      img64 = data.toString('base64');
+      buffer = Buffer.from(img64, 'base64');
+      return buffer;
+    })
+  }
+  catch { }
+}
 
-let text = "'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor. Proin ultrices, nulla et luctus facilisis, risus augue rutrum turpis, finibus";
+let file = "G:/cat.jpeg"
+
+let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor. Proin ultrices, nulla et luctus facilisis, risus augue rutrum turpis, finibus";
+/*
+fs.readFile(file).then((error, data) => {
+  if (!error) {
+    img64 = data.toString('base64');
+    buffer = Buffer.from(img64, 'base64');
+    const mascotas = [
+      { name: 'Firulais', photo: buffer, birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 }
+    ]
+  }
+})
+*/
+
 const mascotas = [
-  { name: 'Firulais',photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel: 1, size: 1, specie: 2, gender: 1 },
-  { name: 'Dharma', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel: '2', size: '2', specie: '1', gender: '2' },
-  { name: 'Moly', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel: '3', size: '3', specie: '2', gender: '2' },
-  { name: 'Grumpy', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel: '4', size: '1', specie: '2', gender: '1' },
-  { name: 'Sami', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel: '5', size: '2', specie: '2', gender: '2' },
-  { name: 'Boby', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel: '6', size: '3', specie: '1', gender: '1' },
-  { name: 'Tango', photo: null, birthdate: new Date(), weight: 7.5, story: text, activitylevel: '1', size: '1', specie: '2', gender: '1' }
+  { name: 'Firulais', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 },
+  { name: 'Dharma', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 2, size: 2, specie_id: 1, gender_id: 2 },
+  { name: 'Moly', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 3, size: 3, specie_id: 2, gender_id: 2 },
+  { name: 'Grumpy', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 4, size: 1, specie_id: 2, gender_id: 1 },
+  { name: 'Sami', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 5, size: 2, specie_id: 2, gender_id: 2 },
+  { name: 'Boby', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 6, size: 3, specie_id: 1, gender_id: 1 },
+  { name: 'Tango', photo: urlToBlob(file), birthdate: new Date(), weight: 7.5, story: text, activitylevel_id: 1, size: 1, specie_id: 2, gender_id: 1 }
+
 ];
 
 const localizaciones = [
-  { country: 'Perú', province: 'Lima', district: 'La Molina', address: 'Calle XXX 123'},
+  { country: 'Perú', province: 'Lima', district: 'La Molina', address: 'Calle XXX 123' },
 ];
 
 const usuarios = [
-  { username: 'User 1', password: 'Password', user_type: 2, location: 1},
-  { username: 'User 2', password: 'Password', user_type: 2, location: 1},
-  { username: 'User 3', password: 'Password', user_type: 2, location: 1}
+  { username: 'User 1', password: 'Password', type_id: 2, location_id: 1 },
+  { username: 'User 2', password: 'Password', type_id: 2, location_id: 1 },
+  { username: 'User 3', password: 'Password', type_id: 2, location_id: 1 }
 ];
 
 const posts = [
-  { user: '1', pet: '1'},
-  { user: '1', pet: '2'},
-  { user: '1', pet: '3'},
-  { user: '2', pet: '4'},
-  { user: '3', pet: '5'},
-  { user: '3', pet: '6'},
-  { user: '3', pet: '7'},
+  { user_id: 1, pet_id: 1 },
+  { user_id: 1, pet_id: 2 },
+  { user_id: 1, pet_id: 3 },
+  { user_id: 2, pet_id: 4 },
+  { user_id: 3, pet_id: 5 },
+  { user_id: 3, pet_id: 6 },
+  { user_id: 3, pet_id: 7 },
 ];
 
 const main = async () => {
