@@ -3,7 +3,7 @@
     <%- include('modal_adopcion') %>
   </div>
   <!--ver el "border-2" mezcla de clase en Boostrap y Tailwind-->
-  <form action="/" method="post" class="row my-3 p-2 border border-gray-500 g-3">
+  <form action="/adopcion/postAdopcion" method="post" class="row my-3 p-2 border border-gray-500 g-3">
     <h3 class="fw-bold">1. Datos:</h3>
     <div class="row input-group mb-3">
       <div class="col-md-4">
@@ -15,7 +15,8 @@
         <select class="form-select" name="specie" required>
           <option selected disabled value="">Choose...</option>
           <% especies.forEach(function(especie){ %>
-            <option value=<%=especie.id%> > <%=especie.name%></option>
+            <option value=<%=especie.id%> > <%=especie.name%>
+            </option>
             <% }) %>
         </select>
       </div>
@@ -38,13 +39,17 @@
       </div>
       <div class="col-md-4">
         <label for="" class="form-label">Tamaño:</label>
-        <select class="form-select" name="size" required>
-          <option selected disabled value="">Choose...</option>
-          <% tamanhos.forEach(function(tamanho){ %>
-            <option value=<%=tamanho.id%> > <%=tamanho.name%>
-            </option>
-            <% }) %>
-        </select>
+        <div class="input-group">
+          <select class="form-select" name="size" required>
+            <option selected disabled value="">Choose...</option>
+            <% tamanhos.forEach(function(tamanho){ %>
+              <option value=<%=tamanho.id%> > <%=tamanho.name%>
+              </option>
+              <% }) %>
+          </select>
+          <input type="number" class="form-control" placeholder="Peso" name="weight" required>
+          <span class="input-group-text">Kg</span>
+        </div>
       </div>
       <div class="col-md-4">
         <label for="" class="form-label">Nivel de Actividad:</label>
