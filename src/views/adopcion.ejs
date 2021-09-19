@@ -3,6 +3,7 @@
     <%- include('modal_adopcion') %>
   </div>
   <!--ver el "border-2" mezcla de clase en Boostrap y Tailwind-->
+  <!-- probar si funciona enctype="multipart/form-data" -->
   <form action="/adopcion/postAdopcion" method="post" class="row my-3 p-2 border border-gray-500 g-3">
     <h3 class="fw-bold">1. Datos:</h3>
     <div class="row input-group mb-3">
@@ -115,12 +116,12 @@
     <h3 class="fw-bold">3. Fotos:</h3>
     <div class="row">
       <label for="" class="form-label text-center">Foto de perfil:</label>
-      <div class="d-grid gap-1">
+      <div class="">
         <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto" type="button">
           <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative" id="image-field"
             width="200" height="200">
         </button>
-        <input type="file" name="image" id="input_foto" onchange="handleIMG(this.files), previewImage(event)"
+        <input type="file" name="image" id="input_foto"  onchange="handleIMG(this.files), previewImage(event)"
           accept="image/*" required style="display: none">
       </div>
     </div>

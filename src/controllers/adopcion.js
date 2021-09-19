@@ -1,11 +1,13 @@
-const { ActivityLevel, Gender, Size, Specie, UserType, Pet } = require('../models');
+const { ActivityLevel, Gender, Size, Specie, UserType, Pet, Post } = require('../models');
 const { Op } = require("sequelize");
+const fs = require('fs');
+const { Buffer } = require('buffer');
 
 module.exports = {
   /**
    * @param {import('express').Request} req
    * @param {import('express').Response} res
-   *
+   * 
    */
 
   getInicioAdopcion: async (req, res) => {
@@ -23,6 +25,9 @@ module.exports = {
   postAdopcion: async (req, res) => {
     const { name, birthdate, weight, story, activitylevel, size, specie, gender } = req.body;
     try {
+      // Intenté por horas y días pasar el "image" a BLOB para que se reemplace por el null,
+      // no tuve éxito.
+      console.log("aaa")
       const pet = await Pet.create({
         name: name,
         photo: null,
@@ -34,8 +39,13 @@ module.exports = {
         specie_id: specie,
         gender_id: gender
       })
-      println("========")
-      return pet
+      //Falta mandar el usuario que accedió a la creación de la adopción
+      const post = await Post.create({
+        pet_id: pet.id,
+        user_id: 1
+      })
+      //error ya que está pasando la photo null
+      res.status(201).redirect('/post/' + pet.id)
     } catch { }
   }
 };
