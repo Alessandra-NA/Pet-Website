@@ -3,9 +3,7 @@ const sequelize = require('../db');
 
 class User extends Model {
     // relaciones:
-    static associate({ UserType, Location, Post }) {
-        this.belongsTo(UserType, { as: 'user_type', foreignKey: 'type_id' });
-        this.belongsTo(Location, { as: 'location', foreignKey: 'location_id' })
+    static associate({ Post }) {
         this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' })
     }
 }
@@ -20,6 +18,10 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        type: {
+            type: DataTypes.ENUM('person', 'shelter', 'admin'),
+            allowNull: false,
+        }
     },
     {
         sequelize,
