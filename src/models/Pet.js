@@ -20,7 +20,7 @@ Pet.init(
         },
         photo: {
             type: DataTypes.BLOB,
-            allowNull: false,
+            allowNull: true,
         },
         birthdate: {
             type: DataTypes.DATEONLY,
@@ -33,7 +33,27 @@ Pet.init(
         story: {
             type: DataTypes.STRING,
             allowNull: true,
-        }
+        },
+        vacunado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        desparasitado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        sano: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        esterilizado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        microchip: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
     },
     {
         sequelize,

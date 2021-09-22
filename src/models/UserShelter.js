@@ -3,7 +3,8 @@ const sequelize = require('../db');
 
 class UserShelter extends Model {
     // relaciones:
-    static associate({ User }) {
+    static associate({ User, Location }) {
+        this.belongsTo(Location, { as: 'location', foreignKey: 'location_id' })
         this.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
     }
 }
