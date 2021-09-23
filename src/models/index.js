@@ -13,7 +13,7 @@ const db = {
   ...require('./User'),
   ...require('./UserPerson'),
   ...require('./UserShelter'),
-  ...require('./UserType'),
+  ...require('./UserAdmin'),
 };
 
 Object.keys(db).forEach(modelName => {
