@@ -12,8 +12,7 @@ const db = {
   ...require('./Specie'),
   ...require('./User'),
   ...require('./UserPerson'),
-  ...require('./UserShelter'),
-  ...require('./UserType'),
+  ...require('./UserShelter')
 };
 
 Object.keys(db).forEach(modelName => {
