@@ -23,11 +23,15 @@ module.exports = {
   },
 
   postAdopcion: async (req, res) => {
-    const { name, birthdate, weight, story, activitylevel, size, specie, gender } = req.body;
+    const { name, birthdate, weight, story, activitylevel, size, specie, gender, vacunado, desparasitado, sano, esterilizado, microchip } = req.body;
     try {
       // Intenté por horas y días pasar el "image" a BLOB para que se reemplace por el null,
       // no tuve éxito.
-      console.log("aaa")
+      console.log("================================================")
+      console.log("---> "+vacunado)
+      console.log("---> "+desparasitado)
+      console.log("---> "+sano)
+      console.log("---> "+esterilizado)
       const pet = await Pet.create({
         name: name,
         photo: null,
