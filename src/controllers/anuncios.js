@@ -36,7 +36,9 @@ module.exports = {
 
 imagesToBase64 = function (postsArray) {
   let array = postsArray.map((post) => {
-    post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
+    if(post.pet.photo){
+      post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
+    }
     return post
   })
   return array
