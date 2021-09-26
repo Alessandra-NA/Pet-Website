@@ -15,6 +15,10 @@ UserShelter.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        photo: {
+            type: DataTypes.BLOB,
+            allowNull: true,
+        },
         phone_number: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -22,6 +26,10 @@ UserShelter.init(
         ruc: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
         rating: {
             type: DataTypes.INTEGER,
