@@ -1,4 +1,4 @@
-const {  /* los modelos que vayas a usar */ } = require('../models');
+const { UserShelter } = require('../models');
 
 module.exports = {
   /**
@@ -12,5 +12,16 @@ module.exports = {
       return res.render('pet_detalle',{title:'Detalle de mascota'});
     }
     catch{}
+  },
+
+  getRatingUserShelter: async(req,res)=> {
+    var id =req.params.id;
+    try{
+      const usuario = await UserShelter.findOne({where:{id:id}})
+      return res.render('rating',{rating :usuario.rating});
+    }
+    catch{
+
+    }
   }
 };
