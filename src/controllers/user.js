@@ -9,8 +9,13 @@ module.exports = {
    *
    */
 
-  /* getProfilet: async (req, res) => {
-    try{}
+  editarUsuario: async (req, res) => {
+    try{
+      return res.render('editar_usuario', {title : 'Editar usuario'})
+    }
     catch{}
-  } */
+  }
+
+  
+
 };

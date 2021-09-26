@@ -1,11 +1,15 @@
 const { Router } = require('express');
 const {} = require("../middlewares/auth")
-const { /*getProfile*/ } = require('../controllers/user');
+const { crearUsuario, editarUsuario } = require('../controllers/user');
 const router = Router();
 
 /*
   EXAMPLE:
   router.get('/', nameAuth, getProfile)
 */
+
+router.get('/editar', editarUsuario)
+
+
 
 module.exports = router;

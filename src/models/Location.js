@@ -3,9 +3,6 @@ const sequelize = require('../db');
 
 class Location extends Model {
     // relaciones:
-    static associate({ User }) {
-        this.hasOne(User, { as: 'user', foreignKey: 'location_id' })
-    }
 }
 Location.init(
     {
