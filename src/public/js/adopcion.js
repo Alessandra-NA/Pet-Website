@@ -5,6 +5,7 @@
     document.getElementsByClassName("nav-link").item(2).setAttribute("class", "nav-link active")
 
 }*/
+
 var main = function(){
     $('#avisoAdopcionModal').modal({ show: true, backdrop: 'static', keyboard: false })
     // CambiarHeader();

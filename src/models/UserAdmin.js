@@ -1,13 +1,13 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-class UserType extends Model {
+class UserAdmin extends Model{
     // relaciones:
     static associate({ User }) {
-        this.hasOne(User, { as: 'user', foreignKey: 'type_id' })
+        this.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
     }
 }
-UserType.init(
+UserAdmin.init(
     {
         // atributos:
         name: {
@@ -17,8 +17,8 @@ UserType.init(
     },
     {
         sequelize,
-        modelName: 'UserType',
+        modelName: 'UserAdmin',
     }
 );
 
-module.exports = { UserType };
+module.exports = { UserAdmin };
