@@ -1,0 +1,23 @@
+<h1>Refugios</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4">
+    <% refugios.forEach(function(refugio){ %>
+
+        <div class="col">
+            <div class="card" role="button" onclick="location.href='./shelter_detalle/<%=refugio.id%>'">
+                <div class="card-body">
+                    <h5 class="card-title"><%=refugio.name%>
+                    </h5>
+                    <p class="card-text">
+                    <p>
+                        Número:<%=refugio.phone_number%>
+                    </p>
+                    <p>
+                        Rating:<%=refugio.rating%>
+                    </p>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+
+</div>
