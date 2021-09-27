@@ -11,6 +11,10 @@ class Post extends Model {
 Post.init(
     {
         // atributos:
+        flagReportado: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
     },
     {
         sequelize,
