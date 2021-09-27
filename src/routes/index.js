@@ -5,19 +5,15 @@ const adopcionRoutes = require('./adopcion')
 
 const matchRoutes = require('./match')
 const anunciosRouter = require('./anuncios')
-
 const petDetalleRouter = require('./pet_detalle')
 const SheltersRouter = require('./shelters')
-
 const ShelterDetalleRouter = require('./shelter_detalle')
-
 const crearUsuarioRouter = require('./user')
 const signupRouter = require('./signup')
 const signinRouter = require('./signin')
 const postRouter = require('./post')
 const accountsRouter = require('./accounts')
 const submitRouter = require('./submit')
-
 
 /**
   * @param {express.Express} app
