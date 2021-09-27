@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {} = require("../middlewares/auth")
-const { getInicioAdopcion } = require('../controllers/adopcion');
+const { getInicioAdopcion, postAdopcion } = require('../controllers/adopcion');
 const router = Router();
 
 
@@ -9,5 +9,6 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', getInicioAdopcion)
+router.post('/postAdopcion', postAdopcion);
 
 module.exports = router;

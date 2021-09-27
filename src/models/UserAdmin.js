@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-class UserAdmin extends Model {
+class UserAdmin extends Model{
     // relaciones:
     static associate({ User }) {
         this.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
@@ -10,7 +10,10 @@ class UserAdmin extends Model {
 UserAdmin.init(
     {
         // atributos:
-
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     },
     {
         sequelize,

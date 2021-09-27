@@ -25,7 +25,9 @@ module.exports = {
           res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) })
         });
       } else {
-        Post.findAll({include: {all: true}}).then(response => res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) }))
+        Post.findAll({ include: { all: true } }).then((response) => {
+          res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) })
+        });
       }
     }
     catch { }
@@ -34,7 +36,9 @@ module.exports = {
 
 imagesToBase64 = function (postsArray) {
   let array = postsArray.map((post) => {
-    post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
+    if(post.pet.photo){
+      post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
+    }
     return post
   })
   return array
