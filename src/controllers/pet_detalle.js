@@ -1,4 +1,4 @@
-const { UserShelter } = require('../models');
+const { } = require('../models');
 
 module.exports = {
   /**
@@ -13,15 +13,4 @@ module.exports = {
     }
     catch{}
   },
-
-  getRatingUserShelter: async(req,res)=> {
-    var id =req.params.id;
-    try{
-      const usuario = await UserShelter.findOne({where:{id:id}})
-      return res.render('rating',{rating :usuario.rating});
-    }
-    catch{
-
-    }
-  }
 };
