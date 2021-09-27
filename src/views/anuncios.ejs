@@ -3,21 +3,26 @@
     <% posts.forEach(function(post){ %>
 
         <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+            <div class="card" style="cursor: pointer ;" id="<%=post.id%>">
+                <img src="data:image/png;base64,<%=post.pet.photo%>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Post #<%=post.id%>
+                    <h5 class="card-title"> <%=post.pet.name%>
                     </h5>
-                    <p class="card-text">Post text</p>
+                    <p class="card-text"><%=post.pet.story.length<=100? post.pet.story: post.pet.story.slice(0,100)+"..."%></p>
                 </div>
             </div>
         </div>
 
 
         <% }) %>
+
 </div>
+
+
 
 <script>
     // para cambiar el color de texto de la sección en el navbar
     highlightNavbar(1)
+    document.querySelectorAll(".card").forEach((card) => card.addEventListener('click', (ev) => window.location = 'post/'+card.id))
 </script>
+
