@@ -22,7 +22,7 @@ module.exports = {
 
   postAdopcion: async (req, res) => {
     const { name, birthdate, weight, story, activitylevel, size, specie, gender } = req.body;
-    const { photo } = req.file.buffer;
+    const photo  = req.file.buffer;
     var { vacunado, desparasitado, sano, esterilizado, microchip } = req.body;
     try {
 
