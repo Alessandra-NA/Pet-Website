@@ -9,6 +9,7 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', getFormularioMatch)
-router.post('/', getResultados)
+router.post('/resultados', getResultados)
+router.get
 
 module.exports = router;
