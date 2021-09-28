@@ -55,7 +55,8 @@ module.exports = {
                     last_name : apellido,
                     document_number : dni,
                     phone_number : celular,
-                    email : correo
+                    email : correo,
+                    gender_id : sexo
                 }
             )
 
