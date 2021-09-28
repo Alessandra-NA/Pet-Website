@@ -4,11 +4,9 @@ const fs = require('fs');
 
 const nivelesActividad = [
   { name: 'Desconocida' },
-  { name: 'Nula' },
   { name: 'Baja' },
   { name: 'Media' },
-  { name: 'Alta' },
-  { name: 'Muy alta' }
+  { name: 'Alta' }
 ];
 
 const generos = [
@@ -20,6 +18,7 @@ const generos = [
 ];
 
 const tamanhos = [
+  { name: 'Miniatura' },
   { name: 'Pequeño' },
   { name: 'Mediano' },
   { name: 'Grande' }
@@ -32,36 +31,52 @@ const especies = [
 
 let file = "G:/cat.jpeg"
 
-let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor. Proin ultrices, nulla et luctus facilisis, risus augue rutrum turpis, finibus";
+let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor.";
 
 const mascotas = [
   { name: 'Firulais', photo: null, birthdate: new Date(), weight: 7.5, story: text,
-    vacunado: true, desparasitado: true, sano:false, esterilizado: false, microchip: true,
-    activitylevel_id: 1, size_id: 1, specie_id: 2, gender_id: 1 },
+    vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
+    activitylevel_id: 1, size_id: 1, specie_id: 1, gender_id: 1 },
 
   { name: 'Dharma', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: false, desparasitado: true, sano:true, esterilizado: false, microchip: false,
     activitylevel_id: 2, size_id: 2, specie_id: 1, gender_id: 2 },
 
   { name: 'Moly', photo: null, birthdate: new Date(), weight: 7.5, story: text,
-    vacunado: true, desparasitado: true, sano:false, esterilizado: false, microchip: true,
-    activitylevel_id: 3, size_id: 3, specie_id: 2, gender_id: 2 },
+    vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
+    activitylevel_id: 3, size_id: 3, specie_id: 1, gender_id: 2 },
 
   { name: 'Grumpy', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: true, desparasitado: false, sano:true, esterilizado: true, microchip: true,
-    activitylevel_id: 4, size_id: 1, specie_id: 2, gender_id: 1 },
+    activitylevel_id: 4, size_id: 1, specie_id: 1, gender_id: 1 },
 
   { name: 'Sami', photo: null, birthdate: new Date(), weight: 7.5, story: text,
-    vacunado: true, desparasitado: false, sano:false, esterilizado: true, microchip: true,
-    activitylevel_id: 5, size_id: 2, specie_id: 2, gender_id: 2 },
+    vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
+    activitylevel_id: 1, size_id: 2, specie_id: 1, gender_id: 2 },
+  
+  { name: 'Oso', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+    vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
+    activitylevel_id: 4, size_id: 4, specie_id: 1, gender_id: 1 },
+    
+  { name: 'Tony', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+    vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
+    activitylevel_id: 3, size_id: 4, specie_id: 1, gender_id: 1 },
+    
+  { name: 'Lucas', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+    vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
+    activitylevel_id: 2, size_id: 4, specie_id: 1, gender_id: 1 },
+    
+  { name: 'Leo', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+    vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
+    activitylevel_id: 1, size_id: 4, specie_id: 1, gender_id: 1 },
 
   { name: 'Boby', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: false, desparasitado: true, sano:true, esterilizado: false, microchip: true,
-    activitylevel_id: 6, size_id: 3, specie_id: 1, gender_id: 1 },
+    activitylevel_id: 2, size_id: 2, specie_id: 2, gender_id: 1 },
 
   { name: 'Tango', photo: null, birthdate: new Date(), weight: 7.5, story: text,
-    vacunado: true, desparasitado: true, sano:false, esterilizado: true, microchip: false,
-    activitylevel_id: 1, size_id: 1, specie_id: 2, gender_id: 1 }
+    vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: false,
+    activitylevel_id: 3, size_id: 2, specie_id: 2, gender_id: 1 }
 ];
 
 const localizaciones = [
@@ -71,10 +86,10 @@ const localizaciones = [
 ];
 
 const usuarios = [
-  { username: 'User 1', password: '123', type: 'person' },
-  { username: 'User 2', password: '123', type: 'person' },
-  { username: 'User 3', password: '123', type: 'shelter' },
-  { username: 'User 4', password: '123', type: 'admin' }
+  { username: 'User1', password: '123', type: 'person' },
+  { username: 'User2', password: '123', type: 'person' },
+  { username: 'User3', password: '123', type: 'shelter' },
+  { username: 'User4', password: '123', type: 'admin' }
 ];
 
 const usuarios_personas = [
@@ -98,6 +113,10 @@ const posts = [
   { user_id: 3, pet_id: 5, flagReportado: false },
   { user_id: 3, pet_id: 6, flagReportado: false },
   { user_id: 3, pet_id: 7, flagReportado: false },
+  { user_id: 2, pet_id: 8, flagReportado: false },
+  { user_id: 2, pet_id: 9, flagReportado: false },
+  { user_id: 2, pet_id: 10, flagReportado: false },
+  { user_id: 2, pet_id: 11, flagReportado: false }
 ];
 
 const main = async () => {
