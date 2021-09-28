@@ -11,7 +11,15 @@ module.exports = {
 
     getSignUp: async (req, res) => {
         try {
-            return res.render('crear_usuario_people', { title: 'Crear nuevo usuario' })
+            const tipoCuenta = parseInt(req.body.tipo_cuenta)
+
+            if (tipoCuenta == 0){
+                return res.render('crear_usuario_people', { title: 'Crear nuevo usuario' })
+            }
+            else if (tipoCuenta == 1){
+                return res.render('crear_usuario_shelter', { title: 'Crear nuevo usuario' })
+            }
+
         }
         catch { }
     },
