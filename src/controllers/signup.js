@@ -60,7 +60,7 @@ module.exports = {
                 }
             )
 
-            res.redirect('/')
+            res.redirect('/signin')
         }   
         catch{}
     }
