@@ -24,10 +24,10 @@ module.exports = {
 
   postAdopcion: async (req, res) => {
     const { name, birthdate, weight, story, activitylevel, size, specie, gender } = req.body;
-    var { vacunado, desparasitado, sano, esterilizado, microchip } = req.body
+    const { photo } = Buffer.from(req.body.image);
+    var { vacunado, desparasitado, sano, esterilizado, microchip } = req.body;
     try {
-      // Intenté por horas y días pasar el "image" a BLOB para que se reemplace por el null,
-      // no tuve éxito.
+
       if(vacunado===undefined){
         vacunado = false
       }
@@ -45,7 +45,7 @@ module.exports = {
       }
       const pet = await Pet.create({
         name: name,
-        photo: null,
+        photo: photo,
         birthdate: birthdate,
         weight: weight,
         story: story,
@@ -62,10 +62,11 @@ module.exports = {
       //Falta mandar el usuario que accedió a la creación de la adopción
       const post = await Post.create({
         pet_id: pet.id,
-        user_id: 1
+        user_id: 1, 
+        flagReportado: false
       })
-      //error ya que está pasando la photo null
-      res.status(201).redirect('/post/' + pet.id)
+      //res.status(201).redirect('/post/' + pet.id)
+      res.status(201).redirect('/anuncios')
     } catch { }
   }
 };
