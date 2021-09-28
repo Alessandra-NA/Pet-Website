@@ -86,10 +86,10 @@ const localizaciones = [
 ];
 
 const usuarios = [
-  { username: 'User 1', password: '123', type: 'person' },
-  { username: 'User 2', password: '123', type: 'person' },
-  { username: 'User 3', password: '123', type: 'shelter' },
-  { username: 'User 4', password: '123', type: 'admin' }
+  { username: 'User1', password: '123', type: 'person' },
+  { username: 'User2', password: '123', type: 'person' },
+  { username: 'User3', password: '123', type: 'shelter' },
+  { username: 'User4', password: '123', type: 'admin' }
 ];
 
 const usuarios_personas = [
