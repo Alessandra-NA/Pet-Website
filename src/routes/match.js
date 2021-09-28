@@ -10,6 +10,10 @@ const router = Router();
 */
 router.get('/', getFormularioMatch)
 router.post('/resultados', getResultados)
+<<<<<<< HEAD
 router.get
+=======
+>>>>>>> main
+
 
 module.exports = router;
