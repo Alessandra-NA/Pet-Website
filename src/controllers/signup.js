@@ -33,9 +33,20 @@ module.exports = {
 
     crearPeople : async (req, res) => {
         try{
+            const nombreUsuario = req.body.nombre_de_usuario
+            const contraseña = req.body.contraseña
+
             const nombre = req.body.nombres
             const apellido = req.body.apellidos
             const dni = req.body.dni
+
+            const sexo = req.body.sexo
+            const pais = req.body.pais
+            const provincia = req.body.provincia
+            const distrito = req.body.distrito
+            const direccion = req.body.direccion
+
+            const correo = req.body.correo
             const celular = req.body.celular
 
             const people = await UserPerson.create(
@@ -43,12 +54,12 @@ module.exports = {
                     first_name : nombre,
                     last_name : apellido,
                     document_number : dni,
-                    phone_number : celular
-                
+                    phone_number : celular,
+                    email : correo
                 }
             )
 
-            console.log(nombre)
+            res.redirect('/')
         }   
         catch{}
     }
