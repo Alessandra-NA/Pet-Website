@@ -22,3 +22,9 @@ Correr el script de desarrollo
 ```bash
 $ npm run dev
 ```
+
+Correr el script para las clases de Tailwind CSS
+
+```bash
+$ npm run dev:tailwind
+```
