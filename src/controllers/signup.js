@@ -1,6 +1,6 @@
 
 
-const { User } = require('../models');
+const { User, UserPerson } = require('../models');
 
 module.exports = {
     /**
@@ -28,6 +28,28 @@ module.exports = {
         try{
             return res.render('chooseTypeAccount', {title : 'Elegir tipo de cuenta'})
         }
+        catch{}
+    },
+
+    crearPeople : async (req, res) => {
+        try{
+            const nombre = req.body.nombres
+            const apellido = req.body.apellidos
+            const dni = req.body.dni
+            const celular = req.body.celular
+
+            const people = await UserPerson.create(
+                {
+                    first_name : nombre,
+                    last_name : apellido,
+                    document_number : dni,
+                    phone_number : celular
+                
+                }
+            )
+
+            console.log(nombre)
+        }   
         catch{}
     }
 };

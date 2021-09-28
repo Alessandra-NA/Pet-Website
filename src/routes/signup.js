@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { } = require("../middlewares/auth")
-const { getSignUp, chooseTypeAccount } = require('../controllers/signup');
+const { getSignUp, chooseTypeAccount, crearPeople } = require('../controllers/signup');
 const router = Router();
 
 
@@ -9,6 +9,8 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.post('/', getSignUp)
+
+router.post('/crearPeople', crearPeople)
 
 router.get('/chooseTypeAccount', chooseTypeAccount)
 

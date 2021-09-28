@@ -1,7 +1,7 @@
 <main class="container">
     
     <div>
-        <form action="" method="POST" class="row my-3 p-2 border-2 g-3">
+        <form action="/signup/crearPeople" method="POST" class="row my-3 p-2 border-2 g-3">
             
             <h2 class="mb-4">Creación de nuevo usuario personal:</h2>
             
@@ -9,74 +9,74 @@
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombre de usuario:</label>
-                <input placeholder="Ingrese un nombre de usuario" name="user_first_name" type="text" class="form-control me-2">
+                <input placeholder="Ingrese un nombre de usuario" name="nombre_de_usuario" type="text" class="form-control me-2">
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Contraseña:</label>
-                <input placeholder="Ingrese una contraseña" name="user_last_name" type="password" class="form-control me-2">
+                <input placeholder="Ingrese una contraseña" name="contraseña" type="password" class="form-control me-2">
             </div>
 
             <h3>Datos personales:</h3>
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombres:</label>
-                <input placeholder="Ingrese sus nombres" name="user_first_name" type="text" class="form-control me-2">
+                <input placeholder="Ingrese sus nombres" name="nombres" type="text" class="form-control me-2">
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Apellidos:</label>
-                <input placeholder="Ingrese sus apellidos" name="user_last_name" type="text" class="form-control me-2">
+                <input placeholder="Ingrese sus apellidos" name="apellidos" type="text" class="form-control me-2">
             </div>
             
             <div class="mb-4">
                 <label class="form-label">DNI/CE:</label>
-                <input placeholder="Ingrese número de DNI/CE" name="user_last_name" type="number" class="form-control me-2">
+                <input placeholder="Ingrese número de DNI/CE" name="dni" type="number" class="form-control me-2">
             </div>
 
             <div class="mb-4">
                 <label for="" class="form-label">Sexo:</label>
-                <select class="form-select" id="user_gender">
-                    <option selected disabled value="">--Seleccione una opción--</option>
-                    <option>Masculino</option>
-                    <option>Femenino</option>
-                    <option>Sin especificar</option>
+                <select class="form-select" id="user_gender" name="sexo">
+                    <option selected disabled value="-1">--Seleccione una opción--</option>
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                    <option value="3">Sin especificar</option>
                 </select>
             </div>
 
             <div class="mb-4 col-md-3">
                 <label class="form-label">País:</label>
-                <input placeholder="Ingrese su país de origen" name="user_first_name" type="text" class="form-control me-2">
+                <input placeholder="Ingrese su país de origen" name="pais" type="text" class="form-control me-2">
             </div>
             
             <div class="mb-4 col-md-3">
                 <label class="form-label">Provincia:</label>
-                <input placeholder="Ingrese su provincia" name="user_last_name" type="text" class="form-control me-2">
+                <input placeholder="Ingrese su provincia" name="provincia" type="text" class="form-control me-2">
             </div>
 
             <div class="mb-4 col-md-3">
                 <label class="form-label">Distrito:</label>
-                <input placeholder="Ingrese su distrito" name="user_last_name" type="text" class="form-control me-2">
+                <input placeholder="Ingrese su distrito" name="distrito" type="text" class="form-control me-2">
             </div>
 
             <div class="mb-4 col-md-3">
                 <label class="form-label">Dirección</label>
-                <input placeholder="Ingrese su dirección" name="user_last_name" type="text" class="form-control me-2">
+                <input placeholder="Ingrese su dirección" name="direccion" type="text" class="form-control me-2">
             </div>
 
             <div class="mb-4">
                 <label class="form-label">Foto:</label>
-                <input type="file" class="file form-control" id="" required>
+                <input type="file" class="file form-control" id="" name="foto">
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Email:</label>
-                <input placeholder="Ingrese su correo electrónico" name="user_last_name" type="email" class="form-control me-2">
+                <input placeholder="Ingrese su correo electrónico" name="correo" type="email" class="form-control me-2">
             </div>
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Telefono celular:</label>
-                <input placeholder="Ingrese su número de telefono" name="user_last_name" type="number" class="form-control me-2">
+                <input placeholder="Ingrese su número de telefono" name="celular" type="number" class="form-control me-2">
             </div>
 
             <div class="mb-4 ">
