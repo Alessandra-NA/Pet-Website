@@ -16,15 +16,15 @@ DB_PASSWORD=<password>
 DB_DATABASE=<database>
 DB_HOST=<host>
 ```
+Correr el script para las clases de Tailwind CSS
 
+```bash
+$ npm run dev:tailwind
+```
 Correr el script de desarrollo
 
 ```bash
 $ npm run dev
 ```
 
-Correr el script para las clases de Tailwind CSS
 
-```bash
-$ npm run dev:tailwind
-```
