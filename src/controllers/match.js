@@ -12,5 +12,13 @@ module.exports = {
             return res.render('matchForm', { title: 'Tu mascota ideal' });
         }
         catch { }
+    },
+
+    getResultados: async (req, res) => {
+        try {
+            res.send(req.body)
+        } catch (error) {
+            
+        }
     }
 };

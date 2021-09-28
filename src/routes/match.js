@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { } = require("../middlewares/auth")
-const { getFormularioMatch } = require('../controllers/match');
+const { getFormularioMatch, getResultados } = require('../controllers/match');
 const router = Router();
 
 
@@ -9,5 +9,6 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', getFormularioMatch)
+router.post('/', getResultados)
 
 module.exports = router;
