@@ -13,7 +13,6 @@ const signupRouter = require('./signup')
 const signinRouter = require('./signin')
 const postRouter = require('./post')
 const accountsRouter = require('./accounts')
-const submitRouter = require('./submit')
 
 /**
   * @param {express.Express} app
@@ -35,7 +34,6 @@ const routerConnection = (app) => {
   app.use('/crear_usuario', crearUsuarioRouter);
   app.use('/post', postRouter);
   app.use('/accounts', accountsRouter);
-  app.use('/submit', submitRouter);
 
   app.use((_, res) => {
     res.render('notFound');
