@@ -14,7 +14,7 @@
             <% posts.forEach(function(post){ %>
 
                 <div class="col">
-                    <div class="card" role="button" onclick="location.href='./pet_detalle/<%=post.pet.id%>'">
+                    <div class="card" role="button" onclick="location.href='./pet_detalle?id=<%=post.pet.id%>'">
                         <div class="card-body">
                             <h5 class="card-title"><%=post.pet.name%>
                             </h5>

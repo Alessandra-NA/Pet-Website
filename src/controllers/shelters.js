@@ -1,4 +1,4 @@
-const {  UserShelter } = require('../models');
+const {  UserShelter, Location } = require('../models');
 
 module.exports = {
   /**
@@ -7,13 +7,20 @@ module.exports = {
    *
    */
 
-  getShelters: (req, res) => {
-    try{
-        UserShelter.findAll().then((result) => {
-        console.log(result);
-        res.render('shelters',{title:'Refugios', refugios: result})
-      });
+  getShelters: async(req, res) => {
+    try{ 
+      const shelters = await UserShelter.findAll({ include: [
+        {
+          model: Location,
+          as: 'location',
+                    
+          
+        }
+      ]})
+      return res.render('shelters',{refugios :shelters});
     }
-    catch{}
+    catch{
+
+    }
   }
 };
