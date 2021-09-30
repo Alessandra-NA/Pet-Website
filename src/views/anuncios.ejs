@@ -37,7 +37,7 @@
     <% posts.forEach(function(post){ %>
 
         <div class="col">
-            <div class="card" style="cursor: pointer ;" id="<%=post.id%>">
+            <div class="card" role="button" onclick="location.href='./pet_detalle?id=<%=post.pet_id%>'">
                 <img src="data:image/png;base64,<%=post.pet.photo?post.pet.photo:''%>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"> <%=post.pet.name%>
@@ -57,6 +57,5 @@
 <script>
     // para cambiar el color de texto de la sección en el navbar
     highlightNavbar(1)
-    document.querySelectorAll(".card").forEach((card) => card.addEventListener('click', (ev) => window.location = 'post/'+card.id))
 </script>
 

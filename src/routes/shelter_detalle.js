@@ -3,5 +3,6 @@ const {} = require("../middlewares/auth")
 const { getUserShelter } = require('../controllers/shelter_detalle');
 const router = Router();
 
-router.get('/:id', getUserShelter)
+
+router.get('/', getUserShelter)
 module.exports = router;
