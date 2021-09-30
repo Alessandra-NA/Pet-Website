@@ -38,6 +38,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.2",
     "md5": "^2.3.0",
+    "multer": "^1.4.3",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "postcss-cli": "^8.3.1",
