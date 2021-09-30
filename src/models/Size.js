@@ -11,7 +11,7 @@ Size.init(
     {
         // atributos:
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(15),
             allowNull: false,
         },
     },
