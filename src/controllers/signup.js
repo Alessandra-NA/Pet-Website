@@ -38,7 +38,6 @@ module.exports = {
 
     crearPeople : async (req, res) => {
         try{
-
             //Validamos que no hay ninguna cuenta username o dni igual
             let duplicado = false
             

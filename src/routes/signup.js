@@ -18,4 +18,5 @@ router.get('/chooseTypeAccount', chooseTypeAccount)
 
 router.get('/cuentaDuplicada', getCuentaDuplicada)
 
+
 module.exports = router;
