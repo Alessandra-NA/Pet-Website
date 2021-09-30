@@ -1,4 +1,9 @@
+<% if (match == false) {%>
 <h1>Portal de anuncios</h1>
+<% } else {%>
+<h1>Resultados del match</h1>
+<% } %>
+<% if (match == false) {%>
 <div class="row">
     <div class="dropdown mt-2">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -10,6 +15,24 @@
         </ul>
       </div>
 </div>
+<% } %>
+<% if (match == true) {%>
+    <% if (alerta1==true) {%>
+        <br>
+        <div class="alert alert-warning" role="alert">
+            <p class="my-0">Si eres una persona que cambia de hogar constantemente, ten en cuenta que un gran porcentaje del abandono de mascotas
+            se da por esa misma causa.</p> 
+            <p class="my-0"><b>Solo adopta a una mascota si sabes que podrás llevarla a todos lados contigo.</b></p>
+        </div>
+    <% } %>    
+    <% if (alerta1==true) {%>
+        <div class="alert alert-warning" role="alert">
+            <p class="my-0">Si ya tienes otros animales en casa, existe la posibilidad de que no se lleve bien con la mascota que quieras adoptar.</p>
+            <p class="my-0">Te recomendamos <b>conversar con el albergue</b> y preguntar si puedes llevar a tu mascota actual para <b>examinar el
+            comportamiento de la que quieres adoptar</b>!</p>
+        </div>
+    <% } %>
+<% } %>
 <div class="row row-cols-1 row-cols-md-5 g-4 mt-2">
     <% posts.forEach(function(post){ %>
 
