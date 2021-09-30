@@ -29,9 +29,8 @@ const especies = [
   { name: 'Gato' }
 ];
 
-let file = "G:/cat.jpeg"
-
 let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor.";
+const path = require('path')
 
 const mascotas = [
   { name: 'Firulais', photo: null, birthdate: new Date(), weight: 7.5, story: text,
@@ -40,7 +39,7 @@ const mascotas = [
 
   { name: 'Dharma', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: false, desparasitado: true, sano:true, esterilizado: false, microchip: false,
-    activitylevel_id: 2, size_id: 2, specie_id: 1, gender_id: 2 },
+    activitylevel_id: 2, size_id: 2, specie_id: 2, gender_id: 2 },
 
   { name: 'Moly', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
@@ -52,7 +51,7 @@ const mascotas = [
 
   { name: 'Sami', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
-    activitylevel_id: 1, size_id: 2, specie_id: 1, gender_id: 2 },
+    activitylevel_id: 1, size_id: 2, specie_id: 2, gender_id: 2 },
   
   { name: 'Oso', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
@@ -64,7 +63,7 @@ const mascotas = [
     
   { name: 'Lucas', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
-    activitylevel_id: 2, size_id: 4, specie_id: 1, gender_id: 1 },
+    activitylevel_id: 2, size_id: 4, specie_id: 2, gender_id: 1 },
     
   { name: 'Leo', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
@@ -76,7 +75,7 @@ const mascotas = [
 
   { name: 'Tango', photo: null, birthdate: new Date(), weight: 7.5, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: false,
-    activitylevel_id: 3, size_id: 2, specie_id: 2, gender_id: 1 }
+    activitylevel_id: 3, size_id: 2, specie_id: 1, gender_id: 1 }
 ];
 
 const localizaciones = [
@@ -93,12 +92,12 @@ const usuarios = [
 ];
 
 const usuarios_personas = [
-  { first_name: 'John', last_name: 'Perez', photo: null, phone_number: '123456789', document_number: '12345678', email: 'correo1@gmail.com', rating: 3, location_id: 1, user_id: 1, gender_id: 1},
-  { first_name: 'Lia', last_name: 'Ber', photo: null, phone_number: '123456789', document_number: '12345678', email: 'correo2@gmail.com', rating: 4, location_id: 2, user_id: 2, gender_id: 1}
+  { first_name: 'John', last_name: 'Perez', photo: null, phone_number: '954684126', document_number: '54862459', email: 'correo1@gmail.com', rating: 3, location_id: 1, user_id: 1, gender_id: 1},
+  { first_name: 'Lia', last_name: 'Ber', photo: null, phone_number: '998745682', document_number: '75963669', email: 'correo2@gmail.com', rating: 4, location_id: 2, user_id: 2, gender_id: 1}
 ];
 
 const usuarios_shelters = [
-  { name:'NyoShelter', photo: null, phone_number: '123456789', ruc:'12345678', email: 'correo3@gmail.com', rating: 5, location_id: 3, user_id: 3}
+  { name:'NyoShelter', photo: null, phone_number: '956841264', ruc:'36544879', email: 'correo3@gmail.com', rating: 5, location_id: 3, user_id: 3}
 ]
 
 const usuarios_admin = [
@@ -157,7 +156,14 @@ const main = async () => {
 
     mascotas.forEach(async mascota => {
       try {
-        await Pet.create(mascota);
+        const newPet = await Pet.create(mascota);
+        var imagenTemp
+        if(newPet.specie_id==1){
+          imagenTemp = "'"+path.resolve('src/public/img','dog.jpg')+"'"
+        }else{
+          imagenTemp = "'"+path.resolve('src/public/img','cat.jpg')+"'"
+        }
+        sequelize.query('UPDATE "Pets" set photo=pg_read_binary_file('+imagenTemp+') where id='+newPet.id)
       } catch (err) {
         console.log(err);
       }
