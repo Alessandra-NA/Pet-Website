@@ -109,7 +109,7 @@ module.exports = {
                 const nombre = req.body.nombres
                 const apellido = req.body.apellidos
     
-                const photo = req.body.foto
+                //const photo = req.file.buffer
     
                 const celular = req.body.celular
                 const dni = req.body.dni
@@ -122,7 +122,7 @@ module.exports = {
                     {
                         first_name : nombre,
                         last_name : apellido,
-                        //photo
+                        //photo : photo,
                         phone_number : celular,
                         document_number : dni,
                         email : correo,

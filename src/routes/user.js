@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {} = require("../middlewares/auth")
-const { crearUsuario, editarUsuario } = require('../controllers/user');
+const { crearUsuario, editarUsuarioPeople, editarUsuarioShelter } = require('../controllers/user');
 const router = Router();
 
 /*
@@ -8,7 +8,8 @@ const router = Router();
   router.get('/', nameAuth, getProfile)
 */
 
-router.get('/editar', editarUsuario)
+router.get('/people', editarUsuarioPeople)
+router.get('/shelter', editarUsuarioShelter)
 
 
 

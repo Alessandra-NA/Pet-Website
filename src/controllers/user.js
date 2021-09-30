@@ -9,9 +9,16 @@ module.exports = {
    *
    */
 
-  editarUsuario: async (req, res) => {
+  editarUsuarioPeople: async (req, res) => {
     try{
-      return res.render('editar_usuario', {title : 'Editar usuario'})
+      return res.render('editar_usuario_people', {title : 'Editar usuario personal'})
+    }
+    catch{}
+  },
+
+  editarUsuarioShelter: async(req, res) => {
+    try{
+      return res.render('editar_usuario_shelter', {title : 'Editar usuario corporativo'})
     }
     catch{}
   }
