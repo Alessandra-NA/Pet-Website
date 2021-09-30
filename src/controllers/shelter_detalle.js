@@ -10,13 +10,13 @@ module.exports = {
 
 
   getUserShelter: async(req,res)=> {
-    var id =req.params.id;
+    var id =req.query.id;
     try{
       const usuario = await UserShelter.findOne({where:{id:id}})
       const posts = await Post.findAll({ include: [
         {
           model: Pet,
-          as: 'pet',
+          as: 'pet',          
           
         }
       ],
