@@ -2,7 +2,8 @@ const { Router } = require('express');
 const { } = require("../middlewares/auth")
 const { getSignUp, chooseTypeAccount, crearPeople, crearShelter, getCuentaDuplicada } = require('../controllers/signup');
 const router = Router();
-
+const multer = require('multer');
+upload = multer();
 
 /*
   EXAMPLE:
@@ -10,7 +11,7 @@ const router = Router();
 */
 router.post('/', getSignUp)
 
-router.post('/crearPeople', crearPeople)
+router.post('/crearPeople', upload.single('image'), crearPeople)
 
 router.post('/crearShelter', crearShelter)
 
