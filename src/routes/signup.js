@@ -13,7 +13,7 @@ router.post('/', getSignUp)
 
 router.post('/crearPeople', upload.single('image'), crearPeople)
 
-router.post('/crearShelter', crearShelter)
+router.post('/crearShelter', upload.single('image'), crearShelter)
 
 router.get('/chooseTypeAccount', chooseTypeAccount)
 
