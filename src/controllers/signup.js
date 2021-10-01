@@ -109,7 +109,7 @@ module.exports = {
                 const nombre = req.body.nombres
                 const apellido = req.body.apellidos
     
-                const photo = req.body.foto
+                const photo = req.file.buffer
     
                 const celular = req.body.celular
                 const dni = req.body.dni
@@ -122,7 +122,7 @@ module.exports = {
                     {
                         first_name : nombre,
                         last_name : apellido,
-                        //photo
+                        photo : photo,
                         phone_number : celular,
                         document_number : dni,
                         email : correo,
@@ -219,7 +219,7 @@ module.exports = {
                 //Ingresar Datos en tabla UserPeople
                 const nombre = req.body.nombre
     
-                const photo = req.body.foto
+                const photo = req.file.buffer
     
                 const telefono = req.body.telefono
                 const ruc = req.body.RUC
@@ -229,7 +229,7 @@ module.exports = {
                 const people = await UserShelter.create(
                     {
                         name : nombre,
-                        //photo
+                        photo : photo,
                         phone_number : telefono,
                         ruc : ruc,
                         email : correo,

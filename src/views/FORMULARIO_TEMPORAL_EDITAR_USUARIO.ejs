@@ -1,0 +1,16 @@
+<main class="container">
+    <form action="/editar_usuario/elegirTipo" method="POST" class="row my-3 p-2 border-2 g-3">
+
+        <label class="form-label" for="">Seleccione el tipo de usuario a editar</label>
+        <select class="form-select" id="" name="tipo" required>
+            <option value="1">Persona natural</option>
+            <option value="2">Corporativo</option>
+        </select>
+
+        <label class="form-label" for="">Seleccione el username a editar:</label>
+        <input class="form-control" type="text" placeholder="Ingrese el nombre de usuario" name="username" required>
+
+        <button class="btn btn-primary" type="submit">Editar</button>
+
+    </form>
+</main>
