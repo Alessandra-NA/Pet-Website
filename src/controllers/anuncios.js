@@ -22,11 +22,11 @@ module.exports = {
           ]
         }).then((response) => {
           //let image64 = Buffer.from(response[0].pet.photo).toString('base64')
-          res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) })
+          res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response), match: false })
         });
       } else {
         Post.findAll({ include: { all: true } }).then((response) => {
-          res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response) })
+          res.render('anuncios', { title: 'Anuncios', posts: imagesToBase64(response), match: false  })
         });
       }
     }

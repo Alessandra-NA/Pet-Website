@@ -5,21 +5,26 @@
 
     <form action="" method="POST">
         <div>
-            <label for="" class="form-label ">Correo o Nombre de Usuario:</label>
-            <input type="email" placeholder="Introduce aquí tu correo o nombre de usuario" class="form-control mb-4">
+            <label for="" class="form-label ">Correo o nombre de usuario:</label>
+            <input type="email" placeholder="Introduce tu correo o nombre de usuario" class="form-control mb-4">
     
         </div>
     
         <div>
             <label for="" class="form-label">Contraseña:</label>
-            <input type="password" placeholder="Introduce tu Contraseña" class="form-control mb-4">
+            <input type="password" placeholder="Introduce tu contraseña" class="form-control mb-4">
         </div>
 
         <div  class="mb-4">
-            <label for="">¿Aún no tienes una cuenta?</label>
-            <a href="/signup">¡Crea tu cuenta ahora!</a>
+            <label for="">¿No tiene una cuenta?</label>
+            <a href="/signup/chooseTypeAccount">Crear cuenta</a>
         </div>
 
         <button type="submit" class="btn btn-success mb-4">Ingresar</button>
     </form>
 </main>
+
+<script>
+    // para cambiar el color de texto de la sección en el navbar
+    highlightNavbar(6)
+</script>

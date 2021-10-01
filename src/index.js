@@ -32,7 +32,7 @@ app.set('layout extractScripts', true);
 
 
 // Middlewares
-//app.use(require('./middlewares/setUserType').roleRequestMiddleware);
+app.use(require('./middlewares/setUserType').roleRequestMiddleware);
 
 // Routes middlewares
 routerConnection(app);
