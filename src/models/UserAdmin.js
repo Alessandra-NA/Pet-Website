@@ -11,8 +11,9 @@ UserAdmin.init(
     {
         // atributos:
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(45),
             allowNull: false,
+            unique: true,
         },
     },
     {

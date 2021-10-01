@@ -31,6 +31,15 @@ module.exports = {
       }
     }
     catch { }
+  },
+
+  
+  getReportarAnuncios : (req,res) =>{
+    try
+    {
+      return res.render('reportar_anunciante' , {title : 'Reportar un anuncio'})
+    }
+    catch{}
   }
 };
 
