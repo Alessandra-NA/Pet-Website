@@ -24,62 +24,29 @@ module.exports = {
       const username = req.body.username
       let idUsuario
 
+      //Obtenemos el id de usuario de acuerdo al username
+      const usuarios = await User.findAll()
+      for(let usuario of usuarios)
+      {
+        if (usuario.username == username) 
+        {
+            idUsuario = usuario.id
+            break
+        }
+      }
+
+      const genders = await Gender.findAll({ where: { [Op.or]: [{ id: 3 }, { id: 4 }, {id : 5}] } })
+
       if (userType == 1)
       {
-
-        //Obtenemos el usuario de acuerdo al username
+        //En caso de UserPerson
         
-        const usuarios = await User.findAll()
-        for(let usuario of usuarios)
-        {
-          if (usuario.username == username) 
-          {
-              idUsuario = usuario.id
-              break
-          }
-        }
+        const usuarioP = await UserPerson.findOne({where : {user_id : idUsuario}})
+        const locations = await Location.findOne({where : {id : usuarioP.location_id}}) 
         
-        const genders = await Gender.findAll()
-        const usuariosP = await UserPerson.findAll()
-        const usuariosPeople = []
-        for (let usuarioP of usuariosP)
-        {
-          if (usuarioP.user_id == idUsuario)
-          {
-            usuariosPeople.push({
-              first_name : usuarioP.first_name,
-              last_name : usuarioP.last_name,
-              photo : usuarioP.photo,
-              phone_number : usuarioP.phone_number,
-              document_number : usuarioP.document_number,
-              email : usuarioP.email,
-              location_id : usuarioP.location_id,
-              gender_id : usuarioP.gender_id,
-              user_id : usuarioP.user_id
-            })
-          }
-        }
-        
-        const locations = await Location.findAll()
-        const location1 = []
-        
-        
-
-        for (let location of locations) 
-        {
-          if (location.id == usuariosPeople[0].location_id)
-          { 
-            location1.push({
-              district : location.district,
-              address : location.address
-            })
-          }
-        }
-        
-
         res.render('editar_usuario_people', {
-          usuario : usuariosPeople[0],
-          location : location1[0],
+          usuario : usuarioP,
+          location : locations,
           username : username,
           genders : genders
         })
@@ -88,8 +55,17 @@ module.exports = {
       else if (userType == 2)
       {
         //En caso de SHELTER
-        res.redirect('/editar_usuario/shelter')
+        const usuarioS = await UserShelter.findOne({where : {user_id : idUsuario}})
+        const locations = await Location.findOne({where : {id : usuarioS.location_id}})
+        
+        res.render('editar_usuario_shelter', {
+          usuario : usuarioS,
+          location : locations,
+          username : username,
+          genders : genders
+          })
       }
+      
     }
     catch{
     }
@@ -97,59 +73,69 @@ module.exports = {
 
 
   realizarEdicion : async (req,res) => {
+    //Variables comunes
     const tipoUsuario = req.body.tipo
-    const id = req.body.id
+    const idABuscar = req.body.id
+    const idLocation = req.body.idLocation
 
-    //Parametros a editar
-    const first_name = req.body.nombres
-    const last_name = req.body.apellidos
-    const document_number = req.body.gender_id
-    const gender_id = req.body.sexo
-    const address = req.body.redireccionarTipoUsuarioEditar
-    //foto
+    const district = req.body.distrito
+    const address = req.body.direccion
+    //const photo = req.file.buffer
     const email = req.body.correo
-    const phone_number = req.body.celular
+    console.log(idABuscar)
     
     if (tipoUsuario == "people")
     {
-      //Obtenemos UsuarioPeople por id
-      const usuarios = await UserPerson.findAll()
-      const usuarioEncontrado = []
+      //Editamos datos de UserPerson
+      //Parametros a editar
+      const first_name = req.body.nombres
+      const last_name = req.body.apellidos
+      const document_number = req.body.gender_id
+      const gender_id = req.body.sexo
+      const phone_number = req.body.celular
 
-      for (let usuario of usuarios){
-        if (usuario.user_id == id)
-        {
-          usuarioEncontrado.push({
-            first_name : usuario.first_name,
-            last_name : usuario.last_name,
-            photo : usuario.photo,
-            phone_number : usuario.phone_number,
-            document_number : usuario.document_number,
-            email : usuario.email,
-            location_id : usuario.location_id,
-            gender_id : usuario.gender_id,
-            user_id : usuario.user_id
-          })
-        }
-      }
+      UserPerson.update({
+        first_name : first_name,
+        last_name : last_name,
+        document_number : document_number,
+        gender_id : gender_id,
+        //photo : photo,
+        address : address,
+        email : email,
+        phone_number : phone_number
+      }, {where : {user_id : idABuscar}})
 
-      usuarioEncontrado[0].first_name = first_name
-      usuarioEncontrado[0].last_name = last_name
-      usuarioEncontrado[0].document_number = document_number
-      usuarioEncontrado[0].gender_id = gender_id
-      usuarioEncontrado[0].address = address
-      usuarioEncontrado[0].email = email
-      usuarioEncontrado[0].phone_number = phone_number
-
-      await usuarioEncontrado.save()
+      //Editamos datos de ubicación
+      Location.update({
+        district : district,
+        address : address
+      }, {where : {id : idLocation}})
+      
     }
 
-    else if (tipoUsuario = "shelter")
+    else if (tipoUsuario == "shelter")
     {
+      //Editamos datos de UserShelter
+      const name = req.body.nombre
+      const ruc = req.body.ruc
+      const phone_number = req.body.telefono
 
+      UserShelter.update({
+        name : name,
+        ruc : ruc,
+        email : email,
+        //photo : photo,
+        phone_number : phone_number
+      }, {where : {user_id : idABuscar}})
+
+      //Editamos datos de ubicación
+      Location.update({
+        district : district,
+        address : address
+      }, {where : {id : idLocation}})
     }
 
-    redirect('/')
+    res.redirect('/')
   },
 
 
