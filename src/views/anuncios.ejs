@@ -37,7 +37,7 @@
     <% posts.forEach(function(post){ %>
 
         <div class="col">
-            <div class="card" role="button" onclick="location.href='./pet_detalle?id=<%=post.pet_id%>'">
+            <div class="card" role="button" onclick="location.href='./pet_detalle?id=<%=post.id%>'">
                 <img src="data:image/png;base64,<%=post.pet.photo?post.pet.photo:''%>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"> <%=post.pet.name%>
