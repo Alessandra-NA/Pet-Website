@@ -15,7 +15,7 @@ Pet.init(
     {
         // atributos:
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
         photo: {
@@ -27,11 +27,11 @@ Pet.init(
             allowNull: true,
         },
         weight: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.FLOAT(50),
             allowNull: false,
         },
         story: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(300),
             allowNull: true,
         },
         vacunado: {

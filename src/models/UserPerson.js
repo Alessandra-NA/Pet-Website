@@ -13,11 +13,11 @@ UserPerson.init(
     {
         // atributos:
         first_name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
         },
         last_name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
         },
         photo: {
@@ -25,19 +25,22 @@ UserPerson.init(
             allowNull: true,
         },
         phone_number: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(9),
             allowNull: false,
+            unique: true,
         },
         document_number: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(8),
             allowNull: false,
+            unique: true,
         },
         email: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: true,
+            unique: true,
         },
         rating: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(5),
             allowNull: false,
             defaultValue: 0,
         },
