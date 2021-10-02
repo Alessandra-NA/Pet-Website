@@ -32,40 +32,27 @@ module.exports = {
     }
     catch { }
   },
-
-
-  /**
-   * @param {import('express').Request} req
-   * @param {import('express').Response} res
-   *
-   */
   
   getReportarAnuncios : async (req,res) =>{
     var id =req.query.id;
     console.log("================== "+id)
     try
     {    
-      const post = Post.findByPk(id)
+      const post = await Post.findByPk(id,{include: { all: true }})
       return res.render('reportar_anunciante' , {title : 'Reportar un anuncio', post:post})
     }
     catch{}
   },
-
-
-  /**
-   * @param {import('express').Request} req
-   * @param {import('express').Response} res
-   *
-   */
   
-  postAnuncioReportado : (req, res) =>{
+  postAnuncioReportado : async (req, res) =>{
     var id =req.query.id;
     console.log("================== "+id)
     try
     {
       const {reason, comment} = req.body;
+      const post = await Post.findByPk(id)
       Post.update({reason: reason, comment: comment, flagReportado: true},{where: {id:id}})
-      res.redirect('/')
+      res.redirect('/anuncios')
     }
     catch{}
   }

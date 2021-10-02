@@ -1,8 +1,9 @@
 <main class="container">
 
     <h2>Reporte/Denuncia a anunciante</h2>
-
-    <form action="/anuncios/reportar/done/?id=<%=post.id%>" method="POST" class="row my-3 p-2 border-2 g-3">
+    <%=post.id%>
+    <%=post.pet.name%>
+    <form action="./reportar/done?id=<%=post.id%>" method="POST" class="row my-3 p-2 border-2 g-3">
 
         <label class="form-label" for="">Motivo del reporte:</label>
         <select class="form-select" name="reason" id="" required>
