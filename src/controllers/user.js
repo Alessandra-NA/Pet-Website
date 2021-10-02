@@ -39,47 +39,13 @@ module.exports = {
           }
         }
         
-        const genders = await Gender.findAll()
-        const usuariosP = await UserPerson.findAll()
-        const usuariosPeople = []
-        for (let usuarioP of usuariosP)
-        {
-          if (usuarioP.user_id == idUsuario)
-          {
-            usuariosPeople.push({
-              first_name : usuarioP.first_name,
-              last_name : usuarioP.last_name,
-              photo : usuarioP.photo,
-              phone_number : usuarioP.phone_number,
-              document_number : usuarioP.document_number,
-              email : usuarioP.email,
-              location_id : usuarioP.location_id,
-              gender_id : usuarioP.gender_id,
-              user_id : usuarioP.user_id
-            })
-          }
-        }
-        
-        const locations = await Location.findAll()
-        const location1 = []
-        
-        
-
-        for (let location of locations) 
-        {
-          if (location.id == usuariosPeople[0].location_id)
-          { 
-            location1.push({
-              district : location.district,
-              address : location.address
-            })
-          }
-        }
-        
+        const genders = await Gender.findAll({ where: { [Op.or]: [{ id: 3 }, { id: 4 }, {id : 5}] } })
+        const usuarioP = await UserPerson.findAll({where : {username : username}})
+        const locations = await Location.findAll({where : {id : usuarioP.location_id}})
 
         res.render('editar_usuario_people', {
-          usuario : usuariosPeople[0],
-          location : location1[0],
+          usuario : usuarioP,
+          location : locations,
           username : username,
           genders : genders
         })
@@ -98,7 +64,7 @@ module.exports = {
 
   realizarEdicion : async (req,res) => {
     const tipoUsuario = req.body.tipo
-    const id = req.body.id
+    const idABuscar = req.body.id
 
     //Parametros a editar
     const first_name = req.body.nombres
@@ -112,36 +78,19 @@ module.exports = {
     
     if (tipoUsuario == "people")
     {
+      console.log("gozu")
       //Obtenemos UsuarioPeople por id
-      const usuarios = await UserPerson.findAll()
-      const usuarioEncontrado = []
-
-      for (let usuario of usuarios){
-        if (usuario.user_id == id)
-        {
-          usuarioEncontrado.push({
-            first_name : usuario.first_name,
-            last_name : usuario.last_name,
-            photo : usuario.photo,
-            phone_number : usuario.phone_number,
-            document_number : usuario.document_number,
-            email : usuario.email,
-            location_id : usuario.location_id,
-            gender_id : usuario.gender_id,
-            user_id : usuario.user_id
-          })
-        }
-      }
-
-      usuarioEncontrado[0].first_name = first_name
-      usuarioEncontrado[0].last_name = last_name
-      usuarioEncontrado[0].document_number = document_number
-      usuarioEncontrado[0].gender_id = gender_id
-      usuarioEncontrado[0].address = address
-      usuarioEncontrado[0].email = email
-      usuarioEncontrado[0].phone_number = phone_number
-
-      await usuarioEncontrado.save()
+    
+      UserPerson.update({
+        first_name : first_name,
+        last_name : last_name,
+        document_number : document_number,
+        gender_id : gender_id,
+        address : address,
+        email : email,
+        phone_number : phone_number
+      }, {where : {id : idABuscar}})
+      
     }
 
     else if (tipoUsuario = "shelter")
@@ -149,7 +98,7 @@ module.exports = {
 
     }
 
-    redirect('/')
+    res.redirect('/')
   },
 
 
