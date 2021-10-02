@@ -13,6 +13,7 @@ const editarUsuarioRouter = require('./user')
 const signupRouter = require('./signup')
 const signinRouter = require('./signin')
 const postRouter = require('./post')
+
 const accountsRouter = require('./accounts');
 const anuncios = require('../controllers/anuncios');
 
@@ -37,8 +38,12 @@ const routerConnection = (app) => {
   app.use('/crear_usuario', crearUsuarioRouter);
   app.use('/editar_usuario', editarUsuarioRouter)
   app.use('/post', postRouter);
+<<<<<<< HEAD
   app.use('/accounts', accountsRouter)
 
+=======
+  app.use('/accounts', accountsRouter);
+>>>>>>> 0290cb929e72a730a51cd5cedbe00a0bfa86731c
 
   app.use((_, res) => {
     res.render('notFound');
