@@ -43,10 +43,10 @@ module.exports = {
             }
         ) 
       if (post.user.type == "shelter"){
-        const dueño = await UserShelter.findOne({where:{user_id:id}})
+        const dueño = await UserShelter.findOne({where:{user_id:post.user_id}})
         return res.render('pet_detalle',{post:post,dueño:dueño});
       } else {
-        const dueño = await UserPerson.findOne({where:{user_id:id}})
+        const dueño = await UserPerson.findOne({where:{user_id:post.user_id}})
         return res.render('pet_detalle',{post:post,dueño:dueño});
       };
       

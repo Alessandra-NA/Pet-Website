@@ -13,8 +13,10 @@ const editarUsuarioRouter = require('./user')
 const signupRouter = require('./signup')
 const signinRouter = require('./signin')
 const postRouter = require('./post')
+
 const accountsRouter = require('./accounts');
 const anuncios = require('../controllers/anuncios');
+
 
 /**
   * @param {express.Express} app
@@ -37,6 +39,7 @@ const routerConnection = (app) => {
   app.use('/editar_usuario', editarUsuarioRouter)
   app.use('/post', postRouter);
   app.use('/accounts', accountsRouter)
+
 
   app.use((_, res) => {
     res.render('notFound');
