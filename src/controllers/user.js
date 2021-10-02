@@ -40,9 +40,13 @@ module.exports = {
         }
         
         const genders = await Gender.findAll({ where: { [Op.or]: [{ id: 3 }, { id: 4 }, {id : 5}] } })
-        const usuarioP = await UserPerson.findAll({where : {username : username}})
-        const locations = await Location.findAll({where : {id : usuarioP.location_id}})
-
+        console.log("gozu")
+        const usuarioP = await UserPerson.findOne({where : {user_id : idUsuario}})
+        console.log(usuarioP.location_id)
+        const locations = await Location.findOne({where : {id : usuarioP.location_id}})
+        console.log("gozu2")
+        
+        
         res.render('editar_usuario_people', {
           usuario : usuarioP,
           location : locations,

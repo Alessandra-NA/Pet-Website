@@ -1,7 +1,7 @@
 <main class="container">
     
     <div>
-        <form action="/editar_usuario/done" method="POST" class="row my-3 p-2 border-2 g-3">
+        <form action="/editar_usuario/done" method="POST" class="row my-3 p-2 border-2 g-3" enctype="multipart/form-data">
             
             <h2 class="mb-4">Editar un usuario personal:</h2>
             
@@ -58,7 +58,7 @@
             <div class="mb-4 col-md-6">
                 <label for="" class="form-label">Distrito: (se complica mucho)</label>
                 <select class="form-select" id="user_gender" name="distrito" required>
-                    <option selected disabled value="">--Seleccione una opción--</option>
+                    <option selected disabled value="<%= location.district %>"><%= location.district %></option>
                     <option value="Ancón">Ancón</option>
                     <option value="Ate Vitarte">Ate Vitarte</option>
                     <option value="Barranco">Barranco</option>
@@ -113,8 +113,15 @@
 
             <div class="mb-4">
                 <label class="form-label">Foto:</label>
-                <input type="file" class="file form-control" id="" name="foto">
-            </div>
+                <div class="">
+                 <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto" type="button">
+                   <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative" id="image-field"
+                     width="200" height="200">
+                 </button>
+                 <input type="file" name="image" id="input_foto" onchange="handleIMG(this.files), previewImage(event)"
+                   accept="image/*" style="display: none">
+               </div>
+             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Email:</label>
@@ -148,3 +155,6 @@
     
     </div>
 </main>
+
+
+<script src="/js/selectFoto.js"></script>
