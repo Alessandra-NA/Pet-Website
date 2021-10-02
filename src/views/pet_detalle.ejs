@@ -165,9 +165,14 @@
                             </button>
                         <% } else{ %>  
                             <span class="badge bg-danger mar" style="width:  12rem;">No es posible adoptar</span>
-                        <% } %>                              
+                        <% } %>
+                        <form action="/anuncios/reportar?id=<%=post.id%>" method="GET">
+                            <button type="submit" class="btn btn-danger mar mt-2" style="width:  12rem;">
+                                <b>Reportar</b>
+                            </button>     
+                        </form>                    
                     </figure>                        
-                </div>              
+                </div>         
             </div>
         </div>
     </div>
