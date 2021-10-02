@@ -12,19 +12,31 @@ UserShelter.init(
     {
         // atributos:
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
+            unique: true,
+        },
+        photo: {
+            type: DataTypes.BLOB,
+            allowNull: true,
         },
         phone_number: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(9),
             allowNull: false,
+            unique: true,
         },
         ruc: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(11),
             allowNull: false,
+            unique: true,
+        },
+        email: {
+            type: DataTypes.STRING(100),
+            allowNull: true,
+            unique: true,
         },
         rating: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(5),
             allowNull: false,
             defaultValue: 0,
         },

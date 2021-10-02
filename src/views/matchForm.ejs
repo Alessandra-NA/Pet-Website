@@ -1,66 +1,81 @@
 <main class="container-lg my-10">
-    <h1 class="mb-3 mx-auto text-center">Formulario para encontrar a mi mascota ideal</h1>
-    <form action="post">
+    <h1 class="mb-3">Formulario para encontrar a mi mascota ideal</h1> <br>
+    <form action="/match/resultados" method="POST">
         <div class="d-flex flex-column">
             <div>
                 <label class="mb-2">Me gustaría adoptar un...</label>
-                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
-                    <label> <input type="radio" name="perro"> Perro</label>
-                    <label> <input type="radio" name="gato"> Gato</label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md"
+                    style="width: 75%">
+                    <label> <input id="rbperro" class="form-check-input mb-2 mr-2" type="radio" name="tipos" value="perros" checked> Perro</label>
+                    <label> <input id="rbgato" class="form-check-input mb-2 mr-2" type="radio" name="tipos" value="gatos"> Gato</label>
                 </div>
             </div>
             <div>
                 <label class="mb-2">Actualmente vivo en una...</label>
-                <select class="mx-auto form-control py-2 mb-3" style="width: 75%">
+                <select class="mx-auto form-control py-2 mb-3" style="width: 75%" name="tamañocasa">
                     <option value="1">Casa pequeña o departamento</option>
                     <option value="2">Casa mediana</option>
                     <option value="3">Casa amplia</option>
                 </select>
             </div>
             <div>
-                <label class="mb-2">¿Cuento con presupuesto para cubrir gastos inesperados (como problemas de salud)?</label>
-                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
-                    <label> <input type="radio" name="gastosTrue"> Sí </label>
-                    <label> <input type="radio" name="gastosFalse"> No </label>
+                <label class="mb-2">¿Cuento con presupuesto para cubrir gastos inesperados (como problemas de
+                    salud)?</label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md"
+                    style="width: 75%">
+                    <label> <input class="form-check-input mb-2 mr-2" type="radio" name="gastos" value="si" checked> Sí </label>
+                    <label> <input class="form-check-input mb-2 mr-2" type="radio" name="gastos" value="no"> No </label>
                 </div>
             </div>
             <div>
                 <label class="mb-2">¿Suelo cambiar de hogar regularmente?</label>
-                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
-                    <label> <input type="radio" name=""> Sí </label>
-                    <label> <input type="radio" name=""> No </label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md"
+                    style="width: 75%">
+                    <label> <input class="form-check-input mb-2 mr-2" type="radio" name="cambiohogar" value="si" checked> Sí </label>
+                    <label> <input class="form-check-input mb-2 mr-2" type="radio" name="cambiohogar" value="no"> No </label>
                 </div>
             </div>
             <div>
                 <label class="mb-2">¿Tengo otros animales en casa o planeo adoptar más de uno?</label>
-                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
-                    <label> <input type="radio" name=""> Sí </label>
-                    <label> <input type="radio" name=""> No </label>
+                <div class="mx-auto d-flex py-2 mb-3 justify-content-around border-1 border-gray-300 rounded-md"
+                    style="width: 75%">
+                    <label> <input class="form-check-input mb-2 mr-2" type="radio" name="masanimales" value="si" checked> Sí </label>
+                    <label> <input class="form-check-input mb-2 mr-2" type="radio" name="masanimales" value="no"> No </label>
                 </div>
             </div>
             <div>
-                <label class="mb-2">¿Cuento con tiempo para realizar actividades físicas o de juego con mi mascota?</label>
-                <select class="mx-auto form-control py-2 mb-3" style="width: 75%">
+                <label class="mb-2">¿Cuento con tiempo para realizar actividades físicas o de juego con mi
+                    mascota?</label>
+                <select class="mx-auto form-control py-2 mb-3" style="width: 75%" name="disponibilidadtiempo">
                     <option value="1">Sí, bastante tiempo</option>
                     <option value="2">Solo lo necesario</option>
                     <option value="3">No, no tengo tiempo</option>
                 </select>
             </div>
-            <div>
-                <label class="mb-2">(en perros) De preferencia, me gustaría un perro de tamaño...</label>
-                <div class="mx-auto d-flex flex-column flex-sm-row py-2 mb-3 justify-content-sm-around justify-content-center border-1 border-gray-300 rounded-md" style="width: 75%">
-                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Miniatura</label>
-                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Pequeño</label>
-                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Mediano</label>
-                    <label class="align-self-center w-24"> <input type="checkbox" name="" class="mr-1">Grande</label>
+            <div id="divTamanos">
+                <label class="mb-2">De preferencia, me gustaría un perro de tamaño...</label>
+                <div class="mx-auto d-flex flex-column flex-sm-row py-2 mb-3 justify-content-sm-around justify-content-center border-1 border-gray-300 rounded-md"
+                    style="width: 75%">
+                    <label class="align-self-center w-24"> <input type="checkbox" name="cbTamMin" class="form-check-input mr-1" checked>Miniatura</label>
+                    <label class="align-self-center w-24"> <input type="checkbox" name="cbTamPeq" class="form-check-input mr-1" checked>Pequeño</label>
+                    <label class="align-self-center w-24"> <input type="checkbox" name="cbTamMed" class="form-check-input mr-1" checked>Mediano</label>
+                    <label class="align-self-center w-24"> <input type="checkbox" name="cbTamGra" class="form-check-input mr-1" checked>Grande</label>
                 </div>
             </div>
+            <br>
+            <div class="mx-auto">
+            <button class="btn btn-primary">Enviar mis respuestas</button>
+            </div>
         </div>
-        <div class="mx-auto flex justify-center mt-6"> <button class="btn btn-primary" type="submit">Enviar respuestas</button> </div>
     </form>
 </main>
-
+<br><br><br><br>
 <script>
     // para cambiar el color de texto de la sección en el navbar
     highlightNavbar(3)
+    document.body.addEventListener('change', function(e){
+            if (e.target.id == "rbperro") document.getElementById('divTamanos').hidden = false
+            else if (e.target.id == "rbgato") document.getElementById('divTamanos').hidden = true
+        }
+    )
 </script>

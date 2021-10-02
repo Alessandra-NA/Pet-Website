@@ -5,9 +5,13 @@
     document.getElementsByClassName("nav-link").item(2).setAttribute("class", "nav-link active")
 
 }*/
+
 var main = function(){
-    $('#avisoAdopcionModal').modal({ show: true, backdrop: 'static', keyboard: false })
+    new bootstrap.Modal(document.getElementById('avisoAdopcionModal'), {backdrop: 'static', keyboard: false}).show()
+
+    //$('#avisoAdopcionModal').modal({ show: true, backdrop: 'static', keyboard: false })
     // CambiarHeader();
 }
 
 window.addEventListener("load", main)
+

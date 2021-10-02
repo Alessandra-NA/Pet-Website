@@ -1,0 +1,155 @@
+<main class="container">
+    
+    <div>
+        <form action="/signup/crearPeople" enctype="multipart/form-data" method="POST" class="row my-3 p-2 border-2 g-3">
+            
+            <h2 class="mb-4">Creación de nuevo usuario personal:</h2>
+            
+            <h3>Datos de la cuenta:</h3>
+
+            <div class="mb-4 col-md-6">
+                <label class="form-label">Nombre de usuario:</label>
+                <input placeholder="Ingrese un nombre de usuario" name="nombre_de_usuario" type="text" class="form-control me-2" required>
+
+            </div>
+            
+            <div class="mb-4 col-md-6">
+                <label class="form-label">Contraseña:</label>
+
+                <input placeholder="Ingrese una contraseña" name="contraseña" type="password" class="form-control me-2" required>
+
+            </div>
+
+            <h3>Datos personales:</h3>
+
+            <div class="mb-4 col-md-6">
+                <label class="form-label">Nombres:</label>
+
+                <input placeholder="Ingrese sus nombres" name="nombres" type="text" class="form-control me-2" required>
+
+            </div>
+            
+            <div class="mb-4 col-md-6">
+                <label class="form-label">Apellidos:</label>
+
+                <input placeholder="Ingrese sus apellidos" name="apellidos" type="text" class="form-control me-2" required>
+
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label">DNI/CE:</label>
+
+                <input placeholder="Ingrese número de DNI/CE" name="dni" type="text" class="form-control me-2" required>
+
+            </div>
+
+            <div class="mb-4">
+                <label for="" class="form-label">Sexo:</label>
+
+                <select class="form-select" id="user_gender" name="sexo" required>
+                    <option selected disabled value="">--Seleccione una opción--</option>
+
+                    <option value="3">Masculino</option>
+                    <option value="4">Femenino</option>
+                    <option value="5">Sin especificar</option>
+                </select>
+            </div>
+
+
+            <div class="mb-4 col-md-6">
+                <label for="" class="form-label">Distrito:</label>
+                <select class="form-select" id="user_gender" name="distrito" required>
+                    <option selected disabled value="">--Seleccione una opción--</option>
+                    <option value="Ancón">Ancón</option>
+                    <option value="Ate Vitarte">Ate Vitarte</option>
+                    <option value="Barranco">Barranco</option>
+                    <option value="Breña">Breña</option>
+                    <option value="Carabayllo">Carabayllo</option>
+                    <option value="Chaclacayo">Chaclacayo</option>
+                    <option value="Chorrillos">Chorrillos</option>
+                    <option value="Cieneguilla">Cieneguilla</option>
+                    <option value="Comas">Comas</option>
+                    <option value="El Agustino">El Agustino</option>
+                    <option value="Independencia">Independencia</option>
+                    <option value="Jesús María">Jesús María</option>
+                    <option value="La Molina">La Molina</option>
+                    <option value="La Victoria">La Victoria</option>
+                    <option value="Lima Cercado">Lima Cercado</option>
+                    <option value="Lince">Lince</option>
+                    <option value="Los Olivos">Los Olivos</option>
+                    <option value="Lurigancho">Lurigancho</option>
+                    <option value="Lurín">Lurín</option>
+                    <option value="Magdalena del Mar">Magdalena del Mar</option>
+                    <option value="Miraflores">Miraflores</option>
+                    <option value="Pachacamac">Pachacamac</option>
+                    <option value="Pucusana">Pucusana</option>
+                    <option value="Pueblo Libre">Pueblo Libre</option>
+                    <option value="Puente Piedra">Puente Piedra</option>
+                    <option value="Punta Hermosa">Punta Hermosa</option>
+                    <option value="Punta Negra">Punta Negra</option>
+                    <option value="Rímac">Rímac</option>
+                    <option value="San Bartolo">San Bartolo</option>
+                    <option value="San Borja">San Borja</option>
+                    <option value="San Isidro">San Isidro</option>
+                    <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                    <option value="San Juan de Miraflores">San Juan de Miraflores</option>
+                    <option value="San Luis">San Luis</option>
+                    <option value="San Martín de Porres">San Martín de Porres</option>
+                    <option value="San Miguel">San Miguel</option>
+                    <option value="Santa Anita">Santa Anita</option>
+                    <option value="Santa María del Mar">Santa María del Mar</option>
+                    <option value="Santa Rosa">Santa Rosa</option>
+                    <option value="Santiago de Surco">Santiago de Surco</option>
+                    <option value="Surquillo">Surquillo</option>
+                    <option value="Villa El Salvador">Villa El Salvador</option>
+                    <option value="Villa María del Triunfo">Villa María del Triunfo</option>
+                </select>
+            </div>
+
+            <div class="mb-4 col-md-6">
+                <label class="form-label">Dirección:</label>
+                <input placeholder="Ingrese su dirección" name="direccion" type="text" class="form-control me-2" required>
+
+            </div>
+
+            <div class="mb-4">
+               <label class="form-label">Foto:</label>
+               <div class="">
+                <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto" type="button">
+                  <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative" id="image-field"
+                    width="200" height="200">
+                </button>
+                <input type="file" name="image" id="input_foto" onchange="handleIMG(this.files), previewImage(event)"
+                  accept="image/*" required style="display: none">
+              </div>
+            </div>
+            
+            <div class="mb-4 col-md-6">
+                <label class="form-label">Email:</label>
+                <input placeholder="Ingrese su correo electrónico" name="correo" type="email" class="form-control me-2" required>
+
+            </div>
+
+            <div class="mb-4 col-md-6">
+                <label class="form-label">Telefono celular:</label>
+                <input placeholder="Ingrese su número de telefono" name="celular" type="number" class="form-control me-2" required>
+
+            </div>
+
+            <div class="mb-4 ">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="acepto_terminos" required>
+                    <label class="form-check-label" for="">Acepto los terminos y condiciones y las leyes de tratamiento de datos personales</label>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="submit">Crear Usuario</button>
+            </div>
+
+        </form>
+    
+    </div>
+</main>
+
+<script src="/js/selectFoto.js"></script>
