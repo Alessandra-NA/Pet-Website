@@ -1,7 +1,7 @@
 <main class="container">
     
     <div>
-        <form action="" method="POST" class="row my-3 p-2 border-2 g-3">
+        <form action="/editar_usuario/done" method="POST" class="row my-3 p-2 border-2 g-3" enctype="multipart/form-data">
             
             <h2 class="mb-4">Editar un usuario corporativo:</h2>
             
@@ -10,15 +10,12 @@
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombre de usuario:</label>
 
-                <input placeholder="Ingrese un nombre de usuario" name="nombre_de_usuario" type="text" class="form-control me-2" required>
+                <input placeholder="Ingrese un nombre de usuario" name="nombre_de_usuario" type="text" class="form-control me-2" value="<%= username %>" disabled>
 
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Contraseña:</label>
-
-                <input placeholder="Ingrese una contraseña" name="contraseña" type="password" class="form-control me-2" required>
-
             </div>
 
             <h3>Datos personales:</h3>
@@ -26,21 +23,21 @@
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombre:</label>
 
-                <input placeholder="Ingrese el nombre del albergue" name="nombre" type="text" class="form-control me-2" required>
+                <input placeholder="Ingrese el nombre del albergue" name="nombre" type="text" class="form-control me-2" value="<%= usuario.name %>" required>
 
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">RUC:</label>
 
-                <input placeholder="Ingrese número de RUC" name="RUC" type="text" class="form-control me-2" required>
+                <input placeholder="Ingrese número de RUC" name="RUC" type="text" class="form-control me-2" value="<%= usuario.ruc %>" required>
             </div>
 
             
             <div class="mb-4 col-md-6">
                 <label for="" class="form-label">Distrito:</label>
                 <select class="form-select" id="user_gender" name="distrito" required>
-                    <option selected disabled value="">--Seleccione una opción--</option>
+                    <option selected disabled value="<%= location.district %>"><%= location.district %></option>
                     <option value="Ancón">Ancón</option>
                     <option value="Ate Vitarte">Ate Vitarte</option>
                     <option value="Barranco">Barranco</option>
@@ -89,43 +86,47 @@
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Dirección:</label>
-                <input placeholder="Ingrese su dirección" name="direccion" type="text" class="form-control me-2" required>
+                <input placeholder="Ingrese su dirección" name="direccion" type="text" class="form-control me-2" value="<%= location.address %>" required>
 
             </div>
 
             <div class="mb-4">
                 <label class="form-label">Foto:</label>
-
-                <input type="file" class="file form-control" id="" name="foto" required>
-
-            </div>
+                <div class="">
+                 <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto" type="button">
+                   <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative" id="image-field"
+                     width="200" height="200">
+                 </button>
+                 <input type="file" name="image" id="input_foto" onchange="handleIMG(this.files), previewImage(event)"
+                   accept="image/*" style="display: none">
+               </div>
+             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Email:</label>
 
-                <input placeholder="Ingrese su correo electrónico" name="correo" type="email" class="form-control me-2" required>
+                <input placeholder="Ingrese su correo electrónico" name="correo" type="email" class="form-control me-2" value="<%= usuario.email %>" required>
 
             </div>
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Número de telefono:</label>
 
-                <input placeholder="Ingrese su número de telefono" name="telefono" type="number" class="form-control me-2" required>
+                <input placeholder="Ingrese su número de telefono" name="telefono" type="number" class="form-control me-2" value="<%= usuario.phone_number %>" required>
 
             </div>
 
-            <div class="mb-4 ">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="acepto_terminos" required>
-                    <label class="form-check-label" for="">Acepto los terminos y condiciones y las leyes de tratamiento de datos personales</label>
-                </div>
-            </div>
+            <input type="hidden" name="tipo" value="shelter">
+            <input type="hidden" name="id" value="<%= usuario.user_id%>">
+            <input type="hidden" name="idLocation" value="<%= usuario.location_id %>">
 
             <div>
-                <button class="btn btn-primary" type="submit">Crear Usuario</button>
+                <button class="btn btn-primary" type="submit">Confirmar datos</button>
             </div>
 
         </form>
     
     </div>
 </main>
+
+<script src="/js/selectFoto.js"></script>

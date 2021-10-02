@@ -136,19 +136,13 @@
                 <input placeholder="Ingrese su número de telefono" name="celular" type="number" class="form-control me-2" value="<%= usuario.phone_number %>" required>
 
             </div>
-
-            <div class="mb-4 ">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="acepto_terminos" required>
-                    <label class="form-check-label" for="">Acepto los terminos y condiciones y las leyes de tratamiento de datos personales</label>
-                </div>
-            </div>
-
+            
             <input type="hidden" name="tipo" value="people">
             <input type="hidden" name="id" value="<%= usuario.user_id%>">
+            <input type="hidden" name="idLocation" value="<%= usuario.location_id %>">
 
             <div>
-                <button class="btn btn-primary" type="submit">Crear Usuario</button>
+                <button class="btn btn-primary" type="submit">Confirmar datos</button>
             </div>
 
         </form>
