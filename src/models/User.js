@@ -11,11 +11,12 @@ User.init(
     {
         // atributos:
         username: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(45),
             allowNull: false,
+            unique: true,
         },
         password: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(45),
             allowNull: false,
         },
         type: {

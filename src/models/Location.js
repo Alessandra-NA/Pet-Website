@@ -3,27 +3,24 @@ const sequelize = require('../db');
 
 class Location extends Model {
     // relaciones:
-    static associate({ User }) {
-        this.hasOne(User, { as: 'user', foreignKey: 'location_id' })
-    }
 }
 Location.init(
     {
         // atributos:
         country: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
         province: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
         district: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
         address: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
         },
     },

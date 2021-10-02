@@ -1,14 +1,21 @@
 const { Router } = require('express');
 const {} = require("../middlewares/auth")
-const { crearUsuario, editarUsuario } = require('../controllers/user');
+const { crearUsuario, editarUsuarioPeople, editarUsuarioShelter, getEditarTipoUsuario, redireccionarTipoUsuarioEditar, realizarEdicion } = require('../controllers/user');
 const router = Router();
+const multer = require('multer');
+upload = multer();
 
 /*
   EXAMPLE:
   router.get('/', nameAuth, getProfile)
 */
 
-router.get('/editar', editarUsuario)
+router.get('/people', editarUsuarioPeople)
+router.get('/shelter', editarUsuarioShelter)
+
+router.get('/elegirTipo', getEditarTipoUsuario)
+router.post('/elegirTipo', redireccionarTipoUsuarioEditar)
+router.post('/done', upload.single('image'), realizarEdicion)
 
 
 

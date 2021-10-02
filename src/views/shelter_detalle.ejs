@@ -1,0 +1,90 @@
+<main class="container" style="height: auto;">
+    <div class="ficha">
+        <div class="row-5" style="margin-top: .5rem; margin-bottom: 1.5rem;">
+            <div class="col">
+                <img src="data:image/png;base64,<%=usuario.photo?usuario.photo:''%>" class="img-fluid" alt="...">
+            </div>
+            <div class="col">
+                <div class="card" style="padding-left: 1rem; padding-right: 1rem;" height="mx-auto">
+                    <div class="row" style="margin-top: .5rem; margin-bottom: .5rem;">
+                        <h1>Refugio <%= usuario.name%></h1>  
+                    </div>
+                    <div class="row">
+                        <div class="col" style="margin-top: .5rem; margin-bottom: .5rem;">
+                            <h5>Dirección: <%=usuario.location.address%></h5>  
+                        </div>   
+                        <div class="col">
+                            <div class="d-flex justify-content-center">
+                                <% for (var i =0; i<usuario.rating;i++) {%> 
+                                    <img src='data:image/png;base64,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' width="70rem" height="70rem">
+                                <% } %>
+                                <% for (var i =0; i<(5-usuario.rating);i++) {%> 
+                                    <img src='https://us.123rf.com/450wm/stockgiu/stockgiu1911/stockgiu191113891/133793719-estrella-icono-de-estilo-de-l%C3%ADnea-de-cinco-puntas.jpg?ver=6' width="70rem" height="70rem">
+                                <% } %>
+                            </div>
+                        </div>
+                    </div> 
+                </div>                           
+            </div>
+            <div class="col">
+                <div class="card" style="padding: 1rem;" height="mx-auto">
+                    <div class="row">
+                        <div class="col">
+                            Número de contacto:
+                        </div>
+                        <div class="col col-lg" style="text-align: end;">
+                            <%=usuario.phone_number %>                
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            Correo de contacto:
+                        </div>
+                        <div class="col col-lg" style="text-align: end;">
+                            <%=usuario.email %>                
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            RUC:
+                        </div>
+                        <div class="col col-lg" style="text-align: end;">
+                            <%=usuario.ruc %>                
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="row-1">
+            <h2 style="margin-top: .5rem; margin-bottom: 1.5rem;">Mascotas:</h2>
+        </div>        
+        <div class="row row-cols-1 row-cols-md-5 g-4">
+            <% posts.forEach(function(post){ %>
+                <div class="col">
+                    <div class="card" role="button" onclick="location.href='./pet_detalle?id=<%=post.id%>'">
+                        <img src="data:image/png;base64,<%=post.pet.photo?post.pet.photo:''%>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=post.pet.name%>
+                            </h5>
+                            <p class="card-text">
+                            <p>
+                                Cumpleaños: <%=post.pet.birthdate%>
+                            </p>
+                            <p>
+                                <%=post.pet.story%>
+                            </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+        
+
+        
+       
+    </div>
+</main>
+

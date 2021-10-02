@@ -1,0 +1,174 @@
+<% if(post.user.type == "shelter"){flag=true} else {flag=false}%>
+<main class="container" style="height: auto;">
+    <div class="ficha">
+        <div class="row justify-content-md-center" style="margin-top: 1.5rem;">
+            <div class="col-xl-3" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+                <div class="row">
+                    <img src="data:image/png;base64,<%=post.pet.photo?post.pet.photo:''%>" class="card-img-top" alt="...">
+                </div>
+                <div class="row" style="margin-top: 1.5rem;">
+                    <div class="col">
+                        <h2 style="text-align: center;"><p class="h2"><%=post.pet.name %> </p></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="padding-left: 1rem; padding-right: 1rem;">
+                <div  class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+                    <h5 class="card-title"><p class="h2">Mis datos</p></h5>
+                    <div class="row">
+                        <div class="col">
+                            Fecha nacimiento
+                        </div>
+                        <div class="col col-lg-4" style="text-align: end;">
+                            <%=post.pet.birthdate %>                   
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            Peso
+                        </div>
+                        <div class="col col-lg-4" style="text-align: end;">                            
+                            <%=post.pet.weight %> 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            Especie
+                        </div>
+                        <div class="col col-lg-4" style="text-align: end;">
+                            <%=post.pet.specie.name %> 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            Género
+                        </div>
+                        <div class="col col-lg-4" style="text-align: end;">
+                            <%=post.pet.gender.name %> 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            Tamaño
+                        </div>
+                        <div class="col col-lg-4" style="text-align: end;">
+                            <%=post.pet.size.name %> 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            Actividad
+                        </div>
+                        <div class="col col-lg-4" style="text-align: end;">
+                            <%=post.pet.activitylevel.name %> 
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div  class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;"">
+                    <h5 class="card-title"><p class="h5">Mi historia </p></h5>
+                    <div class="row" style="text-align: justify;">
+                        <p>
+                            <%=post.pet.story %> 
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-3" style="padding-left: 3rem; padding-right: 3rem;">
+                <div class="row">
+                    <div  class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <h3 class="card-title"><p class="h3">Ficha</p></h3>
+                        <div class="row">
+                            <div class="col">
+                                Sano
+                            </div>
+                            <div class="col col-lg-4" style="text-align: end;">
+                                <% if(post.pet.sano){ %><span class="badge bg-success">Si</span>
+                                <% } else{ %><span class="badge bg-danger">No</span><% } %>                    
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                Vacunado
+                            </div>
+                            <div class="col col-lg-4" style="text-align: end;">
+                                <% if(post.pet.vacunado){ %><span class="badge bg-success">Si</span>
+                                <% } else{ %><span class="badge bg-danger">No</span><% } %>                    
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                Desparasitado
+                            </div>
+                            <div class="col col-lg-4" style="text-align: end;">
+                                <% if(post.pet.desparasitado){ %><span class="badge bg-success">Si</span>
+                                <% } else{ %><span class="badge bg-danger">No</span><% } %>                    
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                Esterelizado
+                            </div>
+                            <div class="col col-lg-4" style="text-align: end;">
+                                <% if(post.pet.esterelizado){ %><span class="badge bg-success">Si</span>
+                                <% } else{ %><span class="badge bg-danger">No</span><% } %>                    
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                Microchip
+                            </div>
+                            <div class="col col-lg-4" style="text-align: end;">
+                                <% if(post.pet.microchip){ %><span class="badge bg-success">Si</span>
+                                <% } else{ %><span class="badge bg-danger">No</span><% } %>                    
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div  class="card" style="padding: 1rem; margin-bottom: 1rem;">
+                        <h5 class="card-title"><p class="h5">
+                            <% if(flag){ %>Refugio
+                            <% } else{ %>Usuario<% } %>
+                        </p></h5>
+                        <div class="row">
+                            <div class="container">
+                                <img src="data:image/png;base64,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" width="50rem" height="6rem" style="align-content: center;">                                                 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p><% if(flag){ %> <%=dueño.name%> 
+                                <% } else{ %> <%=dueño.first_name%><%=dueño.last_name%> 
+                                    <% } %></p>                                                   
+                        </div>
+                        <div class="row">
+                            <p><%=dueño.phone_number%> </p>                                                   
+                        </div>                 
+                    </div>
+                </div>
+                <div class="row">
+                    <figure class="text-center">
+                        <% if(true){ %>
+                            <button type="button" class="btn btn-success mar" style="width:  12rem;">
+                            <b>Adoptar</b>
+                            </button>
+                        <% } else{ %>  
+                            <span class="badge bg-danger mar" style="width:  12rem;">No es posible adoptar</span>
+                        <% } %>                              
+                    </figure>                        
+                </div>              
+            </div>
+        </div>
+    </div>
+</main>
