@@ -1,4 +1,4 @@
-const { Post, Pet, User } = require('../models');
+const { Post, Pet, User, UserPerson, UserShelter } = require('../models');
 
 module.exports = {
   /**
@@ -10,8 +10,7 @@ module.exports = {
   showAccounts: (req, res) => {
     try {
       User.findAll({include: {all: true}}).then(response => {
-        //console.log(response)
-        res.render('accountManager', {title: 'Accounts', users: response})
+        res.render('accountManager', {title: 'Accounts', users: response.filter(user => user.type != 'admin')})
         
       })
       
