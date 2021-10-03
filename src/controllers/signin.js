@@ -1,4 +1,6 @@
-const { User } = require('../models');
+
+const md5 = require('md5');
+const { User, UserPerson, UserAdmin, Location, UserShelter } = require('../models');
 
 module.exports = {
     /**
@@ -13,58 +15,78 @@ module.exports = {
         }
         catch { }
     },
-
-    postSignIn: async (req, res) => {
-        try {
-            
-            const email = req.body.email;
-            const password = md5(req.body.password)
     
-            let usuarioAIngresar = null;
-            let existe = false;
-            let valido = false;
+    /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response & import('express-session').SessionData} res
+   *
+   */
+    iniciarSesion : async (req,res) => {
+        try
+        {
+            let aux = false
 
-            const listaUsuarios = await getUsers();
-            for(let usuario of listaUsuarios){
-                if(usuario.email === email){
-                    existe = true;
-                    if(usuario.password == password){
-                        valido = true;
-                        usuarioAIngresar = usuario
-                        break;
-                    }
+            const username = req.body.username
+            const password = md5(req.body.password)
+
+            const usuarios = await User.findAll()
+            let usuarioCurrent = null
+
+            for (let usuario of usuarios) 
+            {
+                if (usuario.username == username && usuario.password == password)
+                {
+                    usuarioCurrent = usuario
+                    aux = true
+                    console.log('ingresó')
+                    if (usuario.type == 'person')
+                        await UserPerson.findOne({
+                            attributes: ['id'],
+                            raw: true,
+                            where: {
+                                user_id: usuario.id
+                            }
+                        }).then(us => {
+                            req.session.userId = us.id
+                        })
+                    else if (usuario.type == 'shelter')
+                        await UserShelter.findOne({
+                            attributes: ['id'],
+                            raw: true,
+                            where: {
+                                user_id: usuario.id
+                            }
+                        }).then(us => {
+                            req.session.userId = us.id
+                        })
+                    else if (usuario.type == 'admin')
+                        await UserAdmin.findOne({
+                            attributes: ['id'],
+                            raw: true,
+                            where: {
+                                user_id: usuario.id
+                            }
+                        }).then(us => {
+                            req.session.userId = us.id
+                        })
+                    req.session.userType = usuario.type
+                    break
                 }
             }
-
-            if(existe && valido){
-                switch(usuarioAIngresar.rol.id){
-                    case 1:
-                        req.session.usuario=usuarioAIngresar;
-                        res.redirect('/src/views/anuncios');
-                        break;
-                    case 2:
-                        req.session.usuario=usuarioAIngresar;
-                        res.redirect('/src/views/anuncios');
-                        break;
-                    case 3:
-                        req.session.usuario=usuarioAIngresar;
-                        res.redirect('/src/views/anuncios');
-                        break;
-                }
+            if (aux)
+            {
+                //Si inicia sesion
+                res.redirect('/adopcion')
             }
             else{
-                req.session.message = {
-                    type: 'danger',
-                    intro: 'ERROR',
-                    message: ' - El correo o la contraseña ingresados no son válidos, intente denuevo.'
-                }
-                res.redirect('/src/views/login')
-            }
+                //Username o contraseña incorrecto               
+                res.redirect('/')
+            }     
+        }
+        catch{
 
         }
-
-        catch { }
-
     }
 
 };
+    

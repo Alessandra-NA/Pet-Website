@@ -14,7 +14,7 @@
     "build:tailwind": "NODE_ENV=production postcss ./src/public/css/tailwind.css -o ./src/public/css/index.css",
     "dev": "nodemon ./src/index.js",
     "start": "npm run build:tailwind && node ./src/index.js",
-    "seed": "node ./src/seeders/index.js"
+    "seed": "node ./seed.js"
   },
   "bugs": {
     "url": "https://github.com/Alessandra-NA/Pet-Website/issues"
@@ -27,6 +27,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@tailwindcss/forms": "^0.3.3",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.1.0",

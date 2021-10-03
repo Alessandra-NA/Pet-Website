@@ -17,4 +17,20 @@ module.exports = {
   }, 
   */
   
+  /**
+  * Middleware para la atenticacion del Admin
+  *
+  * @param {import('express').Request & import('express-session').SessionData} req
+  * @param {import('express').Response} res
+  * @param {import('express').NextFunction} next
+  */
+  authAdmin: (req, res, next) => {
+    if (req.session.userType !== 'admin') {
+      res.status(401).redirect('/anuncios');
+    } else {
+      next();
+    }
+  },
+
+  
 }
