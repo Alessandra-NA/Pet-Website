@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const { Op } = require('sequelize');
 const {  User, UserPerson, UserShelter, Gender, Location } = require('../models');
 const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
@@ -9,15 +10,6 @@ module.exports = {
    * @param {import('express').Response} res
    *
    */
-
-  getEditarTipoUsuario : async(req, res) => {
-    try {
-      return res.render('FORMULARIO_TEMPORAL_EDITAR_USUARIO', {title : 'Editar usuario TEMPORAL'})
-      
-    } catch{
-      
-    }
-  },
 
   redireccionarTipoUsuarioEditar : async (req, res) => {
     try{
@@ -149,22 +141,89 @@ module.exports = {
     res.redirect('/')
   },
 
-
-
-
-  editarUsuarioPeople: async (req, res) => {
+  getPerfilUsuario : async (req, res) => {
     try{
-      return res.render('editar_usuario_people', {title : 'Editar usuario personal'})
+      const userType = req.session.userType
+      const idUser = req.session.userId
+      
+      if (userType == "person")
+      {
+        const userPerson = await UserPerson.findOne({where : {id : idUser}})
+        res.render('perfil', {
+          title : 'Perfil de usuario',
+          usuario : userPerson,
+          userType : userType})
+      }
+      else if (userType == "shelter")
+      {
+        const userShelter = await UserShelter.findOne({where : {id : idUser}})
+        res.render('perfil', {
+          title : 'Perfil de albergue',
+          usuario : userShelter,
+          userType : userType
+        })
+
+      }
+
+      
+    }
+    catch{
+
+    }
+  },
+
+  getCambiarContraseña : async (req,res) => {
+    try{
+      console.log("llegue")
+      return res.render('editar_contraseña', {title : 'Cambiar contraseña'})
     }
     catch{}
   },
 
-  editarUsuarioShelter: async(req, res) => {
+  cambiarContraseña : async (req, res) => {
     try{
-      return res.render('editar_usuario_shelter', {title : 'Editar usuario corporativo'})
+      const nuevaContraseña = md5(req.body.password)
+      const userType = req.session.userType
+      const idUser = req.session.userId
+
+      console.log(nuevaContraseña)
+      console.log(userType)
+      console.log(idUser)
+
+      //Diferenciamos que tipo de usuario es
+      if (userType == "person")
+      {
+        
+        const userPerson = await UserPerson.findOne({where : {id : idUser}})
+        const user_id = userPerson.user_id
+
+        //Actualizamos contraseña
+        User.update({
+          password : nuevaContraseña
+        }, {where : {id : user_id}})
+
+        res.redirect('/usuario/perfil')
+
+      }
+      else if (userType == "shelter")
+      {
+        const userShelter = await UserShelter.findOne({where : {id : idUser}})
+        const user_id = userShelter.user_id
+
+        //Actualizamos contraseña
+        User.update({
+          password : nuevaContraseña
+        }, {where : {id : user_id}})
+
+        res.redirect('/usuario/perfil')
+      }
+      
     }
     catch{}
   },
+
+
+
 
   /**
    * @param {import('express').Request} req
