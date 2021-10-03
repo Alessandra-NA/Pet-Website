@@ -7,6 +7,6 @@ module.exports = {
     if (req.session.userType === 'shelter') {
       return res.render('index');
     }
-    return res.redirect('/');
+    return res.redirect('/anuncios');
   },
 };
