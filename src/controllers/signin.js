@@ -1,4 +1,6 @@
-const { User } = require('../models');
+
+const md5 = require('md5');
+const { User, UserPerson, Location, UserShelter } = require('../models');
 
 module.exports = {
     /**
@@ -65,6 +67,47 @@ module.exports = {
 
         catch { }
 
+    },
+
+    iniciarSesion : async (req,res) => {
+        try
+        {
+            let aux = false
+
+            const username = req.body.username
+            const password = md5(req.body.password)
+
+            const usuarios = await User.findAll()
+
+            for (let usuario of usuarios) 
+            {
+                if (usuario.username == username && usuario.password == password)
+                {
+                    aux = true
+                    break
+                }
+            }
+            
+
+            if (aux)
+            {
+                //Si inicia sesion
+                res.redirect('/adopcion')
+            }
+
+            else{
+                //Username o contraseña incorrecto
+                
+                res.redirect('/')
+                
+            }
+            console.log(usuarios)
+            
+            
+        }
+        catch{
+
+        }
     }
 
 };

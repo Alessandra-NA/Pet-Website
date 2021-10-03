@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { } = require("../middlewares/auth")
-const { getSignIn } = require('../controllers/signin');
+const { getSignIn, iniciarSesion } = require('../controllers/signin');
 const router = Router();
 
 
@@ -9,5 +9,7 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', getSignIn)
+
+router.post('/iniciar', iniciarSesion)
 
 module.exports = router;
