@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const {  User, UserPerson, UserShelter, Gender, Location } = require('../models');
 const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
 
+
 module.exports = {
   /**
    * @param {import('express').Request} req
@@ -20,12 +21,15 @@ module.exports = {
 
   redireccionarTipoUsuarioEditar : async (req, res) => {
     try{
-      const userType = req.body.tipo
-      const username = req.body.username
-      let idUsuario
+      //const userType = req.body.tipo
+      //const username = req.body.username
+
+      const userType = req.session.userType
+      const idUser = req.session.userId
+      //let idUsuario
 
       //Obtenemos el id de usuario de acuerdo al username
-      const usuarios = await User.findAll()
+      /*const usuarios = await User.findAll()
       for(let usuario of usuarios)
       {
         if (usuario.username == username) 
@@ -33,17 +37,20 @@ module.exports = {
             idUsuario = usuario.id
             break
         }
-      }
-
+      }*/
       const genders = await Gender.findAll({ where: { [Op.or]: [{ id: 3 }, { id: 4 }, {id : 5}] } })
 
-      if (userType == 1)
+      if (userType == "person")
       {
         //En caso de UserPerson
         
-        const usuarioP = await UserPerson.findOne({where : {user_id : idUsuario}})
+        const usuarioP = await UserPerson.findOne({where : {id : idUser}})
         const locations = await Location.findOne({where : {id : usuarioP.location_id}}) 
-        
+
+        //Hallamos el username
+        const usuarioCurrent = await User.findOne({where : {id : usuarioP.user_id}})
+        const username = usuarioCurrent.username
+
         res.render('editar_usuario_people', {
           usuario : usuarioP,
           location : locations,
@@ -52,11 +59,15 @@ module.exports = {
         })
       }
 
-      else if (userType == 2)
+      else if (userType == "shelter")
       {
         //En caso de SHELTER
-        const usuarioS = await UserShelter.findOne({where : {user_id : idUsuario}})
+        const usuarioS = await UserShelter.findOne({where : {id : idUser}})
         const locations = await Location.findOne({where : {id : usuarioS.location_id}})
+
+        //Hallamos el username
+        const usuarioCurrent = await User.findOne({where : {id : usuarioS.user_id}})
+        const username = usuarioCurrent.username
         
         res.render('editar_usuario_shelter', {
           usuario : usuarioS,

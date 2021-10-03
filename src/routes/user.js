@@ -13,8 +13,8 @@ upload = multer();
 router.get('/people', editarUsuarioPeople)
 router.get('/shelter', editarUsuarioShelter)
 router.get('/logout', logoutUser)
-router.get('/elegirTipo', getEditarTipoUsuario)
-router.post('/elegirTipo', redireccionarTipoUsuarioEditar)
+//router.get('/elegirTipo', getEditarTipoUsuario)
+router.get('/elegirTipo', redireccionarTipoUsuarioEditar)
 router.post('/done', upload.single('image'), realizarEdicion)
 
 
