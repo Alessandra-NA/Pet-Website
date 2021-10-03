@@ -32,15 +32,33 @@ module.exports = {
     }
     catch { }
   },
-
   
-  getReportarAnuncios : (req,res) =>{
+  getReportarAnuncios : async (req,res) =>{
+    var id =req.query.id;
+    console.log("================== "+id)
+    try
+    {    
+      const post = await Post.findByPk(id,{include: { all: true }})
+      return res.render('reportar_anunciante' , {title : 'Reportar un anuncio', post:post})
+    }
+    catch{}
+  },
+  
+  postAnuncioReportado : async (req, res) =>{
+    var id =req.query.id;
+    console.log("================== "+id)
     try
     {
-      return res.render('reportar_anunciante' , {title : 'Reportar un anuncio'})
+      const {reason, comment} = req.body;
+      const post = await Post.findByPk(id)
+      Post.update({reason: reason, comment: comment, flagReportado: true},{where: {id:id}})
+      res.redirect('/anuncios')
     }
     catch{}
   }
+
+
+
 };
 
 imagesToBase64 = function (postsArray) {

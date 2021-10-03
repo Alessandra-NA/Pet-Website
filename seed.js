@@ -1,4 +1,5 @@
-// node 
+// node
+const md5 = require('md5');
 const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, User, UserAdmin, UserPerson, UserShelter } = require('./src/models');
 const fs = require('fs');
 
@@ -85,10 +86,10 @@ const localizaciones = [
 ];
 
 const usuarios = [
-  { username: 'User1', password: '123', type: 'person' },
-  { username: 'User2', password: '123', type: 'person' },
-  { username: 'User3', password: '123', type: 'shelter' },
-  { username: 'User4', password: '123', type: 'admin' }
+  { username: 'User1', password: md5('123'), type: 'person' },
+  { username: 'User2', password: md5('123'), type: 'person' },
+  { username: 'User3', password: md5('123'), type: 'shelter' },
+  { username: 'User4', password: md5('123'), type: 'admin' }
 ];
 
 const usuarios_personas = [
