@@ -1,0 +1,35 @@
+<main class="container">
+    <h1>Perfil de usuario</h1>
+
+    <h2>Bienvenido a tu perfil, 
+        <% if (userType == "person") { %>
+            <%= usuario.first_name %>
+        <%} else if (userType == "shelter") { %>
+            <%= usuario.name %>
+        <% } %>
+    </h2>
+    
+    <h2>Datos personales: </h2>
+        <% if (userType == "person") { %>
+            
+            <p>Nombres: <%= usuario.first_name %></p>
+            <p>Apellidos: <%= usuario.last_name %></p>
+            <p>DNI: <%= usuario.document_number %></p>
+            <p>Celular: <%= usuario.phone_number %></p>
+            <p>E-mail: <%= usuario.email %></p>
+
+        <%} else if (userType == "shelter") { %>
+            <p>Nombre de la compañia: <%= usuario.name %></p>
+            <p>RUC: <%= usuario.ruc %></p>
+            <p>Número de telefono: <%= usuario.phone_number %></p>
+            <p>Email: <%= usuario.email %></p>
+
+        <% } %>
+
+    
+
+
+
+    <a href="/editar_usuario/elegirTipo" class="btn btn-warning">Editar cuenta</a>
+    <a href="/usuario/cambiarContrasena" class="btn btn-danger">Cambiar contraseña</a>
+</main>
