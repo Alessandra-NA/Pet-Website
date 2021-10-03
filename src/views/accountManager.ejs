@@ -15,7 +15,7 @@
             <tr>
                 <th scope="row"><%=user.id%></th>
                 <td><%=user.username%></td>
-                <td><%=user.user_type.name%></td>
+                <td><%=user.type%></td>
                 <td><%=user.location_id%></td>
                 <td><%=user.posts.length%></td>
                 <td><button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary deleteButton" userid="<%=user.id%>" username="<%=user.username%>">Delete</button></td>

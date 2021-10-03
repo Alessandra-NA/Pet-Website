@@ -1,6 +1,6 @@
 
 const md5 = require('md5');
-const { User, UserPerson, Location, UserShelter } = require('../models');
+const { User, UserPerson, UserAdmin, Location, UserShelter } = require('../models');
 
 module.exports = {
     /**
@@ -16,7 +16,11 @@ module.exports = {
         catch { }
     },
     
-
+    /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response & import('express-session').SessionData} res
+   *
+   */
     iniciarSesion : async (req,res) => {
         try
         {
@@ -34,26 +38,50 @@ module.exports = {
                 {
                     usuarioCurrent = usuario
                     aux = true
+                    console.log('ingresó')
+                    if (usuario.type == 'person')
+                        await UserPerson.findOne({
+                            attributes: ['id'],
+                            raw: true,
+                            where: {
+                                user_id: usuario.id
+                            }
+                        }).then(us => {
+                            req.session.userId = us.id
+                        })
+                    else if (usuario.type == 'shelter')
+                        await UserShelter.findOne({
+                            attributes: ['id'],
+                            raw: true,
+                            where: {
+                                user_id: usuario.id
+                            }
+                        }).then(us => {
+                            req.session.userId = us.id
+                        })
+                    else if (usuario.type == 'admin')
+                        await UserAdmin.findOne({
+                            attributes: ['id'],
+                            raw: true,
+                            where: {
+                                user_id: usuario.id
+                            }
+                        }).then(us => {
+                            req.session.userId = us.id
+                        })
+                    req.session.userType = usuario.type
                     break
                 }
             }
-            
-
             if (aux)
             {
                 //Si inicia sesion
                 res.redirect('/adopcion')
             }
-
             else{
-                //Username o contraseña incorrecto
-                
+                //Username o contraseña incorrecto               
                 res.redirect('/')
-                
-            }
-            console.log(usuarios)
-            
-            
+            }     
         }
         catch{
 
