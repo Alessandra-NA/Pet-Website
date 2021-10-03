@@ -26,7 +26,7 @@ module.exports = {
   */
   authAdmin: (req, res, next) => {
     if (req.session.userType !== 'admin') {
-      res.status(401).redirect('/anuncios ');
+      res.status(401).redirect('/anuncios');
     } else {
       next();
     }
