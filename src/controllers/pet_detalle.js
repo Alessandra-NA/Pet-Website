@@ -44,9 +44,11 @@ module.exports = {
         ) 
       if (post.user.type == "shelter"){
         const dueño = await UserShelter.findOne({where:{user_id:post.user_id}})
+        post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
         return res.render('pet_detalle',{post:post,dueño:dueño});
       } else {
         const dueño = await UserPerson.findOne({where:{user_id:post.user_id}})
+        post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
         return res.render('pet_detalle',{post:post,dueño:dueño});
       };
       

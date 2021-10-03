@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { authAdmin } = require("../middlewares/auth")
-const { showAccounts, deleteAccount } = require('../controllers/accounts');
+const { showAccounts, deleteAccount, showAccountDetails } = require('../controllers/accounts');
 const router = Router();
 
 
