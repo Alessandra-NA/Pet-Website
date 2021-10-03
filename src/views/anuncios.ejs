@@ -7,11 +7,11 @@
 <div class="row">
     <div class="dropdown mt-2">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          I'm looking for...
+          Estoy buscando...
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="?type=1">Dogs</a></li>
-          <li><a class="dropdown-item" href="?type=2">Cats</a></li>
+          <li><a class="dropdown-item" href="?type=1">Perros</a></li>
+          <li><a class="dropdown-item" href="?type=2">Gatos</a></li>
         </ul>
       </div>
 </div>
@@ -37,8 +37,9 @@
     <% posts.forEach(function(post){ %>
 
         <div class="col">
-            <div class="card" role="button" onclick="location.href='./pet_detalle?id=<%=post.pet_id%>'">
-                <img src="data:image/png;base64,<%=post.pet.photo?post.pet.photo:''%>" class="card-img-top" alt="...">
+
+            <div class="card" role="button" onclick="location.href='./pet_detalle?id=<%=post.id%>'">
+                <img src="data:image/png;base64,<%=post.pet.photo?post.pet.photo:''%>" class="card-img-top" style="width: 100%; height: 15vw; object-fit:contain" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"> <%=post.pet.name%>
                     </h5>

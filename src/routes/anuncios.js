@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {} = require("../middlewares/auth")
-const { getAnuncios, getReportarAnuncios } = require('../controllers/anuncios');
+const { getAnuncios, getReportarAnuncios, postAnuncioReportado } = require('../controllers/anuncios');
 const router = Router();
 
 
@@ -10,5 +10,6 @@ const router = Router();
 */
 router.get('/', getAnuncios)
 router.get('/reportar', getReportarAnuncios)
+router.post('/reportar/done', postAnuncioReportado)
 
 module.exports = router;
