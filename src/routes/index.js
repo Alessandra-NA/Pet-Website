@@ -9,14 +9,10 @@ const petDetalleRouter = require('./pet_detalle')
 const SheltersRouter = require('./shelters')
 const ShelterDetalleRouter = require('./shelter_detalle')
 const crearUsuarioRouter = require('./user')
-const editarUsuarioRouter = require('./user')
 const signupRouter = require('./signup')
 const signinRouter = require('./signin')
 const postRouter = require('./post')
-
-const accountsRouter = require('./accounts');
-const anuncios = require('../controllers/anuncios');
-
+const accountsRouter = require('./accounts')
 
 /**
   * @param {express.Express} app
@@ -36,10 +32,8 @@ const routerConnection = (app) => {
   app.use('/signup', signupRouter);
   app.use('/signin', signinRouter);
   app.use('/crear_usuario', crearUsuarioRouter);
-  app.use('/editar_usuario', editarUsuarioRouter)
   app.use('/post', postRouter);
-  app.use('/accounts', accountsRouter)
-
+  app.use('/accounts', accountsRouter);
 
   app.use((_, res) => {
     res.render('notFound');

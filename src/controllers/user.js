@@ -153,8 +153,19 @@ module.exports = {
       return res.render('editar_usuario_shelter', {title : 'Editar usuario corporativo'})
     }
     catch{}
-  }
+  },
 
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   *
+   */
+  
+  logoutUser: async (req, res) => {
+    req.session.destroy();
+    console.log('saliendo')
+    return res.redirect('/anuncios');
+  }
 
   
 
