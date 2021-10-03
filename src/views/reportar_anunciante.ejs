@@ -1,18 +1,21 @@
 <main class="container">
 
     <h2>Reporte/Denuncia a anunciante</h2>
-
-    <form action="" method="POST" class="row my-3 p-2 border-2 g-3">
+    <%=post.id%>
+    <%=post.pet.name%>
+    <form action="./reportar/done?id=<%=post.id%>" method="POST" class="row my-3 p-2 border-2 g-3">
 
         <label class="form-label" for="">Motivo del reporte:</label>
-        <select class="form-select" name="" id="">
-            <option selected disabled value="1">--Seleccione una opción--</option>
-            <option value="1">Motivo 1</option>
-            <option value="2">Motivo 2</option>
+        <select class="form-select" name="reason" id="" required>
+            <option selected disabled value="">--Seleccione una opción--</option>
+            <option value="1">Incentiva a la venta/trafico de animales</option>
+            <option value="2">Hace promoción de negocios/marcas sin motivo</option>
+            <option value="3">Genera violencia/odio a través del anuncio</option>
+            <option value="4">El anuncio no tiene nada que ver con el propósito de la página</option>
         </select>
 
         <label class="form-label" for="">Comentarios:</label>
-        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="comment" id="" cols="30" rows="10" required></textarea>
 
         <label class="form-label" for="">Adjuntar evidencia:</label>
         <input class="form-control" type="file">
