@@ -15,9 +15,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/match">Encuentra tu mascota ideal</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/adopcion">Dar en adopción</a>
-                </li>
                 <!-- 
                     <li class="nav-item">
                     <a class="nav-link" href="#">Perfil</a>
@@ -35,6 +32,9 @@
                 <% } %>
                 <% if (globalType.length>0) { %>
                     <% if (globalType!='admin' ) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/adopcion">Dar en adopción</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/usuario/perfil">Perfil</a>
                     </li>
