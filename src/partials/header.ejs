@@ -34,7 +34,7 @@
                     <a class="nav-link" href="/accounts">Administración de cuentas</a>
                 </li>
                 <% } %>
-                <% if (globalType.length>0) { %>
+                <% if (globalType.length>0 && globalType != 'admin') { %>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/usuario/perfil">Perfil</a>
@@ -47,6 +47,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/user/logout">Cerrar sesión</a>
                 </li>
+                <% } else if (globalType == 'admin') {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/logout">Cerrar sesión</a>
+                    </li>
                 <% } %>
             </ul>               
         </div>
