@@ -76,7 +76,7 @@ module.exports = {
             if (aux)
             {
                 //Si inicia sesion
-                res.redirect('/adopcion')
+                res.redirect('/anuncios')
             }
             else{
                 //Username o contraseña incorrecto               
