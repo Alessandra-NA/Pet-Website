@@ -162,13 +162,9 @@ module.exports = {
           usuario : userShelter,
           userType : userType
         })
-
       }
-
-      
     }
     catch{
-
     }
   },
 
@@ -221,6 +217,19 @@ module.exports = {
     }
     catch{}
   },
+
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   *
+   */
+  
+  logoutUser: async (req, res) => {
+    req.session.destroy();
+    console.log('saliendo')
+    return res.redirect('/anuncios');
+  },
+
 
   /**
    * @param {import('express').Request} req
