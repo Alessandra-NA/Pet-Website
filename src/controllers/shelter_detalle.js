@@ -29,7 +29,7 @@ module.exports = {
       ],
       where:{user_id: usuario.user_id}})
       usuario.photo = Buffer.from(usuario.photo).toString('base64')
-      return res.render('shelter_detalle',{usuario :usuario, posts:imagesToBase64(posts)});
+      return res.render('shelter_detalle',{usuario :usuario, posts:imagesToBase643(posts)});
     }
     catch{
 
@@ -37,8 +37,11 @@ module.exports = {
   }
 };
 
-imagesToBase64 = function (postsArray) {
+imagesToBase643 = function (postsArray) {
   let array = postsArray.map((post) => {
+    console.log("======================================")
+    console.log(post)
+    console.log("======================================")
     if(post.pet.photo){
       post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
     }
