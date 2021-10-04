@@ -162,29 +162,12 @@ module.exports = {
           usuario : userShelter,
           userType : userType
         })
-<<<<<<< HEAD
-
       }
-
-      
     }
     catch{
-
     }
   },
 
-=======
-
-      }
-
-      
-    }
-    catch{
-
-    }
-  },
-
->>>>>>> 9a72e0bf28b1b4012d2c3d54dc496998ffca421f
   getCambiarContraseña : async (req,res) => {
     try{
       console.log("llegue")
