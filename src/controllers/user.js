@@ -162,6 +162,7 @@ module.exports = {
           usuario : userShelter,
           userType : userType
         })
+<<<<<<< HEAD
 
       }
 
@@ -172,6 +173,18 @@ module.exports = {
     }
   },
 
+=======
+
+      }
+
+      
+    }
+    catch{
+
+    }
+  },
+
+>>>>>>> 9a72e0bf28b1b4012d2c3d54dc496998ffca421f
   getCambiarContraseña : async (req,res) => {
     try{
       console.log("llegue")
@@ -221,6 +234,9 @@ module.exports = {
     }
     catch{}
   },
+
+
+
 
   /**
    * @param {import('express').Request} req
