@@ -8,7 +8,7 @@ const router = Router();
   EXAMPLE:
   router.get('/', nameAuth, getPetPost)
 */
-router.get('/', showAccounts)
+router.get('/', authAdmin, showAccounts)
 router.get('/delete/:userid', deleteAccount)
 
 module.exports = router;
