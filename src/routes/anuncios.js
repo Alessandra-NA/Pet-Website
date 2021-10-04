@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {} = require("../middlewares/auth")
-const { getAnuncios } = require('../controllers/anuncios');
+const { getAnuncios, getReportarAnuncios, postAnuncioReportado } = require('../controllers/anuncios');
 const router = Router();
 
 
@@ -9,5 +9,7 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', getAnuncios)
+router.get('/reportar', getReportarAnuncios)
+router.post('/reportar/done', postAnuncioReportado)
 
 module.exports = router;
