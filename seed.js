@@ -158,13 +158,13 @@ const main = async () => {
     mascotas.forEach(async mascota => {
       try {
         const newPet = await Pet.create(mascota);
-        /*var imagenTemp
+        var imagenTemp
         if(newPet.specie_id==1){
           imagenTemp = "'"+path.resolve('src/public/img','dog.jpg')+"'"
         }else{
           imagenTemp = "'"+path.resolve('src/public/img','cat.jpg')+"'"
         }
-        sequelize.query('UPDATE "Pets" set photo=pg_read_binary_file('+imagenTemp+') where id='+newPet.id)*/
+        sequelize.query('UPDATE "Pets" set photo=pg_read_binary_file('+imagenTemp+') where id='+newPet.id)
       } catch (err) {
         console.log(err);
       }
