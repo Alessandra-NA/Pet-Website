@@ -12,8 +12,15 @@ module.exports = {
       if(req.session.userType != 'admin'){
         res.redirect('/')
       }else{
+
+
+        
+
         User.findAll({include: {all: true}}).then(response => {
-          res.render('accountManager', {title: 'Accounts', users: response.filter(user => user.type != 'admin')})
+          res.render('accountManager', {
+            title: 'Accounts', 
+            users: response.filter(user => user.type != 'admin')
+          })
           
         })
       }
