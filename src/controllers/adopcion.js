@@ -75,8 +75,7 @@ module.exports = {
       console.log("============>"+userID)
       const post = await Post.create({
         pet_id: pet.id,
-        user_id: userID, 
-        flagReportado: false
+        user_id: userID
       })
       //res.status(201).redirect('/post/' + pet.id)
       res.status(201).redirect('/anuncios')
