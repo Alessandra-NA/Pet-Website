@@ -22,6 +22,10 @@ User.init(
         type: {
             type: DataTypes.ENUM('person', 'shelter', 'admin'),
             allowNull: false,
+        },
+        flagReportado: {
+            type: DataTypes.BOOLEAN(),
+            allowNull: true
         }
     },
     {
