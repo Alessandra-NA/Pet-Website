@@ -10,6 +10,7 @@ const db = {
   ...require('./Post'),
   ...require('./Size'),
   ...require('./Specie'),
+  ...require('./Report'),
   ...require('./User'),
   ...require('./UserPerson'),
   ...require('./UserShelter'),

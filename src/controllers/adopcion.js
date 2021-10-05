@@ -1,4 +1,4 @@
-const { ActivityLevel, Gender, Size, Specie, UserType, Pet, Post } = require('../models');
+const { ActivityLevel, Gender, Size, Specie, User, Pet, Post, UserPerson, UserShelter } = require('../models');
 const { Op } = require("sequelize");
 
 module.exports = {
@@ -8,16 +8,19 @@ module.exports = {
    * 
    */
 
-  getInicioAdopcion: async (_, res) => {
+  getInicioAdopcion: async (req, res) => {
     try {
-      const listActivityLevel = await ActivityLevel.findAll()
-      const listGender = await Gender.findAll({ where: { [Op.or]: [{ id: 1 }, { id: 2 }] } })
-      const listSize = await Size.findAll()
-      const listSpecie = await Specie.findAll()
+      const userType = req.session.userType
+      if(userType=="person" || userType=="shelter" || userType=="admin"){
+        const listActivityLevel = await ActivityLevel.findAll()
+        const listGender = await Gender.findAll({ where: { [Op.or]: [{ id: 1 }, { id: 2 }] } })
+        const listSize = await Size.findAll()
+        const listSpecie = await Specie.findAll()
 
-      return res.render('adopcion', { title: 'Dar en adopcion', actividades: listActivityLevel, generos: listGender, tamanhos: listSize, especies: listSpecie });
+        return res.render('adopcion', { title: 'Dar en adopcion', actividades: listActivityLevel, generos: listGender, tamanhos: listSize, especies: listSpecie });
+      }
     }
-    catch { }
+    catch(err) {console.log(err)}
   },
 
   postAdopcion: async (req, res) => {
@@ -58,10 +61,21 @@ module.exports = {
         microchip: microchip
       })
       //Falta mandar el usuario que accedió a la creación de la adopción
+      const userType = req.session.userType
+      const idUser = req.session.userId
+      var userID=0
+      if(userType=="person"){
+        currentUser = await UserPerson.findOne({where:{id:idUser}})
+        userID = currentUser.user_id
+      }else if(userType=="shelter"){
+        currentUser = await UserShelter.findOne({where:{id:idUser}})
+        userID = currentUser.user_id
+      }
+      console.log("============>"+idUser)
+      console.log("============>"+userID)
       const post = await Post.create({
         pet_id: pet.id,
-        user_id: 1, 
-        flagReportado: false
+        user_id: userID
       })
       //res.status(201).redirect('/post/' + pet.id)
       res.status(201).redirect('/anuncios')
