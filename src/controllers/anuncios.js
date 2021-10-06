@@ -1,4 +1,4 @@
-const { Post, Pet } = require('../models');
+const { Post, Pet, Report, User } = require('../models');
 
 module.exports = {
   /**
@@ -39,19 +39,48 @@ module.exports = {
     try
     {    
       const post = await Post.findByPk(id,{include: { all: true }})
-      return res.render('reportar_anunciante' , {title : 'Reportar un anuncio', post:post})
+
+      return res.render('reportar_anunciante' , {
+        title : 'Reportar un anuncio', 
+        post:post
+      })
     }
     catch{}
   },
   
   postAnuncioReportado : async (req, res) =>{
     var id =req.query.id;
+    
     console.log("================== "+id)
     try
     {
-      const {reason, comment} = req.body;
+      const {reason, comment, username_reportado} = req.body;
+
+      console.log(username_reportado)
+      const reporteCreado = await Report.create(
+        {
+          reason : reason,
+          commet : comment,
+          //photo
+          post_id : id
+        }
+      )
+
+      //Cambiamos flag de usuario reportado
+      User.update({
+        flagReportado : true
+      }, {where : {username : username_reportado}})
+
+      /*
       const post = await Post.findByPk(id)
-      Post.update({reason: reason, comment: comment, flagReportado: true},{where: {id:id}})
+
+      Post.update({
+        reason: reason, 
+        comment: comment, 
+        flagReportado: true},{where: {id:id}})
+
+      */
+
       res.redirect('/anuncios')
     }
     catch{}
