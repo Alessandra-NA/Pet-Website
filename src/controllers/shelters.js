@@ -17,10 +17,20 @@ module.exports = {
           
         }
       ]})
-      return res.render('shelters',{refugios :shelters});
+      return res.render('shelters',{refugios :imagesToBase642(shelters)});
     }
-    catch{
-
+    catch(err){
+        console.log(err);
     }
   }
 };
+
+imagesToBase642 = function (shelterArray) {
+  let array = shelterArray.map((shelter) => {
+    if(shelter.photo){
+      shelter.photo = Buffer.from(shelter.photo).toString('base64');
+    }
+    return shelter
+  })
+  return array
+}
