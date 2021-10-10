@@ -6,7 +6,7 @@
       <th scope="col">Nombre de usuario</th>
       <th scope="col">Tipo</th>
       <th scope="col">Publicaciones</th>
-      <th scope="col"></th>
+      <th scope="col">Usuario reportado</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -24,6 +24,13 @@
         </td>
         <td>
           <%=user.posts.length%>
+        </td>
+        <td>
+          <% if (user.flagReportado == true) { %>
+            <b><label for="" style="color: red; ">Reportado</label></b>
+          <%} else { %>
+            <label for="">No reportado</label>
+          <% } %>
         </td>
         <td><button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary deleteButton"
             userid="<%=user.id%>" username="<%=user.username%>">Borrar</button></td>
@@ -68,6 +75,7 @@
   </div>
 </div>
 <script>
+  highlightNavbar(3)
   document.querySelectorAll('.deleteButton').forEach((button) => {
     button.addEventListener('click', (ev) => {
       console.log(ev.target);

@@ -4,7 +4,7 @@ const sequelize = require('../db');
 class User extends Model {
     // relaciones:
     static associate({ Post }) {
-        this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' })
+        this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' , onDelete: 'cascade'})
     }
 }
 User.init(
@@ -22,6 +22,10 @@ User.init(
         type: {
             type: DataTypes.ENUM('person', 'shelter', 'admin'),
             allowNull: false,
+        },
+        flagReportado: {
+            type: DataTypes.BOOLEAN(),
+            allowNull: true
         }
     },
     {
