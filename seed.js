@@ -86,10 +86,10 @@ const localizaciones = [
 ];
 
 const usuarios = [
-  { username: 'User1', password: md5('123'), type: 'person', flagReportado: false},
-  { username: 'User2', password: md5('123'), type: 'person', flagReportado: false},
-  { username: 'User3', password: md5('123'), type: 'shelter', flagReportado: false},
-  { username: 'User4', password: md5('123'), type: 'admin', flagReportado: false}
+  { username: 'User1', password: md5('123'), type: 'person', status: 'actived'},
+  { username: 'User2', password: md5('123'), type: 'person', status: 'actived'},
+  { username: 'User3', password: md5('123'), type: 'shelter', status: 'actived'},
+  { username: 'User4', password: md5('123'), type: 'admin', status: 'actived'}
 ];
 
 const usuarios_personas = [
