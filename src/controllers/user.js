@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { Op } = require('sequelize');
-const {  User, UserPerson, UserShelter, Gender, Location } = require('../models');
+const {  User, UserPerson, UserShelter, Gender, Location, Post } = require('../models');
 const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
 
 
@@ -145,6 +145,9 @@ module.exports = {
     try{
       const userType = req.session.userType
       const idUser = req.session.userId
+
+      //Obtener lista de posts del usuario
+      const posts = await Post.findAll({where : {user_id : idUser}})
       
       if (userType == "person")
       {
@@ -152,7 +155,9 @@ module.exports = {
         res.render('perfil', {
           title : 'Perfil de usuario',
           usuario : userPerson,
-          userType : userType})
+          userType : userType,
+          posts : posts
+        })
       }
       else if (userType == "shelter")
       {
@@ -160,7 +165,8 @@ module.exports = {
         res.render('perfil', {
           title : 'Perfil de albergue',
           usuario : userShelter,
-          userType : userType
+          userType : userType,
+          posts : posts
         })
       }
     }
