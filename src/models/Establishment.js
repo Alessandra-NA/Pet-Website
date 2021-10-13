@@ -16,12 +16,23 @@ Establishment.init(
             type: DataTypes.STRING(100),
             allowNull: false,
         },
-        photo1: {
+        photo: {
             type: DataTypes.ARRAY(DataTypes.BLOB),
             allowNull: true,
+            /*validate: {
+                maxPhoto(value) {
+                  if (value.length >= 4) {
+                    throw new Error('Ya se ha insertado más de 4 imágenes')
+                  }
+                }  
+            }*/
         },
         rating: {
             type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        ofPets:{
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         },
         type: {
@@ -30,7 +41,7 @@ Establishment.init(
         },
         link : {
             type: DataTypes.STRING(150),
-            allowNull: false,
+            allowNull: true,
         },
     },
     {

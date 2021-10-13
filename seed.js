@@ -1,6 +1,6 @@
 // node
 const md5 = require('md5');
-const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, User, UserAdmin, UserPerson, UserShelter } = require('./src/models');
+const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter } = require('./src/models');
 const fs = require('fs');
 
 const nivelesActividad = [
@@ -82,8 +82,18 @@ const mascotas = [
 const localizaciones = [
   { country: 'Perú', province: 'Lima', district: 'La Molina', address: 'Calle XXX 123' },
   { country: 'Perú', province: 'Lima', district: 'Jesús María', address: 'Calle YYY 123' },
-  { country: 'Perú', province: 'Lima', district: 'Ate', address: 'Calle ZZZ 123' }
+  { country: 'Perú', province: 'Lima', district: 'Ate Vitarte', address: 'Calle ZZZ 123' },
+  { country: 'Perú', province: 'Lima', district: 'Santiago de Surco', address: 'Calle ABC 123'},
+  { country: 'Perú', province: 'Lima', district: 'San Juan de Miraflores', address: 'Calle FGH 123'},
+  { country: 'Perú', province: 'Lima', district: 'San Luis', address: 'Calle YUI 123'}
 ];
+
+const establecimientos = [
+  {name: 'Establecimiento1', rating: 0, ofPets: true, type: 'Spa mascotas', link: '', location_id: 4, photo: null},
+  {name: 'Establecimiento2', rating: 0, ofPets: true, type: 'Veterinarias', link: '', location_id: 5, photo: null},
+  {name: 'Establecimiento3', rating: 0, ofPets: false, type: 'Hoteles & Alojamientos', link: '', location_id: 6, photo: null},
+  
+]
 
 const usuarios = [
   { username: 'User1', password: md5('123'), type: 'person', status: 'actived'},
@@ -174,6 +184,17 @@ const main = async () => {
       try {
         await Location.create(localizacion);
       } catch (err) {
+        console.log(err);
+      }
+    });
+    
+    establecimientos.forEach(async establecimiento => {
+      try {
+        const newEstablishment = await Establishment.create(establecimiento);
+        var imagenTemp = "'"+path.resolve('src/public/img','establishment.jpg')+"'"
+        var imagenTemp1 = "'"+path.resolve('src/public/img','establishment1.jpg')+"'"
+        sequelize.query('UPDATE "Establishments" set photo= array [pg_read_binary_file('+imagenTemp+'), pg_read_binary_file('+imagenTemp1+')] WHERE id='+newEstablishment.id)
+      }catch (err) {
         console.log(err);
       }
     });
