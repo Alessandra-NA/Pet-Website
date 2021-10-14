@@ -16,7 +16,7 @@ module.exports = {
                     }
                 ]
             })
-            return res.render('establecimientos', { title: 'Establecimientos', establecimientos: imagesToBase64ForEstablishment(establishments) });
+            return res.render('establecimientos', { title: 'Establecimientos', establecimientos: imagesToBase64ForEstablishment(establishments), listado: req.query.tab!='mapa'});
         }
         catch (err) {
             console.log(err);
