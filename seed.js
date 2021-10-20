@@ -89,9 +89,9 @@ const localizaciones = [
 ];
 
 const establecimientos = [
-  {name: 'Establecimiento1', rating: 0, ofPets: true, type: 'Spa mascotas', link: '', location_id: 4, photo: null},
-  {name: 'Establecimiento2', rating: 0, ofPets: true, type: 'Veterinarias', link: '', location_id: 5, photo: null},
-  {name: 'Establecimiento3', rating: 0, ofPets: false, type: 'Hoteles & Alojamientos', link: '', location_id: 6, photo: null},
+  { name: 'Establecimiento1', rating: 0, ofPets: true, type: 'Spa mascotas', link: '', location_id: 4, photo: null, latitude: -12.083750075956283, longitude: -76.97704255222924},
+  { name: 'Establecimiento2', rating: 0, ofPets: true, type: 'Veterinarias', link: '', location_id: 5, photo: null, latitude: -12.078668590551107, longitude: -77.00215935214327},
+  { name: 'Establecimiento3', rating: 0, ofPets: false, type: 'Hoteles & Alojamientos', link: '', location_id: 6, photo: null, latitude: -12.121898075505575, longitude: -77.03064550074568},
   
 ]
 
