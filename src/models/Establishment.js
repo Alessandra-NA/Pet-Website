@@ -43,6 +43,14 @@ Establishment.init(
             type: DataTypes.STRING(150),
             allowNull: true,
         },
+        latitude: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        longitude: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        }
     },
     {
         sequelize,
