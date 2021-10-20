@@ -16,10 +16,10 @@
     function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: -12.060459, lng: -77.040270 },
-            zoom: 12,
+            zoom: 16,
         });
-
-
+        
+        
         const locations = [
           { lat: -12.083750075956283, lng: -76.97704255222924 },
           {lat: -12.078668590551107, lng: -77.00215935214327},
@@ -32,7 +32,12 @@
             map: map,
           });
         })
-        
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          map.panTo(initialLocation);
+        });
+      }
     }
 </script>
 <script async
