@@ -71,13 +71,13 @@ module.exports = {
 
             else
             {
-
+                
                 //Ingresar Datos en tabla Locations
                 const pais = "Perú"
                 const provincia = "Lima"
                 const distrito = req.body.distrito
                 const direccion = req.body.direccion
-    
+                
                 const location = await Location.create(
                     {
                         country : pais,
@@ -90,19 +90,20 @@ module.exports = {
                 //Obtener ID de Location a introducir en UserPerson
     
                 const idLoc = location.id;
-    
+                
                 //Ingresar Datos en tabla Users
                 const nombreUsuario = req.body.nombre_de_usuario
                 const contraseña = md5(req.body.contraseña)
-    
+                console.log("Llegue")
                 const userPrincipal = await User.create(
                     {
                         username : nombreUsuario,
                         password : contraseña,
-                        type : 'person'
+                        type : 'person',
+                        status : "actived"
                     }
                 )
-    
+                console.log("aca ")
                 const idUserPrinc = userPrincipal.id;
     
                 //Ingresar Datos en tabla UserPeople
@@ -210,7 +211,8 @@ module.exports = {
                     {
                         username : nombreUsuario,
                         password : contraseña,
-                        type : 'shelter'
+                        type : 'shelter',
+                        status : "actived"
                     }
                 )
     
