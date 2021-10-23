@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { Op } = require('sequelize');
-const {  User, UserPerson, UserShelter, Gender, Location, Post } = require('../models');
+const {  User, UserPerson, UserShelter, Gender, Location, Post, Pet } = require('../models');
 const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
 
 
@@ -147,12 +147,21 @@ module.exports = {
       const idUser = req.session.userId
 
       //Obtener lista de posts del usuario
-      const posts = await Post.findAll({where : {user_id : idUser}})
+      const posts = await Post.findAll({ include: [
+        {
+          model: Pet,
+          as: 'pet',          
+          
+        },          
+      ],
+      where:{user_id: idUser}}) 
+
+      console.log(posts)
       
       if (userType == "person")
       {
         const userPerson = await UserPerson.findOne({where : {id : idUser}})
-        res.render('perfil', {
+        return res.render('perfil', {
           title : 'Perfil de usuario',
           usuario : userPerson,
           userType : userType,
@@ -162,7 +171,7 @@ module.exports = {
       else if (userType == "shelter")
       {
         const userShelter = await UserShelter.findOne({where : {id : idUser}})
-        res.render('perfil', {
+        return res.render('perfil', {
           title : 'Perfil de albergue',
           usuario : userShelter,
           userType : userType,
