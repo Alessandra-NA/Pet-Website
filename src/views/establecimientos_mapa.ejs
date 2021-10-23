@@ -9,126 +9,143 @@
   <div id="map" class="col-12 col-lg-8"></div>
   <div class="col-12 col-lg-4">
     <% establecimientos.forEach(function(establecimiento){ %>
-    
-    <div class="border border-gray-400 border-1 estabElement mb-2" hidden>
-      <div class="d-flex align-items-center"><img src="data:image/png;base64,<%=establecimiento.photo && establecimiento.photo[0]%>" style="width: 140px"></div>
-      <div class="px-2 py-1">
-        <p hidden><%=establecimiento.latitude%></p>
-        <p hidden><%=establecimiento.longitude%></p>
-        <h6 class="py-1 m-0"><%=establecimiento.name%></h6>
-        <p class="my-1 text-danger"><%=establecimiento.type%></p>
-        <p class="my-1"><%=establecimiento.location.address%>, <%=establecimiento.location.district%>, <%=establecimiento.location.province%></p>
-        <div class="d-flex"><p class="my-1">Valoración: <%=establecimiento.rating%>/5 <img style="width: 18px; height: 18px" src="https://img.icons8.com/ios-glyphs/30/000000/dog-footprint.png" /></p> </div>
+
+      <div class="border border-gray-400 border-1 estabElement mb-2" hidden>
+        <div class="d-flex align-items-center"><img
+            src="data:image/png;base64,<%=establecimiento.photo && establecimiento.photo[0]%>" style="width: 140px">
+        </div>
+        <div class="px-2 py-1">
+          <p hidden>
+            <%=establecimiento.latitude%>
+          </p>
+          <p hidden>
+            <%=establecimiento.longitude%>
+          </p>
+          <h6 class="py-1 m-0">
+            <%=establecimiento.name%>
+          </h6>
+          <p class="my-1 text-danger">
+            <%=establecimiento.type%>
+          </p>
+          <p class="my-1">
+            <%=establecimiento.location.address%>, <%=establecimiento.location.district%>,
+                <%=establecimiento.location.province%>
+          </p>
+          <div class="d-flex">
+            <p class="my-1">Valoración: <%=establecimiento.rating%>/5 <img style="width: 18px; height: 18px"
+                  src="https://img.icons8.com/ios-glyphs/30/000000/dog-footprint.png" /></p>
+          </div>
+        </div>
       </div>
-    </div>
-    <% }) %>
+      <% }) %>
   </div>
 </div>
 
 <style>
-    #map {
-      height: 50rem;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+  #map {
+    height: 50rem;
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 </style>
 
 <script>
-    var markers = []
-    var lats = []
-    var longs = []
-    async function showEstabElements(){
-        var allEstab = document.getElementsByClassName("estabElement")
-        Array.from(allEstab).forEach((est) => {
-          if(lats.length==0) {
+  var markers = []
+  var lats = []
+  var longs = []
+  async function showEstabElements() {
+    var allEstab = document.getElementsByClassName("estabElement")
+    Array.from(allEstab).forEach((est) => {
+      if (lats.length == 0) {
+        est.hidden = true
+        est.classList.remove("d-flex")
+      }
+      else {
+        var lat = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[0].textContent)
+        var lon = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[1].textContent)
+        for (let i = 0; i < lats.length; i++) {
+          if (lat === lats[i] && lon === longs[i]) {
+            est.hidden = false
+            est.classList.add("d-flex")
+            break
+          }
+          else {
             est.hidden = true
             est.classList.remove("d-flex")
           }
-          else {
-            var lat = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[0].textContent)
-            var lon = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[1].textContent)
-            for (let i = 0; i < lats.length; i++) {
-              if (lat === lats[i] && lon === longs[i]) {
-                est.hidden = false
-                est.classList.add("d-flex")
-                break
-              }
-              else {
-                est.hidden = true
-                est.classList.remove("d-flex")
-              }
-            }
-          }
-        });
-      }
-    const onBoundsChange = (event) =>{
-      lats = []
-      longs = []
-      let bounds = map.getBounds()
-      markers.forEach(m => {
-        if (bounds.contains(m.getPosition())) {
-          lats.push(parseFloat(m.getPosition().lat()))
-          longs.push(parseFloat(m.getPosition().lng()))
         }
-      }) 
-      try {
-        google.maps.event.removeListener(zoomChangeBoundsListener);
-      } catch (error) {}     
-      showEstabElements()
-    }
-    function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: -12.060459, lng: -77.040270 },
-            zoom: 16,
-        });
-
-        //Adding rightclick event listener here
-        google.maps.event.addListener(map, "rightclick", function(event) {
-          var lat = event.latLng.lat();
-          var lng = event.latLng.lng();
-          // populate yor box/field with lat, lng
-          document.getElementById('longitud').innerHTML  = "longitud: "+lng;
-          document.getElementById('latitud').innerHTML  = "latitud: "+lat;
-          document.getElementById('direccion').innerHTML  = "direccion: null";
-          window.setTimeout(function() {  
-            document.getElementById('longitud').innerHTML  = "longitud: ";
-            document.getElementById('latitud').innerHTML  = "latitud: ";
-            document.getElementById('direccion').innerHTML  = "direccion: ";
-          }, 2000);  
-          //alert("Lat=" + lat + "; Lng=" + lng);
-        });
-
-        const locations = [
-          {lat: -12.083750075956283, lng: -76.97704255222924},
-          {lat: -12.078668590551107, lng: -77.00215935214327},
-          {lat: -12.121898075505575, lng: -77.03064550074568}
-        ]
-
-        locations.forEach(location => {
-          var mar = new google.maps.Marker({
-            position: location,
-            map: map,
-          });
-          markers.push(mar)
-        })
-        if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          map.panTo(initialLocation);
-        });
       }
-      google.maps.event.addListener(map, 'zoom_changed', function(event){
-        zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', onBoundsChange)
-      })
-      google.maps.event.addListener(map, 'dragend', onBoundsChange)
-      showEstabElements()
+    });
+  }
+  const onBoundsChange = (event) => {
+    lats = []
+    longs = []
+    let bounds = map.getBounds()
+    markers.forEach(m => {
+      if (bounds.contains(m.getPosition())) {
+        lats.push(parseFloat(m.getPosition().lat()))
+        longs.push(parseFloat(m.getPosition().lng()))
+      }
+    })
+    try {
+      google.maps.event.removeListener(zoomChangeBoundsListener);
+    } catch (error) { }
+    showEstabElements()
+  }
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: -12.060459, lng: -77.040270 },
+      zoom: 16,
+    });
+
+    //Adding rightclick event listener here
+    google.maps.event.addListener(map, "rightclick", function (event) {
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+      // populate yor box/field with lat, lng
+      document.getElementById('longitud').innerHTML = "longitud: " + lng;
+      document.getElementById('latitud').innerHTML = "latitud: " + lat;
+      document.getElementById('direccion').innerHTML = "direccion: null";
+      window.setTimeout(function () {
+        document.getElementById('longitud').innerHTML = "longitud: ";
+        document.getElementById('latitud').innerHTML = "latitud: ";
+        document.getElementById('direccion').innerHTML = "direccion: ";
+      }, 2000);
+      //alert("Lat=" + lat + "; Lng=" + lng);
+    });
+
+    const locations = [
+      { lat: -12.083750075956283, lng: -76.97704255222924 },
+      { lat: -12.078668590551107, lng: -77.00215935214327 },
+      { lat: -12.121898075505575, lng: -77.03064550074568 }
+    ]
+
+    locations.forEach(location => {
+      var mar = new google.maps.Marker({
+        position: location,
+        map: map,
+      });
+      markers.push(mar)
+    })
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.panTo(initialLocation);
+      });
     }
+    google.maps.event.addListener(map, 'zoom_changed', function (event) {
+      zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', onBoundsChange)
+    })
+    google.maps.event.addListener(map, 'dragend', onBoundsChange)
+    showEstabElements()
+  }
 
 </script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizeC9tFV647keWnjuTGF2G3yJregpyEs&callback=initMap">
-</script>
-
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizeC9tFV647keWnjuTGF2G3yJregpyEs&callback=initMap">
+  </script>
