@@ -22,6 +22,15 @@ module.exports = {
         catch (err) {
             console.log(err);
         }
+    },
+
+    showFormNew: async (req, res) => {
+        try {
+            return res.render('new_establishment');
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 }
 
