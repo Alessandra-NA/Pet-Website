@@ -1,3 +1,9 @@
+<div>
+  Area de prueba Nyo
+  <div id="longitud">longitud: </div>
+  <div id="latitud">latitud: </div>
+  <div id="direccion">direccion: </div>
+</div>
 <h3>Lugares pet friendly</h3>
 <div class="row">
   <div id="map" class="col-12 col-lg-8"></div>
@@ -77,6 +83,22 @@
         map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: -12.060459, lng: -77.040270 },
             zoom: 16,
+        });
+
+        //Adding rightclick event listener here
+        google.maps.event.addListener(map, "rightclick", function(event) {
+          var lat = event.latLng.lat();
+          var lng = event.latLng.lng();
+          // populate yor box/field with lat, lng
+          document.getElementById('longitud').innerHTML  = "longitud: "+lng;
+          document.getElementById('latitud').innerHTML  = "latitud: "+lat;
+          document.getElementById('direccion').innerHTML  = "direccion: null";
+          window.setTimeout(function() {  
+            document.getElementById('longitud').innerHTML  = "longitud: ";
+            document.getElementById('latitud').innerHTML  = "latitud: ";
+            document.getElementById('direccion').innerHTML  = "direccion: ";
+          }, 2000);  
+          //alert("Lat=" + lat + "; Lng=" + lng);
         });
 
         const locations = [
