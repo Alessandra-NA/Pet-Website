@@ -1,0 +1,40 @@
+<h1>Establecimientos Petfriendly</h1>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <div class="btn-group" role="group">
+        <% if(listado){ %>
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1" checked>
+            <label class="btn btn-outline-info disabled" for="btnradio1">Listado</label>
+
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2">
+            <label class="btn btn-outline-info" for="btnradio2">Mapa</label>
+          <% } else{ %>  
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1">
+            <label class="btn btn-outline-info" for="btnradio1">Listado</label>
+
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2" checked>
+            <label class="btn btn-outline-info disabled" for="btnradio2">Mapa</label>
+         <% } %>
+        
+    </div>
+</div>
+
+
+<div class="container">
+    <% if(listado){ %>
+        <%- include('establecimientos_listado') %>
+      <% } else{ %>  
+        <%- include('establecimientos_mapa') %>
+     <% } %>
+    
+</div>
+
+
+<script>
+    // para cambiar el color de texto de la sección en el navbar
+    highlightNavbar(2)
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
+            window.location = '/establishments?tab='+event.target.value
+        }))
+    })
+</script>

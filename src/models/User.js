@@ -3,8 +3,9 @@ const sequelize = require('../db');
 
 class User extends Model {
     // relaciones:
-    static associate({ Post }) {
-        this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' })
+    static associate({ Post, Comment }) {
+        this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' , onDelete: 'cascade'});
+        this.hasMany(Comment, { as: 'comments', foreignKey: 'user_id' });
     }
 }
 User.init(
@@ -23,9 +24,9 @@ User.init(
             type: DataTypes.ENUM('person', 'shelter', 'admin'),
             allowNull: false,
         },
-        flagReportado: {
-            type: DataTypes.BOOLEAN(),
-            allowNull: true
+        status: {
+            type: DataTypes.ENUM('actived', 'reported', 'blocked'),
+            allowNull: false,
         }
     },
     {

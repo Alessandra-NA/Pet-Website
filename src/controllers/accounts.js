@@ -31,12 +31,12 @@ module.exports = {
   deleteAccount:(req, res) => {
     try {
       User.findByPk(req.params.userid).then(response => {
-        console.log(response);
         response.destroy();
+        Post.findAll({where: {'user_id': req.params.userid}}).then(posts => posts.forEach(post => post.destroy()))
         res.redirect('/accounts')
       })
       
     }
-    catch { }
+    catch(err) {console.log(err) }
   }
 };

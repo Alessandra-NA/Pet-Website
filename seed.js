@@ -1,6 +1,6 @@
 // node
 const md5 = require('md5');
-const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, User, UserAdmin, UserPerson, UserShelter } = require('./src/models');
+const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter } = require('./src/models');
 const fs = require('fs');
 
 const nivelesActividad = [
@@ -82,14 +82,24 @@ const mascotas = [
 const localizaciones = [
   { country: 'Perú', province: 'Lima', district: 'La Molina', address: 'Calle XXX 123' },
   { country: 'Perú', province: 'Lima', district: 'Jesús María', address: 'Calle YYY 123' },
-  { country: 'Perú', province: 'Lima', district: 'Ate', address: 'Calle ZZZ 123' }
+  { country: 'Perú', province: 'Lima', district: 'Ate Vitarte', address: 'Calle ZZZ 123' },
+  { country: 'Perú', province: 'Lima', district: 'Santiago de Surco', address: 'Calle ABC 123'},
+  { country: 'Perú', province: 'Lima', district: 'San Juan de Miraflores', address: 'Calle FGH 123'},
+  { country: 'Perú', province: 'Lima', district: 'San Luis', address: 'Calle YUI 123'}
 ];
 
+const establecimientos = [
+  { name: 'Establecimiento1', rating: 0, ofPets: true, type: 'Spa mascotas', link: '', location_id: 4, photo: null, latitude: -12.083750075956283, longitude: -76.97704255222924},
+  { name: 'Establecimiento2', rating: 0, ofPets: true, type: 'Veterinarias', link: '', location_id: 5, photo: null, latitude: -12.078668590551107, longitude: -77.00215935214327},
+  { name: 'Establecimiento3', rating: 0, ofPets: false, type: 'Hoteles & Alojamientos', link: '', location_id: 6, photo: null, latitude: -12.121898075505575, longitude: -77.03064550074568},
+  
+]
+
 const usuarios = [
-  { username: 'User1', password: md5('123'), type: 'person' },
-  { username: 'User2', password: md5('123'), type: 'person' },
-  { username: 'User3', password: md5('123'), type: 'shelter' },
-  { username: 'User4', password: md5('123'), type: 'admin' }
+  { username: 'User1', password: md5('123'), type: 'person', status: 'actived'},
+  { username: 'User2', password: md5('123'), type: 'person', status: 'actived'},
+  { username: 'User3', password: md5('123'), type: 'shelter', status: 'actived'},
+  { username: 'User4', password: md5('123'), type: 'admin', status: 'actived'}
 ];
 
 const usuarios_personas = [
@@ -106,17 +116,17 @@ const usuarios_admin = [
 ]
 
 const posts = [
-  { user_id: 1, pet_id: 1, flagReportado: false },
-  { user_id: 1, pet_id: 2, flagReportado: false },
-  { user_id: 1, pet_id: 3, flagReportado: false },
-  { user_id: 2, pet_id: 4, flagReportado: false },
-  { user_id: 3, pet_id: 5, flagReportado: false },
-  { user_id: 3, pet_id: 6, flagReportado: false },
-  { user_id: 3, pet_id: 7, flagReportado: false },
-  { user_id: 2, pet_id: 8, flagReportado: false },
-  { user_id: 2, pet_id: 9, flagReportado: false },
-  { user_id: 2, pet_id: 10, flagReportado: false },
-  { user_id: 2, pet_id: 11, flagReportado: false }
+  { user_id: 1, pet_id: 1 },
+  { user_id: 1, pet_id: 2 },
+  { user_id: 1, pet_id: 3 },
+  { user_id: 2, pet_id: 4 },
+  { user_id: 3, pet_id: 5 },
+  { user_id: 3, pet_id: 6 },
+  { user_id: 3, pet_id: 7 },
+  { user_id: 2, pet_id: 8 },
+  { user_id: 2, pet_id: 9 },
+  { user_id: 2, pet_id: 10 },
+  { user_id: 2, pet_id: 11 }
 ];
 
 const main = async () => {
@@ -177,6 +187,17 @@ const main = async () => {
         console.log(err);
       }
     });
+    
+    establecimientos.forEach(async establecimiento => {
+      try {
+        const newEstablishment = await Establishment.create(establecimiento);
+        var imagenTemp = "'"+path.resolve('src/public/img','establishment.jpg')+"'"
+        var imagenTemp1 = "'"+path.resolve('src/public/img','establishment1.jpg')+"'"
+        sequelize.query('UPDATE "Establishments" set photo= array [pg_read_binary_file('+imagenTemp+'), pg_read_binary_file('+imagenTemp1+')] WHERE id='+newEstablishment.id)
+      }catch (err) {
+        console.log(err);
+      }
+    });
 
     usuarios.forEach(async usuario => {
       try {
@@ -196,14 +217,18 @@ const main = async () => {
 
     usuarios_personas.forEach(async usuario_persona =>{
       try {
-        await UserPerson.create(usuario_persona);
+         const newUsuario = await UserPerson.create(usuario_persona);
+         var imagenTemp = "'"+path.resolve('src/public/img','profile_user.png')+"'"
+         sequelize.query('UPDATE "UserPeople" set photo=pg_read_binary_file('+imagenTemp+') WHERE id='+newUsuario.id)
       } catch (err) {
         console.log(err);
       }
     });
     usuarios_shelters.forEach(async usuario_shelter =>{
       try {
-        await UserShelter.create(usuario_shelter);
+        const newUsuario = await UserShelter.create(usuario_shelter);
+        var imagenTemp = "'"+path.resolve('src/public/img','profile_shelter.png')+"'"
+         sequelize.query('UPDATE "UserShelters" set photo=pg_read_binary_file('+imagenTemp+') WHERE id='+newUsuario.id)
       } catch (err) {
         console.log(err);
       }

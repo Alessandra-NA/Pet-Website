@@ -1,5 +1,4 @@
 <main class="container">
-    <h1>Perfil de usuario</h1>
 
     <h2>Bienvenido a tu perfil, 
         <% if (userType == "person") { %>
@@ -8,32 +7,65 @@
             <%= usuario.name %>
         <% } %>
     </h2>
+
+    <div class="row">
+        <div class="col-6">
+            <h2>Datos personales: </h2>
+                <% if (userType == "person") { %>
+                    
+                    <p>Nombres: <%= usuario.first_name %></p>
+                    <p>Apellidos: <%= usuario.last_name %></p>
+                    <p>DNI: <%= usuario.document_number %></p>
+                    <p>Celular: <%= usuario.phone_number %></p>
+                    <p>E-mail: <%= usuario.email %></p>
+        
+                <%} else if (userType == "shelter") { %>
+                    <p>Nombre de la compañia: <%= usuario.name %></p>
+                    <p>RUC: <%= usuario.ruc %></p>
+                    <p>Número de telefono: <%= usuario.phone_number %></p>
+                    <p>Email: <%= usuario.email %></p>
+        
+                <% } %>
+        </div>
+
+        <div class="col-6">
+            <h2>Realizar cambios:</h2>
+            <a href="/editar_usuario/elegirTipo" class="btn btn-warning">Editar cuenta</a>
+            <a href="/usuario/cambiarContrasena" class="btn btn-danger">Cambiar contraseña</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2>Mis publicaciones:</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre de mascota</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
     
-    <h2>Datos personales: </h2>
-        <% if (userType == "person") { %>
-            
-            <p>Nombres: <%= usuario.first_name %></p>
-            <p>Apellidos: <%= usuario.last_name %></p>
-            <p>DNI: <%= usuario.document_number %></p>
-            <p>Celular: <%= usuario.phone_number %></p>
-            <p>E-mail: <%= usuario.email %></p>
-
-        <%} else if (userType == "shelter") { %>
-            <p>Nombre de la compañia: <%= usuario.name %></p>
-            <p>RUC: <%= usuario.ruc %></p>
-            <p>Número de telefono: <%= usuario.phone_number %></p>
-            <p>Email: <%= usuario.email %></p>
-
-        <% } %>
-
+            <tbody>
+                <% posts.forEach(function(post){ %>
+                    <tr>
+                        <th scope="row">
+                            <%= post.id %>
+                        </th>
+                        <td>
+                            Provisional
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
     
-
-
-
-    <a href="/editar_usuario/elegirTipo" class="btn btn-warning">Editar cuenta</a>
-    <a href="/usuario/cambiarContrasena" class="btn btn-danger">Cambiar contraseña</a>
 </main>
 
 <script>
-    highlightNavbar(4)
+    highlightNavbar(5)
 </script>

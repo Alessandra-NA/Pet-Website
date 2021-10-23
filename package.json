@@ -28,6 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@googlemaps/js-api-loader": "^1.12.6",
     "@tailwindcss/forms": "^0.3.3",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.1.0",

@@ -1,0 +1,59 @@
+<h3>Establecimientos listado</h3>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-2 pb-3">
+    <% establecimientos.forEach(function(establecimiento){ %>
+        <div class="col">
+            <div class="card text-center" role="button" onclick="location.href='#<%=establecimiento.id%>'">
+                <h5 class="card-title fw-bold"> <%=establecimiento.name%> </h5>
+                <img role="" src="data:image/png;base64,<%=establecimiento.photo[0]%>" class="img-fluid"
+                    style="width: 100%; object-fit:contain">
+                <div class="category-panel">
+                    <div class="icon-type ">
+                        <!-- Con la mascota -->
+                        <% if (establecimiento.type=='Bares & Cafés'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/33c96c76-0bcf-4ae2-89db-9963cc847bdb.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Restaurantes'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/46a58912-ccc9-4ae8-83a1-84d3628d472c.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Terrazas'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://cdn-icons-png.flaticon.com/512/174/174446.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Hoteles & Alojamientos'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/6faf13fc-d4c0-4c41-9818-d906fff2d9fa.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Playas'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/52c40115-b990-4e4b-a821-a294f537b683.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Tiendas'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/716975e5-67e5-4cd0-8865-2e083e0ddf70.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Parques'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/036729f4-0085-4e9c-acee-1d4542ca0c4c.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Centros de belleza'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/2ceedd89-faa0-4731-ad07-ae4d0da88a55.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Clínicas'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://img2.freepng.es/20180420/vce/kisspng-hospital-computer-icons-medicine-clinic-clip-art-clinic-5adaa5a660c301.3626810315242786943964.jpg" class="img-fluid">
+                        <% } else if (establecimiento.type=='Transportes'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/22e0a85a-9d3e-48e1-a338-4d23d9d859ca.png" class="img-fluid">
+                        <!-- Para mascotas -->
+                        <% } else if (establecimiento.type=='Spa mascotas'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://cdn-icons-png.flaticon.com/512/1499/1499544.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Veterinarias'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/1e49faef-4aee-41fc-8634-e812b909a185.png" class="img-fluid">
+                        <% } else if (establecimiento.type=='Tiendas mascotas'){ %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/d5bc7c4e-58fc-44d4-89ff-b3146bca3de0.png" class="img-fluid">
+                        <!-- Otros -->
+                        <% } else { %>
+                        <img title="<%=establecimiento.type%>" src="https://www.srperro.com/media/categoria/3d0dc4cd-9c7c-4f0e-87d2-f66161ccaa35.png" class="img-fluid">
+                        <% } %>
+                    </div>
+                </div>
+                <div class="row align-items-center" style="min-height: 50px;">
+                    <div class="col-8">
+                        <span class="align-middle"> <%=establecimiento.location.district%> </span>
+                    </div>
+                    <div class="col-4">
+                        <span class="align-middle"> <%=establecimiento.rating%>/5 </span>
+                        <span class="material-icons align-middle"> pets </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+</div>
+    

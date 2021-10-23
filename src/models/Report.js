@@ -3,8 +3,8 @@ const sequelize = require('../db');
 
 class Report extends Model {
     // relaciones:
-    static associate({ Post }) {
-        this.belongsTo(Post, { as: 'post', foreignKey: 'post_id' });
+    static associate({ User }) {
+        this.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
     }
 }
 Report.init(
