@@ -40,9 +40,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nombre de mascota</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">Cumpleaños</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Borrar</th>
                 </tr>
             </thead>
     
@@ -50,10 +51,13 @@
                 <% posts.forEach(function(post){ %>
                     <tr>
                         <th scope="row">
-                            <%= post.id %>
+                            <%= post.pet.name %>
                         </th>
                         <td>
-                            Provisional
+                            <%= post.pet.birthdate %>
+                        </td>
+                        <td>
+                            <%= post.pet.story %>
                         </td>
                         <td>
                             <a href="#" class="btn btn-danger">Borrar</a>
