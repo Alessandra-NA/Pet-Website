@@ -165,7 +165,7 @@ module.exports = {
           title : 'Perfil de usuario',
           usuario : userPerson,
           userType : userType,
-          posts : posts
+          posts : imagesToBase64(posts)
         })
       }
       else if (userType == "shelter")

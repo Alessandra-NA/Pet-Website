@@ -37,35 +37,30 @@
 
     <div class="row">
         <h2>Mis publicaciones:</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nombre de mascota</th>
-                    <th scope="col">Cumpleaños</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Borrar</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-                <% posts.forEach(function(post){ %>
-                    <tr>
-                        <th scope="row">
-                            <%= post.pet.name %>
-                        </th>
-                        <td>
-                            <%= post.pet.birthdate %>
-                        </td>
-                        <td>
-                            <%= post.pet.story %>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-danger">Borrar</a>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
+
+        <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
+            <% posts.forEach(function(post){ %>
+        
+                <div class="col">
+        
+                    <div class="card col" role="button" onclick="location.href='../pet_detalle?id=<%=post.id%>'">
+                        <img src="data:image/png;base64,<%=post.pet.photo?post.pet.photo:''%>" class="card-img-top" style="width: 100%; height: 15vw; object-fit:contain" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"> <%=post.pet.name%>
+                            </h5>
+                            <p class="card-text"><%=post.pet.story.length<=100? post.pet.story: post.pet.story.slice(0,100)+"..."%></p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger mt-2 mb-2 deleteButton" postid="<%=post.id %>" namePet="<%= post.pet.name %>">Borrar</button>
+                        
+                    </div>
+                </div>
+        
+        
+            <% }) %>
+        
+        </div>
     </div>
     
 </main>
