@@ -12,18 +12,35 @@
         <div class="col-6">
             <h2>Datos personales: </h2>
                 <% if (userType == "person") { %>
-                    
-                    <p>Nombres: <%= usuario.first_name %></p>
-                    <p>Apellidos: <%= usuario.last_name %></p>
-                    <p>DNI: <%= usuario.document_number %></p>
-                    <p>Celular: <%= usuario.phone_number %></p>
-                    <p>E-mail: <%= usuario.email %></p>
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Nombres: <%= usuario.first_name %></p>
+                            <p>Apellidos: <%= usuario.last_name %></p>
+                            <p>DNI: <%= usuario.document_number %></p>
+                            <p>Celular: <%= usuario.phone_number %></p>
+                            <p>E-mail: <%= usuario.email %></p>
+                        </div>
+                        <div class="col-6">
+                            <div class="card col">
+                                <img src="data:image/png;base64,<%=usuario.photo?usuario.photo:''%>" class="card-img-top" style="width: 100%; height: 15vw; object-fit:contain" alt="...">                                
+                            </div>
+                        </div>
+                    </div>
         
                 <%} else if (userType == "shelter") { %>
-                    <p>Nombre de la compañia: <%= usuario.name %></p>
-                    <p>RUC: <%= usuario.ruc %></p>
-                    <p>Número de telefono: <%= usuario.phone_number %></p>
-                    <p>Email: <%= usuario.email %></p>
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Nombre de la compañia: <%= usuario.name %></p>
+                            <p>RUC: <%= usuario.ruc %></p>
+                            <p>Número de telefono: <%= usuario.phone_number %></p>
+                            <p>Email: <%= usuario.email %></p>
+                        </div>
+                        <div class="col-6">
+                            <div class="card col">
+                                <img src="data:image/png;base64,<%=usuario.photo?usuario.photo:''%>" class="card-img-top" style="width: 100%; height: 15vw; object-fit:contain" alt="...">
+                            </div>
+                        </div>
+                    </div>
         
                 <% } %>
         </div>
