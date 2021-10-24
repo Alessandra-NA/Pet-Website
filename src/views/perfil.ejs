@@ -56,6 +56,11 @@
         <h2>Mis publicaciones:</h2>
 
         <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
+            <% if (posts == null) { %>
+            <p>-- No tiene publicaciones actualmente --</p>
+
+            <% } else { %>
+
             <% posts.forEach(function(post){ %>
         
                 <div class="col">
@@ -76,6 +81,8 @@
         
         
             <% }) %>
+
+            <% } %>
         
         </div>
     </div>

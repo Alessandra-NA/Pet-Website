@@ -170,7 +170,7 @@ module.exports = {
           },          
         ],
         where:{user_id: usuario.id}}) 
-
+        console.log(posts)
 
         return res.render('perfil', {
           title : 'Perfil de usuario',
@@ -192,6 +192,8 @@ module.exports = {
           },          
         ],
         where:{user_id: usuario.id}}) 
+
+        console.log(posts)
 
         return res.render('perfil', {
           title : 'Perfil de albergue',
