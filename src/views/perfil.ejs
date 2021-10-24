@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger mt-2 mb-2 deleteButton" postid="<%=post.id %>" namePet="<%= post.pet.name %>">Borrar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger mt-2 mb-2 deleteButton" postid="<%= post.id %>" namePet="<%= post.pet.name %>">Borrar</button>
                         
                     </div>
                 </div>
@@ -65,6 +65,36 @@
     
 </main>
 
+<div class="modal" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Borrar post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="deleteMessage">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" posttoDelete="" class="btn btn-danger" postid="" id="confirmDeleteButton">Borrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
 <script>
     highlightNavbar(5)
+    document.querySelectorAll('.deleteButton').forEach((button) => {
+    button.addEventListener('click', (ev) => {
+      console.log(ev.target);
+      document.querySelector('#deleteMessage').innerText = "  Está seguro que desea borrar al anuncio de " + ev.target.getAttribute('namePet') + '?';
+      document.querySelector('#confirmDeleteButton').setAttribute("postid", ev.target.getAttribute('postid'));
+    })
+  })
+  document.querySelector('#confirmDeleteButton').addEventListener('click', (ev) => window.location = '/post/delete/' + ev.target.getAttribute('postid'))
 </script>
