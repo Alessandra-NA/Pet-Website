@@ -146,24 +146,35 @@ module.exports = {
       const userType = req.session.userType
       const idUser = req.session.userId
 
-      //Obtener lista de posts del usuario
+      const usuario = await User.findOne({where : {}})
+
+      /*//Obtener lista de posts del usuario
       const posts = await Post.findAll({ include: [
         {
-          model: Pet,
-          as: 'pet',          
-          
+            model: Pet,
+            as: 'pet',          
         },          
       ],
-      where:{user_id: idUser}}) 
-
-      console.log(posts)
+      where:{user_id: idUser}}) */
       
       if (userType == "person")
       {
         const userPerson = await UserPerson.findOne({where : {id : idUser}})
+
+        //Obtener lista de posts del usuario
+        const usuario = await User.findOne({where : {id : userPerson.user_id}})
+        const posts = await Post.findAll({ include: [
+          {
+              model: Pet,
+              as: 'pet',          
+          },          
+        ],
+        where:{user_id: usuario.id}}) 
+
+
         return res.render('perfil', {
           title : 'Perfil de usuario',
-          usuario : userPerson,
+          usuario : imagesToBase645(userPerson),
           userType : userType,
           posts : imagesToBase64(posts)
         })
@@ -171,11 +182,22 @@ module.exports = {
       else if (userType == "shelter")
       {
         const userShelter = await UserShelter.findOne({where : {id : idUser}})
+
+        //Obtener lista de posts del usuario
+        const usuario = await User.findOne({where : {id : userShelter.user_id}})
+        const posts = await Post.findAll({ include: [
+          {
+              model: Pet,
+              as: 'pet',          
+          },          
+        ],
+        where:{user_id: usuario.id}}) 
+
         return res.render('perfil', {
           title : 'Perfil de albergue',
-          usuario : userShelter,
+          usuario : imagesToBase645(userShelter),
           userType : userType,
-          posts : posts
+          posts : imagesToBase64(posts)
         })
       }
     }
@@ -245,3 +267,10 @@ module.exports = {
   },
 
 };
+
+imagesToBase645 = function (usuario) {
+  if(usuario.photo){
+    usuario.photo = Buffer.from(usuario.photo).toString('base64');
+  }  
+  return usuario      
+}   
