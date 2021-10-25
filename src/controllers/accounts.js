@@ -1,4 +1,4 @@
-const { Post, Pet, User, UserPerson, UserShelter, Establishment } = require('../models');
+const { Post, Pet, User, UserPerson, UserShelter, Establishment, Suggestion } = require('../models');
 
 module.exports = {
   /**
@@ -70,6 +70,23 @@ module.exports = {
     }
     catch { }
   },*/
+
+  getSugerencias : async (req,res) => {
+    try {
+      
+      const estId = parseInt(req.params.estid)
+      console.log(estId)
+      console.log("llegue")
+      const sugerencias = await Suggestion.findAll({include : {all: true}, where : {establishment_id : estId}})
+      
+      console.log(sugerencias)
+      res.render('verSugerenciasEstablecimiento', {
+        title : 'Ver sugerencias de establecimiento',
+        sugerencias : sugerencias
+      })
+    }
+    catch{}
+  },
 
   deleteAccount:(req, res) => {
     try {

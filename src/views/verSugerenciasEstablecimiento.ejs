@@ -1,4 +1,4 @@
-<h1>Administración de establecimientos Pet Friendly</h1>
+<h1>Sugerencias de establecimientos</h1>
 <table class="table">
   <thead>
     <tr>
@@ -6,38 +6,32 @@
       <th scope="col">Nombre del establecimiento</th>
       <th scope="col">Calificación</th>
       <th scope="col">Tipo</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">Link</th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <% establecimientos.forEach(function(establecimiento){ %>
+    <% sugerencias.forEach(function(sugerencia){ %>
     <tr>
         <th scope="row">
-          <%=establecimiento.id%>
+          <%=sugerencia.id%>
         </th>
         <td>
-          <%=establecimiento.name%>
+          <%=sugerencia.name%>
         </td>
         <td>
-          <%=establecimiento.rating%>
+          <%=sugerencia.rating%>
         </td>
         <td>
-          <%=establecimiento.type%>
-        </td>
-
-        <td>
-            <a href="/accounts/verSugerencias/<%= establecimiento.id %>" class="btn btn-primary">Ver sugerencias de cambio</a>
+          <%=sugerencia.type%>
         </td>
 
         <td>
-            <button class="btn btn-primary">Ver reportes no Pet Friendly</button>
+            <%= sugerencia.link %>
         </td>
 
         <td>
-            <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger deleteButton"
-            estid="<%=establecimiento.id%>" username="<%=establecimiento.name%>">Borrar</button>
+            <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Borrar</button>
         </td>
     </tr>
       <% }) %>
