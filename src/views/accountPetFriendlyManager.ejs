@@ -1,40 +1,45 @@
-<h1>Administración de cuentas de <%= type %></h1>
+<h1>Administración de establecimientos Pet Friendly</h1>
 <table class="table">
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Nombre de usuario</th>
+      <th scope="col">Nombre del establecimiento</th>
+      <th scope="col">Calificación</th>
       <th scope="col">Tipo</th>
-      <th scope="col">Publicaciones</th>
-      <th scope="col">Usuario reportado</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <% users.forEach(function(user){ %>
-      <tr>
+    <% establecimientos.forEach(function(establecimiento){ %>
+    <tr>
         <th scope="row">
-          <%=user.id%>
+          <%=establecimiento.id%>
         </th>
         <td>
-          <%=user.username%>
+          <%=establecimiento.name%>
         </td>
         <td>
-          <%=user.type%>
+          <%=establecimiento.rating%>
         </td>
         <td>
-          <%=user.posts.length%>
+          <%=establecimiento.type%>
         </td>
+
         <td>
-          <% if (user.flagReportado == true) { %>
-            <b><label for="" style="color: red; ">Reportado</label></b>
-          <%} else { %>
-            <label for="">No reportado</label>
-          <% } %>
+            <button class="btn btn-primary">Ver sugerencias de cambio</button>
         </td>
-        <td><button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary deleteButton"
-            userid="<%=user.id%>" username="<%=user.username%>">Borrar</button></td>
-      </tr>
+
+        <td>
+            <button class="btn btn-primary">Ver reportes no Pet Friendly</button>
+        </td>
+
+        <td>
+            <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger deleteButton"
+            userid="<%=establecimiento.id%>" username="<%=establecimiento.name%>">Borrar</button>
+        </td>
+    </tr>
       <% }) %>
   </tbody>
 </table>
@@ -74,6 +79,8 @@
     </div>
   </div>
 </div>
+
+
 <script>
   highlightNavbar(4)
   document.querySelectorAll('.deleteButton').forEach((button) => {

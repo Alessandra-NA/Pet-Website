@@ -1,4 +1,4 @@
-const { Post, Pet, User, UserPerson, UserShelter } = require('../models');
+const { Post, Pet, User, UserPerson, UserShelter, Establishment } = require('../models');
 
 module.exports = {
   /**
@@ -16,7 +16,7 @@ module.exports = {
     catch{}
   },
 
-  getAccounts : (req, res) => {
+  getAccounts : async (req, res) => {
     try {
       const tipoCuenta = parseInt(req.body.tipo_cuenta)
 
@@ -24,7 +24,8 @@ module.exports = {
         User.findAll({include: {all: true}, where : {type : 'person'}}).then(response => {
           res.render('accountManager', {
             title: 'Administrar cuentas de personas', 
-            users: response.filter(user => user.type != 'admin')
+            users: response.filter(user => user.type != 'admin'),
+            type : "personas"
           })
         })
       } 
@@ -33,20 +34,26 @@ module.exports = {
         User.findAll({include: {all: true}, where : {type : 'shelter'}}).then(response => {
           res.render('accountManager', {
             title: 'Administrar cuentas de albergue', 
-            users: response.filter(user => user.type != 'admin')
+            users: response.filter(user => user.type != 'admin'),
+            type : "albergues"
           })
         })
       }
 
       else if (tipoCuenta == 2){
-        return res.render('accountManagerEstablecimientos', {
-          title : 'Administrar establecimientos Pet Friendly'
+
+        const establecimientos = await Establishment.findAll({include : {all : true}})
+
+        res.render('accountPetFriendlyManager', {
+          title : 'Administrar establecimientos Pet Friendly',
+          establecimientos : establecimientos
         })
       }
     }
     catch{}
   },
 
+  /*LO DE ABAJO ESTA SIENDO REEMPLAZADO POR FUNCION getAccounts
   showAccounts: (req, res) => {
     try {
       if(req.session.userType != 'admin'){
@@ -62,7 +69,7 @@ module.exports = {
       }
     }
     catch { }
-  },
+  },*/
 
   deleteAccount:(req, res) => {
     try {

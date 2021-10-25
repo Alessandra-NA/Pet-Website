@@ -9,8 +9,8 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', authAdmin, chooseTypeAccountToManage)
-router.post('/', getAccounts)
-//router.get('/', authAdmin, showAccounts)
+router.post('/', authAdmin, getAccounts)
+//router.get('/', authAdmin, showAccounts) --> reemplazado por getAccounts
 router.get('/delete/:userid', deleteAccount)
 
 module.exports = router;
