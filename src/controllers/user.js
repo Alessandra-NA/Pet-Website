@@ -169,9 +169,8 @@ module.exports = {
               as: 'pet',          
           },          
         ],
-        where:{user_id: usuario.id}}) 
-
-
+        where:{user_id: usuario.id}})
+        
         return res.render('perfil', {
           title : 'Perfil de usuario',
           usuario : imagesToBase645(userPerson),

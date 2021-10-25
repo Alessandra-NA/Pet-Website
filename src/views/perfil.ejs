@@ -55,6 +55,10 @@
     <div class="row">
         <h2>Mis publicaciones:</h2>
 
+        <% if (posts.length == 0) { %>
+            <p style="text-align: center;">-- Actualmente no tienes publicaciones --</p>
+        <% } %>
+
         <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
             <% posts.forEach(function(post){ %>
         
