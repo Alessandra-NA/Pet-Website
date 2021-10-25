@@ -81,5 +81,16 @@ module.exports = {
       
     }
     catch(err) {console.log(err) }
+  },
+
+  deleteEstablecimiento : (req,res) => {
+    try{
+      Establishment.findByPk(req.params.estid).then(response => {
+        response.destroy();
+        res.redirect('/accounts')
+      })
+    }
+
+    catch{}
   }
 };

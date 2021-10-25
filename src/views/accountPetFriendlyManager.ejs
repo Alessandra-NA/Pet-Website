@@ -37,7 +37,7 @@
 
         <td>
             <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger deleteButton"
-            userid="<%=establecimiento.id%>" username="<%=establecimiento.name%>">Borrar</button>
+            estid="<%=establecimiento.id%>" username="<%=establecimiento.name%>">Borrar</button>
         </td>
     </tr>
       <% }) %>
@@ -86,9 +86,9 @@
   document.querySelectorAll('.deleteButton').forEach((button) => {
     button.addEventListener('click', (ev) => {
       console.log(ev.target);
-      document.querySelector('#deleteMessage').innerText = "  Está seguro que desea borrar al usuario " + ev.target.getAttribute('username') + '?';
-      document.querySelector('#confirmDeleteButton').setAttribute("userid", ev.target.getAttribute('userid'));
+      document.querySelector('#deleteMessage').innerText = "  Está seguro que desea borrar el establecimiento " + ev.target.getAttribute('username') + '?';
+      document.querySelector('#confirmDeleteButton').setAttribute("estid", ev.target.getAttribute('estid'));
     })
   })
-  document.querySelector('#confirmDeleteButton').addEventListener('click', (ev) => window.location = '/accounts/delete/' + ev.target.getAttribute('userid'))
+  document.querySelector('#confirmDeleteButton').addEventListener('click', (ev) => window.location = '/accounts/deleteEstablecimiento/' + ev.target.getAttribute('estid'))
 </script>

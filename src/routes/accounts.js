@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { authAdmin } = require("../middlewares/auth")
-const { showAccounts, deleteAccount, showAccountDetails, chooseTypeAccountToManage, getAccounts } = require('../controllers/accounts');
+const { showAccounts, deleteAccount, showAccountDetails, chooseTypeAccountToManage, getAccounts, deleteEstablecimiento } = require('../controllers/accounts');
 const router = Router();
 
 
@@ -11,6 +11,7 @@ const router = Router();
 router.get('/', authAdmin, chooseTypeAccountToManage)
 router.post('/', authAdmin, getAccounts)
 //router.get('/', authAdmin, showAccounts) --> reemplazado por getAccounts
+router.get('/deleteEstablecimiento/:estid', deleteEstablecimiento)
 router.get('/delete/:userid', deleteAccount)
 
 module.exports = router;
