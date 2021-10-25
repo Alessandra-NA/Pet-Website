@@ -18,35 +18,58 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/match">Encuentra tu mascota ideal</a>
                 </li>
+
+
+
+                
                 <!-- arrinconarlo a la derecha -->
                 <% if (globalType.length===0) { %>
-                <li class="nav-item">
-                    <a class="nav-link" href="/signin">Iniciar sesión</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
+                        Opciones de inicio de sesión ▼
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/signin">Iniciar sesion</a></li>
+                        <li><a class="dropdown-item" href="/signup/chooseTypeAccount">Crear una cuenta</a></li>
+                    </ul>
                 </li>
+                
                 <% } %>
                 <% if (globalType==='admin') { %>
-                <li class="nav-item">
-                    <a class="nav-link" href="/accounts">Administración de cuentas</a>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
+                        Opciones de administrador ▼
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/accounts">Administración de cuentas</a></li>
+                        <li><a class="dropdown-item" href="/user/logout">Cerrar sesion</a></li>
+                    </ul>
                 </li>
+
                 <% } %>
 
                 <% if (globalType.length>0 && globalType != 'admin') { %>
+
+                    
                 <li class="nav-item">
                     <a class="nav-link" href="/adopcion">Dar en adopción</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/usuario/perfil">Perfil</a>
-                </li>     
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/logout">Cerrar sesión</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
+                        Opciones de perfil ▼
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/usuario/perfil">Mi perfil</a></li>
+                        <li><a class="dropdown-item" href="/editar_usuario/elegirTipo">Editar perfil</a></li>
+                        <li><a class="dropdown-item" href="/usuario/cambiarContrasena">Cambiar contraseña</a></li>
+                        <li><a class="dropdown-item" href="/user/logout">Cerrar sesion</a></li>
+                    </ul>
                 </li>
-                <% } else if (globalType == 'admin') {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/logout">Cerrar sesión</a>
-                    </li>
                 <% } %>
             </ul>               
         </div>
     </div>
 </nav>
+
