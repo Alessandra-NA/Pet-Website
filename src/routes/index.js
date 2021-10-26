@@ -17,7 +17,9 @@ const postRouter = require('./post')
 const accountsRouter = require('./accounts')
 const establishmentRouter = require('./establishment')
 const newEstablishmentRouter = require('./new_establishment')
-
+const establcimientoDetalleRouter = require('./establecimiento_detalle')
+const suggestionFormRouter = require('./suggestion_form')
+const suggestionsRouter = require('./suggestions')
 /**
   * @param {express.Express} app
   */
@@ -43,7 +45,10 @@ const routerConnection = (app) => {
 
   app.use('/establishments', establishmentRouter)
   app.use('/establishments/new', newEstablishmentRouter)
-
+  app.use('/establecimiento_detalle', establcimientoDetalleRouter)
+  app.use('/establecimiento_detalle/ds', establcimientoDetalleRouter)
+  app.use('/suggestion_form', suggestionFormRouter)
+  app.use('/suggestions', suggestionsRouter)
   app.use((_, res) => {
     res.render('notFound');
   });
