@@ -1,8 +1,5 @@
 <div>
-  Area de prueba Nyo
-  <div id="longitud">longitud: </div>
-  <div id="latitud">latitud: </div>
-  <div id="direccion">direccion: </div>
+  <div class="invisible" id="btnAgregar" data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar</div>
 </div>
 <h3>Lugares pet friendly</h3>
 <div class="row">
@@ -81,6 +78,13 @@
       } catch (error) {}     
       showEstabElements()
     }
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+
+
     function initMap() {
       map = new google.maps.Map(document.getElementById("map"), {
           center: { lat: -12.060459, lng: -77.040270 },
@@ -90,21 +94,18 @@
       //Adding rightclick event listener here
       google.maps.event.addListener(map, "rightclick", function(event) {
         var lat = event.latLng.lat();
-        var lng = event.latLng.lng();
+        var long = event.latLng.lng();
         // populate yor box/field with lat, lng
-        document.getElementById('longitud').innerHTML  = "longitud: "+lng;
+        document.getElementById('longitud').title = long;
+        document.getElementById('longitud').innerHTML  = "longitud: "+long;
+        document.getElementById('latitud').title  = lat;
         document.getElementById('latitud').innerHTML  = "latitud: "+lat;
+        document.getElementById('direccion').title  = "";
         document.getElementById('direccion').innerHTML  = "direccion: null";
-        
         addMarker(event.latLng);
-        window.setTimeout(function() {  
-          setMapOnAll(null);
-          markers.pop();
-          setMapOnAll(map);
-          document.getElementById('longitud').innerHTML  = "longitud: ";
-          document.getElementById('latitud').innerHTML  = "latitud: ";
-          document.getElementById('direccion').innerHTML  = "direccion: ";
-        }, 2000);  
+        window.setTimeout(function() {
+          document.getElementById("btnAgregar").click(); 
+        },500);
         //alert("Lat=" + lat + "; Lng=" + lng);
       });
 
@@ -152,10 +153,42 @@
     setMapOnAll(null);
   }
 }
+</script>
 
+<div class="modal" id="modalAgregar" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Establecimiento Petfriendly</h5>
+      </div>
+      <div class="modal-body" id="deleteMessage">
+        <div id="longitud" title="" >longitud: </div>
+        <div id="latitud" title="" >latitud: </div>
+        <div id="direccion">direccion: </div>
+        
+        <button type="button" class="btn btn-warning" data-bs-toggle="popover" title="Coordenadas"
+        data-bs-content="Longitud: xx.xxxx Latitud: yy.yyyy">Click</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick=CancelarClicked()>Cancelar</button>
+        <button type="button" class="btn btn-success" onclick=AgregarClicked() >Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-
+<script>
+  new bootstrap.Modal(document.getElementById('modalAgregar'), {backdrop: 'static', keyboard: false})
+  function AgregarClicked(){
+    const longCurrent = document.getElementById('longitud').title
+    const latCurrent = document.getElementById('latitud').title
+    location.href='establishments/new?lat='+latCurrent+'&?long='+longCurrent
+  }
+  function CancelarClicked(){
+    setMapOnAll(null);
+    markers.pop();
+    setMapOnAll(map);
+  }
 </script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizeC9tFV647keWnjuTGF2G3yJregpyEs&callback=initMap">
