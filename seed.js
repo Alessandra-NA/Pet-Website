@@ -116,17 +116,17 @@ const usuarios_admin = [
 ]
 
 const posts = [
-  { user_id: 1, pet_id: 1 },
-  { user_id: 1, pet_id: 2 },
-  { user_id: 1, pet_id: 3 },
-  { user_id: 2, pet_id: 4 },
-  { user_id: 3, pet_id: 5 },
-  { user_id: 3, pet_id: 6 },
-  { user_id: 3, pet_id: 7 },
-  { user_id: 2, pet_id: 8 },
-  { user_id: 2, pet_id: 9 },
-  { user_id: 2, pet_id: 10 },
-  { user_id: 2, pet_id: 11 }
+  { fecha: new Date(), user_id: 1, pet_id: 1 },
+  { fecha: new Date(), user_id: 1, pet_id: 2 },
+  { fecha: new Date(), user_id: 1, pet_id: 3 },
+  { fecha: new Date(), user_id: 2, pet_id: 4 },
+  { fecha: new Date(), user_id: 3, pet_id: 5 },
+  { fecha: new Date(), user_id: 3, pet_id: 6 },
+  { fecha: new Date(), user_id: 3, pet_id: 7 },
+  { fecha: new Date(), user_id: 2, pet_id: 8 },
+  { fecha: new Date(), user_id: 2, pet_id: 9 },
+  { fecha: new Date(), user_id: 2, pet_id: 10 },
+  { fecha: new Date(), user_id: 2, pet_id: 11 }
 ];
 
 const main = async () => {
