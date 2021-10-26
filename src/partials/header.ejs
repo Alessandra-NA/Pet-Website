@@ -23,31 +23,32 @@
             <% if (globalType.length===0) { %>
             </ul>
             <ul class="navbar-nav justify-content-end">
-                <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
-                        Opciones de inicio de sesión ▼
+                <div class="flex-shrink-0 dropdown">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="font-size: 85%; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);">
                         <li><a class="dropdown-item" href="/signin">Iniciar sesion</a></li>
                         <li><a class="dropdown-item" href="/signup/chooseTypeAccount">Crear una cuenta</a></li>
                     </ul>
-                </li>
+                  </div>
             </ul>  
             <% } %>
 
             <% if (globalType==='admin') { %>
             </ul>
             <ul class="navbar-nav justify-content-end">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
-                        Opciones de administrador ▼
+                <div class="flex-shrink-0 dropdown">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="font-size: 85%; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);">
                         <li><a class="dropdown-item" href="/accounts">Administración de cuentas</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/user/logout">Cerrar sesion</a></li>
                     </ul>
-                </li>
-            </ul>
+                  </div>
+            </ul>  
             <% } %>
 
             <% if (globalType.length>0 && globalType != 'admin') { %>
@@ -56,18 +57,19 @@
                 </li>
             </ul>
             <ul class="navbar-nav justify-content-end">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
-                        Opciones de perfil ▼
+                <div class="flex-shrink-0 dropdown">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="font-size: 85%; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);">
                         <li><a class="dropdown-item" href="/usuario/perfil">Mi perfil</a></li>
                         <li><a class="dropdown-item" href="/editar_usuario/elegirTipo">Editar perfil</a></li>
                         <li><a class="dropdown-item" href="/usuario/cambiarContrasena">Cambiar contraseña</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/user/logout">Cerrar sesion</a></li>
                     </ul>
-                </li>
-            </ul>
+                  </div>
+            </ul> 
             <% } %>
                         
         </div>
