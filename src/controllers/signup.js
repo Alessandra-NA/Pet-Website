@@ -26,14 +26,18 @@ module.exports = {
             }
 
         }
-        catch { }
+        catch (err) {
+            console.log(err);
+        }
     },
 
     chooseTypeAccount : async (req, res) => {
         try{
             return res.render('chooseTypeAccount', {title : 'Elegir tipo de cuenta'})
         }
-        catch{}
+        catch (err) {
+            console.log(err);
+        }
     },
 
     crearPeople : async (req, res) => {
@@ -141,7 +145,9 @@ module.exports = {
             
 
         }   
-        catch{}
+        catch (err) {
+            console.log(err);
+        }
     },
 
     crearShelter : async (req, res) => {
@@ -244,6 +250,8 @@ module.exports = {
 
             res.redirect('/signin')
         }   
-        catch{}
+        catch (err) {
+            console.log(err);
+        }
     }
 };

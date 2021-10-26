@@ -50,7 +50,9 @@ module.exports = {
         })
       }
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
 
   /*LO DE ABAJO ESTA SIENDO REEMPLAZADO POR FUNCION getAccounts
@@ -85,7 +87,9 @@ module.exports = {
         sugerencias : sugerencias
       })
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
 
   deleteAccount:(req, res) => {
@@ -108,6 +112,8 @@ module.exports = {
       })
     }
 
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   }
 };

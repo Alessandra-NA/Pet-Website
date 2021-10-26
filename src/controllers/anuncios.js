@@ -30,7 +30,9 @@ module.exports = {
         });
       }
     }
-    catch { }
+    catch (err) {
+      console.log(err);
+    }
   },
   
   getReportarAnuncios : async (req,res) =>{
@@ -45,7 +47,9 @@ module.exports = {
         post:post
       })
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
   
   postAnuncioReportado : async (req, res) =>{
@@ -83,7 +87,9 @@ module.exports = {
 
       res.redirect('/anuncios')
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+  }
   }
 
 

@@ -31,8 +31,8 @@ module.exports = {
       
       return res.render('shelter_detalle',{usuario:imagesToBase644(usuario), posts:imagesToBase643(posts)});
     }
-    catch{
-
+    catch (err) {
+      console.log(err);
     }
   }
 };
