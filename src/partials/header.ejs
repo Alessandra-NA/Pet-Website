@@ -18,13 +18,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/match">Encuentra tu mascota ideal</a>
                 </li>
-
-
-
-                
-                <!-- arrinconarlo a la derecha -->
-                <% if (globalType.length===0) { %>
-                <li class="nav-item dropdown"; style=margin-left:895px;>
+            
+            <!-- arrinconarlo a la derecha -->
+            <% if (globalType.length===0) { %>
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
                         Opciones de inicio de sesión ▼
                     </a>
@@ -33,11 +32,13 @@
                         <li><a class="dropdown-item" href="/signup/chooseTypeAccount">Crear una cuenta</a></li>
                     </ul>
                 </li>
-                
-                <% } %>
-                <% if (globalType==='admin') { %>
+            </ul>  
+            <% } %>
 
-                <li class="nav-item dropdown"; style=margin-left:895px;>
+            <% if (globalType==='admin') { %>
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
                         Opciones de administrador ▼
                     </a>
@@ -46,17 +47,16 @@
                         <li><a class="dropdown-item" href="/user/logout">Cerrar sesion</a></li>
                     </ul>
                 </li>
+            </ul>
+            <% } %>
 
-                <% } %>
-
-                <% if (globalType.length>0 && globalType != 'admin') { %>
-
-                    
+            <% if (globalType.length>0 && globalType != 'admin') { %>
                 <li class="nav-item">
                     <a class="nav-link" href="/adopcion">Dar en adopción</a>
                 </li>
-
-                <li class="nav-item dropdown"; style=margin-left:810px;>
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown">
                         Opciones de perfil ▼
                     </a>
@@ -67,8 +67,9 @@
                         <li><a class="dropdown-item" href="/user/logout">Cerrar sesion</a></li>
                     </ul>
                 </li>
-                <% } %>
-            </ul>               
+            </ul>
+            <% } %>
+                        
         </div>
     </div>
 </nav>
