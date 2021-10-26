@@ -13,7 +13,9 @@ module.exports = {
         try {
             return res.render('signin', { title: 'Iniciar sesión' })
         }
-        catch { }
+        catch (err) {
+            console.log(err);
+        }
     },
     
     /**
@@ -83,8 +85,8 @@ module.exports = {
                 res.redirect('/')
             }     
         }
-        catch{
-
+        catch (err) {
+            console.log(err);
         }
     }
 

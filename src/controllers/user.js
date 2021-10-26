@@ -70,75 +70,83 @@ module.exports = {
       }
       
     }
-    catch{
+    catch (err) {
+      console.log(err);
     }
   },
 
 
   realizarEdicion : async (req,res) => {
-    //Variables comunes
-    const tipoUsuario = req.body.tipo
-    const idABuscar = req.body.id
-    const idLocation = req.body.idLocation
 
-    const district = req.body.distrito
-    const address = req.body.direccion
-    //const photo = req.file.buffer
-    const email = req.body.correo
-    console.log(idABuscar)
-    
-    if (tipoUsuario == "people")
-    {
-      //Editamos datos de UserPerson
-      //Parametros a editar
-      const first_name = req.body.nombres
-      const last_name = req.body.apellidos
-      const document_number = req.body.gender_id
-      const gender_id = req.body.sexo
-      const phone_number = req.body.celular
-
-      UserPerson.update({
-        first_name : first_name,
-        last_name : last_name,
-        document_number : document_number,
-        gender_id : gender_id,
-        //photo : photo,
-        address : address,
-        email : email,
-        phone_number : phone_number
-      }, {where : {user_id : idABuscar}})
-
-      //Editamos datos de ubicación
-      Location.update({
-        district : district,
-        address : address
-      }, {where : {id : idLocation}})
+    try{
       
+      //Variables comunes
+      const tipoUsuario = req.body.tipo
+      const idABuscar = req.body.id
+      const idLocation = req.body.idLocation
+    
+      const district = req.body.distrito
+      const address = req.body.direccion
+      //const photo = req.file.buffer
+      const email = req.body.correo
+      console.log(idABuscar)
+      
+      if (tipoUsuario == "people")
+      {
+        //Editamos datos de UserPerson
+        //Parametros a editar
+        const first_name = req.body.nombres
+        const last_name = req.body.apellidos
+        const document_number = req.body.gender_id
+        const gender_id = req.body.sexo
+        const phone_number = req.body.celular
+    
+        UserPerson.update({
+          first_name : first_name,
+          last_name : last_name,
+          document_number : document_number,
+          gender_id : gender_id,
+          //photo : photo,
+          address : address,
+          email : email,
+          phone_number : phone_number
+        }, {where : {user_id : idABuscar}})
+    
+        //Editamos datos de ubicación
+        Location.update({
+          district : district,
+          address : address
+        }, {where : {id : idLocation}})
+        
     }
-
-    else if (tipoUsuario == "shelter")
-    {
-      //Editamos datos de UserShelter
-      const name = req.body.nombre
-      const ruc = req.body.ruc
-      const phone_number = req.body.telefono
-
-      UserShelter.update({
-        name : name,
-        ruc : ruc,
-        email : email,
-        //photo : photo,
-        phone_number : phone_number
-      }, {where : {user_id : idABuscar}})
-
-      //Editamos datos de ubicación
-      Location.update({
-        district : district,
-        address : address
-      }, {where : {id : idLocation}})
+  
+      else if (tipoUsuario == "shelter")
+      {
+        //Editamos datos de UserShelter
+        const name = req.body.nombre
+        const ruc = req.body.ruc
+        const phone_number = req.body.telefono
+  
+        UserShelter.update({
+          name : name,
+          ruc : ruc,
+          email : email,
+          //photo : photo,
+          phone_number : phone_number
+        }, {where : {user_id : idABuscar}})
+  
+        //Editamos datos de ubicación
+        Location.update({
+          district : district,
+          address : address
+        }, {where : {id : idLocation}})
+      }
+  
+      res.redirect('/')
     }
-
-    res.redirect('/')
+    catch (err) {
+      console.log(err);
+    }
   },
 
   getPerfilUsuario : async (req, res) => {
@@ -200,7 +208,8 @@ module.exports = {
         })
       }
     }
-    catch{
+    catch (err) {
+      console.log(err);
     }
   },
 
@@ -209,7 +218,9 @@ module.exports = {
       console.log("llegue")
       return res.render('editar_contraseña', {title : 'Cambiar contraseña'})
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
 
   cambiarContraseña : async (req, res) => {
@@ -251,7 +262,9 @@ module.exports = {
       }
       
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
 
   /**
@@ -261,8 +274,13 @@ module.exports = {
    */
   
   logoutUser: async (req, res) => {
-    req.session.destroy();
-    return res.redirect('/anuncios');
+    try{
+      req.session.destroy();
+      return res.redirect('/anuncios');
+    }
+    catch (err) {
+      console.log(err);
+    }
   },
 
 };

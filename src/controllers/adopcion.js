@@ -79,6 +79,8 @@ module.exports = {
       })
       //res.status(201).redirect('/post/' + pet.id)
       res.status(201).redirect('/anuncios')
-    } catch { }
+    } catch (err) {
+      console.log(err);
+  }
   }
 };

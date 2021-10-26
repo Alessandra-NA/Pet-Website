@@ -28,7 +28,9 @@ module.exports = {
             })
 
         }
-        catch { }
+        catch (err) {
+            console.log(err);
+        }
     },
 
     deletePost: async (req,res) => {
@@ -43,7 +45,9 @@ module.exports = {
                 res.redirect('/usuario/perfil')
             })
         }
-        catch{}
+        catch (err) {
+            console.log(err);
+        }
     }
 
 };
