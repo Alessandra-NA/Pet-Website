@@ -3,7 +3,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 mt-2 pb-3">
     <% establecimientos.forEach(function(establecimiento){ %>
         <div class="col">
-            <div class="card text-center" role="button" onclick="location.href='#<%=establecimiento.id%>'">
+            <div class="card text-center" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'">
                 <h5 class="card-title fw-bold"> <%=establecimiento.name%> </h5>
                 <img role="" src="data:image/png;base64,<%=establecimiento.photo[0]%>" class="img-fluid"
                     style="width: 100%; object-fit:contain">
