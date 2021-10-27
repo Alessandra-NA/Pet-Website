@@ -96,11 +96,11 @@ module.exports = {
       const establecimiento = await Establishment.findByPk(estId)
 
       //Datos de sugerencia a confirmar
-      const nombreS = req.body.nombreS
-      const tipoS = req.body.tipoS
-      const distritoS = req.body.distritoS
-      const direccionS = req.body.direccionS
-      const linkS = req.body.linkS
+      let nombreS = req.body.nombreS
+      let tipoS = req.body.tipoS
+      let distritoS = req.body.distritoS
+      let direccionS = req.body.direccionS
+      let linkS = req.body.linkS
       if (nombreS == undefined)
       {
         nombreS = establecimiento.name
