@@ -1,4 +1,4 @@
-<h2>Sugerencias para establecimientos</h2>
+<h2>Sugerencias para establecimiento con ID: <%= estId %></h2>
 
 
 
@@ -7,21 +7,53 @@
       <div class="col">
           <div class="card">
               <div class="card-body">
-                <h4 class="card-title mb-3" style="text-align: center;">Sugerencia <%= sugerencia.id %></h5>
-                <h5> Nombre:</h5>
-                <input type="text" value="<%=sugerencia.name%>">
-                <h5 class="mt-3">Tipo:</h5>
-                <input type="text" value="<%=sugerencia.type%>">
-                <h5 class="mt-3">Distrito:</h5>
-                <input type="text" value="<%=sugerencia.district%>">
-                <h5 class="mt-3">Dirección exacta:</h5>
-                <input type="text" value="<%=sugerencia.address%>">
-                <h5 class="mt-3">Link:</h5>
-                <input type="text" value="<%=sugerencia.link%>">
-                <h5 class="mt-3">Sugerido por: <%= sugerencia.user.username %> </h5>
-                <h6>Fecha: <%= sugerencia.fecha %></h6>
+                <form action="/accounts/confirmarSugerencia" method="POST">
+                  <h4 class="card-title mb-3" style="text-align: center;">Sugerencia <%= sugerencia.id %></h5>
 
-                <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-success mt-4">Aceptar sugerencias</button>
+                  <h5> Nombre:</h5>
+                  <% if (sugerencia.name == null){ %>
+                  <input type="text" placeholder="Nombre no sugerido" disabled>
+                  <% } else { %>
+                  <input type="text" value="<%=sugerencia.name%>" name="nombreS">
+                  <% } %>
+                    
+                  <h5 class="mt-3">Tipo:</h5>
+                  <% if (sugerencia.type == null){ %>
+                  <input type="text" placeholder="No sugerido" disabled>
+                  <% } else { %>
+                    <input type="text" value="<%=sugerencia.type%>" name="tipoS">
+                  <% } %>
+
+                  <h5 class="mt-3">Distrito:</h5>
+                  <% if (sugerencia.district == null){ %>
+                  <input type="text" placeholder="No sugerido" disabled>
+                  <% } else { %>
+                  <input type="text" value="<%=sugerencia.district%>" name="distritoS">
+                  <% } %>
+
+                  <h5 class="mt-3">Dirección exacta:</h5>
+                  <% if (sugerencia.address == null){ %>
+                  <input type="text" placeholder="No sugerido" disabled>
+                  <% } else { %>
+                  <input type="text" value="<%=sugerencia.address%>" name="direccionS">
+                  <% } %>
+
+                  <h5 class="mt-3">Link:</h5>
+                  <% if (sugerencia.link == null){ %>
+                  <input type="text" placeholder="No sugerido" disabled>
+                  <% } else { %>
+                    <input type="text" value="<%=sugerencia.link%>" name="linkS">
+                  <% } %>
+
+                  <h5 class="mt-3">Sugerido por: <%= sugerencia.user.username %> </h5>
+                  <h6>Fecha: <%= sugerencia.fecha %></h6>
+  
+                  <button type="submit" class="btn btn-success mt-3 mb-2">Aceptar sugerencias</button>
+                  <button class="btn btn-danger">Eliminar sugerencias</button>
+
+                  <!-- Variables ocultas-->
+                  <input type="text" value="<%= estId %>" name="estid" hidden>
+                </form>
               </div>
           </div>
       </div>
@@ -31,52 +63,6 @@
 
 </div>
 
-
-<div class="modal" id="deleteModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Borrar usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="deleteMessage">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" usertoDelete="" class="btn btn-danger" userid="" id="confirmDeleteButton">Borrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="detailsModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Borrar usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="deleteMessage">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" usertoDelete="" class="btn btn-danger" userid="" id="confirmDeleteButton">Borrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <script>
   highlightNavbar(4)
-  document.querySelectorAll('.deleteButton').forEach((button) => {
-    button.addEventListener('click', (ev) => {
-      console.log(ev.target);
-      document.querySelector('#deleteMessage').innerText = "  Está seguro que desea borrar el establecimiento " + ev.target.getAttribute('username') + '?';
-      document.querySelector('#confirmDeleteButton').setAttribute("estid", ev.target.getAttribute('estid'));
-    })
-  })
-  document.querySelector('#confirmDeleteButton').addEventListener('click', (ev) => window.location = '/accounts/deleteEstablecimiento/' + ev.target.getAttribute('estid'))
 </script>
