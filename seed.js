@@ -34,7 +34,7 @@ let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacin
 const path = require('path')
 
 const mascotas = [
-  { name: 'Firulais', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Firulais', photo: null, birthdate: new Date(), weight: 4.2, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 1, size_id: 1, specie_id: 1, gender_id: 1 },
 
@@ -42,39 +42,39 @@ const mascotas = [
     vacunado: false, desparasitado: true, sano:true, esterilizado: false, microchip: false,
     activitylevel_id: 2, size_id: 2, specie_id: 2, gender_id: 2 },
 
-  { name: 'Moly', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Moly', photo: null, birthdate: new Date(), weight: 8.1, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 3, size_id: 3, specie_id: 1, gender_id: 2 },
 
-  { name: 'Grumpy', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Grumpy', photo: null, birthdate: new Date(), weight: 3.2, story: text,
     vacunado: true, desparasitado: false, sano:true, esterilizado: true, microchip: true,
     activitylevel_id: 4, size_id: 1, specie_id: 1, gender_id: 1 },
 
-  { name: 'Sami', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Sami', photo: null, birthdate: new Date(), weight: 2.9, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 1, size_id: 2, specie_id: 2, gender_id: 2 },
   
-  { name: 'Oso', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Oso', photo: null, birthdate: new Date(), weight: 3.7, story: text,
     vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
     activitylevel_id: 4, size_id: 4, specie_id: 1, gender_id: 1 },
     
-  { name: 'Tony', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Tony', photo: null, birthdate: new Date(), weight: 4.2, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 3, size_id: 4, specie_id: 1, gender_id: 1 },
     
-  { name: 'Lucas', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Lucas', photo: null, birthdate: new Date(), weight: 6, story: text,
     vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
     activitylevel_id: 2, size_id: 4, specie_id: 2, gender_id: 1 },
     
-  { name: 'Leo', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Leo', photo: null, birthdate: new Date(), weight: 7.45, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 1, size_id: 4, specie_id: 1, gender_id: 1 },
 
-  { name: 'Boby', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Boby', photo: null, birthdate: new Date(), weight: 1.65, story: text,
     vacunado: false, desparasitado: true, sano:true, esterilizado: false, microchip: true,
     activitylevel_id: 2, size_id: 2, specie_id: 2, gender_id: 1 },
 
-  { name: 'Tango', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Tango', photo: null, birthdate: new Date(), weight: 3.75, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: false,
     activitylevel_id: 3, size_id: 2, specie_id: 1, gender_id: 1 }
 ];
