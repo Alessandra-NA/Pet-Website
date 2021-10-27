@@ -77,8 +77,6 @@ module.exports = {
     try {
       
       const estId = parseInt(req.params.estid)
-      console.log(estId)
-      console.log("llegue")
       const sugerencias = await Suggestion.findAll({include : {all: true}, where : {establishment_id : estId}})
       
       console.log(sugerencias)
