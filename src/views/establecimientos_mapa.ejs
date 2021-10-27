@@ -1,5 +1,7 @@
 <div>
-  <div class="invisible" id="btnAgregar" data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar</div>
+  <div class="invisible" id="longitud" title="" >longitud: </div>
+  <div class="invisible" id="latitud" title="" >latitud: </div>
+  <div class="invisible" id="direccion">direccion: </div>
 </div>
 <h3>Lugares pet friendly</h3>
 <div class="row">
@@ -79,34 +81,44 @@
       showEstabElements()
     }
 
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-      return new bootstrap.Popover(popoverTriggerEl)
-    })
-
-
     function initMap() {
       map = new google.maps.Map(document.getElementById("map"), {
           center: { lat: -12.060459, lng: -77.040270 },
           zoom: 16,
       });
+      let infoWindow = new google.maps.InfoWindow();
+      infoWindow.open(map);
 
-      //Adding rightclick event listener here
-      google.maps.event.addListener(map, "rightclick", function(event) {
-        var lat = event.latLng.lat();
-        var long = event.latLng.lng();
+      const contentString = '<button type="button" class="btn btn-success" onclick=AgregarClicked() >Agregar</button>'
+      var contClicks = 0;
+      map.addListener("click", (mapsMouseEvent) => {
+        // Close the current InfoWindow.
+        // Restart Marcas
+        if(contClicks!=0){
+          deleteMarker();
+        }
+        infoWindow.close();
+        var lat = mapsMouseEvent.latLng.lat();
+        var long = mapsMouseEvent.latLng.lng();
         // populate yor box/field with lat, lng
         document.getElementById('longitud').title = long;
         document.getElementById('longitud').innerHTML  = "longitud: "+long;
         document.getElementById('latitud').title  = lat;
         document.getElementById('latitud').innerHTML  = "latitud: "+lat;
-        document.getElementById('direccion').title  = "";
-        document.getElementById('direccion').innerHTML  = "direccion: null";
-        addMarker(event.latLng);
-        window.setTimeout(function() {
-          document.getElementById("btnAgregar").click(); 
-        },500);
-        //alert("Lat=" + lat + "; Lng=" + lng);
+        // Añadir marca
+        const marker = addMarker(mapsMouseEvent.latLng)
+        // Create a new InfoWindow.
+        infoWindow = new google.maps.InfoWindow({
+          position: mapsMouseEvent.latLng,
+          content: contentString,
+        });
+
+        infoWindow.open({
+          anchor: marker,
+          map,
+          shouldFocus: false,
+        });
+        contClicks ++;
       });
 
       const locations = [
@@ -137,57 +149,33 @@
       map,
     });
     markers.push(marker);
+    return marker;
   }
-  async function deleteMarker() {
-    showMarkers();
+
+  function deleteMarker() {
+    hideMarkers()
     markers.pop();
+    showMarkers();
   }
-  async function setMapOnAll(map) {
+  function setMapOnAll(map) {
     for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
+    }
   }
-  async function showMarkers() {
+  function showMarkers() {
     setMapOnAll(map);
   }
-  async function hideMarkers() {
+  function hideMarkers() {
     setMapOnAll(null);
   }
-}
+
 </script>
 
-<div class="modal" id="modalAgregar" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Agregar Establecimiento Petfriendly</h5>
-      </div>
-      <div class="modal-body" id="deleteMessage">
-        <div id="longitud" title="" >longitud: </div>
-        <div id="latitud" title="" >latitud: </div>
-        <div id="direccion">direccion: </div>
-        
-        <button type="button" class="btn btn-warning" data-bs-toggle="popover" title="Coordenadas"
-        data-bs-content="Longitud: xx.xxxx Latitud: yy.yyyy">Click</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick=CancelarClicked()>Cancelar</button>
-        <button type="button" class="btn btn-success" onclick=AgregarClicked() >Agregar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
-  new bootstrap.Modal(document.getElementById('modalAgregar'), {backdrop: 'static', keyboard: false})
   function AgregarClicked(){
     const longCurrent = document.getElementById('longitud').title
     const latCurrent = document.getElementById('latitud').title
     location.href='establishments/new?lat='+latCurrent+'&?long='+longCurrent
-  }
-  function CancelarClicked(){
-    setMapOnAll(null);
-    markers.pop();
-    setMapOnAll(map);
   }
 </script>
 <script async defer
