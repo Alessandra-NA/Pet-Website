@@ -19,7 +19,7 @@ module.exports = {
         },          
       ],        
       where:{id:id}})
-      return res.render('establecimiento_detalle',{establecimiento:imagesToBase64ForEstablishment(establecimiento)});
+      return res.render('establecimiento_detalle',{establecimiento:imagesToBase64ForEstablishmentDetails(establecimiento)});
     }
     catch{
 
@@ -80,8 +80,7 @@ module.exports = {
 };
 
 
-
-imagesToBase64ForEstablishment = function (establishment) {
+imagesToBase64ForEstablishmentDetails = function (establishment) {
 
   if (establishment.photo) {
       for(var i=0; i<establishment.photo.length; i++) {
