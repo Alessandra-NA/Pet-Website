@@ -74,6 +74,7 @@ module.exports = {
       console.log("============>"+idUser)
       console.log("============>"+userID)
       const post = await Post.create({
+        fecha: new Date(),
         pet_id: pet.id,
         user_id: userID
       })
