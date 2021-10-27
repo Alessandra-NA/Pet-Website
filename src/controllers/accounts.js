@@ -78,13 +78,59 @@ module.exports = {
       
       const estId = parseInt(req.params.estid)
       const sugerencias = await Suggestion.findAll({include : {all: true}, where : {establishment_id : estId}})
-      
-      console.log(sugerencias)
+
       res.render('verSugerenciasEstablecimiento', {
         title : 'Ver sugerencias de establecimiento',
-        sugerencias : sugerencias
+        sugerencias : sugerencias,
+        estId : estId
       })
     }
+    catch (err) {
+      console.log(err);
+    }
+  },
+
+  confirmarSugerencia : async(req,res) => {
+    try{
+      const estId = req.body.estid
+      const establecimiento = await Establishment.findByPk(estId)
+
+      //Datos de sugerencia a confirmar
+      const nombreS = req.body.nombreS
+      const tipoS = req.body.tipoS
+      const distritoS = req.body.distritoS
+      const direccionS = req.body.direccionS
+      const linkS = req.body.linkS
+      if (nombreS == undefined)
+      {
+        nombreS = establecimiento.name
+      }
+      if (tipoS == undefined)
+      {
+        tipoS = establecimiento.type
+      }
+      /*
+      if (distritoS == undefined) 
+      {
+        distritoS = establecimiento.district
+      }
+      if (direccionS == undefined) 
+      {
+        direccionS = establecimiento.address
+      }
+      */
+      if (linkS == undefined) 
+      {
+        linkS = establecimiento.link
+      }
+
+      Establishment.update({
+        name : nombreS,
+        type : tipoS,
+        link : linkS
+      }, {where : {id : estId}})
+      res.redirect('/accounts/verSugerencias/' + estId)
+    } 
     catch (err) {
       console.log(err);
     }
