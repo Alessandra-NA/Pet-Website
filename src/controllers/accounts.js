@@ -1,4 +1,4 @@
-const { Post, Pet, User, UserPerson, UserShelter, Establishment, Suggestion } = require('../models');
+const { Post, Pet, User, UserPerson, UserShelter, Establishment, Suggestion, Location } = require('../models');
 
 module.exports = {
   /**
@@ -77,12 +77,14 @@ module.exports = {
     try {
       
       const estId = parseInt(req.params.estid)
+      const establecimiento = await Establishment.findByPk(estId)
       const sugerencias = await Suggestion.findAll({include : {all: true}, where : {establishment_id : estId}})
 
       res.render('verSugerenciasEstablecimiento', {
         title : 'Ver sugerencias de establecimiento',
         sugerencias : sugerencias,
-        estId : estId
+        estId : estId,
+        estName : establecimiento.name
       })
     }
     catch (err) {
@@ -94,6 +96,9 @@ module.exports = {
     try{
       const estId = req.body.estid
       const establecimiento = await Establishment.findByPk(estId)
+
+      //Buscamos LocationId a actualizar
+      const location = await Location.findByPk(establecimiento.location_id)
 
       //Datos de sugerencia a confirmar
       let nombreS = req.body.nombreS
@@ -109,31 +114,63 @@ module.exports = {
       {
         tipoS = establecimiento.type
       }
-      /*
+      
       if (distritoS == undefined) 
       {
-        distritoS = establecimiento.district
+        distritoS = location.district
       }
       if (direccionS == undefined) 
       {
-        direccionS = establecimiento.address
+        direccionS = location.address
       }
-      */
+      
       if (linkS == undefined) 
       {
         linkS = establecimiento.link
       }
+
+
+      Location.update({
+        district : distritoS,
+        address : direccionS
+      }, {where : {id : establecimiento.location_id}})
 
       Establishment.update({
         name : nombreS,
         type : tipoS,
         link : linkS
       }, {where : {id : estId}})
+
+      /*
+      //Borramos la sugerencia
+      Suggestion.findByPk(req.body.sugid).then(response => {
+        response.destroy();
+      })*/
+
+
       res.redirect('/accounts/verSugerencias/' + estId)
     } 
     catch (err) {
       console.log(err);
     }
+  },
+
+  eliminarSugerengia : async (req,res) => {
+    try{
+      const sugid = req.params.sugid
+      const sugerencia = await Suggestion.findByPk(sugid)
+      const estId = sugerencia.establishment_id
+
+      //Borramos la sugerencia
+      Suggestion.findByPk(sugid).then(response => {
+        response.destroy();
+      })
+
+      //Redireccionamos
+      res.redirect('/accounts/verSugerencias/' + estId)
+
+    }
+    catch(err) {console.log(err) }
   },
 
   deleteAccount:(req, res) => {

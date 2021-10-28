@@ -39,6 +39,10 @@
   </tbody>
 </table>
 
+<% if (users.length == 0) { %>
+  <p style="text-align: center;">	-- No se encuentran usuarios --</p>
+<% } %>
+
 <div class="modal" id="deleteModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -75,7 +79,6 @@
   </div>
 </div>
 <script>
-  highlightNavbar(4)
   document.querySelectorAll('.deleteButton').forEach((button) => {
     button.addEventListener('click', (ev) => {
       console.log(ev.target);
