@@ -98,7 +98,6 @@
         }
 
         google.maps.event.addListener(mark, 'dragend', function () {
-            console.log(mark.getPosition())
             document.querySelector('#mapLat').setAttribute('value', mark.getPosition().lat())
             document.querySelector('#mapLng').setAttribute('value', mark.getPosition().lng())
         });
