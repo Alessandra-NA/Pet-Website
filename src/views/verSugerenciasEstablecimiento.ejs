@@ -19,7 +19,7 @@
                   <% if (sugerencia.name == null){ %>
                   <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                  <input type="text" class="form-control" value="<%=sugerencia.name%>" name="nombreS">
+                  <input type="text" class="form-control" value="<%=sugerencia.name%>" name="nombreS" required>
                   <% } %>
                     
                   <label for="" class="mt-3 form-label" style="font-weight: bold;">Tipo:</label>
@@ -103,14 +103,14 @@
                   <% if (sugerencia.address == null){ %>
                   <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                  <input type="text" class="form-control" value="<%=sugerencia.address%>" name="direccionS">
+                  <input type="text" class="form-control" value="<%=sugerencia.address%>" name="direccionS" required>
                   <% } %>
 
                   <label for="" class="mt-3 form-label" style="font-weight: bold;">Link:</label>
                   <% if (sugerencia.link == null){ %>
                   <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                    <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS">
+                    <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS" required>
                   <% } %>
 
                   <h5 class="mt-3">Sugerido por: <%= sugerencia.user.username %> </h5>
