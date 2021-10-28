@@ -1,12 +1,14 @@
 <main class="container">
 
-    <h2 style="margin-bottom: 2%;">Bienvenido a tu perfil, 
-        <% if (userType == "person") { %>
+    <div style="background-color: aliceblue; margin: 2%;">
+        <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">¡ Bienvenido a tu perfil, 
+            <% if (userType == "person") { %>
             <%= usuario.first_name %>
-        <%} else if (userType == "shelter") { %>
+            <%} else if (userType == "shelter") { %>
             <%= usuario.name %>
-        <% } %>
-    </h2>
+            <% } %>!
+        </h2>
+    </div>
 
     
             <h2 style="margin-top:10px; margin-bottom:30px">Datos personales: </h2>
