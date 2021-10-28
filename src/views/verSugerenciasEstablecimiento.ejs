@@ -1,6 +1,11 @@
-<h2>Sugerencias para establecimiento con ID: <%= estId %></h2>
+<h2>Sugerencias del establecimiento "<%= estName %>"</h2>
 
 
+
+<% if (sugerencias.length == 0) { %>
+    <p style="text-align:center;">-- Actualmente no se encuentran sugerencias --</p>
+
+<% } %>
 
 <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
   <% sugerencias.forEach(function(sugerencia){ %>
@@ -10,48 +15,113 @@
                 <form action="/accounts/confirmarSugerencia" method="POST">
                   <h4 class="card-title mb-3" style="text-align: center;">Sugerencia <%= sugerencia.id %></h5>
 
-                  <h5> Nombre:</h5>
+                  <label for="" class="form-label" style="font-weight: bold;">Nombre:</label>
                   <% if (sugerencia.name == null){ %>
-                  <input type="text" placeholder="Nombre no sugerido" disabled>
+                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                  <input type="text" value="<%=sugerencia.name%>" name="nombreS">
+                  <input type="text" class="form-control" value="<%=sugerencia.name%>" name="nombreS">
                   <% } %>
                     
-                  <h5 class="mt-3">Tipo:</h5>
+                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Tipo:</label>
                   <% if (sugerencia.type == null){ %>
-                  <input type="text" placeholder="No sugerido" disabled>
+                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                    <input type="text" value="<%=sugerencia.type%>" name="tipoS">
+                  <select name="tipoS" class="form-select" required>
+                    <option selected value="<%= sugerencia.type %>"><%= sugerencia.type %></option>
+                    <option value="Bares & Cafés">Bares & Cafés</option>
+                    <option value="Restaurantes">Restaurantes</option>
+                    <option value="Terrazas">Terrazas</option>
+                    <option value="Hoteles & Alojamientos">Hoteles & Alojamientos</option>
+                    <option value="Playas">Playas</option>
+                    <option value="Tiendas">Tiendas</option>
+                    <option value="Parques">Parques</option>
+                    <option value="Centros de belleza">Centros de belleza</option>
+                    <option value="Clínicas">Clínicas</option>
+                    <option value="Transportes">Transportes</option>
+                    <option value="Spa mascotas">Spa mascotas</option>
+                    <option value="Veterinarias">Veterinarias</option>
+                    <option value="Tiendas mascotas">Tiendas mascotas</option>
+                  </select>
+                    <!--<input type="text" value="<%=sugerencia.type%>" name="tipoS">-->
                   <% } %>
 
-                  <h5 class="mt-3">Distrito:</h5>
+                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Distrito:</label>
                   <% if (sugerencia.district == null){ %>
-                  <input type="text" placeholder="No sugerido" disabled>
+                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                  <input type="text" value="<%=sugerencia.district%>" name="distritoS">
+                    
+                  <select class="form-select" name="distritoS" required>
+                      <option selected value="<%=sugerencia.district%>"><%=sugerencia.district%></option>
+                      <option value="Ancón">Ancón</option>
+                      <option value="Ate Vitarte">Ate Vitarte</option>
+                      <option value="Barranco">Barranco</option>
+                      <option value="Breña">Breña</option>
+                      <option value="Carabayllo">Carabayllo</option>
+                      <option value="Chaclacayo">Chaclacayo</option>
+                      <option value="Chorrillos">Chorrillos</option>
+                      <option value="Cieneguilla">Cieneguilla</option>
+                      <option value="Comas">Comas</option>
+                      <option value="El Agustino">El Agustino</option>
+                      <option value="Independencia">Independencia</option>
+                      <option value="Jesús María">Jesús María</option>
+                      <option value="La Molina">La Molina</option>
+                      <option value="La Victoria">La Victoria</option>
+                      <option value="Lima Cercado">Lima Cercado</option>
+                      <option value="Lince">Lince</option>
+                      <option value="Los Olivos">Los Olivos</option>
+                      <option value="Lurigancho">Lurigancho</option>
+                      <option value="Lurín">Lurín</option>
+                      <option value="Magdalena del Mar">Magdalena del Mar</option>
+                      <option value="Miraflores">Miraflores</option>
+                      <option value="Pachacamac">Pachacamac</option>
+                      <option value="Pucusana">Pucusana</option>
+                      <option value="Pueblo Libre">Pueblo Libre</option>
+                      <option value="Puente Piedra">Puente Piedra</option>
+                      <option value="Punta Hermosa">Punta Hermosa</option>
+                      <option value="Punta Negra">Punta Negra</option>
+                      <option value="Rímac">Rímac</option>
+                      <option value="San Bartolo">San Bartolo</option>
+                      <option value="San Borja">San Borja</option>
+                      <option value="San Isidro">San Isidro</option>
+                      <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                      <option value="San Juan de Miraflores">San Juan de Miraflores</option>
+                      <option value="San Luis">San Luis</option>
+                      <option value="San Martín de Porres">San Martín de Porres</option>
+                      <option value="San Miguel">San Miguel</option>
+                      <option value="Santa Anita">Santa Anita</option>
+                      <option value="Santa María del Mar">Santa María del Mar</option>
+                      <option value="Santa Rosa">Santa Rosa</option>
+                      <option value="Santiago de Surco">Santiago de Surco</option>
+                      <option value="Surquillo">Surquillo</option>
+                      <option value="Villa El Salvador">Villa El Salvador</option>
+                      <option value="Villa María del Triunfo">Villa María del Triunfo</option>
+                  </select>
+                  <!--<input type="text" value="<%=sugerencia.district%>" name="distritoS">-->
                   <% } %>
 
-                  <h5 class="mt-3">Dirección exacta:</h5>
+                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Dirección exacta:</label>
                   <% if (sugerencia.address == null){ %>
-                  <input type="text" placeholder="No sugerido" disabled>
+                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                  <input type="text" value="<%=sugerencia.address%>" name="direccionS">
+                  <input type="text" class="form-control" value="<%=sugerencia.address%>" name="direccionS">
                   <% } %>
 
-                  <h5 class="mt-3">Link:</h5>
+                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Link:</label>
                   <% if (sugerencia.link == null){ %>
-                  <input type="text" placeholder="No sugerido" disabled>
+                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
                   <% } else { %>
-                    <input type="text" value="<%=sugerencia.link%>" name="linkS">
+                    <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS">
                   <% } %>
 
                   <h5 class="mt-3">Sugerido por: <%= sugerencia.user.username %> </h5>
                   <h6>Fecha: <%= sugerencia.fecha %></h6>
   
                   <button type="submit" class="btn btn-success mt-3 mb-2">Aceptar sugerencias</button>
-                  <button class="btn btn-danger">Eliminar sugerencias</button>
+                  <a href="/accounts/eliminarSugerencia/<%= sugerencia.id %>" class="btn btn-danger">Eliminar sugerencia</a>
+                  
 
                   <!-- Variables ocultas-->
+                  <input type="text" value="<%= sugerencia.id %>" name="sugid" hidden>
                   <input type="text" value="<%= estId %>" name="estid" hidden>
                 </form>
               </div>
