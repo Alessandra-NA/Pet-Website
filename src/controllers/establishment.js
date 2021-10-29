@@ -34,7 +34,7 @@ module.exports = {
     saveNewEstablishment: async (req, res) => {
         try {
             const { name, type, address, mapLat, mapLng, province, district, ofPets, link } = req.body
-            const photo = req.file ? req.file.buffer : null
+            const photos = req.files ? req.files.map(file => file.buffer) : null
 
             const newLocation = Location.create({
                 country: 'Perú',
@@ -46,7 +46,7 @@ module.exports = {
             newLocation.then(data => {
                 Establishment.create({
                     name: name,
-                    photo: [photo],
+                    photo: photos,
                     rating: 0,
                     ofPets: ofPets ? true : false,
                     type: type,

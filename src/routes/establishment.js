@@ -12,6 +12,6 @@ upload = multer();
 */
 router.get('/', getEstablishments)
 router.get('/new', showFormNew)
-router.post('/new/save', upload.single('image'), saveNewEstablishment)
+router.post('/new/save', upload.array('image'), saveNewEstablishment)
 
 module.exports = router;
