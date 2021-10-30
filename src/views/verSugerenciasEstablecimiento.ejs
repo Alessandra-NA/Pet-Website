@@ -112,11 +112,43 @@
                   <% } else { %>
                     <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS" required>
                   <% } %>
+                  
+                  <% if (sugerencia.user.type == "person") { %>
+                    <% usuariosPeople.forEach(function(people){ %>
+                      <% if (people.user_id == sugerencia.user.id) { %>
+                        <div class="row mt-4">
+                          <div class="col-6">
+                            <img src="data:image/png;base64,<%=people.photo?people.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                          </div>
+                          <div class="col-6">
+                            <label for="">Por:</label>
+                            <label for="" style="font-weight: bold;" class="form-label"><%= people.first_name %> <%= people.last_name %></label>
+                            <label for="" style="font-weight: bold;" class="form-label"><%= sugerencia.fecha %></label>
+                          </div>
+                        </div>
 
-                  <h5 class="mt-3">Sugerido por: <%= sugerencia.user.username %> </h5>
-                  <h6>Fecha: <%= sugerencia.fecha %></h6>
+                      <% } %>
+                    <% }) %>
+
+                  <% } else if(sugerencia.user.type == "shelter") { %>
+                    <% usuariosShelter.forEach(function(shelter){ %>
+                      <% if (shelter.user_id == sugerencia.user.id) { %>
+                        <div class="row mt-4">
+                          <div class="col-6">
+                            <img src="data:image/png;base64,<%=shelter.photo?shelter.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                          </div>
+                          <div class="col-6">
+                            <label for="">Por:</label>
+                            <label for="" style="font-weight: bold;" class="form-label"><%= shelter.name %></label>
+                            <label for="" style="font-weight: bold;" class="form-label"><%= sugerencia.fecha %></label>
+                          </div>
+                        </div>
+
+                      <% } %>
+                    <% }) %>
+                  <% } %>
   
-                  <button type="submit" class="btn btn-success mt-3 mb-2">Aceptar sugerencias</button>
+                  <button type="submit" class="btn btn-success mt-3 mb-2">Aceptar sugerencia</button>
                   <a href="/accounts/eliminarSugerencia/<%= sugerencia.id %>" class="btn btn-danger">Eliminar sugerencia</a>
                   
 

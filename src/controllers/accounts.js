@@ -1,4 +1,7 @@
 const { Post, Pet, User, UserPerson, UserShelter, Establishment, Suggestion, Location } = require('../models');
+const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
+const md5 = require('md5');
+const { Op } = require('sequelize');
 
 module.exports = {
   /**
@@ -80,11 +83,16 @@ module.exports = {
       const establecimiento = await Establishment.findByPk(estId)
       const sugerencias = await Suggestion.findAll({include : {all: true}, where : {establishment_id : estId}})
 
-      res.render('verSugerenciasEstablecimiento', {
+      const UsuariosPeople = await UserPerson.findAll({include : {all : true}})
+      const UsuariosShelter = await UserShelter.findAll({include : {all : true}})
+
+      return res.render('verSugerenciasEstablecimiento', {
         title : 'Ver sugerencias de establecimiento',
         sugerencias : sugerencias,
         estId : estId,
-        estName : establecimiento.name
+        estName : establecimiento.name,
+        usuariosPeople : imagesToBase645(UsuariosPeople),
+        usuariosShelter : imagesToBase645(UsuariosShelter)
       })
     }
     catch (err) {
@@ -198,3 +206,14 @@ module.exports = {
     }
   }
 };
+
+imagesToBase645 = function (usuario) {
+
+  for (var i = 0; i < usuario.length; i++)
+  {
+    if(usuario[i].photo){
+      usuario[i].photo = Buffer.from(usuario[i].photo).toString('base64');
+    }  
+  }
+  return usuario      
+}   
