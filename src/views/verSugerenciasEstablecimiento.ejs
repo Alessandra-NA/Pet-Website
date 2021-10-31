@@ -1,169 +1,245 @@
-<h2>Sugerencias del establecimiento "<%= estName %>"</h2>
 
-
-
-<% if (sugerencias.length == 0) { %>
-    <p style="text-align:center;">-- Actualmente no se encuentran sugerencias --</p>
-
-<% } %>
-
-<div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
-  <% sugerencias.forEach(function(sugerencia){ %>
-      <div class="col">
-          <div class="card">
-              <div class="card-body">
-                <form action="/accounts/confirmarSugerencia" method="POST">
-                  <h4 class="card-title mb-3" style="text-align: center;">Sugerencia <%= sugerencia.id %></h5>
-
-                  <label for="" class="form-label" style="font-weight: bold;">Nombre:</label>
-                  <% if (sugerencia.name == null){ %>
-                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
-                  <% } else { %>
-                  <input type="text" class="form-control" value="<%=sugerencia.name%>" name="nombreS" required>
-                  <% } %>
-                    
-                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Tipo:</label>
-                  <% if (sugerencia.type == null){ %>
-                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
-                  <% } else { %>
-                  <select name="tipoS" class="form-select" required>
-                    <option selected value="<%= sugerencia.type %>"><%= sugerencia.type %></option>
-                    <option value="Bares & Cafés">Bares & Cafés</option>
-                    <option value="Restaurantes">Restaurantes</option>
-                    <option value="Terrazas">Terrazas</option>
-                    <option value="Hoteles & Alojamientos">Hoteles & Alojamientos</option>
-                    <option value="Playas">Playas</option>
-                    <option value="Tiendas">Tiendas</option>
-                    <option value="Parques">Parques</option>
-                    <option value="Centros de belleza">Centros de belleza</option>
-                    <option value="Clínicas">Clínicas</option>
-                    <option value="Transportes">Transportes</option>
-                    <option value="Spa mascotas">Spa mascotas</option>
-                    <option value="Veterinarias">Veterinarias</option>
-                    <option value="Tiendas mascotas">Tiendas mascotas</option>
-                  </select>
-                    <!--<input type="text" value="<%=sugerencia.type%>" name="tipoS">-->
-                  <% } %>
-
-                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Distrito:</label>
-                  <% if (sugerencia.district == null){ %>
-                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
-                  <% } else { %>
-                    
-                  <select class="form-select" name="distritoS" required>
-                      <option selected value="<%=sugerencia.district%>"><%=sugerencia.district%></option>
-                      <option value="Ancón">Ancón</option>
-                      <option value="Ate Vitarte">Ate Vitarte</option>
-                      <option value="Barranco">Barranco</option>
-                      <option value="Breña">Breña</option>
-                      <option value="Carabayllo">Carabayllo</option>
-                      <option value="Chaclacayo">Chaclacayo</option>
-                      <option value="Chorrillos">Chorrillos</option>
-                      <option value="Cieneguilla">Cieneguilla</option>
-                      <option value="Comas">Comas</option>
-                      <option value="El Agustino">El Agustino</option>
-                      <option value="Independencia">Independencia</option>
-                      <option value="Jesús María">Jesús María</option>
-                      <option value="La Molina">La Molina</option>
-                      <option value="La Victoria">La Victoria</option>
-                      <option value="Lima Cercado">Lima Cercado</option>
-                      <option value="Lince">Lince</option>
-                      <option value="Los Olivos">Los Olivos</option>
-                      <option value="Lurigancho">Lurigancho</option>
-                      <option value="Lurín">Lurín</option>
-                      <option value="Magdalena del Mar">Magdalena del Mar</option>
-                      <option value="Miraflores">Miraflores</option>
-                      <option value="Pachacamac">Pachacamac</option>
-                      <option value="Pucusana">Pucusana</option>
-                      <option value="Pueblo Libre">Pueblo Libre</option>
-                      <option value="Puente Piedra">Puente Piedra</option>
-                      <option value="Punta Hermosa">Punta Hermosa</option>
-                      <option value="Punta Negra">Punta Negra</option>
-                      <option value="Rímac">Rímac</option>
-                      <option value="San Bartolo">San Bartolo</option>
-                      <option value="San Borja">San Borja</option>
-                      <option value="San Isidro">San Isidro</option>
-                      <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
-                      <option value="San Juan de Miraflores">San Juan de Miraflores</option>
-                      <option value="San Luis">San Luis</option>
-                      <option value="San Martín de Porres">San Martín de Porres</option>
-                      <option value="San Miguel">San Miguel</option>
-                      <option value="Santa Anita">Santa Anita</option>
-                      <option value="Santa María del Mar">Santa María del Mar</option>
-                      <option value="Santa Rosa">Santa Rosa</option>
-                      <option value="Santiago de Surco">Santiago de Surco</option>
-                      <option value="Surquillo">Surquillo</option>
-                      <option value="Villa El Salvador">Villa El Salvador</option>
-                      <option value="Villa María del Triunfo">Villa María del Triunfo</option>
-                  </select>
-                  <!--<input type="text" value="<%=sugerencia.district%>" name="distritoS">-->
-                  <% } %>
-
-                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Dirección exacta:</label>
-                  <% if (sugerencia.address == null){ %>
-                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
-                  <% } else { %>
-                  <input type="text" class="form-control" value="<%=sugerencia.address%>" name="direccionS" required>
-                  <% } %>
-
-                  <label for="" class="mt-3 form-label" style="font-weight: bold;">Link:</label>
-                  <% if (sugerencia.link == null){ %>
-                  <input type="text" class="form-control" placeholder="No sugerido" disabled>
-                  <% } else { %>
-                    <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS" required>
-                  <% } %>
-                  
-                  <% if (sugerencia.user.type == "person") { %>
-                    <% usuariosPeople.forEach(function(people){ %>
-                      <% if (people.user_id == sugerencia.user.id) { %>
-                        <div class="row mt-4">
-                          <div class="col-6">
-                            <img src="data:image/png;base64,<%=people.photo?people.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                          </div>
-                          <div class="col-6">
-                            <label for="">Por:</label>
-                            <label for="" style="font-weight: bold;" class="form-label"><%= people.first_name %> <%= people.last_name %></label>
-                            <label for="" style="font-weight: bold;" class="form-label"><%= sugerencia.fecha %></label>
-                          </div>
-                        </div>
-
-                      <% } %>
-                    <% }) %>
-
-                  <% } else if(sugerencia.user.type == "shelter") { %>
-                    <% usuariosShelter.forEach(function(shelter){ %>
-                      <% if (shelter.user_id == sugerencia.user.id) { %>
-                        <div class="row mt-4">
-                          <div class="col-6">
-                            <img src="data:image/png;base64,<%=shelter.photo?shelter.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                          </div>
-                          <div class="col-6">
-                            <label for="">Por:</label>
-                            <label for="" style="font-weight: bold;" class="form-label"><%= shelter.name %></label>
-                            <label for="" style="font-weight: bold;" class="form-label"><%= sugerencia.fecha %></label>
-                          </div>
-                        </div>
-
-                      <% } %>
-                    <% }) %>
-                  <% } %>
+<main class="container">
   
-                  <button type="submit" class="btn btn-success mt-3 mb-2">Aceptar sugerencia</button>
-                  <a href="/accounts/eliminarSugerencia/<%= sugerencia.id %>" class="btn btn-danger">Eliminar sugerencia</a>
-                  
+  <div style="background-color: aliceblue; margin: 2%;">
+    <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">Datos del establecimiento "<%= establecimiento.name %>"
+    </h2>
+  </div>
 
-                  <!-- Variables ocultas-->
-                  <input type="text" value="<%= sugerencia.id %>" name="sugid" hidden>
-                  <input type="text" value="<%= estId %>" name="estid" hidden>
-                </form>
-              </div>
+  <section style="background-color: rgb(255, 255, 255);">      
+          
+    <div class="row">
+        
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="data:image/png;base64,<%=establecimiento.photo && establecimiento.photo[0]%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3"><%= establecimiento.name %></h5>
+              <p class="text-muted mb-1">Rating: (+) <%= establecimiento.rating %></p>
+              <p class="text-muted mb-4">Lima, Perú</p>
+            </div>
           </div>
-      </div>
+        </div>
 
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Nombre</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> <%= establecimiento.name %> </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Tipo</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> <%= establecimiento.type %> </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Link</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> <%= establecimiento.link %> </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Dirección</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> <%= establecimiento.location.address %> </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Distrito</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> <%= establecimiento.location.district %> </p>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+          </div>
+    </div>
+  </section>
+  
+  <h2 class="mt-3" style="margin-bottom: 2%; font-weight: 650">Sugerencias:</h2>
+  <% if (sugerencias.length == 0) { %>
+      <p style="text-align:center;">-- Actualmente no se encuentran sugerencias --</p>
+  
+  <% } %>
+  
+  <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
+    <% sugerencias.forEach(function(sugerencia){ %>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                  <form action="/accounts/confirmarSugerencia" method="POST">
+                    <h4 class="card-title mb-3" style="text-align: center;">Sugerencia <%= sugerencia.id %></h5>
+  
+                    <label for="" class="form-label" style="font-weight: bold;">Nombre:</label>
+                    <% if (sugerencia.name == null){ %>
+                    <input type="text" class="form-control" placeholder="No sugerido" disabled>
+                    <% } else { %>
+                    <input type="text" class="form-control" value="<%=sugerencia.name%>" name="nombreS" required>
+                    <% } %>
+                      
+                    <label for="" class="mt-3 form-label" style="font-weight: bold;">Tipo:</label>
+                    <% if (sugerencia.type == null){ %>
+                    <input type="text" class="form-control" placeholder="No sugerido" disabled>
+                    <% } else { %>
+                    <select name="tipoS" class="form-select" required>
+                      <option selected value="<%= sugerencia.type %>"><%= sugerencia.type %></option>
+                      <option value="Bares & Cafés">Bares & Cafés</option>
+                      <option value="Restaurantes">Restaurantes</option>
+                      <option value="Terrazas">Terrazas</option>
+                      <option value="Hoteles & Alojamientos">Hoteles & Alojamientos</option>
+                      <option value="Playas">Playas</option>
+                      <option value="Tiendas">Tiendas</option>
+                      <option value="Parques">Parques</option>
+                      <option value="Centros de belleza">Centros de belleza</option>
+                      <option value="Clínicas">Clínicas</option>
+                      <option value="Transportes">Transportes</option>
+                      <option value="Spa mascotas">Spa mascotas</option>
+                      <option value="Veterinarias">Veterinarias</option>
+                      <option value="Tiendas mascotas">Tiendas mascotas</option>
+                    </select>
+                      <!--<input type="text" value="<%=sugerencia.type%>" name="tipoS">-->
+                    <% } %>
+  
+                    <label for="" class="mt-3 form-label" style="font-weight: bold;">Distrito:</label>
+                    <% if (sugerencia.district == null){ %>
+                    <input type="text" class="form-control" placeholder="No sugerido" disabled>
+                    <% } else { %>
+                      
+                    <select class="form-select" name="distritoS" required>
+                        <option selected value="<%=sugerencia.district%>"><%=sugerencia.district%></option>
+                        <option value="Ancón">Ancón</option>
+                        <option value="Ate Vitarte">Ate Vitarte</option>
+                        <option value="Barranco">Barranco</option>
+                        <option value="Breña">Breña</option>
+                        <option value="Carabayllo">Carabayllo</option>
+                        <option value="Chaclacayo">Chaclacayo</option>
+                        <option value="Chorrillos">Chorrillos</option>
+                        <option value="Cieneguilla">Cieneguilla</option>
+                        <option value="Comas">Comas</option>
+                        <option value="El Agustino">El Agustino</option>
+                        <option value="Independencia">Independencia</option>
+                        <option value="Jesús María">Jesús María</option>
+                        <option value="La Molina">La Molina</option>
+                        <option value="La Victoria">La Victoria</option>
+                        <option value="Lima Cercado">Lima Cercado</option>
+                        <option value="Lince">Lince</option>
+                        <option value="Los Olivos">Los Olivos</option>
+                        <option value="Lurigancho">Lurigancho</option>
+                        <option value="Lurín">Lurín</option>
+                        <option value="Magdalena del Mar">Magdalena del Mar</option>
+                        <option value="Miraflores">Miraflores</option>
+                        <option value="Pachacamac">Pachacamac</option>
+                        <option value="Pucusana">Pucusana</option>
+                        <option value="Pueblo Libre">Pueblo Libre</option>
+                        <option value="Puente Piedra">Puente Piedra</option>
+                        <option value="Punta Hermosa">Punta Hermosa</option>
+                        <option value="Punta Negra">Punta Negra</option>
+                        <option value="Rímac">Rímac</option>
+                        <option value="San Bartolo">San Bartolo</option>
+                        <option value="San Borja">San Borja</option>
+                        <option value="San Isidro">San Isidro</option>
+                        <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                        <option value="San Juan de Miraflores">San Juan de Miraflores</option>
+                        <option value="San Luis">San Luis</option>
+                        <option value="San Martín de Porres">San Martín de Porres</option>
+                        <option value="San Miguel">San Miguel</option>
+                        <option value="Santa Anita">Santa Anita</option>
+                        <option value="Santa María del Mar">Santa María del Mar</option>
+                        <option value="Santa Rosa">Santa Rosa</option>
+                        <option value="Santiago de Surco">Santiago de Surco</option>
+                        <option value="Surquillo">Surquillo</option>
+                        <option value="Villa El Salvador">Villa El Salvador</option>
+                        <option value="Villa María del Triunfo">Villa María del Triunfo</option>
+                    </select>
+                    <!--<input type="text" value="<%=sugerencia.district%>" name="distritoS">-->
+                    <% } %>
+  
+                    <label for="" class="mt-3 form-label" style="font-weight: bold;">Dirección exacta:</label>
+                    <% if (sugerencia.address == null){ %>
+                    <input type="text" class="form-control" placeholder="No sugerido" disabled>
+                    <% } else { %>
+                    <input type="text" class="form-control" value="<%=sugerencia.address%>" name="direccionS" required>
+                    <% } %>
+  
+                    <label for="" class="mt-3 form-label" style="font-weight: bold;">Link:</label>
+                    <% if (sugerencia.link == null){ %>
+                    <input type="text" class="form-control" placeholder="No sugerido" disabled>
+                    <% } else { %>
+                      <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS" required>
+                    <% } %>
+                    
+                    <% if (sugerencia.user.type == "person") { %>
+                      <% usuariosPeople.forEach(function(people){ %>
+                        <% if (people.user_id == sugerencia.user.id) { %>
+                          <div class="row mt-4">
+                            <div class="col-6">
+                              <img src="data:image/png;base64,<%=people.photo?people.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            </div>
+                            <div class="col-6">
+                              <label for="">Por:</label>
+                              <label for="" style="font-weight: bold;" class="form-label"><%= people.first_name %> <%= people.last_name %></label>
+                              <label for="" style="font-weight: bold;" class="form-label"><%= sugerencia.fecha %></label>
+                            </div>
+                          </div>
+  
+                        <% } %>
+                      <% }) %>
+  
+                    <% } else if(sugerencia.user.type == "shelter") { %>
+                      <% usuariosShelter.forEach(function(shelter){ %>
+                        <% if (shelter.user_id == sugerencia.user.id) { %>
+                          <div class="row mt-4">
+                            <div class="col-6">
+                              <img src="data:image/png;base64,<%=shelter.photo?shelter.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            </div>
+                            <div class="col-6">
+                              <label for="">Por:</label>
+                              <label for="" style="font-weight: bold;" class="form-label"><%= shelter.name %></label>
+                              <label for="" style="font-weight: bold;" class="form-label"><%= sugerencia.fecha %></label>
+                            </div>
+                          </div>
+  
+                        <% } %>
+                      <% }) %>
+                    <% } %>
+    
+                    <button type="submit" class="btn btn-success mt-3 mb-2">Aceptar sugerencia</button>
+                    <a href="/accounts/eliminarSugerencia/<%= sugerencia.id %>" class="btn btn-danger">Eliminar sugerencia</a>
+                    
+  
+                    <!-- Variables ocultas-->
+                    <input type="text" value="<%= sugerencia.id %>" name="sugid" hidden>
+                    <input type="text" value="<%= establecimiento.id %>" name="estid" hidden>
+                  </form>
+                </div>
+            </div>
+        </div>
+  
+  
+    <% }) %>
+  
+  </div>
+</main>
 
-  <% }) %>
-
-</div>
 
 <script>
   highlightNavbar(4)

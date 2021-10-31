@@ -80,7 +80,7 @@ module.exports = {
     try {
       
       const estId = parseInt(req.params.estid)
-      const establecimiento = await Establishment.findByPk(estId)
+      const establecimiento = await Establishment.findByPk(estId, {include : {all : true}})
       const sugerencias = await Suggestion.findAll({include : {all: true}, where : {establishment_id : estId}})
 
       const UsuariosPeople = await UserPerson.findAll({include : {all : true}})
@@ -89,10 +89,9 @@ module.exports = {
       return res.render('verSugerenciasEstablecimiento', {
         title : 'Ver sugerencias de establecimiento',
         sugerencias : sugerencias,
-        estId : estId,
-        estName : establecimiento.name,
-        usuariosPeople : imagesToBase645(UsuariosPeople),
-        usuariosShelter : imagesToBase645(UsuariosShelter)
+        establecimiento : imagesToBase64ForUniqueEstablishment(establecimiento),
+        usuariosPeople : imagesToBase6455(UsuariosPeople),
+        usuariosShelter : imagesToBase6455(UsuariosShelter)
       })
     }
     catch (err) {
@@ -207,7 +206,7 @@ module.exports = {
   }
 };
 
-imagesToBase645 = function (usuario) {
+imagesToBase6455 = function (usuario) {
 
   for (var i = 0; i < usuario.length; i++)
   {
@@ -216,4 +215,13 @@ imagesToBase645 = function (usuario) {
     }  
   }
   return usuario      
-}   
+};
+
+imagesToBase64ForUniqueEstablishment = function (establishment) {
+  if (establishment.photo) {
+      for(var i=0; i<establishment.photo.length; i++) {
+          establishment.photo[i] = Buffer.from(establishment.photo[i]).toString('base64');
+      }
+  }
+  return establishment
+}
