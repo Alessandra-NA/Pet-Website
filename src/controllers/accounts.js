@@ -88,7 +88,7 @@ module.exports = {
 
       return res.render('verSugerenciasEstablecimiento', {
         title : 'Ver sugerencias de establecimiento',
-        sugerencias : sugerencias,
+        sugerencias : imagesToBase64ForSuggestion(sugerencias),
         establecimiento : imagesToBase64ForUniqueEstablishment(establecimiento),
         usuariosPeople : imagesToBase6455(UsuariosPeople),
         usuariosShelter : imagesToBase6455(UsuariosShelter)
@@ -224,4 +224,17 @@ imagesToBase64ForUniqueEstablishment = function (establishment) {
       }
   }
   return establishment
+};
+
+imagesToBase64ForSuggestion = function (establishmentArray) {
+  let array = establishmentArray.map((establishment) => {
+      if (establishment.photo) {
+          for(var i=0; i<establishment.photo.length; i++) {
+              establishment.photo[i] = Buffer.from(establishment.photo[i]).toString('base64');
+          }
+      }
+      return establishment
+  })
+  return array
 }
+
