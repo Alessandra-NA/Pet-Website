@@ -1,6 +1,6 @@
 // node
 const md5 = require('md5');
-const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter } = require('./src/models');
+const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter, Suggestion } = require('./src/models');
 const fs = require('fs');
 
 const nivelesActividad = [
@@ -93,7 +93,13 @@ const establecimientos = [
   { name: 'Establecimiento2', rating: 0, ofPets: true, type: 'Veterinarias', link: '', location_id: 5, photo: null, latitude: -12.078668590551107, longitude: -77.00215935214327},
   { name: 'Establecimiento3', rating: 0, ofPets: false, type: 'Hoteles & Alojamientos', link: '', location_id: 6, photo: null, latitude: -12.121898075505575, longitude: -77.03064550074568},
   
-]
+];
+
+const sugerencias = [
+  {fecha : new Date(), name : 'Los Gallardos', photo : null, type : 'Veterinaria', link : 'gallardos.com', district : 'La Molina', address : 'Los Jirones 123', establishment_id : 1, user_id : 1},
+  {fecha : new Date(), name : 'Los Vielos', photo : null, type : 'Spa mascotas', link : 'vielos.com', district : 'San Borja', address : 'Los Aduanes 123', establishment_id : 1, user_id : 2},
+  {fecha : new Date(), name : 'El Juanete', photo : null, type : 'Hoteles & Alojamientos', link : 'juanete.com', district : 'San Isidro', address : 'Los Hipogrifos 123', establishment_id : 1, user_id : 3}
+];
 
 const usuarios = [
   { username: 'User1', password: md5('123'), type: 'person', status: 'actived'},
@@ -199,6 +205,8 @@ const main = async () => {
       }
     });
 
+    
+
     usuarios.forEach(async usuario => {
       try {
         await User.create(usuario);
@@ -240,6 +248,19 @@ const main = async () => {
         console.log(err);
       }
     });
+
+    
+    sugerencias.forEach(async sugerencia => {
+      try {
+        const newSuggestion = await Suggestion.create(sugerencia);
+        var imagenTemp = "'"+path.resolve('src/public/img','establishment.jpg')+"'"
+        var imagenTemp1 = "'"+path.resolve('src/public/img','establishment1.jpg')+"'"
+        sequelize.query('UPDATE "Suggestions" set photo= array [pg_read_binary_file('+imagenTemp+'), pg_read_binary_file('+imagenTemp1+')] WHERE id='+newSuggestion.id)
+      }catch (err){
+        console.log(err);
+      }
+    });
+
 
   } catch (err) {
     console.log(err);
