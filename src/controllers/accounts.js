@@ -102,6 +102,9 @@ module.exports = {
   confirmarSugerencia : async(req,res) => {
     try{
       const estId = req.body.estid
+      const sugId = req.body.sugid
+
+      const sugerencia = await Suggestion.findByPk(sugId, {include : {all : true}})
       const establecimiento = await Establishment.findByPk(estId)
 
       //Buscamos LocationId a actualizar
@@ -113,6 +116,8 @@ module.exports = {
       let distritoS = req.body.distritoS
       let direccionS = req.body.direccionS
       let linkS = req.body.linkS
+      let photoS = req.body.img
+
       if (nombreS == undefined)
       {
         nombreS = establecimiento.name
@@ -136,7 +141,21 @@ module.exports = {
         linkS = establecimiento.link
       }
 
+      let photoAIncluir = establecimiento.photo
+      if (photoS == undefined) 
+      {
+        
+      }
+      else 
+      {
+        const photoSugeridas = sugerencia.photo
+        for (var i=0; i<photoS.length; i++)
+        {
+          photoAIncluir.push(photoSugeridas[photoS[i]])
+        }
+      }
 
+      console.log(photoAIncluir)
       Location.update({
         district : distritoS,
         address : direccionS
@@ -145,9 +164,11 @@ module.exports = {
       Establishment.update({
         name : nombreS,
         type : tipoS,
-        link : linkS
+        link : linkS,
+        photo : photoAIncluir
       }, {where : {id : estId}})
 
+    
       /*
       //Borramos la sugerencia
       Suggestion.findByPk(req.body.sugid).then(response => {
