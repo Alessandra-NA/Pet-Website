@@ -32,33 +32,27 @@ module.exports = {
     var type = req.query.type;
     var link = req.query.link;
     var address = req.query.address;
-    var country = req.query.country;
     var district = req.query.district;
-    var province = req.query.province;
+
+
+    var f = new Date();
+    var fecha = f.getFullYear() + "-" + f.getMonth() + "-" + f.getDate()
+    console.log(fecha)
 
     console.log(name)
     console.log(type)
     console.log(link)
     console.log(address)
-    console.log(country)
     console.log(district)
-    console.log(province)
-
-
-    var location = await Location.create({
-      address: address,
-      country: country,
-      district: district,
-      province: province,
-    })
-
-    console.log(location)
 
     await Suggestion.create({
       name: name,
+      fecha: fecha,
       type: type,
       link: link, 
-      location_id: location.id
+      address: address,
+      district: district,
+      establishment_id: id,
     });
 
 
