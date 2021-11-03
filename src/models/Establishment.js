@@ -5,7 +5,7 @@ class Establishment extends Model{
     // relaciones:
     static associate({ Location, Comment, Suggestion }) {
         this.belongsTo(Location, { as: 'location', foreignKey: 'location_id' });
-        this.hasMany(Comment, { as: 'comment', foreignKey: 'establishment_id', onDelete: 'cascade' });
+        this.hasMany(Comment, { as: 'comments', foreignKey: 'establishment_id', onDelete: 'cascade' });
         this.hasMany(Suggestion, { as: 'suggestions', foreignKey: 'establishment_id', onDelete: 'cascade' });
     }
 }

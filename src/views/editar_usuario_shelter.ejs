@@ -33,7 +33,7 @@
             <div class="mb-4 col-md-6">
                 <label for="" class="form-label">Distrito:</label>
                 <select class="form-select" id="user_gender" name="distrito" required>
-                    <option selected disabled value="<%= location.district %>"><%= location.district %></option>
+                    <option selected value="<%= location.district %>"><%= location.district %></option>
                     <option value="Ancón">Ancón</option>
                     <option value="Ate Vitarte">Ate Vitarte</option>
                     <option value="Barranco">Barranco</option>
@@ -128,3 +128,7 @@
 </main>
 
 <script src="/js/selectFoto.js"></script>
+<script>
+    // para cambiar el color de texto de la sección en el navbar
+    highlightNavbar(5)
+</script>

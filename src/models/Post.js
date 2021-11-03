@@ -11,6 +11,10 @@ class Post extends Model {
 Post.init(
     {
         // atributos:
+        fecha: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+        },
     },
     {
         sequelize,

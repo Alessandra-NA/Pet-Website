@@ -3,9 +3,10 @@ const sequelize = require('../db');
 
 class User extends Model {
     // relaciones:
-    static associate({ Post, Comment }) {
+    static associate({ Post, Comment, Suggestion}) {
         this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' , onDelete: 'cascade'});
-        this.hasMany(Comment, { as: 'comments', foreignKey: 'user_id' });
+        this.hasMany(Comment, { as: 'comments', foreignKey: 'user_id', onDelete: 'cascade' });
+        this.hasMany(Suggestion, { as: 'suggestions', foreignKey: 'user_id', onDelete: 'cascade' });
     }
 }
 User.init(

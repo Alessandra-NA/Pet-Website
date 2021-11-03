@@ -28,10 +28,11 @@ module.exports = {
         },          
       ],
       where:{user_id: usuario.user_id}})
+      
       return res.render('shelter_detalle',{usuario:imagesToBase644(usuario), posts:imagesToBase643(posts)});
     }
-    catch{
-
+    catch (err) {
+      console.log(err);
     }
   }
 };

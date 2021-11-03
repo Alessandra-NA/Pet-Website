@@ -8,7 +8,7 @@ class Pet extends Model {
         this.belongsTo(Size, { as: 'size', foreignKey: 'size_id' });
         this.belongsTo(Specie, { as: 'specie', foreignKey: 'specie_id' });
         this.belongsTo(Gender, { as: 'gender', foreignKey: 'gender_id' });
-        this.hasOne(Post, { as: 'post', foreignKey: 'user_id' });
+        this.hasOne(Post, { as: 'post', foreignKey: 'pet_id' });
     }
 }
 Pet.init(

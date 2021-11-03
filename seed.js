@@ -1,6 +1,6 @@
 // node
 const md5 = require('md5');
-const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter } = require('./src/models');
+const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter, Suggestion } = require('./src/models');
 const fs = require('fs');
 
 const nivelesActividad = [
@@ -34,7 +34,7 @@ let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacin
 const path = require('path')
 
 const mascotas = [
-  { name: 'Firulais', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Firulais', photo: null, birthdate: new Date(), weight: 4.2, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 1, size_id: 1, specie_id: 1, gender_id: 1 },
 
@@ -42,39 +42,39 @@ const mascotas = [
     vacunado: false, desparasitado: true, sano:true, esterilizado: false, microchip: false,
     activitylevel_id: 2, size_id: 2, specie_id: 2, gender_id: 2 },
 
-  { name: 'Moly', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Moly', photo: null, birthdate: new Date(), weight: 8.1, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 3, size_id: 3, specie_id: 1, gender_id: 2 },
 
-  { name: 'Grumpy', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Grumpy', photo: null, birthdate: new Date(), weight: 3.2, story: text,
     vacunado: true, desparasitado: false, sano:true, esterilizado: true, microchip: true,
     activitylevel_id: 4, size_id: 1, specie_id: 1, gender_id: 1 },
 
-  { name: 'Sami', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Sami', photo: null, birthdate: new Date(), weight: 2.9, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 1, size_id: 2, specie_id: 2, gender_id: 2 },
   
-  { name: 'Oso', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Oso', photo: null, birthdate: new Date(), weight: 3.7, story: text,
     vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
     activitylevel_id: 4, size_id: 4, specie_id: 1, gender_id: 1 },
     
-  { name: 'Tony', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Tony', photo: null, birthdate: new Date(), weight: 4.2, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 3, size_id: 4, specie_id: 1, gender_id: 1 },
     
-  { name: 'Lucas', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Lucas', photo: null, birthdate: new Date(), weight: 6, story: text,
     vacunado: true, desparasitado: false, sano: false, esterilizado: true, microchip: true,
     activitylevel_id: 2, size_id: 4, specie_id: 2, gender_id: 1 },
     
-  { name: 'Leo', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Leo', photo: null, birthdate: new Date(), weight: 7.45, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
     activitylevel_id: 1, size_id: 4, specie_id: 1, gender_id: 1 },
 
-  { name: 'Boby', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Boby', photo: null, birthdate: new Date(), weight: 1.65, story: text,
     vacunado: false, desparasitado: true, sano:true, esterilizado: false, microchip: true,
     activitylevel_id: 2, size_id: 2, specie_id: 2, gender_id: 1 },
 
-  { name: 'Tango', photo: null, birthdate: new Date(), weight: 7.5, story: text,
+  { name: 'Tango', photo: null, birthdate: new Date(), weight: 3.75, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: false,
     activitylevel_id: 3, size_id: 2, specie_id: 1, gender_id: 1 }
 ];
@@ -93,7 +93,13 @@ const establecimientos = [
   { name: 'Establecimiento2', rating: 0, ofPets: true, type: 'Veterinarias', link: '', location_id: 5, photo: null, latitude: -12.078668590551107, longitude: -77.00215935214327},
   { name: 'Establecimiento3', rating: 0, ofPets: false, type: 'Hoteles & Alojamientos', link: '', location_id: 6, photo: null, latitude: -12.121898075505575, longitude: -77.03064550074568},
   
-]
+];
+
+const sugerencias = [
+  {fecha : new Date(), name : 'Los Gallardos', photo : null, type : 'Veterinaria', link : 'gallardos.com', district : 'La Molina', address : 'Los Jirones 123', establishment_id : 1, user_id : 1},
+  {fecha : new Date(), name : 'Los Vielos', photo : null, type : 'Spa mascotas', link : 'vielos.com', district : 'San Borja', address : 'Los Aduanes 123', establishment_id : 1, user_id : 2},
+  {fecha : new Date(), name : 'El Juanete', photo : null, type : 'Hoteles & Alojamientos', link : 'juanete.com', district : 'San Isidro', address : 'Los Hipogrifos 123', establishment_id : 1, user_id : 3}
+];
 
 const usuarios = [
   { username: 'User1', password: md5('123'), type: 'person', status: 'actived'},
@@ -116,17 +122,17 @@ const usuarios_admin = [
 ]
 
 const posts = [
-  { user_id: 1, pet_id: 1 },
-  { user_id: 1, pet_id: 2 },
-  { user_id: 1, pet_id: 3 },
-  { user_id: 2, pet_id: 4 },
-  { user_id: 3, pet_id: 5 },
-  { user_id: 3, pet_id: 6 },
-  { user_id: 3, pet_id: 7 },
-  { user_id: 2, pet_id: 8 },
-  { user_id: 2, pet_id: 9 },
-  { user_id: 2, pet_id: 10 },
-  { user_id: 2, pet_id: 11 }
+  { fecha: new Date(), user_id: 1, pet_id: 1 },
+  { fecha: new Date(), user_id: 1, pet_id: 2 },
+  { fecha: new Date(), user_id: 1, pet_id: 3 },
+  { fecha: new Date(), user_id: 2, pet_id: 4 },
+  { fecha: new Date(), user_id: 3, pet_id: 5 },
+  { fecha: new Date(), user_id: 3, pet_id: 6 },
+  { fecha: new Date(), user_id: 3, pet_id: 7 },
+  { fecha: new Date(), user_id: 2, pet_id: 8 },
+  { fecha: new Date(), user_id: 2, pet_id: 9 },
+  { fecha: new Date(), user_id: 2, pet_id: 10 },
+  { fecha: new Date(), user_id: 2, pet_id: 11 }
 ];
 
 const main = async () => {
@@ -199,6 +205,8 @@ const main = async () => {
       }
     });
 
+    
+
     usuarios.forEach(async usuario => {
       try {
         await User.create(usuario);
@@ -240,6 +248,19 @@ const main = async () => {
         console.log(err);
       }
     });
+
+    
+    sugerencias.forEach(async sugerencia => {
+      try {
+        const newSuggestion = await Suggestion.create(sugerencia);
+        var imagenTemp = "'"+path.resolve('src/public/img','establishment.jpg')+"'"
+        var imagenTemp1 = "'"+path.resolve('src/public/img','establishment1.jpg')+"'"
+        sequelize.query('UPDATE "Suggestions" set photo= array [pg_read_binary_file('+imagenTemp+'), pg_read_binary_file('+imagenTemp1+')] WHERE id='+newSuggestion.id)
+      }catch (err){
+        console.log(err);
+      }
+    });
+
 
   } catch (err) {
     console.log(err);

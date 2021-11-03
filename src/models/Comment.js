@@ -11,6 +11,10 @@ class Comment extends Model {
 Comment.init(
     {
         // atributos:
+        fecha: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+        },
         desc: {
             type: DataTypes.STRING(300),
             allowNull: false,
