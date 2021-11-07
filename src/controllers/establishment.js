@@ -34,8 +34,11 @@ module.exports = {
     saveNewEstablishment: async (req, res) => {
         try {
             const { name, type, address, mapLat, mapLng, province, district, ofPets, link } = req.body
-            const photos = req.files ? req.files.map(file => file.buffer) : null
 
+            const photo1 =  req.files[0]?.buffer
+            const photo2 =  req.files[1]?.buffer
+            const photo3 =  req.files[2]?.buffer
+            const photo4 =  req.files[3]?.buffer
             const newLocation = Location.create({
                 country: 'Perú',
                 province: province,
@@ -46,7 +49,10 @@ module.exports = {
             newLocation.then(data => {
                 Establishment.create({
                     name: name,
-                    photo: photos,
+                    photo1: photo1,
+                    photo2: photo2,
+                    photo3: photo3,
+                    photo4: photo4,
                     rating: 0,
                     ofPets: ofPets ? true : false,
                     type: type,
@@ -58,6 +64,7 @@ module.exports = {
                 .then(data => console.log("Establecimiento creado correctamente"), 
                 err => console.error(err))
             })
+            
             res.redirect('/establishments?tab=mapa')
         } catch (error) {
             console.error(error)
@@ -67,9 +74,9 @@ module.exports = {
 
 imagesToBase64ForEstablishment = function (establishmentArray) {
     let array = establishmentArray.map((establishment) => {
-        if (establishment.photo) {
-            for(var i=0; i<establishment.photo.length; i++) {
-                establishment.photo[i] = Buffer.from(establishment.photo[i]).toString('base64');
+        for(i=1; i<5; i++){
+            if(establishment['photo'+i]){
+                establishment['photo'+i] = establishment['photo'+i].toString('base64')
             }
         }
         return establishment
