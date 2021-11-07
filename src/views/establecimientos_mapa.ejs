@@ -155,6 +155,7 @@
       zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', onBoundsChange)
     })
     google.maps.event.addListener(map, 'dragend', onBoundsChange)
+    google.maps.event.addListenerOnce(map, 'idle', onBoundsChange);
     showEstabElements()
   }
 
