@@ -12,8 +12,8 @@
     <div class="border border-gray-400 border-1 estabElement mb-2" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
       <div class="d-flex align-items-center"><img src="data:image/png;base64,<%=establecimiento.photo && establecimiento.photo[0]%>" style="width: 140px"></div>
       <div class="px-2 py-1">
-        <p hidden><%=establecimiento.latitude%></p>
-        <p hidden><%=establecimiento.longitude%></p>
+        <p class="estab_lat" hidden><%=establecimiento.latitude%></p>
+        <p class="estab_lng" hidden><%=establecimiento.longitude%></p>
         <h6 class="py-1 m-0"><%=establecimiento.name%></h6>
         <p class="my-1 text-danger"><%=establecimiento.type%></p>
         <p class="my-1"><%=establecimiento.location.address%>, <%=establecimiento.location.district%>, <%=establecimiento.location.province%></p>
@@ -121,15 +121,30 @@
         contClicks ++;
       });
 
-      const locations = [
-        {lat: -12.083750075956283, lng: -76.97704255222924},
-        {lat: -12.078668590551107, lng: -77.00215935214327},
-        {lat: -12.121898075505575, lng: -77.03064550074568}
-      ]
 
-      locations.forEach(location => {
-        addMarker(location);
+      let latArray = []
+      //add all estab_lat inner text values to latArray
+      document.querySelectorAll(".estab_lat").forEach(function(element){
+        latArray.push(parseFloat(element.textContent))
       })
+
+      //same for longArray
+      let longArray = []
+      document.querySelectorAll(".estab_lng").forEach(function(element){
+        longArray.push(parseFloat(element.textContent))
+      })
+
+      //combine latArray and longArray into an array of latlng objects
+      let latLongArray = []
+      for(let i = 0; i < latArray.length; i++){
+        latLongArray.push(new google.maps.LatLng(latArray[i], longArray[i]))
+      }
+
+      //add markers to map
+      for(let i = 0; i < latLongArray.length; i++){
+        addMarker(latLongArray[i])
+      }
+
       if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -175,7 +190,7 @@
   function AgregarClicked(){
     const longCurrent = document.getElementById('longitud').title
     const latCurrent = document.getElementById('latitud').title
-    location.href='establishments/new?lat='+latCurrent+'&?long='+longCurrent
+    location.href='establishments/new?lat='+latCurrent+'&long='+longCurrent
   }
 </script>
 <script async defer
