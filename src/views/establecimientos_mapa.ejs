@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
 <div>
   <div class="invisible" id="longitud" title="">longitud: </div>
   <div class="invisible" id="latitud" title="">latitud: </div>
@@ -6,10 +10,10 @@
 <h3>Lugares pet friendly</h3>
 <div class="row">
   <div id="map" class="col-12 col-lg-8"></div>
-  <div class="col-12 col-lg-4">
+  <div class="row col-12 col-lg-4">
     <% establecimientos.forEach(function(establecimiento){ %>
     
-    <div class="border border-gray-400 border-1 estabElement mb-2" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
+    <div class="border border-gray-400 border-1 estabElement mb-2" id="<%= establecimiento.id %>" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
       <div class="d-flex align-items-center"><img src="data:image/png;base64,<%=establecimiento.photo1%>" style="width: 140px"></div>
       <div class="px-2 py-1">
         <p class="estab_lat" hidden><%=establecimiento.latitude%></p>
@@ -63,6 +67,18 @@
             est.classList.remove("d-flex")
           }
         }
+      }
+    });
+  }
+
+  async function showFirstEstablishmentChoosed(idElegido) {
+    var allEstab = document.getElementsByClassName("estabElement")
+    Array.from(allEstab).forEach((est) => {
+      if (est.id == idElegido){
+        est.setAttribute("class", 'border border-gray-400 border-1 estabElement mb-2 d-flex order-first')
+      }
+      else{
+        est.setAttribute("class", 'border border-gray-400 border-1 estabElement mb-2 d-flex')
       }
     });
   }
@@ -147,16 +163,7 @@
       const marker = addMarker(latLongArray[i])
       marker.addListener("click", () => {
         // Create a new InfoWindow.
-        infoWindow = new google.maps.InfoWindow({
-          content: "Holu",
-        });
-
-        infoWindow.open({
-          anchor: marker,
-          map,
-          shouldFocus: false,
-        });
-
+        showFirstEstablishmentChoosed(i+1)
       })
     }
 
