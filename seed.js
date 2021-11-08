@@ -37,7 +37,7 @@ const mascotas = [
   {
     name: 'Firulais', photo: null, birthdate: new Date(), weight: 4.2, story: text,
     vacunado: true, desparasitado: true, sano: true, esterilizado: true, microchip: true,
-    activitylevel_id: 1, size_id: 1, specie_id: 1, gender_id: 1
+    activitylevel_id: 1, size_id: 1, specie_id: 1, gender_id: 1 
   },
 
   {
@@ -131,8 +131,8 @@ const usuarios = [
 ];
 
 const usuarios_personas = [
-  { first_name: 'John', last_name: 'Perez', photo: null, phone_number: '954684126', document_number: '54862459', email: 'correo1@gmail.com', rating: 3, location_id: 1, user_id: 1, gender_id: 1 },
-  { first_name: 'Lia', last_name: 'Ber', photo: null, phone_number: '998745682', document_number: '75963669', email: 'correo2@gmail.com', rating: 4, location_id: 2, user_id: 2, gender_id: 1 }
+  { first_name: 'John', last_name: 'Perez', photo: null, phone_number: '954684126', document_number: '54862459', email: 'correo1@gmail.com', rating: 3, location_id: 1, user_id: 1, gender_id: 3 },
+  { first_name: 'Lia', last_name: 'Ber', photo: null, phone_number: '998745682', document_number: '75963669', email: 'correo2@gmail.com', rating: 4, location_id: 2, user_id: 2, gender_id: 4 }
 ];
 
 const usuarios_shelters = [
