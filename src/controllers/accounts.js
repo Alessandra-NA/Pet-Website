@@ -101,6 +101,7 @@ module.exports = {
 
   confirmarSugerencia : async(req,res) => {
     try{
+      let cancelar = false
       const estId = req.body.estid
       const sugId = req.body.sugid
 
@@ -143,64 +144,80 @@ module.exports = {
       //Definimos fotos
       let photoS = []
 
-      if (req.body.img1 != undefined){
-        photoS[0] = sugerencia.photo1
-      }
-      if (req.body.img2 != undefined){
-        photoS[1] = sugerencia.photo2
-      } 
-      if (req.body.img3 != undefined){
-        photoS[2] = sugerencia.photo3
-      } 
+      photoS[0] = req.body.img1
+      photoS[1] = req.body.img2
+      photoS[2] = req.body.img3
+
+      let photoA = []
 
       for (var i=0; i<photoS.length; i++){
-        if (establecimiento.photo1!=null && establecimiento.photo2!=null && establecimiento.photo3!=null && establecimiento.photo4!=null){
-          //Todos los slots de fotos estan llenos
-          break
-        }
-        else{
-          if (establecimiento.photo1 == null){
-            Establishment.update({
-              photo1 : photoS[i]
-            }, {where : {id : estId}})
+        if (photoS[i]!=undefined){
+          if (photoS[i] == 1){
+            photoA.push(sugerencia.photo1)
           }
-          else if(establecimiento.photo2 == null){
-            Establishment.update({
-              photo2 : photoS[i]
-            }, {where : {id : estId}})
+          else if (photoS[i] == 2){
+            photoA.push(sugerencia.photo2)
           }
-          else if(establecimiento.photo3 == null){
-            Establishment.update({
-              photo3 : photoS[i]
-            }, {where : {id : estId}})
+          else if (photoS[i] == 3){
+            photoA.push(sugerencia.photo3)
           }
-          else if(establecimiento.photo4 == null){
-            Establishment.update({
-              photo4 : photoS[i]
-            }, {where : {id : estId}})
-          }
+          
         }
       }
 
-      Location.update({
-        district : distritoS,
-        address : direccionS
-      }, {where : {id : establecimiento.location_id}})
-
-      Establishment.update({
-        name : nombreS,
-        type : tipoS,
-        link : linkS
-      }, {where : {id : estId}})
-
+      let photo1 = establecimiento.photo1
+      let photo2 = establecimiento.photo2
+      let photo3 = establecimiento.photo3
+      let photo4 = establecimiento.photo4
       
-      //Borramos la sugerencia
-      Suggestion.findByPk(req.body.sugid).then(response => {
-        response.destroy();
-      })
+      for (var i=0; i<photoA.length; i++){
+        if (photo1 == null){
+          photo1 = photoA[i]
+        }
+        else if (photo2 == null){
+          photo2 = photoA[i]
+        }
+        else if (photo3 == null){
+          photo3 = photoA[i]
+        }
+        else if (photo4 == null){
+          photo4 = photoA[i]
+        }
+        else{
+          console.log('¡¡¡¡¡YA NO HAY ESPACIO PARA MAS FOTOS!!!!!!')
+          break
+        }
+      }
 
+      if (cancelar == true){
+        //Se cancela la accion porque no hay espacio en las fotos
+        console.log("No hay mas espacio")
+        res.redirect('/accounts/verSugerencias/' + estId)
+      }
+      else{
+        Location.update({
+          district : distritoS,
+          address : direccionS
+        }, {where : {id : establecimiento.location_id}})
+  
+        Establishment.update({
+          name : nombreS,
+          type : tipoS,
+          link : linkS,
+          photo1 : photo1,
+          photo2 : photo2,
+          photo3 : photo3,
+          photo4 : photo4
+        }, {where : {id : estId}})
+  
+        
+        //Borramos la sugerencia
+        Suggestion.findByPk(req.body.sugid).then(response => {
+          response.destroy();
+        })
+        res.redirect('/accounts/verSugerencias/' + estId)
+      }
 
-      res.redirect('/accounts/verSugerencias/' + estId)
     } 
     catch (err) {
       console.log(err);
