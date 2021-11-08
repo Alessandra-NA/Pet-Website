@@ -88,8 +88,8 @@ module.exports = {
 
       return res.render('verSugerenciasEstablecimiento', {
         title : 'Ver sugerencias de establecimiento',
-        sugerencias : imagesToBase64ForSuggestion(sugerencias),
-        establecimiento : imagesToBase64ForUniqueEstablishment(establecimiento),
+        sugerencias : imagesToBase6(sugerencias),
+        establecimiento : imagesToBase7(establecimiento),
         usuariosPeople : imagesToBase6455(UsuariosPeople),
         usuariosShelter : imagesToBase6455(UsuariosShelter)
       })
@@ -116,7 +116,6 @@ module.exports = {
       let distritoS = req.body.distritoS
       let direccionS = req.body.direccionS
       let linkS = req.body.linkS
-      let photoS = req.body.img
 
       if (nombreS == undefined)
       {
@@ -140,31 +139,48 @@ module.exports = {
       {
         linkS = establecimiento.link
       }
-      console.log(photoS)
-      
-      let photoAIncluir = establecimiento.photo
 
-      console.log(photoAIncluir)
-      console.log("Establecimiento.photo")
-      console.log(establecimiento.photo)
-      console.log("Sugerencia.photo")
-      console.log(sugerencia.photo)
-      if (photoS == undefined) 
-      {
-        
+      //Definimos fotos
+      let photoS = []
+
+      if (req.body.img1 != undefined){
+        photoS[0] = sugerencia.photo1
       }
-      else 
-      {
-        const photoSugeridas = sugerencia.photo
-        
-        for (var i=0; i<photoS.length; i++)
-        {
-          photoAIncluir.push(photoSugeridas[photoS[i]])
+      if (req.body.img2 != undefined){
+        photoS[1] = sugerencia.photo2
+      } 
+      if (req.body.img3 != undefined){
+        photoS[2] = sugerencia.photo3
+      } 
+
+      for (var i=0; i<photoS.length; i++){
+        if (establecimiento.photo1!=null && establecimiento.photo2!=null && establecimiento.photo3!=null && establecimiento.photo4!=null){
+          //Todos los slots de fotos estan llenos
+          break
+        }
+        else{
+          if (establecimiento.photo1 == null){
+            Establishment.update({
+              photo1 : photoS[i]
+            }, {where : {id : estId}})
+          }
+          else if(establecimiento.photo2 == null){
+            Establishment.update({
+              photo2 : photoS[i]
+            }, {where : {id : estId}})
+          }
+          else if(establecimiento.photo3 == null){
+            Establishment.update({
+              photo3 : photoS[i]
+            }, {where : {id : estId}})
+          }
+          else if(establecimiento.photo4 == null){
+            Establishment.update({
+              photo4 : photoS[i]
+            }, {where : {id : estId}})
+          }
         }
       }
-
-      console.log(photoAIncluir)
-      console.log("Establishment.photo")
 
       Location.update({
         district : distritoS,
@@ -174,15 +190,14 @@ module.exports = {
       Establishment.update({
         name : nombreS,
         type : tipoS,
-        link : linkS,
-        photo : photoAIncluir
+        link : linkS
       }, {where : {id : estId}})
 
-      /*
+      
       //Borramos la sugerencia
       Suggestion.findByPk(req.body.sugid).then(response => {
         response.destroy();
-      })*/
+      })
 
 
       res.redirect('/accounts/verSugerencias/' + estId)
@@ -247,24 +262,37 @@ imagesToBase6455 = function (usuario) {
   return usuario      
 };
 
-imagesToBase64ForUniqueEstablishment = function (establishment) {
-  if (establishment.photo) {
-      for(var i=0; i<establishment.photo.length; i++) {
-          establishment.photo[i] = Buffer.from(establishment.photo[i]).toString('base64');
-      }
+imagesToBase6 = function (array) {
+
+  for (var i=0; i<array.length; i++){
+
+    if (array[i].photo1){
+      array[i].photo1 = Buffer.from(array[i].photo1).toString('base64');
+    }
+    if (array[i].photo2){
+      array[i].photo2 = Buffer.from(array[i].photo2).toString('base64');
+    }
+    if (array[i].photo3){
+      array[i].photo3 = Buffer.from(array[i].photo3).toString('base64');
+    }
   }
-  return establishment
+  return array
+  
 };
 
-imagesToBase64ForSuggestion = function (establishmentArray) {
-  let array = establishmentArray.map((establishment) => {
-      if (establishment.photo) {
-          for(var i=0; i<establishment.photo.length; i++) {
-              establishment.photo[i] = Buffer.from(establishment.photo[i]).toString('base64');
-          }
-      }
-      return establishment
-  })
+imagesToBase7 = function (array) {
+  if (array.photo1){
+    array.photo1 = Buffer.from(array.photo1).toString('base64');
+  }
+  if (array.photo2){
+    array.photo2 = Buffer.from(array.photo2).toString('base64');
+  }
+  if (array.photo3){
+    array.photo3 = Buffer.from(array.photo3).toString('base64');
+  }
+  if (array.photo4){
+    array.photo4 = Buffer.from(array.photo4).toString('base64');
+  }
   return array
-}
+};
 
