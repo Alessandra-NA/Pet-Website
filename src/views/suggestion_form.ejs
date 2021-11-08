@@ -3,7 +3,7 @@
     <p class="h1">Sugerencias</p>
 </div>
 <div class="container" style="margin-bottom: 2%;">
-    <form class="row g-3" action="/establecimiento_detalle/ds">
+    <form class="row g-3" action="/establecimiento_detalle/ds" enctype="multipart/form-data" method="POST">
         <input hidden type="text" id="id" name="id" value="<%=establecimiento.id%>">
         <input hidden type="text" id="country" name="country" value="<%=establecimiento.location.country%>">
         <input hidden type="text" id="province" name="province" value="<%=establecimiento.location.province%>">
@@ -89,8 +89,22 @@
             <option value="Villa María del Triunfo">Villa María del Triunfo</option>
           </select>          
         </div>
+        <label class="form-label">Foto:</label>
+        <div class="col-md-4">          
+          <div class="">
+            <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto1" type="button">
+              <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative" id="image-field1"
+                width="200" height="200">
+            </button>
+            <input type="file" name="images" id="input_foto1"
+              accept="image/*" required style="display: none" multiple>
+          </div>
+        </div>
+
+       
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Subir</button>
         </div>
     </form>
 </div>
+<script src="/js/selectFotos.js"></script>
