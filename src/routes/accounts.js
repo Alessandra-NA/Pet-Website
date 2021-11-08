@@ -10,11 +10,11 @@ const router = Router();
 */
 router.get('/', authAdmin, chooseTypeAccountToManage)
 router.post('/', authAdmin, getAccounts)
-router.get('/verSugerencias/:estid', getSugerencias)
+router.get('/verSugerencias/:estid', authAdmin, getSugerencias)
 router.post('/confirmarSugerencia', confirmarSugerencia)
-router.get('/eliminarSugerencia/:sugid', eliminarSugerengia)
+router.get('/eliminarSugerencia/:sugid', authAdmin,eliminarSugerengia)
 //router.get('/', authAdmin, showAccounts) --> reemplazado por getAccounts
-router.get('/deleteEstablecimiento/:estid', deleteEstablecimiento)
-router.get('/delete/:userid', deleteAccount)
+router.get('/deleteEstablecimiento/:estid', authAdmin, deleteEstablecimiento)
+router.get('/delete/:userid', authAdmin, deleteAccount)
 
 module.exports = router;
