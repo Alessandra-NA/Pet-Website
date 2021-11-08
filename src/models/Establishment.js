@@ -16,16 +16,21 @@ Establishment.init(
             type: DataTypes.STRING(100),
             allowNull: false,
         },
-        photo: {
-            type: DataTypes.ARRAY(DataTypes.BLOB),
+        photo1: {
+            type: DataTypes.BLOB,
             allowNull: true,
-            /*validate: {
-                maxPhoto(value) {
-                  if (value.length >= 4) {
-                    throw new Error('Ya se ha insertado más de 4 imágenes')
-                  }
-                }  
-            }*/
+        },
+        photo2: {
+            type: DataTypes.BLOB,
+            allowNull: true,
+        },
+        photo3: {
+            type: DataTypes.BLOB,
+            allowNull: true,
+        },
+        photo4: {
+            type: DataTypes.BLOB,
+            allowNull: true,
         },
         rating: {
             type: DataTypes.INTEGER,

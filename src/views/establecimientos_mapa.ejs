@@ -8,34 +8,16 @@
   <div id="map" class="col-12 col-lg-8"></div>
   <div class="col-12 col-lg-4">
     <% establecimientos.forEach(function(establecimiento){ %>
-
-      <div class="border border-gray-400 border-1 estabElement mb-2" role="button"
-        onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
-        <div class="d-flex align-items-center"><img
-            src="data:image/png;base64,<%=establecimiento.photo && establecimiento.photo[0]%>" style="width: 140px">
-        </div>
-        <div class="px-2 py-1">
-          <p class="estab_lat" hidden>
-            <%=establecimiento.latitude%>
-          </p>
-          <p class="estab_lng" hidden>
-            <%=establecimiento.longitude%>
-          </p>
-          <h6 class="py-1 m-0">
-            <%=establecimiento.name%>
-          </h6>
-          <p class="my-1 text-danger">
-            <%=establecimiento.type%>
-          </p>
-          <p class="my-1">
-            <%=establecimiento.location.address%>, <%=establecimiento.location.district%>,
-                <%=establecimiento.location.province%>
-          </p>
-          <div class="d-flex">
-            <p class="my-1">Valoración: <%=establecimiento.rating%>/5 <img style="width: 18px; height: 18px"
-                  src="https://img.icons8.com/ios-glyphs/30/000000/dog-footprint.png" /></p>
-          </div>
-        </div>
+    
+    <div class="border border-gray-400 border-1 estabElement mb-2" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
+      <div class="d-flex align-items-center"><img src="data:image/png;base64,<%=establecimiento.photo1%>" style="width: 140px"></div>
+      <div class="px-2 py-1">
+        <p class="estab_lat" hidden><%=establecimiento.latitude%></p>
+        <p class="estab_lng" hidden><%=establecimiento.longitude%></p>
+        <h6 class="py-1 m-0"><%=establecimiento.name%></h6>
+        <p class="my-1 text-danger"><%=establecimiento.type%></p>
+        <p class="my-1"><%=establecimiento.location.address%>, <%=establecimiento.location.district%>, <%=establecimiento.location.province%></p>
+        <div class="d-flex"><p class="my-1">Valoración: <%=establecimiento.rating%>/5 <img style="width: 18px; height: 18px" src="https://img.icons8.com/ios-glyphs/30/000000/dog-footprint.png" /></p> </div>
       </div>
       <% }) %>
   </div>
@@ -187,6 +169,7 @@
       zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', onBoundsChange)
     })
     google.maps.event.addListener(map, 'dragend', onBoundsChange)
+    google.maps.event.addListenerOnce(map, 'idle', onBoundsChange);
     showEstabElements()
   }
 
