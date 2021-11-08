@@ -33,15 +33,14 @@ module.exports = {
     },
     saveNewEstablishment: async (req, res) => {
         try {
-            const { name, type, address, mapLat, mapLng, province, district, ofPets, link } = req.body
-
+            const { name, type, address, mapLat, mapLng, district, ofPets, link } = req.body
             const photo1 =  req.files[0]?.buffer
             const photo2 =  req.files[1]?.buffer
             const photo3 =  req.files[2]?.buffer
             const photo4 =  req.files[3]?.buffer
             const newLocation = Location.create({
                 country: 'Perú',
-                province: province,
+                province: 'Lima',
                 district: district,
                 address: address
             })
