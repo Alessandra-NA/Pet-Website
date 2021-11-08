@@ -19,8 +19,16 @@ Suggestion.init(
             type: DataTypes.STRING(100),
             allowNull: true,
         },
-        photo: {
-            type: DataTypes.ARRAY(DataTypes.BLOB),
+        photo1: {
+            type: DataTypes.BLOB,
+            allowNull: true,
+        },
+        photo2: {
+            type: DataTypes.BLOB,
+            allowNull: true,
+        },
+        photo3: {
+            type: DataTypes.BLOB,
             allowNull: true,
         },
         type: {

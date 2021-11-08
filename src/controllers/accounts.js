@@ -140,8 +140,15 @@ module.exports = {
       {
         linkS = establecimiento.link
       }
-
+      console.log(photoS)
+      
       let photoAIncluir = establecimiento.photo
+
+      console.log(photoAIncluir)
+      console.log("Establecimiento.photo")
+      console.log(establecimiento.photo)
+      console.log("Sugerencia.photo")
+      console.log(sugerencia.photo)
       if (photoS == undefined) 
       {
         
@@ -149,6 +156,7 @@ module.exports = {
       else 
       {
         const photoSugeridas = sugerencia.photo
+        
         for (var i=0; i<photoS.length; i++)
         {
           photoAIncluir.push(photoSugeridas[photoS[i]])
@@ -156,6 +164,8 @@ module.exports = {
       }
 
       console.log(photoAIncluir)
+      console.log("Establishment.photo")
+
       Location.update({
         district : distritoS,
         address : direccionS
@@ -168,7 +178,6 @@ module.exports = {
         photo : photoAIncluir
       }, {where : {id : estId}})
 
-    
       /*
       //Borramos la sugerencia
       Suggestion.findByPk(req.body.sugid).then(response => {
