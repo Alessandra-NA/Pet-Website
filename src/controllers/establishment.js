@@ -64,8 +64,6 @@ module.exports = {
                 .then(data => console.log("Establecimiento creado correctamente"), 
                     err => console.error(err)).then(res.redirect('/establishments?tab=mapa'))
             })
-            
-            res.redirect('/establishments?tab=mapa')
         } catch (error) {
             console.error(error)
         }
