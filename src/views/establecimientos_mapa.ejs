@@ -1,6 +1,6 @@
 <div>
-  <div class="invisible" id="longitud" title="" >longitud: </div>
-  <div class="invisible" id="latitud" title="" >latitud: </div>
+  <div class="invisible" id="longitud" title="">longitud: </div>
+  <div class="invisible" id="latitud" title="">latitud: </div>
   <div class="invisible" id="direccion">direccion: </div>
 </div>
 <h3>Lugares pet friendly</h3>
@@ -8,109 +8,164 @@
   <div id="map" class="col-12 col-lg-8"></div>
   <div class="col-12 col-lg-4">
     <% establecimientos.forEach(function(establecimiento){ %>
-    
-    <div class="border border-gray-400 border-1 estabElement mb-2" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
-      <div class="d-flex align-items-center"><img src="data:image/png;base64,<%=establecimiento.photo && establecimiento.photo[0]%>" style="width: 140px"></div>
-      <div class="px-2 py-1">
-        <p class="estab_lat" hidden><%=establecimiento.latitude%></p>
-        <p class="estab_lng" hidden><%=establecimiento.longitude%></p>
-        <h6 class="py-1 m-0"><%=establecimiento.name%></h6>
-        <p class="my-1 text-danger"><%=establecimiento.type%></p>
-        <p class="my-1"><%=establecimiento.location.address%>, <%=establecimiento.location.district%>, <%=establecimiento.location.province%></p>
-        <div class="d-flex"><p class="my-1">Valoración: <%=establecimiento.rating%>/5 <img style="width: 18px; height: 18px" src="https://img.icons8.com/ios-glyphs/30/000000/dog-footprint.png" /></p> </div>
+
+      <div class="border border-gray-400 border-1 estabElement mb-2" role="button"
+        onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
+        <div class="d-flex align-items-center"><img
+            src="data:image/png;base64,<%=establecimiento.photo && establecimiento.photo[0]%>" style="width: 140px">
+        </div>
+        <div class="px-2 py-1">
+          <p class="estab_lat" hidden>
+            <%=establecimiento.latitude%>
+          </p>
+          <p class="estab_lng" hidden>
+            <%=establecimiento.longitude%>
+          </p>
+          <h6 class="py-1 m-0">
+            <%=establecimiento.name%>
+          </h6>
+          <p class="my-1 text-danger">
+            <%=establecimiento.type%>
+          </p>
+          <p class="my-1">
+            <%=establecimiento.location.address%>, <%=establecimiento.location.district%>,
+                <%=establecimiento.location.province%>
+          </p>
+          <div class="d-flex">
+            <p class="my-1">Valoración: <%=establecimiento.rating%>/5 <img style="width: 18px; height: 18px"
+                  src="https://img.icons8.com/ios-glyphs/30/000000/dog-footprint.png" /></p>
+          </div>
+        </div>
       </div>
-    </div>
-    <% }) %>
+      <% }) %>
   </div>
 </div>
 
 <style>
-    #map {
-      height: 50rem;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+  #map {
+    height: 50rem;
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 </style>
 
 <script>
-    let markers = [];
-    var lats = [];
-    var longs = [];
+  let markers = [];
+  var lats = [];
+  var longs = [];
 
-    async function showEstabElements(){
-      var allEstab = document.getElementsByClassName("estabElement")
-      Array.from(allEstab).forEach((est) => {
-        if(lats.length==0) {
-          est.hidden = true
-          est.classList.remove("d-flex")
-        }
-        else {
-          var lat = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[0].textContent)
-          var lon = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[1].textContent)
-          for (let i = 0; i < lats.length; i++) {
-            if (lat === lats[i] && lon === longs[i]) {
-              est.hidden = false
-              est.classList.add("d-flex")
-              break
-            }
-            else {
-              est.hidden = true
-              est.classList.remove("d-flex")
-            }
+  async function showEstabElements() {
+    var allEstab = document.getElementsByClassName("estabElement")
+    Array.from(allEstab).forEach((est) => {
+      if (lats.length == 0) {
+        est.hidden = true
+        est.classList.remove("d-flex")
+      }
+      else {
+        var lat = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[0].textContent)
+        var lon = parseFloat(est.getElementsByTagName("div")[1].getElementsByTagName('p')[1].textContent)
+        for (let i = 0; i < lats.length; i++) {
+          if (lat === lats[i] && lon === longs[i]) {
+            est.hidden = false
+            est.classList.add("d-flex")
+            break
+          }
+          else {
+            est.hidden = true
+            est.classList.remove("d-flex")
           }
         }
+      }
+    });
+  }
+
+  const onBoundsChange = (event) => {
+    lats = []
+    longs = []
+    let bounds = map.getBounds()
+    markers.forEach(m => {
+      if (bounds.contains(m.getPosition())) {
+        lats.push(parseFloat(m.getPosition().lat()))
+        longs.push(parseFloat(m.getPosition().lng()))
+      }
+    })
+    try {
+      google.maps.event.removeListener(zoomChangeBoundsListener);
+    } catch (error) { }
+    showEstabElements()
+  }
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: -12.060459, lng: -77.040270 },
+      zoom: 16,
+    });
+    let infoWindow = new google.maps.InfoWindow();
+    infoWindow.open(map);
+
+    const contentString = '<button type="button" class="btn btn-success" onclick=AgregarClicked() >Agregar</button>'
+    var contClicks = 0;
+    map.addListener("click", (mapsMouseEvent) => {
+      // Close the current InfoWindow.
+      // Restart Marcas
+      if (contClicks != 0) {
+        deleteMarker();
+      }
+      infoWindow.close();
+      var lat = mapsMouseEvent.latLng.lat();
+      var long = mapsMouseEvent.latLng.lng();
+      // populate yor box/field with lat, lng
+      document.getElementById('longitud').title = long;
+      document.getElementById('longitud').innerHTML = "longitud: " + long;
+      document.getElementById('latitud').title = lat;
+      document.getElementById('latitud').innerHTML = "latitud: " + lat;
+      // Añadir marca
+      const marker = addMarker(mapsMouseEvent.latLng)
+      // Create a new InfoWindow.
+      infoWindow = new google.maps.InfoWindow({
+        position: mapsMouseEvent.latLng,
+        content: contentString,
       });
+
+      infoWindow.open({
+        anchor: marker,
+        map,
+        shouldFocus: false,
+      });
+      contClicks++;
+    });
+
+
+    let latArray = []
+    //add all estab_lat inner text values to latArray
+    document.querySelectorAll(".estab_lat").forEach(function (element) {
+      latArray.push(parseFloat(element.textContent))
+    })
+
+    //same for longArray
+    let longArray = []
+    document.querySelectorAll(".estab_lng").forEach(function (element) {
+      longArray.push(parseFloat(element.textContent))
+    })
+
+    //combine latArray and longArray into an array of latlng objects
+    let latLongArray = []
+    for (let i = 0; i < latArray.length; i++) {
+      latLongArray.push(new google.maps.LatLng(latArray[i], longArray[i]))
     }
 
-    const onBoundsChange = (event) =>{
-      lats = []
-      longs = []
-      let bounds = map.getBounds()
-      markers.forEach(m => {
-        if (bounds.contains(m.getPosition())) {
-          lats.push(parseFloat(m.getPosition().lat()))
-          longs.push(parseFloat(m.getPosition().lng()))
-        }
-      }) 
-      try {
-        google.maps.event.removeListener(zoomChangeBoundsListener);
-      } catch (error) {}     
-      showEstabElements()
-    }
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: -12.060459, lng: -77.040270 },
-          zoom: 16,
-      });
-      let infoWindow = new google.maps.InfoWindow();
-      infoWindow.open(map);
-
-      const contentString = '<button type="button" class="btn btn-success" onclick=AgregarClicked() >Agregar</button>'
-      var contClicks = 0;
-      map.addListener("click", (mapsMouseEvent) => {
-        // Close the current InfoWindow.
-        // Restart Marcas
-        if(contClicks!=0){
-          deleteMarker();
-        }
-        infoWindow.close();
-        var lat = mapsMouseEvent.latLng.lat();
-        var long = mapsMouseEvent.latLng.lng();
-        // populate yor box/field with lat, lng
-        document.getElementById('longitud').title = long;
-        document.getElementById('longitud').innerHTML  = "longitud: "+long;
-        document.getElementById('latitud').title  = lat;
-        document.getElementById('latitud').innerHTML  = "latitud: "+lat;
-        // Añadir marca
-        const marker = addMarker(mapsMouseEvent.latLng)
+    //add markers to map
+    for (let i = 0; i < latLongArray.length; i++) {
+      const marker = addMarker(latLongArray[i])
+      marker.addListener("click", () => {
         // Create a new InfoWindow.
         infoWindow = new google.maps.InfoWindow({
-          position: mapsMouseEvent.latLng,
-          content: contentString,
+          content: "Holu",
         });
 
         infoWindow.open({
@@ -118,40 +173,17 @@
           map,
           shouldFocus: false,
         });
-        contClicks ++;
-      });
 
-
-      let latArray = []
-      //add all estab_lat inner text values to latArray
-      document.querySelectorAll(".estab_lat").forEach(function(element){
-        latArray.push(parseFloat(element.textContent))
       })
+    }
 
-      //same for longArray
-      let longArray = []
-      document.querySelectorAll(".estab_lng").forEach(function(element){
-        longArray.push(parseFloat(element.textContent))
-      })
-
-      //combine latArray and longArray into an array of latlng objects
-      let latLongArray = []
-      for(let i = 0; i < latArray.length; i++){
-        latLongArray.push(new google.maps.LatLng(latArray[i], longArray[i]))
-      }
-
-      //add markers to map
-      for(let i = 0; i < latLongArray.length; i++){
-        addMarker(latLongArray[i])
-      }
-
-      if (navigator.geolocation) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map.panTo(initialLocation);
       });
     }
-    google.maps.event.addListener(map, 'zoom_changed', function(event){
+    google.maps.event.addListener(map, 'zoom_changed', function (event) {
       zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', onBoundsChange)
     })
     google.maps.event.addListener(map, 'dragend', onBoundsChange)
@@ -187,13 +219,12 @@
 </script>
 
 <script>
-  function AgregarClicked(){
+  function AgregarClicked() {
     const longCurrent = document.getElementById('longitud').title
     const latCurrent = document.getElementById('latitud').title
-    location.href='establishments/new?lat='+latCurrent+'&long='+longCurrent
+    location.href = 'establishments/new?lat=' + latCurrent + '&long=' + longCurrent
   }
 </script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizeC9tFV647keWnjuTGF2G3yJregpyEs&callback=initMap">
-</script>
-
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizeC9tFV647keWnjuTGF2G3yJregpyEs&callback=initMap">
+  </script>
