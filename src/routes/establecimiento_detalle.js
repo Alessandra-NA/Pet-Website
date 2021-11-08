@@ -2,8 +2,10 @@ const { Router } = require('express');
 const {} = require("../middlewares/auth")
 const { getEstablishment, crearSugerencia } = require('../controllers/establecimiento_detalle');
 const router = Router();
+const multer = require('multer');
+upload = multer();
 
 
 router.get('/', getEstablishment)
-router.get('/ds', crearSugerencia)
+router.post('/ds', upload.array('images'), crearSugerencia)
 module.exports = router;

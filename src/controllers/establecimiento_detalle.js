@@ -27,12 +27,15 @@ module.exports = {
   },
 
   crearSugerencia: async(req,res)=>{
-    var id = req.query.id;
-    var name = req.query.name;
-    var type = req.query.type;
-    var link = req.query.link;
-    var address = req.query.address;
-    var district = req.query.district;
+    var id = req.body.id;
+    var name = req.body.name;
+    var type = req.body.type;
+    var link = req.body.link;
+    var address = req.body.address;
+    var district = req.body.district;
+
+    var fotos =  req.files
+
 
 
     var f = new Date();
@@ -49,6 +52,7 @@ module.exports = {
       name: name,
       fecha: fecha,
       type: type,
+      photo: fotos,
       link: link, 
       address: address,
       district: district,
@@ -57,13 +61,6 @@ module.exports = {
 
 
     try{
-      const establecimiento = await Establishment.findOne( {include: [
-        {
-          model: Location,
-          as: 'location',
-        },          
-      ],        
-      where:{id:id}})
       res.redirect('/establecimiento_detalle?id='+id);
     }
     catch{
@@ -76,10 +73,17 @@ module.exports = {
 
 imagesToBase64ForEstablishmentDetails = function (establishment) {
 
-  if (establishment.photo) {
-      for(var i=0; i<establishment.photo.length; i++) {
-          establishment.photo[i] = Buffer.from(establishment.photo[i]).toString('base64');
-      }
+  if (establishment.photo1) {
+    establishment.photo1 = Buffer.from(establishment.photo1).toString('base64');
+  }
+  if (establishment.photo2) {
+    establishment.photo2 = Buffer.from(establishment.photo2).toString('base64');
+  }
+  if (establishment.photo3) {
+    establishment.photo3 = Buffer.from(establishment.photo3).toString('base64');
+  }
+  if (establishment.photo4) {
+    establishment.photo4 = Buffer.from(establishment.photo4).toString('base64');
   }
   return establishment
   
