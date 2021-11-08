@@ -222,7 +222,7 @@ const main = async () => {
         var imagenTemp = "'" + path.resolve('src/public/img', 'establishment.jpg') + "'"
         var imagenTemp1 = "'" + path.resolve('src/public/img', 'establishment1.jpg') + "'"
         sequelize.query('UPDATE "Establishments" set photo1 = pg_read_binary_file(' + imagenTemp + ') WHERE id=' + newEstablishment.id)
-        sequelize.query('UPDATE "Establishments" set photo1 = pg_read_binary_file(' + imagenTemp1 + ') WHERE id=' + newEstablishment.id)
+        sequelize.query('UPDATE "Establishments" set photo2 = pg_read_binary_file(' + imagenTemp1 + ') WHERE id=' + newEstablishment.id)
       } catch (err) {
         console.log(err);
       }
