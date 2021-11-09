@@ -2,11 +2,11 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">Nombre del establecimiento</th>
       <th scope="col">Calificación</th>
       <th scope="col">Tipo</th>
-      <th scope="col"></th>
+      <th scope="col">Sugerencias</th>
+      <th scope="col">Reportes</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
@@ -14,14 +14,11 @@
   <tbody>
     <% establecimientos.forEach(function(establecimiento){ %>
     <tr>
-        <th scope="row">
-          <%=establecimiento.id%>
+        <th scope="row"> 
+          <%=establecimiento.name%>
         </th>
         <td>
-          <%=establecimiento.name%>
-        </td>
-        <td>
-          <%=establecimiento.rating%>
+          <%=establecimiento.rating%>/5
         </td>
         <td>
           <%=establecimiento.type%>
@@ -35,6 +32,9 @@
             <button class="btn btn-primary">Ver reportes no Pet Friendly</button>
         </td>
 
+        <td>
+          <button type="button" class="btn btn-success">Editar</button>
+        </td>
         <td>
             <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger deleteButton"
             estid="<%=establecimiento.id%>" username="<%=establecimiento.name%>">Borrar</button>
