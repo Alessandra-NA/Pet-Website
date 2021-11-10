@@ -13,7 +13,7 @@
   <div class="row col-12 col-lg-4">
     <% establecimientos.forEach(function(establecimiento){ %>
     
-    <div class="border border-gray-400 border-1 estabElement mb-2" id="<%= establecimiento.id %>" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden>
+    <div class="border border-gray-400 border-1 estabElement mb-2" id="<%= establecimiento.id %>" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'" hidden style="height: 170px;">
       <div class="d-flex align-items-center"><img src="data:image/png;base64,<%=establecimiento.photo1%>" style="width: 140px"></div>
       <div class="px-2 py-1">
         <p class="estab_lat" hidden><%=establecimiento.latitude%></p>
