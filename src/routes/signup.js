@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { } = require("../middlewares/auth")
+const {authLoged } = require("../middlewares/auth")
 const { getSignUp, chooseTypeAccount, crearPeople, crearShelter, getCuentaDuplicada } = require('../controllers/signup');
 const router = Router();
 const multer = require('multer');
@@ -15,7 +15,7 @@ router.post('/crearPeople', upload.single('image'), crearPeople)
 
 router.post('/crearShelter', upload.single('image'), crearShelter)
 
-router.get('/chooseTypeAccount', chooseTypeAccount)
+router.get('/chooseTypeAccount',authLoged, chooseTypeAccount)
 
 router.get('/cuentaDuplicada', getCuentaDuplicada)
 
