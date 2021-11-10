@@ -34,7 +34,9 @@ module.exports = {
     var address = req.body.address;
     var district = req.body.district;
 
-    var fotos =  req.files
+    const photo1 =  req.files[0]?.buffer
+    const photo2 =  req.files[1]?.buffer
+    const photo3 =  req.files[2]?.buffer
 
     const userType = req.session.userType
     const idUser = req.session.userId
@@ -60,9 +62,11 @@ module.exports = {
 
     await Suggestion.create({
       name: name,
+      photo1: photo1,
+      photo2: photo2,
+      photo3: photo3,
       fecha: fecha,
       type: type,
-      photo: fotos,
       link: link, 
       address: address,
       district: district,

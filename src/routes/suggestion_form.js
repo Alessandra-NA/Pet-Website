@@ -4,5 +4,6 @@ const { getEstablishment } = require('../controllers/suggestion_form');
 const router = Router();
 
 
+
 router.get('/',authUser, getEstablishment)
 module.exports = router;

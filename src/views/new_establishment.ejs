@@ -19,18 +19,18 @@
         </div>
         <div class="mb-3">
             <label for="newEstablishmentType" class="form-label">Tipo de establecimiento</label>
-            <select class="form-select" id="newEstablishmentType" aria-label="Tipo de establecimiento" name="type" >
+            <select class="form-select" id="newEstablishmentType" aria-label="Tipo de establecimiento" name="type">
                 <option selected>Seleccione el tipo de establecimiento</option>
                 <option value="Bares & cafés">Bares & cafés</option>
-                <option value="restaurantes">Restaurantes</option>
-                <option value="terrazas">Terrazas</option>
-                <option value="hoteles & alojamientos">Hoteles & alojamientos</option>
-                <option value="playas">Playas</option>
-                <option value="tiendas">Tiendas</option>
-                <option value="parques">Parques</option>
-                <option value="centros de belleza">Centros de belleza</option>
-                <option value="clínicas">Clínicas</option>
-                <option value="transportes">Transportes</option>
+                <option value="Restaurantes">Restaurantes</option>
+                <option value="Terrazas">Terrazas</option>
+                <option value="Hoteles & Alojamientos">Hoteles & alojamientos</option>
+                <option value="Playas">Playas</option>
+                <option value="Tiendas">Tiendas</option>
+                <option value="Parques">Parques</option>
+                <option value="Centros de belleza">Centros de belleza</option>
+                <option value="Clínicas">Clínicas</option>
+                <option value="Transportes">Transportes</option>
             </select>
         </div>
         <div class="mb-3">
@@ -160,22 +160,22 @@
         document.querySelector('#newEstablishmentOfPets').addEventListener('change', function (e) {
             if (this.checked) {
                 document.querySelector('#newEstablishmentType').innerHTML = `
-                    <option value="spa mascotas">Spa mascotas</option>
-                    <option value="veterinarias">Veterinarias</option>
-                    <option value="tienda mascotas">Tienda mascotas</option>
+                    <option value="Spa mascotas">Spa mascotas</option>
+                    <option value="Veterinarias">Veterinarias</option>
+                    <option value="Tienda mascotas">Tienda mascotas</option>
                 `;
             } else {
                 document.querySelector('#newEstablishmentType').innerHTML = `
                     <option value="Bares & cafés">Bares & cafés</option>
-                    <option value="restaurantes">Restaurantes</option>
-                    <option value="terrazas">Terrazas</option>
-                    <option value="hoteles & alojamientos">Hoteles & alojamientos</option>
-                    <option value="playas">Playas</option>
-                    <option value="tiendas">Tiendas</option>
-                    <option value="parques">Parques</option>
-                    <option value="centros de belleza">Centros de belleza</option>
-                    <option value="clínicas">Clínicas</option>
-                    <option value="transportes">Transportes</option>
+                    <option value="Restaurantes">Restaurantes</option>
+                    <option value="Terrazas">Terrazas</option>
+                    <option value="Hoteles & Alojamientos">Hoteles & alojamientos</option>
+                    <option value="Playas">Playas</option>
+                    <option value="Tiendas">Tiendas</option>
+                    <option value="Parques">Parques</option>
+                    <option value="Centros de belleza">Centros de belleza</option>
+                    <option value="Clínicas">Clínicas</option>
+                    <option value="Transportes">Transportes</option>
                 `;
             }
         });

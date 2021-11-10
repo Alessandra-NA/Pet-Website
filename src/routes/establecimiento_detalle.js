@@ -7,5 +7,5 @@ upload = multer();
 
 
 router.get('/', getEstablishment)
-router.post('/ds', upload.array('images'), crearSugerencia)
+router.post('/ds', upload.array('image'), crearSugerencia)
 module.exports = router;
