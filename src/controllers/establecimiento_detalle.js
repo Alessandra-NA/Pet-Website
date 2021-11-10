@@ -1,4 +1,4 @@
-const { Establishment , Location, Suggestion} = require('../models');
+const { Establishment , Location, Suggestion, UserPerson, UserShelter} = require('../models');
 
 
 module.exports = {
@@ -36,6 +36,16 @@ module.exports = {
 
     var fotos =  req.files
 
+    const userType = req.session.userType
+    const idUser = req.session.userId
+    var userID=0
+    if(userType=="person"){
+      currentUser = await UserPerson.findOne({where:{id:idUser}})
+      userID = currentUser.user_id
+    }else if(userType=="shelter"){
+      currentUser = await UserShelter.findOne({where:{id:idUser}})
+      userID = currentUser.user_id
+    }
 
 
     var f = new Date();
@@ -57,6 +67,7 @@ module.exports = {
       address: address,
       district: district,
       establishment_id: id,
+      user_id: userID
     });
 
 

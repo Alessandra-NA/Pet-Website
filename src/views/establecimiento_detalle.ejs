@@ -99,7 +99,11 @@
             </div>
             <div class="col-3" >
                 <div class="container">
+                    <% if (globalType.length>0 && globalType != 'admin') { %>
                     <button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='./suggestion_form?id=<%=establecimiento.id%>'">Dar Sugerencia</button>
+                    <% } else {%>
+                     
+                    <% }%>
                 </div>                
             </div>            
         </div>

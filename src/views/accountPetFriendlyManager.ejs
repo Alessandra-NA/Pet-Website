@@ -1,22 +1,22 @@
 <h1>Administración de establecimientos Pet Friendly</h1>
-<table class="table">
+<table class="table text-center">
   <thead>
     <tr>
-      <th scope="col">Nombre del establecimiento</th>
-      <th scope="col">Calificación</th>
-      <th scope="col">Tipo</th>
-      <th scope="col">Sugerencias</th>
-      <th scope="col">Reportes</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col" class="col-3">Nombre del establecimiento</th>
+      <th scope="col" class="col-1">Calificación</th>
+      <th scope="col" class="col-2">Tipo</th>
+      <th scope="col" class="col-2">Sugerencias</th>
+      <th scope="col" class="col-2">Reportes</th>
+      <th scope="col" class="col-1"></th>
+      <th scope="col" class="col-1"></th>
     </tr>
   </thead>
   <tbody>
     <% establecimientos.forEach(function(establecimiento){ %>
-    <tr>
-        <th scope="row"> 
+      <tr scope="row" class="col-auto">
+        <td>
           <%=establecimiento.name%>
-        </th>
+        </td>
         <td>
           <%=establecimiento.rating%>/5
         </td>
@@ -25,21 +25,21 @@
         </td>
 
         <td>
-            <a href="/accounts/verSugerencias/<%= establecimiento.id %>" class="btn btn-primary">Ver sugerencias de cambio</a>
+          <a href="/accounts/verSugerencias/<%= establecimiento.id %>" class="btn btn-primary">Ver sugerencias</a>
         </td>
 
         <td>
-            <button class="btn btn-primary">Ver reportes no Pet Friendly</button>
+          <button class="btn btn-primary">Ver reportes</button>
         </td>
 
         <td>
           <button type="button" class="btn btn-success">Editar</button>
         </td>
         <td>
-            <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger deleteButton"
+          <button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger deleteButton"
             estid="<%=establecimiento.id%>" username="<%=establecimiento.name%>">Borrar</button>
         </td>
-    </tr>
+      </tr>
       <% }) %>
   </tbody>
 </table>

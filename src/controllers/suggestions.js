@@ -1,4 +1,4 @@
-const {  Suggestion, Location } = require('../models');
+const {  Suggestion, Location, User } = require('../models');
 
 module.exports = {
   /**
@@ -11,8 +11,8 @@ module.exports = {
     try{ 
       const Suggestions = await Suggestion.findAll({ include: [
         {
-          model: Location,
-          as: 'location',                 
+          model: User,
+          as: 'user',                 
         }
       ]})
       return res.render('suggestions',{sugerencias :Suggestions});
