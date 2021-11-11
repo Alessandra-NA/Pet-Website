@@ -3,8 +3,8 @@ const sequelize = require('../db');
 
 class Suggestion extends Model{
     // relaciones:
-    static associate({ Establishment, User }) {
-        this.belongsTo(User, { as: 'user', foreignKey: {allowNull: false, name: 'user_id'}, onDelete: 'cascade'});
+    static associate({ Establishment, UserPerson }) {
+        this.belongsTo(UserPerson, { as: 'user', foreignKey: {allowNull: false, name: 'userPerson_id'}, onDelete: 'cascade'});
         this.belongsTo(Establishment, { as: 'establishment', foreignKey: 'establishment_id' });
     }
 }

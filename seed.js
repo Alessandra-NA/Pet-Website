@@ -118,9 +118,9 @@ const establecimientos = [
 ];
 
 const sugerencias = [
-  { fecha: new Date(), name: 'Los Gallardos', photo: null, type: 'Veterinaria', link: 'gallardos.com', district: 'La Molina', address: 'Los Jirones 123', establishment_id: 1, user_id: 1 },
-  { fecha: new Date(), name: 'Los Vielos', photo: null, type: 'Spa mascotas', link: 'vielos.com', district: 'San Borja', address: 'Los Aduanes 123', establishment_id: 1, user_id: 2 },
-  { fecha: new Date(), name: 'El Juanete', photo: null, type: 'Hoteles & Alojamientos', link: 'juanete.com', district: 'San Isidro', address: 'Los Hipogrifos 123', establishment_id: 1, user_id: 3 }
+  { fecha: new Date(), name: 'Los Gallardos', photo: null, type: 'Veterinaria', link: 'gallardos.com', district: 'La Molina', address: 'Los Jirones 123', establishment_id: 1, userPerson_id: 1 },
+  { fecha: new Date(), name: 'Los Vielos', photo: null, type: 'Spa mascotas', link: 'vielos.com', district: 'San Borja', address: 'Los Aduanes 123', establishment_id: 1, userPerson_id: 2 },
+  { fecha: new Date(), name: 'El Juanete', photo: null, type: 'Hoteles & Alojamientos', link: 'juanete.com', district: 'San Isidro', address: 'Los Hipogrifos 123', establishment_id: 1, userPerson_id: 2 }
 ];
 
 const usuarios = [

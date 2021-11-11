@@ -1,32 +1,32 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-class Report extends Model {
+class ReportEstablishment extends Model {
     // relaciones:
-    static associate({ User }) {
-        this.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
+    static associate({ Establishment}) {
+        this.belongsTo(Establishment, { as: 'establishment', foreignKey: 'establishment_id' });
     }
 }
-Report.init(
+ReportEstablishment.init(
     {
         // atributos:
-        reason: {
-            type: DataTypes.STRING(100),
+        fecha: {
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
-        commet: {
+        desc: {
             type: DataTypes.STRING(300),
             allowNull: false,
         },
         photo: {
             type: DataTypes.BLOB,
             allowNull: true,
-        },
+        }
     },
     {
         sequelize,
-        modelName: 'Report',
+        modelName: 'ReportEstablishment',
     }
 );
 
-module.exports = { Report };
+module.exports = { ReportEstablishment };

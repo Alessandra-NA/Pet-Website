@@ -3,10 +3,11 @@ const sequelize = require('../db');
 
 class Establishment extends Model{
     // relaciones:
-    static associate({ Location, Comment, Suggestion }) {
+    static associate({ Location, Comment, Suggestion, ReportEstablishment }) {
         this.belongsTo(Location, { as: 'location', foreignKey: 'location_id' });
         this.hasMany(Comment, { as: 'comments', foreignKey: 'establishment_id', onDelete: 'cascade' });
         this.hasMany(Suggestion, { as: 'suggestions', foreignKey: 'establishment_id', onDelete: 'cascade' });
+        this.hasMany(ReportEstablishment, {as: 'reportEstablishment', foreignKey: 'establishment_id', onDelete: 'cascade'})
     }
 }
 Establishment.init(
@@ -33,7 +34,7 @@ Establishment.init(
             allowNull: true,
         },
         rating: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(5),
             allowNull: false,
         },
         ofPets:{
