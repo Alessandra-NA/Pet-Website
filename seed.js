@@ -32,7 +32,8 @@ const especies = [
 
 let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor.";
 let text2 ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor consectetur.";
-const path = require('path')
+const path = require('path');
+const { ReportUserPost } = require('./src/models/ReportUserPost');
 
 const mascotas = [
   {
@@ -124,6 +125,8 @@ const sugerencias = [
   { fecha: new Date(), name: 'El Juanete', photo: null, type: 'Hoteles & Alojamientos', link: 'juanete.com', district: 'San Isidro', address: 'Los Hipogrifos 123', establishment_id: 1, userPerson_id: 2 }
 ];
 
+
+
 const usuarios = [
   { username: 'User1', password: md5('123'), type: 'person', status: 'actived' },
   { username: 'User2', password: md5('123'), type: 'person', status: 'actived' },
@@ -163,6 +166,12 @@ const posts = [
   { fecha: new Date(), user_id: 2, pet_id: 9 },
   { fecha: new Date(), user_id: 2, pet_id: 10 },
   { fecha: new Date(), user_id: 2, pet_id: 11 }
+];
+
+const reportesPosts = [
+  { fecha: new Date(), desc: 'Estan publicando a Run Run en ese post', photo: null, user_id : 1, userAdoptante_id : 2},
+  { fecha: new Date(), desc: 'Estan publicando a Nyo en ese post', photo: null, user_id : 2, userAdoptante_id : 1},
+  { fecha: new Date(), desc: 'Estan publicando a Cato en ese post', photo: null, user_id : 3, userAdoptante_id : 2}
 ];
 
 const main = async () => {
@@ -293,15 +302,26 @@ const main = async () => {
       }
     });
 
+    
     comentarios.forEach(async comentario => {
       try {
         await Comment.create(comentario);
-  
+        
       }catch (err) {
         console.log(err);
       }
-    })
+    });
 
+    reportesPosts.forEach(async reporte => {
+      try{
+        const newReportePost = await ReportUserPost.create(reporte)
+        var imagenTemp = "'" + path.resolve('src/public/img', 'establishment.jpg') + "'"
+        sequelize.query('UPDATE "ReportUserPosts" set photo = pg_read_binary_file(' + imagenTemp + ') WHERE id=' + newReportePost.id)
+      } catch (err) {
+        console.log(err);
+      }
+    })
+    
   } catch (err) {
     console.log(err);
   }
