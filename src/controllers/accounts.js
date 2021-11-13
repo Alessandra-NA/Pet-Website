@@ -10,24 +10,19 @@ module.exports = {
    *
    */
 
-  chooseTypeAccountToManage : (req, res) => {
-    try{
-      res.render('chooseTypeAccountToManage', {
-        title : 'Elegir cuenta a administrar',
-      })
-    }
-    catch{}
-  },
-
   getAccounts : async (req, res) => {
     try {
       const tipoCuenta = parseInt(req.query.tipo_cuenta)
+      const persons = await UserPerson.findAll({include : {all : true}})
+      const shelters = await UserShelter.findAll({include : {all : true}})
 
       if (tipoCuenta == 0) {
         User.findAll({include: {all: true}, where : {type : 'person'}}).then(response => {
+
           res.render('accountManager', {
             title: 'Administrar cuentas de personas', 
             users: response.filter(user => user.type != 'admin'),
+            childUsers : persons,
             type : "personas"
           })
         })
@@ -35,9 +30,11 @@ module.exports = {
 
       else if (tipoCuenta == 1){
         User.findAll({include: {all: true}, where : {type : 'shelter'}}).then(response => {
+         
           res.render('accountManager', {
             title: 'Administrar cuentas de albergue', 
             users: response.filter(user => user.type != 'admin'),
+            childUsers : shelters,
             type : "albergues"
           })
         })
