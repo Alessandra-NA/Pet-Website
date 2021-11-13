@@ -8,8 +8,9 @@ const router = Router();
   EXAMPLE:
   router.get('/', nameAuth, getPetPost)
 */
-router.get('/', authAdmin, chooseTypeAccountToManage)
-router.post('/', authAdmin, getAccounts)
+//router.get('/', authAdmin, chooseTypeAccountToManage)
+router.get('/', authAdmin, getAccounts)
+//router.post('/', authAdmin, getAccounts)
 router.get('/verSugerencias/:estid', authAdmin, getSugerencias)
 router.post('/confirmarSugerencia', confirmarSugerencia)
 router.get('/eliminarSugerencia/:sugid', authAdmin,eliminarSugerengia)

@@ -21,7 +21,7 @@ module.exports = {
 
   getAccounts : async (req, res) => {
     try {
-      const tipoCuenta = parseInt(req.body.tipo_cuenta)
+      const tipoCuenta = parseInt(req.query.tipo_cuenta)
 
       if (tipoCuenta == 0) {
         User.findAll({include: {all: true}, where : {type : 'person'}}).then(response => {
