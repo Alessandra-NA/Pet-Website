@@ -67,6 +67,19 @@ module.exports = {
             console.error(error)
         }
     },
+
+    postSaveNewComment: async (req, res) => {
+        var id = req.session.userId;
+        console.log(id)
+        try {
+          const gass = String
+          return res.redirect('/establecimiento_detalle?id='+ id);
+          //return res.render('establecimiento_detalle', { establecimiento: imagesToBase64ForEstablishmentDetails(establecimiento), comentarios: imagesToBase64UserComments(comentarios) });
+        }
+        catch  (error) {
+            console.error(error)
+        }
+    },
 }
 
 imagesToBase64ForEstablishment = function (establishmentArray) {

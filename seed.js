@@ -1,6 +1,6 @@
 // node
 const md5 = require('md5');
-const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter, Suggestion } = require('./src/models');
+const { sequelize, ActivityLevel, Gender, Location, Pet, Post, Size, Specie, Establishment, User, UserAdmin, UserPerson, UserShelter, Suggestion, Comment } = require('./src/models');
 const fs = require('fs');
 
 const nivelesActividad = [
@@ -31,6 +31,7 @@ const especies = [
 ];
 
 let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor.";
+let text2 ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor. Fusce lacinia eu libero eu gravida. Morbi varius sapien sed luctus tempus. In et tellus ac ante gravida porttitor consectetur.";
 const path = require('path')
 
 const mascotas = [
@@ -111,7 +112,7 @@ const localizaciones = [
 ];
 
 const establecimientos = [
-  { name: 'Establecimiento1', rating: 0, ofPets: true, type: 'Spa mascotas', link: '', location_id: 4, photo: null, latitude: -12.083750075956283, longitude: -76.97704255222924 },
+  { name: 'Establecimiento1', rating: 4, ofPets: true, type: 'Spa mascotas', link: '', location_id: 4, photo: null, latitude: -12.083750075956283, longitude: -76.97704255222924 },
   { name: 'Establecimiento2', rating: 0, ofPets: true, type: 'Veterinarias', link: '', location_id: 5, photo: null, latitude: -12.078668590551107, longitude: -77.00215935214327 },
   { name: 'Establecimiento3', rating: 0, ofPets: false, type: 'Hoteles & Alojamientos', link: '', location_id: 6, photo: null, latitude: -12.121898075505575, longitude: -77.03064550074568 },
 
@@ -142,6 +143,13 @@ const usuarios_shelters = [
 const usuarios_admin = [
   { name: 'Nyo', user_id: 4 }
 ]
+
+const comentarios = [
+  {fecha: new Date(), desc: text, score:3, userPerson_id: 1, establishment_id: 1},
+  {fecha: new Date(), desc: text2, score:5, userPerson_id: 2, establishment_id: 1},
+  {fecha: new Date(), desc: text2, score:1, userPerson_id: 2, establishment_id: 1},
+  {fecha: new Date(), desc: text, score:5, userPerson_id: 1, establishment_id: 1}
+];
 
 const posts = [
   { fecha: new Date(), user_id: 1, pet_id: 1 },
@@ -285,6 +293,14 @@ const main = async () => {
       }
     });
 
+    comentarios.forEach(async comentario => {
+      try {
+        await Comment.create(comentario);
+  
+      }catch (err) {
+        console.log(err);
+      }
+    })
 
   } catch (err) {
     console.log(err);

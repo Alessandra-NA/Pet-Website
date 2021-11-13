@@ -1,4 +1,4 @@
-const { Establishment , Location, Suggestion, UserPerson, UserShelter} = require('../models');
+const { Establishment, Location, Suggestion, UserPerson, UserShelter, Comment } = require('../models');
 
 
 module.exports = {
@@ -9,24 +9,34 @@ module.exports = {
    */
 
 
-  getEstablishment: async(req,res)=> {
-    var id =req.query.id;
-    try{
-      const establecimiento = await Establishment.findOne( {include: [
-        {
-          model: Location,
-          as: 'location',
-        },          
-      ],        
-      where:{id:id}})
-      return res.render('establecimiento_detalle',{establecimiento:imagesToBase64ForEstablishmentDetails(establecimiento)});
+  getEstablishment: async (req, res) => {
+    var id = req.query.id;
+    try {
+      const establecimiento = await Establishment.findOne({
+        include: [
+          {
+            model: Location,
+            as: 'location',
+          },
+        ],
+        where: { id: id }
+      })
+      const idEstablecimiento = establecimiento.id
+      const comentarios = await Comment.findAll({
+        include: {
+          model: UserPerson,
+          as: 'user',
+        },
+        where: { establishment_id: idEstablecimiento },
+      })
+      return res.render('establecimiento_detalle', { establecimiento: imagesToBase64ForEstablishmentDetails(establecimiento), comentarios: imagesToBase64UserComments(comentarios) });
     }
-    catch{
+    catch {
 
     }
   },
 
-  crearSugerencia: async(req,res)=>{
+  crearSugerencia: async (req, res) => {
     var id = req.body.id;
     var name = req.body.name;
     var type = req.body.type;
@@ -34,18 +44,18 @@ module.exports = {
     var address = req.body.address;
     var district = req.body.district;
 
-    const photo1 =  req.files[0]?.buffer
-    const photo2 =  req.files[1]?.buffer
-    const photo3 =  req.files[2]?.buffer
+    const photo1 = req.files[0]?.buffer
+    const photo2 = req.files[1]?.buffer
+    const photo3 = req.files[2]?.buffer
 
     const userType = req.session.userType
     const idUser = req.session.userId
-    var userID=0
-    if(userType=="person"){
-      currentUser = await UserPerson.findOne({where:{id:idUser}})
+    var userID = 0
+    if (userType == "person") {
+      currentUser = await UserPerson.findOne({ where: { id: idUser } })
       userID = currentUser.user_id
-    }else if(userType=="shelter"){
-      currentUser = await UserShelter.findOne({where:{id:idUser}})
+    } else if (userType == "shelter") {
+      currentUser = await UserShelter.findOne({ where: { id: idUser } })
       userID = currentUser.user_id
     }
 
@@ -67,7 +77,7 @@ module.exports = {
       photo3: photo3,
       fecha: fecha,
       type: type,
-      link: link, 
+      link: link,
       address: address,
       district: district,
       establishment_id: id,
@@ -75,15 +85,58 @@ module.exports = {
     });
 
 
-    try{
-      res.redirect('/establecimiento_detalle?id='+id);
+    try {
+      res.redirect('/establecimiento_detalle?id=' + id);
     }
-    catch{
+    catch {
 
     }
-    
-  }
+
+  },
+
+  postSaveNewComment1: async (req, res) => {
+    var idUsuario = req.session.userId;
+    const idEstablecimiento = req.query.id;
+    const { desc, score} = req.body;
+
+    try {
+      const fecha = new Date();
+      await Comment.create({
+        fecha: fecha,
+        desc: desc,
+        score: score,
+        userPerson_id: idUsuario,
+        establishment_id: idEstablecimiento
+      })
+      const establecimiento = await Establishment.findOne({
+        include: [
+          {
+            model: Location,
+            as: 'location',
+          },
+        ],
+        where: { id: idEstablecimiento }
+      })
+
+      const newRating = Math.round((parseInt(establecimiento.rating) + parseInt(score))/2)
+      // newRating = round(4+3) -> 7
+      // newRating = round(43) -> 43
+      // 1+1 = 11 -> str
+      // 1+1 = 1 -> logic
+      // 1+1 = 2 -> math
+
+      establecimiento.update({
+        rating: newRating
+      })
+
+      return res.redirect('/establecimiento_detalle?id='+ idEstablecimiento);
+    }
+    catch  (error) {
+        console.error(error)
+    }
+  },
 };
+
 
 
 imagesToBase64ForEstablishmentDetails = function (establishment) {
@@ -101,6 +154,15 @@ imagesToBase64ForEstablishmentDetails = function (establishment) {
     establishment.photo4 = Buffer.from(establishment.photo4).toString('base64');
   }
   return establishment
-  
+
 }
 
+imagesToBase64UserComments = function (commentsArray) {
+  let array = commentsArray.map((comment) => {
+    if (comment.user.photo) {
+      comment.user.photo = comment.user.photo.toString('base64')
+    }
+    return comment
+  })
+  return array
+}
