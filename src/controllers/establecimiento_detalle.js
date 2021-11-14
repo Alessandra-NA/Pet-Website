@@ -142,7 +142,9 @@ module.exports = {
     var f = new Date();
     var fecha = f.getFullYear() + "-" + f.getMonth() + "-" + f.getDate()
     console.log(reporte)
-
+    if(reporte == ""){
+      console.log(reporte)
+    }
     if (req.file){
       var photo = req.file.buffer;
       await ReportEstablishment.create({
@@ -174,8 +176,6 @@ module.exports = {
 
   },
 };
-
-
 
 imagesToBase64ForEstablishmentDetails = function (establishment) {
 
