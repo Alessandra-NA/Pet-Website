@@ -1,4 +1,4 @@
-const { Establishment, Location, Suggestion, UserPerson, UserShelter, Comment } = require('../models');
+const { Establishment, Location, Suggestion, UserPerson, UserShelter, Comment, ReportEstablishment } = require('../models');
 
 
 module.exports = {
@@ -134,6 +134,44 @@ module.exports = {
     catch  (error) {
         console.error(error)
     }
+  },
+
+  crearReportar: async (req, res) => {
+    var reporte = req.body.reporte;
+    var id = req.body.id;
+    var f = new Date();
+    var fecha = f.getFullYear() + "-" + f.getMonth() + "-" + f.getDate()
+    console.log(reporte)
+
+    if (req.file){
+      var photo = req.file.buffer;
+      await ReportEstablishment.create({
+        fecha: fecha,
+        desc: reporte, 
+        photo: photo, 
+        establishment_id: id,
+      });
+      
+    }
+    else{
+      await ReportEstablishment.create({
+        fecha: fecha,
+        desc: reporte,
+        establishment_id: id,
+      });
+    }
+
+      
+    
+    
+
+    try {
+      res.redirect('/establecimiento_detalle?id=' + id);
+    }
+    catch {
+
+    }
+
   },
 };
 
