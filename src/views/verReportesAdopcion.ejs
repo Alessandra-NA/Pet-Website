@@ -1,0 +1,89 @@
+
+<main class="container">
+  
+    <div style="background-color: aliceblue; margin: 2%;">
+      <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">Administración de Usuarios - Reportes de Adopción"</h2>
+    </div>
+
+    <% if (reportes.length == 0) { %>
+        <p style="text-align:center;">-- Actualmente no se encuentran reportes --</p>
+    
+    <% } %>
+    
+    <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
+      <% reportes.forEach(function(reporte){ %>
+            <div style="width: 33%"; class="col">
+                <div class="card">
+                    <div class="card-title">
+                        <h4 class="mt-3" style="font-weight: bold; text-align: center;">Reporte</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <label for="" class="form-label" style="font-weight: bold;">¿Qué ocurrió?</label>
+                        <p><%= reporte.desc %></p>
+
+                        <div class="row">
+                            <label for="" class="form-label" style="font-weight: bold;">Foto:</label>
+                        </div>
+                        <div class="row">
+                            <img src="data:image/png;base64,<%=reporte.photo?reporte.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <% if (reporte.user.type == "person") { %>
+                                    <% usuariosPeople.forEach(function(people){ %>
+                                        <% if (people.user_id == reporte.user.id) { %>
+                                        <div class="row mt-4">
+                                            <div class="col-6">
+                                                <img src="data:image/png;base64,<%=people.photo?people.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Por:</label>
+                                                <label for="" style="font-weight: bold;" class="form-label"><%= people.first_name %> <%= people.last_name %></label>
+                                                <label for="" style="font-size:90%"; class="form-label"><%= reporte.fecha %></label>
+                                            </div>
+                                        </div>
+                
+                                        <% } %>
+                                    <% }) %>
+        
+                                <% } else if(reporte.user.type == "shelter") { %>
+                                    <% usuariosShelter.forEach(function(shelter){ %>
+                                        <% if (shelter.user_id == reporte.user.id) { %>
+                                        <div class="row mt-4">
+                                            <div class="col-6">
+                                                <img src="data:image/png;base64,<%=shelter.photo?shelter.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Por:</label>
+                                                <label for="" style="font-weight: bold;" class="form-label"><%= shelter.name %></label>
+                                                <label for="" style="font-size:90%"; class="form-label"><%= reporte.fecha %></label>
+                                            </div>
+                                        </div>
+                
+                                        <% } %>
+                                    <% }) %>
+                                <% } %>
+                            </div>
+
+                            <div class="col-6">
+                                <form action="/accounts/cambiarStatus" method="POST">
+                                    <div style="margin-top:84%; margin-bottom: -10%;";>
+                                        <select class="form-select" name="status" id="" required>
+                                            <option selected disabled value="">--Seleccione un status--</option>
+                                            <option value="activo">Activo</option>
+                                            <option value="desactivado">Desactivado</option>
+                                        </select>
+                                        <button style="margin:10%"; type="submit" class="btn btn-success mt-3 mb-2">Ok</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      <% }) %>
+    
+    </div>
+</main>

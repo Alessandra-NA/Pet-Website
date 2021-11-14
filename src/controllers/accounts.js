@@ -2,6 +2,7 @@ const { Post, Pet, User, UserPerson, UserShelter, Establishment, Suggestion, Loc
 const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
 const md5 = require('md5');
 const { Op } = require('sequelize');
+const { ReportUserPost } = require('../models/ReportUserPost');
 
 module.exports = {
   /**
@@ -72,6 +73,29 @@ module.exports = {
     }
     catch { }
   },*/
+
+  getReportesAdopcion : async (req, res) => {
+    try{
+      const user_id = req.query.user_id
+      const reportesAdopcion = await ReportUserPost.findAll({include : {all : true}, where : {user_id : user_id}})
+
+      const UsuariosPeople = await UserPerson.findAll({include : {all : true}})
+      const UsuariosShelter = await UserShelter.findAll({include : {all : true}})
+
+      return res.render('verReportesAdopcion', {
+        title : 'Ver reportes adopción',
+        reportes : imagesToBase6455(reportesAdopcion),
+        usuariosPeople : imagesToBase6455(UsuariosPeople),
+        usuariosShelter : imagesToBase6455(UsuariosShelter)
+      })
+    }
+
+    catch(err) {
+      console.log(err);
+    }
+  },
+
+
 
   getSugerencias : async (req,res) => {
     try {
