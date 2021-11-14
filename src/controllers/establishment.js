@@ -8,16 +8,42 @@ module.exports = {
 
     getEstablishments: async (req, res) => {
         try {
-            const establishments = await Establishment.findAll({
-                include: [
-                    {
-                        model: Location,
-                        as: 'location',
+            if (req.query.type) {
+                switch (req.query.type) {
+                    case 'spa':
+                        var filter = 'Spa mascotas'
+                        break;
+                    case 'vet':
+                        var filter = 'Veterinarias'
+                        break;
+                    case 'tiendas':
+                        var filter = 'Tienda mascotas'
+                        break;
+                }
+                var establishments = await Establishment.findAll({
+                    include: [
+                        {
+                            model: Location,
+                            as: 'location',
+                            
+                        }
+                    ],
+                    where: {
+                        type: filter
                     }
-                ]
-            })
+                })
+            } else {
+                var establishments = await Establishment.findAll({
+                    include: [
+                        {
+                            model: Location,
+                            as: 'location',
+                        }
+                    ]
+                })
+            }
             //console.log(establishments)
-            return res.render('establecimientos', { title: 'Establecimientos', establecimientos: imagesToBase64ForEstablishment(establishments), listado: req.query.tab!='mapa'});
+            return res.render('establecimientos', { title: 'Establecimientos', establecimientos: imagesToBase64ForEstablishment(establishments), listado: req.query.tab != 'mapa' });
         }
         catch (err) {
             console.log(err);
@@ -34,10 +60,10 @@ module.exports = {
     saveNewEstablishment: async (req, res) => {
         try {
             const { name, type, address, mapLat, mapLng, district, ofPets, link } = req.body
-            const photo1 =  req.files[0]?.buffer
-            const photo2 =  req.files[1]?.buffer
-            const photo3 =  req.files[2]?.buffer
-            const photo4 =  req.files[3]?.buffer
+            const photo1 = req.files[0]?.buffer
+            const photo2 = req.files[1]?.buffer
+            const photo3 = req.files[2]?.buffer
+            const photo4 = req.files[3]?.buffer
             const newLocation = Location.create({
                 country: 'Perú',
                 province: 'Lima',
@@ -60,8 +86,8 @@ module.exports = {
                     longitude: parseFloat(mapLng),
                     location_id: data.id,
                 })
-                .then(data => console.log("Establecimiento creado correctamente"), 
-                    err => console.error(err)).then(res.redirect('/establishments?tab=mapa'))
+                    .then(data => console.log("Establecimiento creado correctamente"),
+                        err => console.error(err)).then(res.redirect('/establishments?tab=mapa'))
             })
         } catch (error) {
             console.error(error)
@@ -72,11 +98,11 @@ module.exports = {
         var id = req.session.userId;
         console.log(id)
         try {
-          const gass = String
-          return res.redirect('/establecimiento_detalle?id='+ id);
-          //return res.render('establecimiento_detalle', { establecimiento: imagesToBase64ForEstablishmentDetails(establecimiento), comentarios: imagesToBase64UserComments(comentarios) });
+            const gass = String
+            return res.redirect('/establecimiento_detalle?id=' + id);
+            //return res.render('establecimiento_detalle', { establecimiento: imagesToBase64ForEstablishmentDetails(establecimiento), comentarios: imagesToBase64UserComments(comentarios) });
         }
-        catch  (error) {
+        catch (error) {
             console.error(error)
         }
     },
@@ -84,9 +110,9 @@ module.exports = {
 
 imagesToBase64ForEstablishment = function (establishmentArray) {
     let array = establishmentArray.map((establishment) => {
-        for(i=1; i<5; i++){
-            if(establishment['photo'+i]){
-                establishment['photo'+i] = establishment['photo'+i].toString('base64')
+        for (i = 1; i < 5; i++) {
+            if (establishment['photo' + i]) {
+                establishment['photo' + i] = establishment['photo' + i].toString('base64')
             }
         }
         return establishment

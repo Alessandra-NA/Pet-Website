@@ -1,4 +1,24 @@
 <h1>Establecimientos Petfriendly</h1>
+<div class="row">
+    <div class="dropdown mt-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Filtrar por tipo
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+            <% if(listado){ %>
+                <li><a class="dropdown-item" href="?tab=listado&type=spa">Spa mascotas</a></li>
+                <li><a class="dropdown-item" href="?tab=listado&type=vet">Veterinarias</a></li>
+                <li><a class="dropdown-item" href="?tab=listado&type=tiendas">Tiendas mascotas</a></li>
+                <% } else{ %>
+                    <li><a class="dropdown-item" href="?tab=mapa&type=spa">Spa mascotas</a></li>
+                    <li><a class="dropdown-item" href="?tab=mapa&type=vet">Veterinarias</a></li>
+                    <li><a class="dropdown-item" href="?tab=mapa&type=tiendas">Tiendas mascotas</a></li>
+                    <% } %>
+        </ul>
+    </div>
+</div>
 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
     <div class="btn-group" role="group">
         <% if(listado){ %>
@@ -7,14 +27,14 @@
 
             <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2">
             <label class="btn btn-outline-info" for="btnradio2">Mapa</label>
-          <% } else{ %>  
-            <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1">
-            <label class="btn btn-outline-info" for="btnradio1">Listado</label>
+            <% } else{ %>
+                <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1">
+                <label class="btn btn-outline-info" for="btnradio1">Listado</label>
 
-            <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2" checked>
-            <label class="btn btn-outline-info disabled" for="btnradio2">Mapa</label>
-         <% } %>
-        
+                <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2" checked>
+                <label class="btn btn-outline-info disabled" for="btnradio2">Mapa</label>
+                <% } %>
+
     </div>
 </div>
 
@@ -22,10 +42,10 @@
 <div class="container">
     <% if(listado){ %>
         <%- include('establecimientos_listado') %>
-      <% } else{ %>  
-        <%- include('establecimientos_mapa') %>
-     <% } %>
-    
+            <% } else{ %>
+                <%- include('establecimientos_mapa') %>
+                    <% } %>
+
 </div>
 
 
@@ -34,7 +54,7 @@
     highlightNavbar(2)
     window.addEventListener('load', () => {
         document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
-            window.location = '/establishments?tab='+event.target.value
+            window.location = '/establishments?tab=' + event.target.value
         }))
     })
 </script>
