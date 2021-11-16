@@ -1,4 +1,4 @@
-const { Post, Pet, User, UserPerson, UserShelter, Establishment, Suggestion, Location, ReportUserComment } = require('../models');
+const { Post, Pet, User, UserPerson, UserShelter, Establishment, Suggestion, Location, ReportUserComment, Comment } = require('../models');
 const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
 const md5 = require('md5');
 const { Op } = require('sequelize');
@@ -18,6 +18,7 @@ module.exports = {
       const shelters = await UserShelter.findAll({include : {all : true}})
       const reportesPosts = await ReportUserPost.findAll({include : {all : true}})
       const reportesComentarios = await ReportUserComment.findAll({include : {all : true}})
+      const comentarios = await Comment.findAll({include : {all : true}})
 
       if (tipoCuenta == 0) {
         User.findAll({include: {all: true}, where : {type : 'person'}}).then(response => {
@@ -28,7 +29,8 @@ module.exports = {
             childUsers : persons,
             type : "personas",
             reportes : reportesPosts,
-            reportesC : reportesComentarios
+            reportesC : reportesComentarios,
+            comentarios : comentarios
           })
         })
       } 

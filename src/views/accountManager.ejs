@@ -64,8 +64,10 @@
                   Ver comentarios
                   <% var contC = 0 %>
                   <% for (var i=0; i<reportesC.length; i++) { %>
-                    <% if (user.id == reportesC[i].userPerson_id) { %>
-                      <% contC = contC + 1 %>
+                    <% for (var j = 0; j<comentarios.length; j++) { %>
+                      <% if (comentarios[j].id == reportesC[i].comment_id && comentarios[j].userPerson_id == user.id) { %>
+                        <% contC = contC + 1 %>
+                      <% } %>
                     <% } %>
                   <% } %>
 
