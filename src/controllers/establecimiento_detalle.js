@@ -1,4 +1,4 @@
-const { Establishment, Location, Suggestion, UserPerson, UserShelter, Comment, ReportEstablishment } = require('../models');
+const { Establishment, Location, Suggestion, User, UserPerson, UserShelter, Comment, ReportEstablishment, ReportUserComment } = require('../models');
 
 
 module.exports = {
@@ -117,14 +117,7 @@ module.exports = {
         ],
         where: { id: idEstablecimiento }
       })
-
       const newRating = Math.round((parseInt(establecimiento.rating) + parseInt(score))/2)
-      // newRating = round(4+3) -> 7
-      // newRating = round(43) -> 43
-      // 1+1 = 11 -> str
-      // 1+1 = 1 -> logic
-      // 1+1 = 2 -> math
-
       establecimiento.update({
         rating: newRating
       })
@@ -134,6 +127,29 @@ module.exports = {
     catch  (error) {
         console.error(error)
     }
+  },
+
+  postNewReportComment: async (req, res) => {
+    var idComentario = req.body.idComment;
+    const idEstablecimiento = req.query.id;
+    try {
+      const fecha = new Date();
+      const comentario = await Comment.findByPk(idComentario)
+      const usuarioPerson = await UserPerson.findByPk(comentario.userPerson_id)
+      const usuario = await User.findByPk(usuarioPerson.user_id)
+      await ReportUserComment.create({
+        fecha: fecha,
+        comment_id: idComentario
+      })
+      usuario.update({
+        status: 'reported'
+      })
+
+      return res.redirect('/establecimiento_detalle?id='+ idEstablecimiento);
+    } catch (error) {
+      console.error(error)
+    }
+   
   },
 
   crearReportar: async (req, res) => {
@@ -162,10 +178,6 @@ module.exports = {
         establishment_id: id,
       });
     }
-
-      
-    
-    
 
     try {
       res.redirect('/establecimiento_detalle?id=' + id);
