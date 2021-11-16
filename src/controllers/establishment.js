@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const { Establishment, Location } = require('../models')
 
 module.exports = {
@@ -9,29 +10,59 @@ module.exports = {
     getEstablishments: async (req, res) => {
         try {
             if (req.query.type) {
-                switch (req.query.type) {
-                    case 'spa':
-                        var filter = 'Spa mascotas'
-                        break;
-                    case 'vet':
-                        var filter = 'Veterinarias'
-                        break;
-                    case 'tiendas':
-                        var filter = 'Tienda mascotas'
-                        break;
-                }
-                var establishments = await Establishment.findAll({
-                    include: [
-                        {
-                            model: Location,
-                            as: 'location',
-                            
+                //if req.query.type is array
+                if (Array.isArray(req.query.type)) {
+                    var selectedTypes = req.query.type.map(type => {
+                        switch (type) {
+                            case 'spa':
+                                var filter = 'Spa mascotas'
+                                break;
+                            case 'vet':
+                                var filter = 'Veterinarias'
+                                break;
+                            case 'tiendas':
+                                var filter = 'Tienda mascotas'
+                                break;
                         }
-                    ],
-                    where: {
-                        type: filter
+                        return {type: filter}
+                    })
+                    var establishments = await Establishment.findAll({
+                        include: [
+                            {
+                                model: Location,
+                                as: 'location',
+                                
+                            }
+                        ],
+                        where: {
+                            [Op.or] : selectedTypes
+                        }
+                    })
+                }else{
+                    switch (req.query.type) {
+                        case 'spa':
+                            var selectedTypes = 'Spa mascotas'
+                            break;
+                        case 'vet':
+                            var selectedTypes = 'Veterinarias'
+                            break;
+                        case 'tiendas':
+                            var selectedTypes = 'Tienda mascotas'
+                            break;
                     }
-                })
+                    var establishments = await Establishment.findAll({
+                        include: [
+                            {
+                                model: Location,
+                                as: 'location',
+                            },
+                        ],
+                        where: {
+                            type: selectedTypes
+                        }
+                    })
+                }
+                
             } else {
                 var establishments = await Establishment.findAll({
                     include: [
@@ -43,7 +74,7 @@ module.exports = {
                 })
             }
             //console.log(establishments)
-            return res.render('establecimientos', { title: 'Establecimientos', establecimientos: imagesToBase64ForEstablishment(establishments), listado: req.query.tab != 'mapa' });
+            return res.render('establecimientos', { title: 'Establecimientos', establecimientos: imagesToBase64ForEstablishment(establishments), listado: req.query.tab != 'mapa', selectedTypes: req.query.type });
         }
         catch (err) {
             console.log(err);
