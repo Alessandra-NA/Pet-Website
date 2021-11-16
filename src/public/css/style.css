@@ -82,7 +82,7 @@ ul{
 }
 
 #userImage {
-	margin-top: 27%;
+	margin-top: -2%;
 }
 
 #reportButton {
@@ -94,7 +94,7 @@ ul{
 }
 
 #reportOptions {
-	margin-top: -5%;
+	margin-top: -35%;
 }
 
 #imageReport {
@@ -102,13 +102,26 @@ ul{
 	margin-bottom: -25%;
 }
 
+
+#footerReport {
+	margin-top: 25%
+}
+
+
 /*responsive*/
 @media(max-width: 767px){
   .footer-col{
     width: 50%;
     margin-bottom: 30px;
 }
+
+	#footerReport {
+		width: 100%;
+		margin-bottom: 30px;
+	}
+
 }
+
 @media(max-width: 574px){
   .footer-col{
     width: 100%;
