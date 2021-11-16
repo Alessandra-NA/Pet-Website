@@ -1,23 +1,5 @@
 <h1>Establecimientos Petfriendly</h1>
 <div class="row">
-    <div class="dropdown mt-2">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Filtrar por tipo
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-            <% if(listado){ %>
-                <li><a class="dropdown-item" href="?tab=listado&type=spa">Spa mascotas</a></li>
-                <li><a class="dropdown-item" href="?tab=listado&type=vet">Veterinarias</a></li>
-                <li><a class="dropdown-item" href="?tab=listado&type=tiendas">Tiendas mascotas</a></li>
-                <% } else{ %>
-                    <li><a class="dropdown-item" href="?tab=mapa&type=spa">Spa mascotas</a></li>
-                    <li><a class="dropdown-item" href="?tab=mapa&type=vet">Veterinarias</a></li>
-                    <li><a class="dropdown-item" href="?tab=mapa&type=tiendas">Tiendas mascotas</a></li>
-                    <% } %>
-        </ul>
-    </div>
 </div>
 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
     <div class="btn-group" role="group">
@@ -37,7 +19,51 @@
 
     </div>
 </div>
+<div class="row">
+    <label for="dropdownMenuButton1">
+        Qué buscas?
+    </label>
+    <div class="col-3">
+        <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro">
+            <option value="conMascota" selected>Con mi mascota</option>
+            <option value="paraMascota">Para mi mascota</option>
+        </select>
+    </div>
+</div>
 
+<ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
+    <li class="col mb-4 optionsParaMascota" data-tags="numbers" data-categories="typography" hidden="true">
+        <a class="d-block text-dark text-decoration-none" href="?tab=<%=listado?'listado':'mapa'%>&type=spa">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sunglasses" viewBox="0 0 16 16">
+                    <path d="M3 5a2 2 0 0 0-2 2v.5H.5a.5.5 0 0 0 0 1H1V9a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3 1 1 0 1 1 2 0 3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-.5h.5a.5.5 0 0 0 0-1H15V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-1.888 1.338A1.99 1.99 0 0 0 8 6a1.99 1.99 0 0 0-1.112.338A2 2 0 0 0 5 5H3zm0 1h.941c.264 0 .348.356.112.474l-.457.228a2 2 0 0 0-.894.894l-.228.457C2.356 8.289 2 8.205 2 7.94V7a1 1 0 0 1 1-1z"/>
+                </svg>
+            </div>
+            <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
+        </a>
+    </li>
+    <li class="col mb-4 optionsParaMascota" data-tags="pulse heartbeat rhythm" data-categories="data" hidden="true">
+        <a class="d-block text-dark text-decoration-none" href="?tab=<%=listado?'listado':'mapa'%>&type=vet">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bandaid-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="m2.68 7.676 6.49-6.504a4 4 0 0 1 5.66 5.653l-1.477 1.529-5.006 5.006-1.523 1.472a4 4 0 0 1-5.653-5.66l.001-.002 1.505-1.492.001-.002Zm5.71-2.858a.5.5 0 1 1-.708.707.5.5 0 0 1 .707-.707ZM6.974 6.939a.5.5 0 1 0-.707-.707.5.5 0 0 0 .707.707ZM5.56 8.354a.5.5 0 1 0-.707-.708.5.5 0 0 0 .707.708Zm2.828 2.828a.5.5 0 1 0-.707-.707.5.5 0 0 0 .707.707Zm1.414-2.121a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707Zm1.414-.707a.5.5 0 1 0-.706-.708.5.5 0 0 0 .707.708Zm-4.242.707a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707Zm1.414-.707a.5.5 0 1 0-.707-.708.5.5 0 0 0 .707.708Zm1.414-2.122a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707ZM8.646 3.354l4 4 .708-.708-4-4-.708.708Zm-1.292 9.292-4-4-.708.708 4 4 .708-.708Z"/>
+                </svg>
+            </div>
+            <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
+        </a>
+    </li>
+    <li class="col mb-4 optionsParaMascota" data-tags="alarm clock time" data-categories="devices"  hidden="true">
+        <a class="d-block text-dark text-decoration-none" href="?tab=<%=listado?'listado':'mapa'%>&type=tiendas">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+                </svg>
+            </div>
+            <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
+        </a>
+    </li>
+    </li>
+</ul>
 
 <div class="container">
     <% if(listado){ %>
@@ -56,5 +82,17 @@
         document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
             window.location = '/establishments?tab=' + event.target.value
         }))
+        document.querySelector("#dropdownFiltro").addEventListener('change', (event) => {
+            //unhide all elements of class 'optionsParaMascota'
+            if(event.target.value == "paraMascota"){
+                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                    elem.hidden = false
+                })
+            }else{
+                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                    elem.hidden = true
+                })
+            }
+        })
     })
 </script>
