@@ -110,6 +110,7 @@ module.exports = {
     try { 
       const status = req.body.status
       const id = req.body.id
+      const reporte_id = req.body.reporte_id
 
       console.log(status) 
       console.log(id)
@@ -117,6 +118,10 @@ module.exports = {
       User.update({
         status : status
       }, {where : {id : id}})
+
+      ReportUserPost.findByPk(reporte_id).then(response => {
+        response.destroy();
+      })
 
       return res.redirect('/accounts/reporteAdopcion?user_id=' + id)
 
