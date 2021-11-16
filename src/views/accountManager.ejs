@@ -45,21 +45,38 @@
                 <a type="button" class="btn btn-primary position-relative" href="/accounts/reporteAdopcion?user_id=<%= user.id %>">
                   Ver adopciones
 
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    <% var cont = 0 %>
-                    <% for (var i=0; i<reportes.length; i++) { %>
-                      <% if (user.id == reportes[i].user_id) { %>
-                        <% cont = cont + 1 %>
-                      <% } %>
+                  <% var cont = 0 %>
+                  <% for (var i=0; i<reportes.length; i++) { %>
+                    <% if (user.id == reportes[i].user_id) { %>
+                      <% cont = cont + 1 %>
                     <% } %>
-                    <%= cont %>
-                    <span class="visually-hidden">unread messages</span>
-                  </span>
-
+                  <% } %>
+                  <% if (cont > 0) { %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <%= cont %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% } %>
                 </a>
               </td>
               <td>
-                <button class="btn btn-success">Ver comentarios</button>
+                <a type="button" class="btn btn-primary position-relative" href="">
+                  Ver comentarios
+                  <% var contC = 0 %>
+                  <% for (var i=0; i<reportesC.length; i++) { %>
+                    <% if (user.id == reportesC[i].user_id) { %>
+                      <% contC = contC + 1 %>
+                    <% } %>
+                  <% } %>
+                  
+                  <% if (contC > 0) { %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <%= contC %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% } %>
+
+                </a>
               </td>
               <td>
                 <button class="btn btn-success">Editar</button>
@@ -86,18 +103,18 @@
               <td>
                 <a type="button" class="btn btn-primary position-relative" href="/accounts/reporteAdopcion?user_id=<%= user.id %>">
                   Ver adopciones
-
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    <% var cont = 0 %>
-                    <% for (var i=0; i<reportes.length; i++) { %>
-                      <% if (user.id == reportes[i].user_id) { %>
-                        <% cont = cont + 1 %>
-                      <% } %>
+                  <% var cont = 0 %>
+                  <% for (var i=0; i<reportes.length; i++) { %>
+                    <% if (user.id == reportes[i].user_id) { %>
+                      <% cont = cont + 1 %>
                     <% } %>
-                    <%= cont %>
-                    <span class="visually-hidden">unread messages</span>
-                  </span>
-                  
+                  <% } %>
+                  <% if (cont > 0) { %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <%= cont %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% } %>
                 </a>
               </td>
               <td>
