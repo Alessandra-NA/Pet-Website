@@ -79,14 +79,25 @@ module.exports = {
       const user_id = req.query.user_id
       const reportesAdopcion = await ReportUserPost.findAll({include : {all : true}, where : {user_id : user_id}})
 
+      //Datos del usuario reportado
+      let userChild = null
+      const user = await User.findOne({include : {all : true}, where : {id : user_id}})
+      
+      if (user.type == "person"){
+        userChild = await UserPerson.findOne({include : {all : true}, where : {user_id : user_id}})
+      } else {
+        userChild = await UserShelter.findOne({include : {all : true}, where : {user_id : user_id}})
+      }
+
+      //Se manda para hallar datos de usuario reportante
       const UsuariosPeople = await UserPerson.findAll({include : {all : true}})
-      const UsuariosShelter = await UserShelter.findAll({include : {all : true}})
 
       return res.render('verReportesAdopcion', {
         title : 'Ver reportes adopción',
         reportes : imagesToBase6455(reportesAdopcion),
+        user : user,
+        userChild : imagesToBase644(userChild),
         usuariosPeople : imagesToBase6455(UsuariosPeople),
-        usuariosShelter : imagesToBase6455(UsuariosShelter)
       })
     }
 
@@ -298,6 +309,12 @@ imagesToBase6455 = function (usuario) {
     }  
   }
   return usuario      
+};
+
+imagesToBase644 = function (user) {
+  if (user.photo){
+    user.photo = Buffer.from(user.photo).toString('base64');
+  }
 };
 
 imagesToBase6 = function (array) {

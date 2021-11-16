@@ -2,7 +2,7 @@
 <main class="container">
   
     <div style="background-color: aliceblue; margin: 2%;">
-      <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">Administración de Usuarios - Reportes de Adopción"</h2>
+      <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">Administración de Usuarios - "Reportes de Adopción"</h2>
     </div>
 
     <% if (reportes.length == 0) { %>
@@ -31,49 +31,29 @@
 
                         <div class="row">
                             <div class="col-6">
-                                <% if (reporte.user.type == "person") { %>
-                                    <% usuariosPeople.forEach(function(people){ %>
-                                        <% if (people.user_id == reporte.user.id) { %>
+                                <% usuariosPeople.forEach(function(people){ %>
+                                    <% if (people.user_id == reporte.userAdoptante_id) { %>
                                         <div class="row mt-4">
                                             <div class="col-6">
                                                 <img src="data:image/png;base64,<%=people.photo?people.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                                             </div>
                                             <div class="col-6">
                                                 <label for="">Por:</label>
-                                                <label for="" style="font-weight: bold;" class="form-label"><%= people.first_name %> <%= people.last_name %></label>
+                                                <label for="" style="font-weight: bold;" class="form-label"><%= people.first_name %> <%= people.last_name %></label>                                                
                                                 <label for="" style="font-size:90%"; class="form-label"><%= reporte.fecha %></label>
                                             </div>
                                         </div>
-                
-                                        <% } %>
-                                    <% }) %>
-        
-                                <% } else if(reporte.user.type == "shelter") { %>
-                                    <% usuariosShelter.forEach(function(shelter){ %>
-                                        <% if (shelter.user_id == reporte.user.id) { %>
-                                        <div class="row mt-4">
-                                            <div class="col-6">
-                                                <img src="data:image/png;base64,<%=shelter.photo?shelter.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="">Por:</label>
-                                                <label for="" style="font-weight: bold;" class="form-label"><%= shelter.name %></label>
-                                                <label for="" style="font-size:90%"; class="form-label"><%= reporte.fecha %></label>
-                                            </div>
-                                        </div>
-                
-                                        <% } %>
-                                    <% }) %>
-                                <% } %>
+                                    <% } %>
+                                <% }) %>
                             </div>
-
                             <div class="col-6">
                                 <form action="/accounts/cambiarStatus" method="POST">
                                     <div style="margin-top:84%; margin-bottom: -10%;";>
                                         <select class="form-select" name="status" id="" required>
                                             <option selected disabled value="">--Seleccione un status--</option>
                                             <option value="activo">Activo</option>
-                                            <option value="desactivado">Desactivado</option>
+                                            <option value="reportado">Reportado</option>
+                                            <option value="bloqueado">Bloqueado</option>
                                         </select>
                                         <button style="margin:10%"; type="submit" class="btn btn-success mt-3 mb-2">Ok</button>
                                     </div>
@@ -83,6 +63,7 @@
                     </div>
                 </div>
             </div>
+        </div>
       <% }) %>
     
     </div>
