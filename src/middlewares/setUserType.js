@@ -6,6 +6,7 @@ module.exports = {
    */
   roleRequestMiddleware: (req, res, next) => {
     res.locals.globalType = req.session.userType ? req.session.userType : '';
+    res.locals.globalId = req.session.userId ? req.session.userId: '';
     next();
   },
 

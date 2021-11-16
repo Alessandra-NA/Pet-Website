@@ -32,8 +32,33 @@ function highlightNavbar(index) {
     navbarList.item(index).setAttribute("class", "nav-link active")
 }
 
-var main = function(){
-    document.getElementById("button_navbar").onclick = OnclickNavbar;
+function test(){
+    
+    /*
+    (document).ready(function (e) {
+        ('#reportComment').on('show.bs.modal', function(e) {    
+            var id = (e.relatedTarget).data().id;
+            (e.currentTarget).find('#idComment').val(id);
+            console.log(id);
+        });
+    });
+    */
 }
 
+var main = function(){
+    document.getElementById("button_navbar").onclick = OnclickNavbar;
+    document.querySelectorAll(".listener-report").forEach(element => {
+        element.addEventListener("click",function(e){
+            var id = element.getAttribute('data-id');
+            document.getElementById("idComment").setAttribute("value",id);
+        })
+    });
+    
+    
+    
+}
 window.addEventListener("load", main)
+
+
+
+

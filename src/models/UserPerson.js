@@ -8,7 +8,6 @@ class UserPerson extends Model {
         this.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
         this.belongsTo(Gender, { as: 'gender', foreignKey: 'gender_id' });
         this.hasMany(ReportUserPost, { as: 'reportPosts', foreignKey: 'userAdoptante_id' , onDelete: 'cascade'});
-        this.hasMany(ReportUserComment, { as: 'reportComments', foreignKey: 'userPerson_id' , onDelete: 'cascade'});
         this.hasMany(Comment, { as: 'comments', foreignKey: 'userPerson_id', onDelete: 'cascade' });
         this.hasMany(Suggestion, { as: 'suggestions', foreignKey: 'userPerson_id', onDelete: 'cascade' });
     }
