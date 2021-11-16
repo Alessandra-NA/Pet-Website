@@ -20,11 +20,11 @@
     </div>
 </div>
 <div class="row">
-    <label for="dropdownMenuButton1">
+    <label for="dropdownFiltro">
         Qué buscas?
     </label>
     <div class="col-3">
-        <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro">
+        <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro" selected-types=<%=selectedTypes%>>
             <option value="conMascota" selected>Con mi mascota</option>
             <option value="paraMascota">Para mi mascota</option>
         </select>
@@ -32,34 +32,36 @@
 </div>
 
 <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
-    <li class="col mb-4 optionsParaMascota" data-tags="numbers" data-categories="typography" hidden="true">
-        <a class="d-block text-dark text-decoration-none" href="?tab=<%=listado?'listado':'mapa'%>&type=spa">
+    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="numbers" data-categories="typography"
+        hidden="true">
+        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('spa') && 'is-selected'%> filterOption"
+            id="spa" is-selected="false">
             <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sunglasses" viewBox="0 0 16 16">
-                    <path d="M3 5a2 2 0 0 0-2 2v.5H.5a.5.5 0 0 0 0 1H1V9a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3 1 1 0 1 1 2 0 3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-.5h.5a.5.5 0 0 0 0-1H15V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-1.888 1.338A1.99 1.99 0 0 0 8 6a1.99 1.99 0 0 0-1.112.338A2 2 0 0 0 5 5H3zm0 1h.941c.264 0 .348.356.112.474l-.457.228a2 2 0 0 0-.894.894l-.228.457C2.356 8.289 2 8.205 2 7.94V7a1 1 0 0 1 1-1z"/>
-                </svg>
+                <img src="https://cdn-icons-png.flaticon.com/512/1499/1499544.png" class="img-fluid">
+                <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
             </div>
-            <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
         </a>
     </li>
-    <li class="col mb-4 optionsParaMascota" data-tags="pulse heartbeat rhythm" data-categories="data" hidden="true">
-        <a class="d-block text-dark text-decoration-none" href="?tab=<%=listado?'listado':'mapa'%>&type=vet">
+    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
+        data-categories="data" hidden="true" is-selected="false">
+        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('vet') && 'is-selected'%> filterOption"
+            id="vet">
             <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bandaid-fill" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="m2.68 7.676 6.49-6.504a4 4 0 0 1 5.66 5.653l-1.477 1.529-5.006 5.006-1.523 1.472a4 4 0 0 1-5.653-5.66l.001-.002 1.505-1.492.001-.002Zm5.71-2.858a.5.5 0 1 1-.708.707.5.5 0 0 1 .707-.707ZM6.974 6.939a.5.5 0 1 0-.707-.707.5.5 0 0 0 .707.707ZM5.56 8.354a.5.5 0 1 0-.707-.708.5.5 0 0 0 .707.708Zm2.828 2.828a.5.5 0 1 0-.707-.707.5.5 0 0 0 .707.707Zm1.414-2.121a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707Zm1.414-.707a.5.5 0 1 0-.706-.708.5.5 0 0 0 .707.708Zm-4.242.707a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707Zm1.414-.707a.5.5 0 1 0-.707-.708.5.5 0 0 0 .707.708Zm1.414-2.122a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707ZM8.646 3.354l4 4 .708-.708-4-4-.708.708Zm-1.292 9.292-4-4-.708.708 4 4 .708-.708Z"/>
-                </svg>
+                <img src="https://www.srperro.com/media/categoria/1e49faef-4aee-41fc-8634-e812b909a185.png"
+                    class="img-fluid">
+                <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
             </div>
-            <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
         </a>
     </li>
-    <li class="col mb-4 optionsParaMascota" data-tags="alarm clock time" data-categories="devices"  hidden="true">
-        <a class="d-block text-dark text-decoration-none" href="?tab=<%=listado?'listado':'mapa'%>&type=tiendas">
+    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="alarm clock time" data-categories="devices"
+        hidden="true">
+        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('tiendas') && 'is-selected'%> filterOption"
+            id="tiendas">
             <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
-                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
-                </svg>
+                <img src="https://www.srperro.com/media/categoria/d5bc7c4e-58fc-44d4-89ff-b3146bca3de0.png"
+                    class="img-fluid">
+                <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
             </div>
-            <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
         </a>
     </li>
     </li>
@@ -74,7 +76,13 @@
 
 </div>
 
-
+<style>
+    .is-selected{
+        border-color: #007bff!important;
+        border-radius: 0.25rem !important;
+        border: 1px solid;
+    }
+</style>
 <script>
     // para cambiar el color de texto de la sección en el navbar
     highlightNavbar(2)
@@ -84,15 +92,53 @@
         }))
         document.querySelector("#dropdownFiltro").addEventListener('change', (event) => {
             //unhide all elements of class 'optionsParaMascota'
-            if(event.target.value == "paraMascota"){
+            if (event.target.value == "paraMascota") {
                 document.querySelectorAll('.optionsParaMascota').forEach(elem => {
                     elem.hidden = false
                 })
-            }else{
+            } else {
                 document.querySelectorAll('.optionsParaMascota').forEach(elem => {
                     elem.hidden = true
                 })
             }
+        })
+
+        //get property selectedTypes of dropdownFiltro
+        let selectedTypes = document.querySelector("#dropdownFiltro").getAttribute("selected-types")
+        //if selectedTypes contains 'vet', 'spa' or 'tiendas' then unhide all optionsParaMascota class elements
+        if (selectedTypes.includes("vet")) {
+            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                elem.hidden = false
+                //set corresponding value to dropdownFiltro
+                document.querySelector("#dropdownFiltro").value = "paraMascota"
+            })
+        }
+        if (selectedTypes.includes("spa")) {
+            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                elem.hidden = false
+                document.querySelector("#dropdownFiltro").value = "paraMascota"
+            })
+        }
+        if (selectedTypes.includes("tiendas")) {
+            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                elem.hidden = false
+                document.querySelector("#dropdownFiltro").value = "paraMascota"
+            })
+        }
+
+        document.querySelectorAll(".filterOption").forEach(function (elem) {
+            elem.addEventListener("click", function (event) {
+                if (elem.classList.contains("is-selected")) {
+                    window.location = window.location.href.slice(0, window.location.href.indexOf("type="+elem.id)-1)
+                }else{
+                    //if element doesn't contain 'is-selected' class, add type to url
+                    if(window.location.href.includes("?")){
+                        window.location = window.location.href + '&type=' + elem.id
+                    }else{
+                        window.location = window.location.href + '?type=' + elem.id
+                    }
+                }
+            })
         })
     })
 </script>
