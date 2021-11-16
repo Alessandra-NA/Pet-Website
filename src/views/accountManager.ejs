@@ -42,10 +42,41 @@
                 <%=user.status%>
               </td>
               <td>
-                <a href="/accounts/reporteAdopcion?user_id=<%= user.id %>">Ver adopciones</a>
+                <a type="button" class="btn btn-primary position-relative" href="/accounts/reporteAdopcion?user_id=<%= user.id %>">
+                  Ver adopciones
+
+                  <% var cont = 0 %>
+                  <% for (var i=0; i<reportes.length; i++) { %>
+                    <% if (user.id == reportes[i].user_id) { %>
+                      <% cont = cont + 1 %>
+                    <% } %>
+                  <% } %>
+                  <% if (cont > 0) { %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <%= cont %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% } %>
+                </a>
               </td>
               <td>
-                <button class="btn btn-success">Ver comentarios</button>
+                <a type="button" class="btn btn-primary position-relative" href="">
+                  Ver comentarios
+                  <% var contC = 0 %>
+                  <% for (var i=0; i<reportesC.length; i++) { %>
+                    <% if (user.id == reportesC[i].user_id) { %>
+                      <% contC = contC + 1 %>
+                    <% } %>
+                  <% } %>
+                  
+                  <% if (contC > 0) { %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <%= contC %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% } %>
+
+                </a>
               </td>
               <td>
                 <button class="btn btn-success">Editar</button>
@@ -53,7 +84,9 @@
               <td><button data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary deleteButton"
                   userid="<%=user.id%>" username="<%=user.username%>">Borrar</button></td>
             </tr>
-          <% } else if (type =='albergues') { %>
+          <% } %>
+
+          <% if (type == "albergues") { %>
             <tr>
               <th scope="row">
                 <%=cUser.name%>
@@ -68,7 +101,21 @@
                 <%=user.status%>
               </td>
               <td>
-                <a href="/accounts/reporteAdopcion?user_id=<%= user.id %>">Ver adopciones</a>
+                <a type="button" class="btn btn-primary position-relative" href="/accounts/reporteAdopcion?user_id=<%= user.id %>">
+                  Ver adopciones
+                  <% var cont = 0 %>
+                  <% for (var i=0; i<reportes.length; i++) { %>
+                    <% if (user.id == reportes[i].user_id) { %>
+                      <% cont = cont + 1 %>
+                    <% } %>
+                  <% } %>
+                  <% if (cont > 0) { %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <%= cont %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% } %>
+                </a>
               </td>
               <td>
                 <button class="btn btn-success">Editar</button>
