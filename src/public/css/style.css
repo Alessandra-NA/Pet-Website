@@ -81,6 +81,27 @@ ul{
 	background-color: #ffffff;
 }
 
+#userImage {
+	margin-top: 27%;
+}
+
+#reportButton {
+	width: 100%;
+}
+
+#changeStatus {
+	text-align: center;
+}
+
+#reportOptions {
+	margin-top: -5%;
+}
+
+#imageReport {
+	width: 100%; 
+	margin-bottom: -25%;
+}
+
 /*responsive*/
 @media(max-width: 767px){
   .footer-col{

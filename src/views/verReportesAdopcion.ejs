@@ -1,3 +1,6 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/style.css">
+
 
 <main class="container">
   
@@ -197,6 +200,8 @@
     
     <% } %>
     
+<!--VIEW REPORTES-->
+
     <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
       <% reportes.forEach(function(reporte){ %>
             <div style="width: 33%"; class="col">
@@ -213,11 +218,11 @@
                             <label for="" class="form-label" style="font-weight: bold;">Foto:</label>
                         </div>
                         <div class="row">
-                            <img src="data:image/png;base64,<%=reporte.photo?reporte.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <img id="imageReport" src="data:image/png;base64,<%=reporte.photo?reporte.photo:''%>" alt="avatar">
                         </div>
 
                         <div class="row">
-                            <div class="col-6">
+                            <div id="userImage" class="col-6">
                                 <% usuariosPeople.forEach(function(people){ %>
                                     <% if (people.user_id == reporte.userAdoptante_id) { %>
                                         <div class="row mt-4">
@@ -233,18 +238,18 @@
                                     <% } %>
                                 <% }) %>
                             </div>
-                            <div class="col-6">
+                            <div id="reportOptions" class="col-6">
                                 <form action="/accounts/cambiarStatus" method="POST">
                                     <div style="margin-top:84%; margin-bottom: -10%;";>
-                                        <select class="form-select" name="status" id="" required>
-                                            <option selected disabled value="">--Seleccione un status--</option>
+                                        <select id="changeStatus" class="form-select" name="status" id="" required>
+                                            <option selected disabled value="">-- Status --</option>
                                             <option value="actived">Activo</option>
                                             <option value="reported">Reportado</option>
                                             <option value="blocked">Bloqueado</option>
                                         </select>
                                         <input type="text" value="<%= user.id %>" name="id" hidden>
                                         <input type="text" value="<%= reporte.id %>" name="reporte_id" hidden>
-                                        <button style="margin:10%"; type="submit" class="btn btn-success mt-3 mb-2">Ok</button>
+                                        <button id="reportButton" style="margin:0%"; type="submit" class="btn btn-success mt-3 mb-2">Ok</button>
                                     </div>
                                 </form>
                             </div>
