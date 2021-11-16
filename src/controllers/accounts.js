@@ -106,6 +106,24 @@ module.exports = {
     }
   },
 
+  confirmarReporte : async (req, res) => {
+    try { 
+      const status = req.body.status
+      const id = req.body.id
+
+      console.log(status) 
+      console.log(id)
+
+      User.update({
+        status : status
+      }, {where : {id : id}})
+
+      return res.redirect('/accounts/reporteAdopcion?user_id=' + id)
+
+    } catch (err) {
+      console.log(err)
+    }
+  },
 
 
   getSugerencias : async (req,res) => {

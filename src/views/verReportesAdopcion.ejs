@@ -5,6 +5,193 @@
       <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">Administración de Usuarios - "Reportes de Adopción"</h2>
     </div>
 
+    <div style="background-color: aliceblue; margin: 2%;">
+        <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">Datos del <%= user.type %> "<%= user.username %>"
+        </h2>
+    </div>
+
+    <section style="background-color: rgb(255, 255, 255);">      
+          
+        <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                    <% if (userChild.photo == null){ %>
+                        <label for="" class="form-label">-- Sin foto --</label>
+        
+                    <% } else { %>
+                        <img src="data:image/png;base64,<%=userChild.photo%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                    <% } %>
+                    
+                    <% if (user.type == "person") { %>
+                        <h5 class="my-3"><%= userChild.first_name %> <%= userChild.last_name %></h5>
+                        <p class="text-muted mb-1">Teléfono: <%= userChild.phone_number %></p>
+                    <% } else { %>
+                        <h5 class="my-3"><%= userChild.name %></h5>
+                        <p class="text-muted mb-1">Teléfono: <%= userChild.phone_number %></p>
+                    <% } %>
+                    <p class="text-muted mb-1">Status: <%= user.status %></p>
+                </div>
+              </div>
+            </div>
+            
+            <% if (user.type == "person") { %>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Nombre</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.first_name %> <%= userChild.last_name %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Teléfono</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.phone_number %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">DNI</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.document_number %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Rating</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0"> <%= userChild.rating %>/5 </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">E-mail</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0"> <%= userChild.gender.name %> </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">E-mail</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0"> <%= userChild.email %> </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Dirección</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.location.address %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Distrito</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.location.district %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                      </div>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Nombre</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.name %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Teléfono</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.phone_number %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">RUC</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.ruc %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">E-mail</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.email %> </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Rating</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0"> <%= userChild.rating %>/5 </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Dirección</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0"> <%= userChild.location.address %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Distrito</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0"> <%= userChild.location.district %></p>
+                            </div>
+                        </div>
+                        <hr>
+                      </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </section>
+
+    <div style="background-color: aliceblue; margin: 2%;">
+        <h2 style="margin-bottom: 2%; text-align: center; font-weight: 650">Listado de reportes</h2>
+    </div>
+
     <% if (reportes.length == 0) { %>
         <p style="text-align:center;">-- Actualmente no se encuentran reportes --</p>
     
@@ -51,10 +238,11 @@
                                     <div style="margin-top:84%; margin-bottom: -10%;";>
                                         <select class="form-select" name="status" id="" required>
                                             <option selected disabled value="">--Seleccione un status--</option>
-                                            <option value="activo">Activo</option>
-                                            <option value="reportado">Reportado</option>
-                                            <option value="bloqueado">Bloqueado</option>
+                                            <option value="actived">Activo</option>
+                                            <option value="reported">Reportado</option>
+                                            <option value="blocked">Bloqueado</option>
                                         </select>
+                                        <input type="text" value="<%= user.id %>" name="id" hidden>
                                         <button style="margin:10%"; type="submit" class="btn btn-success mt-3 mb-2">Ok</button>
                                     </div>
                                 </form>
