@@ -64,11 +64,11 @@
                   Ver comentarios
                   <% var contC = 0 %>
                   <% for (var i=0; i<reportesC.length; i++) { %>
-                    <% if (user.id == reportesC[i].user_id) { %>
+                    <% if (user.id == reportesC[i].userPerson_id) { %>
                       <% contC = contC + 1 %>
                     <% } %>
                   <% } %>
-                  
+
                   <% if (contC > 0) { %>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         <%= contC %>
