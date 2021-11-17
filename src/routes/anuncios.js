@@ -1,7 +1,10 @@
 const { Router } = require('express');
-const {} = require("../middlewares/auth")
+const { authUser } = require("../middlewares/auth")
 const { getAnuncios, getReportarAnuncios, postAnuncioReportado } = require('../controllers/anuncios');
 const router = Router();
+const multer = require('multer');
+
+upload = multer();
 
 
 /*
@@ -9,7 +12,7 @@ const router = Router();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', getAnuncios)
-router.get('/reportar', getReportarAnuncios)
-router.post('/reportar/done', postAnuncioReportado)
+router.get('/reportar', authUser, getReportarAnuncios)
+router.post('/reportar/done', upload.single('image'), postAnuncioReportado)
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { Post, Pet, Report, User } = require('../models');
+const { Post, Pet, Report, User, ReportUserPost } = require('../models');
 
 module.exports = {
   /**
@@ -58,22 +58,29 @@ module.exports = {
     console.log("================== "+id)
     try
     {
-      const {reason, comment, username_reportado} = req.body;
+      const {comment, username_reportado, id_reported_user} = req.body;
+      const photo = req.file? req.file.buffer : null;
 
       console.log(username_reportado)
-      const reporteCreado = await Report.create(
+      const reporteCreado = await ReportUserPost.create(
         {
-          reason : reason,
-          commet : comment,
+          desc : comment,
           //photo
-          post_id : id
+          user_id: id_reported_user,
+          userAdoptante_id: req.session.userId,
+          fecha: new Date(),
+          photo : photo
         }
-      )
+      ).then(function(_){
+        //Cambiamos flag de usuario reportado
+        User.update({
+          flagReportado : true
+        }, {where : {username : username_reportado}})
+      })
 
-      //Cambiamos flag de usuario reportado
-      User.update({
-        flagReportado : true
-      }, {where : {username : username_reportado}})
+      //get current  user id
+
+      
 
       /*
       const post = await Post.findByPk(id)
