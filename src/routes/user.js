@@ -12,7 +12,8 @@ upload = multer();
 
 
 router.get('/logout', logoutUser)
-router.get('/elegirTipo', auth,  redireccionarTipoUsuarioEditar)
+router.get('/elegirTipo', redireccionarTipoUsuarioEditar)
+router.get('/editarAdmin', auth, redireccionarTipoUsuarioEditar)
 router.post('/done', upload.single('image'), realizarEdicion)
 router.get('/perfil', getPerfilUsuario)
 router.get('/cambiarContrasena', getCambiarContraseña)
