@@ -10,10 +10,16 @@ const db = {
   ...require('./Post'),
   ...require('./Size'),
   ...require('./Specie'),
+  ...require('./ReportUserPost'),
+  ...require('./ReportUserComment'),
+  ...require('./ReportEstablishment'),
   ...require('./User'),
   ...require('./UserPerson'),
   ...require('./UserShelter'),
   ...require('./UserAdmin'),
+  ...require('./Comment'),
+  ...require('./Establishment'),
+  ...require('./Suggestion'),
 };
 
 Object.keys(db).forEach(modelName => {

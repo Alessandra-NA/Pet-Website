@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { Op } = require('sequelize');
-const {  User, UserPerson, UserShelter, Gender, Location } = require('../models');
+const {  User, UserPerson, UserShelter, Gender, Location, Post, Pet } = require('../models');
 const { SESSION_NAME, SALT_ROUNDS, DB_DATABASE } = require('../config/env');
 
 
@@ -16,9 +16,18 @@ module.exports = {
       //const userType = req.body.tipo
       //const username = req.body.username
 
-      const userType = req.session.userType
-      const idUser = req.session.userId
+      let userType = req.session.userType
+      let idUser = req.session.userId
       //let idUsuario
+
+      console.log(req.query.user_id)
+      console.log(req.query.type)
+
+      if (req.query.user_id!=undefined && req.query.type!=undefined){
+        userType = req.query.type
+        idUser = req.query.user_id
+      }
+      
 
       //Obtenemos el id de usuario de acuerdo al username
       /*const usuarios = await User.findAll()
@@ -70,105 +79,146 @@ module.exports = {
       }
       
     }
-    catch{
+    catch (err) {
+      console.log(err);
     }
   },
 
 
   realizarEdicion : async (req,res) => {
-    //Variables comunes
-    const tipoUsuario = req.body.tipo
-    const idABuscar = req.body.id
-    const idLocation = req.body.idLocation
 
-    const district = req.body.distrito
-    const address = req.body.direccion
-    //const photo = req.file.buffer
-    const email = req.body.correo
-    console.log(idABuscar)
-    
-    if (tipoUsuario == "people")
-    {
-      //Editamos datos de UserPerson
-      //Parametros a editar
-      const first_name = req.body.nombres
-      const last_name = req.body.apellidos
-      const document_number = req.body.gender_id
-      const gender_id = req.body.sexo
-      const phone_number = req.body.celular
-
-      UserPerson.update({
-        first_name : first_name,
-        last_name : last_name,
-        document_number : document_number,
-        gender_id : gender_id,
-        //photo : photo,
-        address : address,
-        email : email,
-        phone_number : phone_number
-      }, {where : {user_id : idABuscar}})
-
-      //Editamos datos de ubicación
-      Location.update({
-        district : district,
-        address : address
-      }, {where : {id : idLocation}})
+    try{
       
+      //Variables comunes
+      const tipoUsuario = req.body.tipo
+      const idABuscar = req.body.id
+      const idLocation = req.body.idLocation
+    
+      const district = req.body.distrito
+      const address = req.body.direccion
+      //const photo = req.file.buffer
+      const email = req.body.correo
+      console.log(idABuscar)
+      
+      if (tipoUsuario == "people")
+      {
+        //Editamos datos de UserPerson
+        //Parametros a editar
+        const first_name = req.body.nombres
+        const last_name = req.body.apellidos
+        const document_number = req.body.gender_id
+        const gender_id = req.body.sexo
+        const phone_number = req.body.celular
+    
+        UserPerson.update({
+          first_name : first_name,
+          last_name : last_name,
+          document_number : document_number,
+          gender_id : gender_id,
+          //photo : photo,
+          address : address,
+          email : email,
+          phone_number : phone_number
+        }, {where : {user_id : idABuscar}})
+    
+        //Editamos datos de ubicación
+        Location.update({
+          district : district,
+          address : address
+        }, {where : {id : idLocation}})
+        
     }
-
-    else if (tipoUsuario == "shelter")
-    {
-      //Editamos datos de UserShelter
-      const name = req.body.nombre
-      const ruc = req.body.ruc
-      const phone_number = req.body.telefono
-
-      UserShelter.update({
-        name : name,
-        ruc : ruc,
-        email : email,
-        //photo : photo,
-        phone_number : phone_number
-      }, {where : {user_id : idABuscar}})
-
-      //Editamos datos de ubicación
-      Location.update({
-        district : district,
-        address : address
-      }, {where : {id : idLocation}})
+  
+      else if (tipoUsuario == "shelter")
+      {
+        //Editamos datos de UserShelter
+        const name = req.body.nombre
+        const ruc = req.body.ruc
+        const phone_number = req.body.telefono
+  
+        UserShelter.update({
+          name : name,
+          ruc : ruc,
+          email : email,
+          //photo : photo,
+          phone_number : phone_number
+        }, {where : {user_id : idABuscar}})
+  
+        //Editamos datos de ubicación
+        Location.update({
+          district : district,
+          address : address
+        }, {where : {id : idLocation}})
+      }
+  
+      res.redirect('/')
     }
-
-    res.redirect('/')
+    catch (err) {
+      console.log(err);
+    }
   },
 
   getPerfilUsuario : async (req, res) => {
     try{
       const userType = req.session.userType
       const idUser = req.session.userId
+
+      const usuario = await User.findOne({where : {}})
+
+      /*//Obtener lista de posts del usuario
+      const posts = await Post.findAll({ include: [
+        {
+            model: Pet,
+            as: 'pet',          
+        },          
+      ],
+      where:{user_id: idUser}}) */
       
       if (userType == "person")
       {
         const userPerson = await UserPerson.findOne({where : {id : idUser}})
-        res.render('perfil', {
+
+        //Obtener lista de posts del usuario
+        const usuario = await User.findOne({where : {id : userPerson.user_id}})
+        const posts = await Post.findAll({ include: [
+          {
+              model: Pet,
+              as: 'pet',          
+          },          
+        ],
+        where:{user_id: usuario.id}})
+        
+        return res.render('perfil', {
           title : 'Perfil de usuario',
-          usuario : userPerson,
-          userType : userType})
+          usuario : imagesToBase645(userPerson),
+          userType : userType,
+          posts : imagesToBase64(posts)
+        })
       }
       else if (userType == "shelter")
       {
         const userShelter = await UserShelter.findOne({where : {id : idUser}})
-        res.render('perfil', {
+
+        //Obtener lista de posts del usuario
+        const usuario = await User.findOne({where : {id : userShelter.user_id}})
+        const posts = await Post.findAll({ include: [
+          {
+              model: Pet,
+              as: 'pet',          
+          },          
+        ],
+        where:{user_id: usuario.id}}) 
+
+        return res.render('perfil', {
           title : 'Perfil de albergue',
-          usuario : userShelter,
-          userType : userType
+          usuario : imagesToBase645(userShelter),
+          userType : userType,
+          posts : imagesToBase64(posts)
         })
-
       }
-
-      
     }
-    catch{
-
+    catch (err) {
+      console.log(err);
     }
   },
 
@@ -177,7 +227,9 @@ module.exports = {
       console.log("llegue")
       return res.render('editar_contraseña', {title : 'Cambiar contraseña'})
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
 
   cambiarContraseña : async (req, res) => {
@@ -219,11 +271,10 @@ module.exports = {
       }
       
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
-
-
-
 
   /**
    * @param {import('express').Request} req
@@ -232,11 +283,20 @@ module.exports = {
    */
   
   logoutUser: async (req, res) => {
-    req.session.destroy();
-    console.log('saliendo')
-    return res.redirect('/anuncios');
-  }
-
-  
+    try{
+      req.session.destroy();
+      return res.redirect('/anuncios');
+    }
+    catch (err) {
+      console.log(err);
+    }
+  },
 
 };
+
+imagesToBase645 = function (usuario) {
+  if(usuario.photo){
+    usuario.photo = Buffer.from(usuario.photo).toString('base64');
+  }  
+  return usuario      
+}   

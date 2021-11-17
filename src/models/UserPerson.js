@@ -3,10 +3,13 @@ const sequelize = require('../db');
 
 class UserPerson extends Model {
     // relaciones:
-    static associate({ User, Gender, Location }) {
-        this.belongsTo(Location, { as: 'location', foreignKey: 'location_id' })
+    static associate({ User, Gender, Location, ReportUserPost, ReportUserComment, Comment, Suggestion}) {
+        this.belongsTo(Location, { as: 'location', foreignKey: 'location_id' });
         this.belongsTo(User, { as: 'user', foreignKey: 'user_id' });
         this.belongsTo(Gender, { as: 'gender', foreignKey: 'gender_id' });
+        this.hasMany(ReportUserPost, { as: 'reportPosts', foreignKey: 'userAdoptante_id' , onDelete: 'cascade'});
+        this.hasMany(Comment, { as: 'comments', foreignKey: 'userPerson_id', onDelete: 'cascade' });
+        this.hasMany(Suggestion, { as: 'suggestions', foreignKey: 'userPerson_id', onDelete: 'cascade' });
     }
 }
 UserPerson.init(

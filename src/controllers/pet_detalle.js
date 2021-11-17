@@ -44,15 +44,25 @@ module.exports = {
         ) 
       if (post.user.type == "shelter"){
         const dueño = await UserShelter.findOne({where:{user_id:post.user_id}})
-        post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
-        return res.render('pet_detalle',{post:post,dueño:dueño});
+        post.pet = imagesToBase645(post.pet)
+        return res.render('pet_detalle',{post:post,dueño:imagesToBase645(dueño)});
       } else {
         const dueño = await UserPerson.findOne({where:{user_id:post.user_id}})
-        post.pet.photo = Buffer.from(post.pet.photo).toString('base64');
-        return res.render('pet_detalle',{post:post,dueño:dueño});
+        post.pet = imagesToBase645(post.pet)
+        return res.render('pet_detalle',{post:post,dueño:imagesToBase645(dueño)});
       };
-      
+         
     }
-    catch{}
+    catch (err) {
+      console.log(err);
+    }
   },
 };
+
+
+imagesToBase645 = function (usuario) {
+  if(usuario.photo){
+    usuario.photo = Buffer.from(usuario.photo).toString('base64');
+  }  
+  return usuario      
+}   

@@ -3,8 +3,10 @@ const sequelize = require('../db');
 
 class User extends Model {
     // relaciones:
-    static associate({ Post }) {
-        this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' })
+    static associate({ Post, ReportUserPost, Comment, Suggestion}) {
+        this.hasMany(Post, { as: 'posts', foreignKey: 'user_id' , onDelete: 'cascade'});
+        this.hasMany(ReportUserPost, { as: 'reportPosts', foreignKey: 'user_id' , onDelete: 'cascade'});
+
     }
 }
 User.init(
@@ -21,6 +23,10 @@ User.init(
         },
         type: {
             type: DataTypes.ENUM('person', 'shelter', 'admin'),
+            allowNull: false,
+        },
+        status: {
+            type: DataTypes.ENUM('actived', 'reported', 'blocked'),
             allowNull: false,
         }
     },

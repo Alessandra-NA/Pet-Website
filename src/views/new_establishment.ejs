@@ -1,0 +1,185 @@
+<div class="container justify-content-center">
+    <div class="row mb-3">
+        <h1>Nuevo establecimiento</h1>
+    </div>
+    <form action="/establishments/new/save" method="POST" enctype="multipart/form-data">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="newEstablishmentName" name="name" placeholder="name">
+            <label for="newEstablishmentName">Nombre</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="newEstablishmentLink" name="link" placeholder="Página web">
+            <label for="newEstablishmentLink">Página web</label>
+        </div>
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="newEstablishmentOfPets" name="ofPets"
+                value="true">
+            <label class="form-check-label" for="newEstablishmentOfPets">Es un lugar exclusivamente dedicado a las
+                mascotas?</label>
+        </div>
+        <div class="mb-3">
+            <label for="newEstablishmentType" class="form-label">Tipo de establecimiento</label>
+            <select class="form-select" id="newEstablishmentType" aria-label="Tipo de establecimiento" name="type">
+                <option selected>Seleccione el tipo de establecimiento</option>
+                <option value="Bares & cafés">Bares & cafés</option>
+                <option value="Restaurantes">Restaurantes</option>
+                <option value="Terrazas">Terrazas</option>
+                <option value="Hoteles & Alojamientos">Hoteles & alojamientos</option>
+                <option value="Playas">Playas</option>
+                <option value="Tiendas">Tiendas</option>
+                <option value="Parques">Parques</option>
+                <option value="Centros de belleza">Centros de belleza</option>
+                <option value="Clínicas">Clínicas</option>
+                <option value="Transportes">Transportes</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="newEstablishmentDistrict" class="form-label">Distrito</label>
+            <select class="form-select" id="newEstablishmentDistrict" name="district">
+                <option selected>Seleccione el distrito</option>
+                <option value="Ancón">Ancón</option>
+                <option value="Ate Vitarte">Ate Vitarte</option>
+                <option value="Barranco">Barranco</option>
+                <option value="Breña">Breña</option>
+                <option value="Carabayllo">Carabayllo</option>
+                <option value="Chaclacayo">Chaclacayo</option>
+                <option value="Chorrillos">Chorrillos</option>
+                <option value="Cieneguilla">Cieneguilla</option>
+                <option value="Comas">Comas</option>
+                <option value="El Agustino">El Agustino</option>
+                <option value="Independencia">Independencia</option>
+                <option value="Jesús María">Jesús María</option>
+                <option value="La Molina">La Molina</option>
+                <option value="La Victoria">La Victoria</option>
+                <option value="Lima Cercado">Lima Cercado</option>
+                <option value="Lince">Lince</option>
+                <option value="Los Olivos">Los Olivos</option>
+                <option value="Lurigancho">Lurigancho</option>
+                <option value="Lurín">Lurín</option>
+                <option value="Magdalena del Mar">Magdalena del Mar</option>
+                <option value="Miraflores">Miraflores</option>
+                <option value="Pachacamac">Pachacamac</option>
+                <option value="Pucusana">Pucusana</option>
+                <option value="Pueblo Libre">Pueblo Libre</option>
+                <option value="Puente Piedra">Puente Piedra</option>
+                <option value="Punta Hermosa">Punta Hermosa</option>
+                <option value="Punta Negra">Punta Negra</option>
+                <option value="Rímac">Rímac</option>
+                <option value="San Bartolo">San Bartolo</option>
+                <option value="San Borja">San Borja</option>
+                <option value="San Isidro">San Isidro</option>
+                <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                <option value="San Juan de Miraflores">San Juan de Miraflores</option>
+                <option value="San Luis">San Luis</option>
+                <option value="San Martín de Porres">San Martín de Porres</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="Santa Anita">Santa Anita</option>
+                <option value="Santa María del Mar">Santa María del Mar</option>
+                <option value="Santa Rosa">Santa Rosa</option>
+                <option value="Santiago de Surco">Santiago de Surco</option>
+                <option value="Surquillo">Surquillo</option>
+                <option value="Villa El Salvador">Villa El Salvador</option>
+                <option value="Villa María del Triunfo">Villa María del Triunfo</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="newEstablishmentAddress" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="newEstablishmentAddress"
+                placeholder="Ingrese la dirección del establecimiento" name="address">
+        </div>
+        <div class="row mb-3 justify-content-center">
+            <p class="lead">Arrastre el marcador a la ubicación exacta</p>
+            <div id="map" style="height: 30rem; width: 50rem;"></div>
+        </div>
+        <div>
+            <input type="text" id="mapLat" name="mapLat" hidden value=<%=lat%>>
+            <input type="text" id="mapLng" name="mapLng" hidden value=<%=long%>>
+        </div>
+        <div class="mb-3">
+            <div class="row mb-3">
+                <label for="input_foto" class="">Foto</label>
+            </div>
+            <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto" type="button">
+                <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative"
+                    id="image-field" width="200" height="200">
+            </button>
+            <input type="file" multiple name="image" id="input_foto" accept="image/*" style="display: none">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+</div>
+<script src="/js/selectFoto.js"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCizeC9tFV647keWnjuTGF2G3yJregpyEs&callback=initMap">
+    </script>
+<script>
+
+    let map = null;
+    const lat = parseFloat(document.querySelector('#mapLat').getAttribute('value'));
+    const long = parseFloat(document.querySelector('#mapLng').getAttribute('value'));
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: lat, lng: long },
+            zoom: 16,
+        });
+
+        var mark = new google.maps.Marker({
+            position: { lat: lat, lng: long },
+            map: map,
+            draggable: true
+        });
+
+        var moveMarker = function (e) {
+            mark.setPosition(e.latLng);
+        }
+
+        google.maps.event.addListener(mark, 'dragend', function () {
+            document.querySelector('#mapLat').setAttribute('value', mark.getPosition().lat())
+            document.querySelector('#mapLng').setAttribute('value', mark.getPosition().lng())
+        });
+    }
+
+    function main() {
+        //set max files of input_foto to 4
+        document.querySelector('#input_foto').addEventListener('change', function (e) {
+            if (this.files.length > 4) {
+                alert("Only 4 files accepted.");
+                e.preventDefault();
+                //set src of image-field to default image
+                document.querySelector('#image-field').setAttribute('src', '/img/petDefault.png');
+            } else {
+                handleIMG(this.files);
+                previewImage(e)
+            }
+        });
+
+        //add on change event listener to newEstablishmentOfPets. if is checked, set newEstablishmentType options to 'spa mascotas', 'veterinarias' and 'tienda mascotas', else set options to 'Bares & cafés', 'restaurantes', 'terrazas', 'hoteles & alojamientos', 'playas', 'tiendas', 'parques', 'centros de belleza', 'clínicas', 'transportes'
+        document.querySelector('#newEstablishmentOfPets').addEventListener('change', function (e) {
+            if (this.checked) {
+                document.querySelector('#newEstablishmentType').innerHTML = `
+                    <option value="Spa mascotas">Spa mascotas</option>
+                    <option value="Veterinarias">Veterinarias</option>
+                    <option value="Tienda mascotas">Tienda mascotas</option>
+                `;
+            } else {
+                document.querySelector('#newEstablishmentType').innerHTML = `
+                    <option value="Bares & cafés">Bares & cafés</option>
+                    <option value="Restaurantes">Restaurantes</option>
+                    <option value="Terrazas">Terrazas</option>
+                    <option value="Hoteles & Alojamientos">Hoteles & alojamientos</option>
+                    <option value="Playas">Playas</option>
+                    <option value="Tiendas">Tiendas</option>
+                    <option value="Parques">Parques</option>
+                    <option value="Centros de belleza">Centros de belleza</option>
+                    <option value="Clínicas">Clínicas</option>
+                    <option value="Transportes">Transportes</option>
+                `;
+            }
+        });
+    }
+
+    window.addEventListener('load', main);
+</script>

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {} = require("../middlewares/auth")
+const { authAdmin } = require("../middlewares/auth")
 const { logoutUser, redireccionarTipoUsuarioEditar, realizarEdicion, getPerfilUsuario, getCambiarContraseña, cambiarContraseña } = require('../controllers/user');
 const router = Router();
 const multer = require('multer');
@@ -13,6 +13,7 @@ upload = multer();
 
 router.get('/logout', logoutUser)
 router.get('/elegirTipo', redireccionarTipoUsuarioEditar)
+router.get('/editarAdmin', authAdmin, redireccionarTipoUsuarioEditar)
 router.post('/done', upload.single('image'), realizarEdicion)
 router.get('/perfil', getPerfilUsuario)
 router.get('/cambiarContrasena', getCambiarContraseña)

@@ -1,0 +1,47 @@
+.category-panel {
+    position: absolute;
+    width: 100%;
+    bottom: 35px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+.icon-type {
+    width: 36px;
+    height: 36px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text-justify {
+    text-align: justify;
+}
+
+@media screen and (min-width: 768px) {
+    .card-border-comment {
+        min-height: 250px;
+    }
+} 
+
+@media screen and (min-width: 992px) {
+    .card-border-comment {
+        min-height: 270px;
+    }
+} 
+
+@media screen and (min-width: 1200px) {
+    .card-border-comment {
+        min-height: 345px;
+    }
+} 
+
+@media screen and (min-width: 1400px) {
+    .card-border-comment {
+        min-height: 270px;
+    }
+} 

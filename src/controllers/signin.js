@@ -13,7 +13,9 @@ module.exports = {
         try {
             return res.render('signin', { title: 'Iniciar sesión' })
         }
-        catch { }
+        catch (err) {
+            console.log(err);
+        }
     },
     
     /**
@@ -76,15 +78,15 @@ module.exports = {
             if (aux)
             {
                 //Si inicia sesion
-                res.redirect('/adopcion')
+                res.redirect('/anuncios')
             }
             else{
                 //Username o contraseña incorrecto               
                 res.redirect('/')
             }     
         }
-        catch{
-
+        catch (err) {
+            console.log(err);
         }
     }
 

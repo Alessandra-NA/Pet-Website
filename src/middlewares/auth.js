@@ -32,5 +32,28 @@ module.exports = {
     }
   },
 
+  authUser: (req, res, next) => {
+    if (req.session.userType !== 'person' && req.session.userType !== 'shelter') {
+      res.status(401).redirect('/anuncios');
+    } else {
+      next();
+    }
+  },
+
+  authLoged: (req, res, next) => {
+    if (req.session.userType === 'person' || req.session.userType === 'shelter' || req.session.userType === 'admin') {
+      res.status(401).redirect('/anuncios');
+    } else {
+      next();
+    }
+  },
+  authAdmin: (req, res, next) => {
+    if (req.session.userType === 'admin') {
+      next();
+    } else {
+      res.status(401).redirect('/anuncios');
+    }
+  }
+
   
 }

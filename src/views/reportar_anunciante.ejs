@@ -1,9 +1,12 @@
 <main class="container">
 
-    <h2>Reporte/Denuncia a anunciante</h2>
-    <%=post.id%>
-    <%=post.pet.name%>
+    <h2 class="mb-5">Reporte/Denuncia a anunciante</h2>
+    
     <form action="./reportar/done?id=<%=post.id%>" method="POST" class="row my-3 p-2 border-2 g-3">
+
+        <label for="" class="form-label">Usuario a reportar:</label>
+        <input type="text" class="form-control" value="<%=post.user.username%>" disabled>
+        <input type="hidden" class="form-control" name="username_reportado" value="<%=post.user.username%>">
 
         <label class="form-label" for="">Motivo del reporte:</label>
         <select class="form-select" name="reason" id="" required>

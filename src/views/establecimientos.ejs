@@ -1,0 +1,145 @@
+<h1>Establecimientos Petfriendly</h1>
+<div class="row">
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <div class="btn-group" role="group">
+        <% if(listado){ %>
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1" checked>
+            <label class="btn btn-outline-info disabled" for="btnradio1">Listado</label>
+
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2">
+            <label class="btn btn-outline-info" for="btnradio2">Mapa</label>
+            <% } else{ %>
+                <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1">
+                <label class="btn btn-outline-info" for="btnradio1">Listado</label>
+
+                <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2" checked>
+                <label class="btn btn-outline-info disabled" for="btnradio2">Mapa</label>
+                <% } %>
+
+    </div>
+</div>
+<div class="row">
+    <label for="dropdownFiltro">
+        Qué buscas?
+    </label>
+    <div class="col-3">
+        <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro" selected-types=<%=selectedTypes%>>
+            <option value="conMascota" selected>Con mi mascota</option>
+            <option value="paraMascota">Para mi mascota</option>
+        </select>
+    </div>
+</div>
+
+<ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
+    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="numbers" data-categories="typography"
+        hidden="true">
+        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('spa') && 'is-selected'%> filterOption"
+            id="spa" is-selected="false">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <img src="https://cdn-icons-png.flaticon.com/512/1499/1499544.png" class="img-fluid">
+                <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
+            </div>
+        </a>
+    </li>
+    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
+        data-categories="data" hidden="true" is-selected="false">
+        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('vet') && 'is-selected'%> filterOption"
+            id="vet">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <img src="https://www.srperro.com/media/categoria/1e49faef-4aee-41fc-8634-e812b909a185.png"
+                    class="img-fluid">
+                <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
+            </div>
+        </a>
+    </li>
+    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="alarm clock time" data-categories="devices"
+        hidden="true">
+        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('tiendas') && 'is-selected'%> filterOption"
+            id="tiendas">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <img src="https://www.srperro.com/media/categoria/d5bc7c4e-58fc-44d4-89ff-b3146bca3de0.png"
+                    class="img-fluid">
+                <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
+            </div>
+        </a>
+    </li>
+    </li>
+</ul>
+
+<div class="container">
+    <% if(listado){ %>
+        <%- include('establecimientos_listado') %>
+            <% } else{ %>
+                <%- include('establecimientos_mapa') %>
+                    <% } %>
+
+</div>
+
+<style>
+    .is-selected{
+        border-color: #007bff!important;
+        border-radius: 0.25rem !important;
+        border: 1px solid;
+    }
+</style>
+<script>
+    // para cambiar el color de texto de la sección en el navbar
+    highlightNavbar(2)
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
+            window.location = '/establishments?tab=' + event.target.value
+        }))
+        document.querySelector("#dropdownFiltro").addEventListener('change', (event) => {
+            //unhide all elements of class 'optionsParaMascota'
+            if (event.target.value == "paraMascota") {
+                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                    elem.hidden = false
+                })
+            } else {
+                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                    elem.hidden = true
+                })
+            }
+        })
+
+        //get property selectedTypes of dropdownFiltro
+        let selectedTypes = document.querySelector("#dropdownFiltro").getAttribute("selected-types")
+        //if selectedTypes contains 'vet', 'spa' or 'tiendas' then unhide all optionsParaMascota class elements
+        if (selectedTypes.includes("vet")) {
+            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                elem.hidden = false
+                //set corresponding value to dropdownFiltro
+                document.querySelector("#dropdownFiltro").value = "paraMascota"
+            })
+        }
+        if (selectedTypes.includes("spa")) {
+            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                elem.hidden = false
+                document.querySelector("#dropdownFiltro").value = "paraMascota"
+            })
+        }
+        if (selectedTypes.includes("tiendas")) {
+            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
+                elem.hidden = false
+                document.querySelector("#dropdownFiltro").value = "paraMascota"
+            })
+        }
+
+        document.querySelectorAll(".filterOption").forEach(function (elem) {
+            elem.addEventListener("click", function (event) {
+                if (elem.classList.contains("is-selected")) {
+                    //set window location to current url without '&' or '?' + 'type' + elem.id
+                    window.location = window.location.href.replace('type='+elem.id, '')
+                }else{
+                    //if element doesn't contain 'is-selected' class, add type to url
+                    if(window.location.href.includes("?")){
+                        window.location = window.location.href + '&type=' + elem.id
+                    }else{
+                        window.location = window.location.href + '?type=' + elem.id
+                    }
+                }
+            })
+        })
+    })
+</script>
