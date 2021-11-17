@@ -304,12 +304,19 @@ module.exports = {
     catch(err) {console.log(err) }
   },
 
-  deleteAccount:(req, res) => {
+  deleteAccount : async (req, res) => {
     try {
+      const usuario = await User.findByPk(req.params.userid)
+      const tipo = usuario.type
+      let aux = 0
+      if (tipo == "shelter"){
+        aux = 1
+      }
       User.findByPk(req.params.userid).then(response => {
         response.destroy();
         Post.findAll({where: {'user_id': req.params.userid}}).then(posts => posts.forEach(post => post.destroy()))
-        res.redirect('/accounts')
+
+        res.redirect('/accounts?tipo_cuenta=' + aux)
       })
       
     }
