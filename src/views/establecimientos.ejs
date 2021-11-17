@@ -130,7 +130,7 @@
             elem.addEventListener("click", function (event) {
                 if (elem.classList.contains("is-selected")) {
                     //set window location to current url without '&' or '?' + 'type' + elem.id
-                    window.location = window.location.href.replace('type='+elem.id, '')
+                    window.location = window.location.href.indexOf("?"+'type='+elem.id) > -1 ? (window.location.href.indexOf('type='+elem.id+'&')>-1? window.location.href.replace('type='+elem.id+'&', ''):window.location.href.replace('?type='+elem.id, '')) : window.location.href.replace('&type='+elem.id, '')
                 }else{
                     //if element doesn't contain 'is-selected' class, add type to url
                     if(window.location.href.includes("?")){
