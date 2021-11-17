@@ -16,9 +16,18 @@ module.exports = {
       //const userType = req.body.tipo
       //const username = req.body.username
 
-      const userType = req.session.userType
-      const idUser = req.session.userId
+      let userType = req.session.userType
+      let idUser = req.session.userId
       //let idUsuario
+
+      console.log(req.query.user_id)
+      console.log(req.query.type)
+
+      if (req.query.user_id!=undefined && req.query.type!=undefined){
+        userType = req.query.type
+        idUser = req.query.user_id
+      }
+      
 
       //Obtenemos el id de usuario de acuerdo al username
       /*const usuarios = await User.findAll()

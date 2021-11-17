@@ -47,6 +47,13 @@ module.exports = {
       next();
     }
   },
+  auth: (req, res, next) => {
+    if (req.session.userType === 'person' || req.session.userType === 'shelter' || req.session.userType === 'admin') {
+      next();
+    } else {
+      res.status(401).redirect('/anuncios');
+    }
+  }
 
   
 }
