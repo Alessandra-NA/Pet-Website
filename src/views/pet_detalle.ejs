@@ -176,17 +176,21 @@
                                 <%=dueño.phone_number%>
                             </p>
                         </div>
+                        <% if (globalType.length>0 && !sameUser){ %>
+                            <div class="row">
+                                <figure class="text-center">                            
+                                    <a href="/anuncios/reportar?id=<%=post.pet_id%>" type="button"
+                                        class="btn btn-danger mar mt-2" style="width:  12rem;">
+                                        <b>Reportar</b>
+                                    </a>
+                                </figure>
+                            </div>
+                        
+                            <% } %>
+                        </div>
                     </div>
                 </div>
-                    <div class="row">
-                        <figure class="text-center">                            
-                            <a href="/anuncios/reportar?id=<%=post.pet_id%>" type="button"
-                                class="btn btn-danger mar mt-2" style="width:  12rem;">
-                                <b>Reportar</b>
-                            </a>
-                        </figure>
-                    </div>
-                </div>
+                
         </div>        
     </div>
 </main>

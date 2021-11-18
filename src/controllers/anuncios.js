@@ -1,4 +1,4 @@
-const { Post, Pet, Report, User, ReportUserPost } = require('../models');
+const { Post, Pet, Report, User, ReportUserPost, UserPerson, UserShelter } = require('../models');
 
 module.exports = {
   /**
@@ -42,9 +42,22 @@ module.exports = {
     {    
       const post = await Post.findByPk(id,{include: { all: true }})
 
+      console.log(post.user.type)
+
+      if(post.user.type=="person"){
+        //get userperson
+        var user = await UserPerson.findOne({where:{user_id: post.user_id}})
+        var username = user.first_name + " " + user.last_name
+      }else if(post.user.type=="shelter"){
+        //get usershelter
+        var user = await UserShelter.findOne({where:{user_id: post.user_id}})
+        var username = user.name
+      }
+
       return res.render('reportar_anunciante' , {
         title : 'Reportar un anuncio', 
-        post:post
+        post:post,
+        username:username
       })
     }
     catch (err) {
@@ -73,14 +86,13 @@ module.exports = {
         }
       ).then(function(_){
         //Cambiamos flag de usuario reportado
-        User.update({
-          flagReportado : true
-        }, {where : {username : username_reportado}})
+        const reportedUser = User.findOne({where : {id : id_reported_user}}).then(function(reportedUser){
+          reportedUser.status = 'reported';
+          reportedUser.save();
+        })
       })
 
-      //get current  user id
-
-      
+      //get reported user by id
 
       /*
       const post = await Post.findByPk(id)

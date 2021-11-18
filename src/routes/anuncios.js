@@ -12,7 +12,7 @@ upload = multer();
   router.get('/', nameAuth, getPetPost)
 */
 router.get('/', getAnuncios)
-router.get('/reportar', authUser, getReportarAnuncios)
+router.get('/reportar', getReportarAnuncios)
 router.post('/reportar/done', upload.single('image'), postAnuncioReportado)
 
 module.exports = router;

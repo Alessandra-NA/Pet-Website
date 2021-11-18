@@ -5,7 +5,7 @@
     <form action="./reportar/done?id=<%=post.id%>" method="POST" class="row my-3 p-2 border-2 g-3" enctype="multipart/form-data">
 
         <label for="" class="form-label">Usuario a reportar:</label>
-        <input type="text" class="form-control" value="<%=post.user.username%>" disabled>
+        <input type="text" class="form-control" value="<%=username%>" disabled>
         <input type="hidden" class="form-control" name="username_reportado" value="<%=post.user.username%>">
         <input type="hidden" name="id_reported_user" value="<%=post.user.id%>" >
 
@@ -28,7 +28,7 @@
                 width="200" height="200">
             </button>
             <input type="file" name="image" id="input_foto" onchange="handleIMG(this.files), previewImage(event)"
-              accept="image/*" required style="display: none">
+              accept="image/*" style="display: none">
           </div>
         <button class="btn btn-success" type="submit">Enviar reporte</button>
     </form>
