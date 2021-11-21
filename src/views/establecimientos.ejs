@@ -4,13 +4,13 @@
 <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
     <div class="btn-group" role="group">
         <% if(listado){ %>
-            <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1" checked>
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="list" id="btnradio1" checked>
             <label class="btn btn-outline-info disabled" for="btnradio1">Listado</label>
 
             <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2">
             <label class="btn btn-outline-info" for="btnradio2">Mapa</label>
             <% } else{ %>
-                <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1">
+                <input type="radio" class="btn-check tab-selector" name="btnradio" value="list" id="btnradio1">
                 <label class="btn btn-outline-info" for="btnradio1">Listado</label>
 
                 <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2" checked>
@@ -23,78 +23,50 @@
 <div class="container">
     <div class="d-flex justify-content-end mt-3 mr-3">
         <div class="row">
-            <label id="lblFiltros" for="dropdownFiltro">
+            <label id="lblFiltros" for="dropdownFiltro" class="btn btn-secondary">
                 Filtros
             </label>
-            <!-- <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro" selected-types=<%=selectedTypes%>>
-                <option value="conMascota" selected>Con mi mascota</option>
-                <option value="paraMascota">Para mi mascota</option>
-            </select> -->
         </div>
     </div>
     <div id="divFiltros" class="border mt-2" hidden>
         <label class="mt-2 ml-4">Tipo de establecimiento:</label>
         <div class="mx-auto d-flex py-2 m-2 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
-            <label> <input id="rbConMascota" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="conMascota" checked>
+            <label> <input id="rbConMascota" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="conMascota" >
                 Con mi mascota </label>
             <label> <input id="rbParaMascota" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="paraMascota"> Para mi mascota </label>
-            <label> <input id="rbTodos" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="todos"> Todos </label>
+            <label> <input id="rbTodos" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="todos" checked> Todos </label>
         </div>
         <div hidden id="divElementos">
-        <label class="mt-2 ml-4">Seleccione uno o varios:</label>
+        <label class="mt-1 mb-1 ml-4">Seleccione uno o varios:</label>
             <!-- con -->
             <div hidden id="divCon" class="grid grid-cols-2 mx-auto border-1 border-gray-300 rounded-md" style="width: 75%">
-                <label> <input id="rbByC" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="ByC"> Bares & Cafés </label>
-                <label> <input id="rbTer" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Ter"> Terrazas </label>
-                <label> <input id="rbPla" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Pla"> Playas </label>
-                <label> <input id="rbHot" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Hot"> Hoteles & Alojamientos </label>
-                <label> <input id="rbTie" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Tie"> Tiendas </label>
-                <label> <input id="rbPar" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Par"> Parques </label>
-                <label> <input id="rbCen" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Cen"> Centros de belleza </label>
-                <label> <input id="rbCli" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Cli"> Clínicas </label>
-                <label> <input id="rbTra" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Tra"> Transportes </label>
-                <label> <input id="rbOtr" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Otr"> Otros </label>
+                <label> <input id="rbByC" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="ByC"> Bares & Cafés </label>
+                <label> <input id="rbTer" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Ter"> Terrazas </label>
+                <label> <input id="rbPla" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Pla"> Playas </label>
+                <label> <input id="rbHot" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Hot"> Hoteles & Alojamientos </label>
+                <label> <input id="rbTie" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Tie"> Tiendas </label>
+                <label> <input id="rbPar" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Par"> Parques </label>
+                <label> <input id="rbCen" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Cen"> Centros de belleza </label>
+                <label> <input id="rbCli" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Cli"> Clínicas </label>
+                <label> <input id="rbTra" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Tra"> Transportes </label>
             </div>
             <!-- para -->
-            <div hidden id="divPara" class="mx-auto border-gray-300 rounded-md" style="width: 75%">
-                <label> <input id="rbSpa" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Spa"> Spa Mascotas </label>
-                <label> <input id="rbVet" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Vet"> Veterinaria </label>
-                <label> <input id="rbTieM" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="TieM"> Tienda Mascotas </label>
+            <div hidden id="divPara" class="grid grid-cols-3 mx-auto border-gray-300 rounded-md" style="width: 75%">
+                <label> <input id="rbSpa" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Spa"> Spa Mascotas </label>
+                <label> <input id="rbVet" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="Vet"> Veterinaria </label>
+                <label> <input id="rbTieM" class="form-check-input mb-2 mr-2" type="checkbox" name="tipo" value="TieM"> Tienda Mascotas </label>
+            </div>
+            <br>
+        </div>
+        <div class="d-flex justify-content-end mt-3 mr-3">
+            <div class="row">
+                <label id="lblAplicarFiltros" class="btn btn-link mb-1 mr-2">
+                    Aplicar filtros
+                </label>
             </div>
         </div>
     </div>
     <br>
-    <!--
-    <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
-        <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="numbers"
-            data-categories="typography" hidden="true">
-            <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('spa') && 'is-selected'%> filterOption"
-                id="spa" is-selected="false">
-                <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                    <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
-                </div>
-            </a>
-        </li>
-        <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
-            data-categories="data" hidden="true" is-selected="false">
-            <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('vet') && 'is-selected'%> filterOption"
-                id="vet">
-                <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                    <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
-                </div>
-            </a>
-        </li>
-        <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="alarm clock time"
-            data-categories="devices" hidden="true">
-            <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('tiendas') && 'is-selected'%> filterOption"
-                id="tiendas">
-                <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                    <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
-                </div>
-            </a>
-        </li>
-        </li>
-    </ul>   -->
     <% if(listado){ %>
         <%- include('establecimientos_listado') %>
             <% } else{ %>
@@ -123,70 +95,55 @@
     document.getElementById('rbParaMascota').addEventListener('click', mostrarOpciones)
     document.getElementById('rbTodos').addEventListener('click', mostrarOpciones)
     function mostrarOpciones(){
+        var divcon = document.getElementById('divCon')
+        var divpara = document.getElementById('divPara')
+        var divelem = document.getElementById('divElementos')
         if(document.getElementById('rbConMascota').checked) {
-
+            divelem.hidden = false
+            divcon.hidden = false
+            divpara.hidden = true
         } else if (document.getElementById('rbParaMascota').checked) {
-
+            divelem.hidden = false
+            divcon.hidden = true
+            divpara.hidden = false
         } else {
-
+            divelem.hidden = true
+            divcon.hidden = false
+            divpara.hidden = false
+        }
+    }
+    // para el req.query y los filtros
+    document.getElementById('lblAplicarFiltros').addEventListener('click', redirigirFiltros)
+    function redirigirFiltros(){
+        if(document.getElementById('rbTodos').checked) {
+            if(window.location.toString().includes('list')) window.location = '/establishments?tab=list'
+            else window.location = '/establishments?tab=mapa'
+        } else {
+            queryFiltros = ''
+            if(document.getElementById('rbConMascota').checked){
+                if (document.getElementById('rbByC').checked) queryFiltros = queryFiltros + '&rbByC=t'
+                if (document.getElementById('rbTer').checked) queryFiltros = queryFiltros + '&rbTer=t'
+                if (document.getElementById('rbPla').checked) queryFiltros = queryFiltros + '&rbPla=t'
+                if (document.getElementById('rbHot').checked) queryFiltros = queryFiltros + '&rbHot=t'
+                if (document.getElementById('rbTie').checked) queryFiltros = queryFiltros + '&rbTie=t'
+                if (document.getElementById('rbPar').checked) queryFiltros = queryFiltros + '&rbPar=t'
+                if (document.getElementById('rbCen').checked) queryFiltros = queryFiltros + '&rbCen=t'
+                if (document.getElementById('rbCli').checked) queryFiltros = queryFiltros + '&rbCli=t'
+                if (document.getElementById('rbTra').checked) queryFiltros = queryFiltros + '&rbTra=t'
+            } else {
+                if (document.getElementById('rbSpa').checked) queryFiltros = queryFiltros + '&rbSpa=t'
+                if (document.getElementById('rbVet').checked) queryFiltros = queryFiltros + '&rbVet=t'
+                if (document.getElementById('rbTieM').checked) queryFiltros = queryFiltros + '&rbTieM=t'
+            }
+            if (window.location.toString().includes('list')) window.location = '/establishments?tab=list' + queryFiltros
+            else window.location = '/establishments?tab=mapa'+queryFiltros
         }
     }
     // para cambiar el color de texto de la sección en el navbar
     highlightNavbar(2)
-    /*window.addEventListener('load', () => {
-        document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
-            window.location = '/establishments?tab=' + event.target.value
-        }))
-        document.querySelector("#dropdownFiltro").addEventListener('change', (event) => {
-            //unhide all elements of class 'optionsParaMascota'
-            if (event.target.value == "paraMascota") {
-                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                    elem.hidden = false
-                })
-            } else {
-                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                    elem.hidden = true
-                })
-            }
+    window.addEventListener('load', () => {
+            document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
+                window.location = '/establishments?tab=' + event.target.value
+            }))
         })
-
-        //get property selectedTypes of dropdownFiltro
-        let selectedTypes = document.querySelector("#dropdownFiltro").getAttribute("selected-types")
-        //if selectedTypes contains 'vet', 'spa' or 'tiendas' then unhide all optionsParaMascota class elements
-        if (selectedTypes.includes("vet")) {
-            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                elem.hidden = false
-                //set corresponding value to dropdownFiltro
-                document.querySelector("#dropdownFiltro").value = "paraMascota"
-            })
-        }
-        if (selectedTypes.includes("spa")) {
-            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                elem.hidden = false
-                document.querySelector("#dropdownFiltro").value = "paraMascota"
-            })
-        }
-        if (selectedTypes.includes("tiendas")) {
-            document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                elem.hidden = false
-                document.querySelector("#dropdownFiltro").value = "paraMascota"
-            })
-        }
-
-        document.querySelectorAll(".filterOption").forEach(function (elem) {
-            elem.addEventListener("click", function (event) {
-                if (elem.classList.contains("is-selected")) {
-                    //set window location to current url without '&' or '?' + 'type' + elem.id
-                    window.location = window.location.href.replace('type='+elem.id, '')
-                }else{
-                    //if element doesn't contain 'is-selected' class, add type to url
-                    if(window.location.href.includes("?")){
-                        window.location = window.location.href + '&type=' + elem.id
-                    }else{
-                        window.location = window.location.href + '?type=' + elem.id
-                    }
-                }
-            })
-        })
-    })*/
 </script>

@@ -9,8 +9,45 @@ module.exports = {
 
     getEstablishments: async (req, res) => {
         try {
-            if (req.query.type) {
-                //if req.query.type is array
+            if (Object.keys(req.query).length > 1) {
+                var rbByC = ''
+                var rbTer = ''
+                var rbPla = ''
+                var rbHot = ''
+                var rbTie = ''
+                var rbPar = ''
+                var rbCen = ''
+                var rbCli = ''
+                var rbTra = ''
+                var rbSpa = ''
+                var rbVet = ''
+                var rbTieM = ''
+                if (req.query.rbByC == 't') rbByC = 'Bares & cafés'
+                if (req.query.rbTer == 't') rbTer = 'Restaurantes'
+                if (req.query.rbPla == 't') rbPla = 'Terrazas'
+                if (req.query.rbHot == 't') rbHot = 'Hoteles & Alojamientos'
+                if (req.query.rbTie == 't') rbTie = 'Tiendas'
+                if (req.query.rbPar == 't') rbPar = 'Parques'
+                if (req.query.rbCen == 't') rbCen = 'Centros de belleza'
+                if (req.query.rbCli == 't') rbCli = 'Clínicas'
+                if (req.query.rbTra == 't') rbTra = 'Transportes'
+                if (req.query.rbSpa == 't') rbSpa = 'Spa mascotas'
+                if (req.query.rbVet == 't') rbVet = 'Veterinarias'
+                if (req.query.rbTieM == 't') rbTieM = 'Tienda mascotas'
+                var establishments = await Establishment.findAll({
+                    include: [
+                        {
+                            model: Location,
+                            as: 'location',
+                        }
+                    ],
+                    where: {
+                        type: { [Op.or]: [rbByC, rbTer, rbPla, rbHot, rbTie, rbPar, rbCen, rbCli, rbTra, rbSpa, rbVet, rbTieM].filter(e => e != '') }
+                    }
+                })
+
+
+                /*//if req.query.type is array
                 if (Array.isArray(req.query.type)) {
                     var selectedTypes = req.query.type.map(type => {
                         switch (type) {
@@ -61,7 +98,7 @@ module.exports = {
                             type: selectedTypes
                         }
                     })
-                }
+                }*/
                 
             } else {
                 var establishments = await Establishment.findAll({
