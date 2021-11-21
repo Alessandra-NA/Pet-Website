@@ -1,7 +1,7 @@
 <h1>Establecimientos Petfriendly</h1>
 <div class="row">
 </div>
-<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
     <div class="btn-group" role="group">
         <% if(listado){ %>
             <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1" checked>
@@ -19,55 +19,82 @@
 
     </div>
 </div>
-<div class="row">
-    <label for="dropdownFiltro">
-        Qué buscas?
-    </label>
-    <div class="col-3">
-        <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro" selected-types=<%=selectedTypes%>>
-            <option value="conMascota" selected>Con mi mascota</option>
-            <option value="paraMascota">Para mi mascota</option>
-        </select>
-    </div>
-</div>
-
-<ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
-    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="numbers" data-categories="typography"
-        hidden="true">
-        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('spa') && 'is-selected'%> filterOption"
-            id="spa" is-selected="false">
-            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                <img src="https://cdn-icons-png.flaticon.com/512/1499/1499544.png" class="img-fluid">
-                <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
-            </div>
-        </a>
-    </li>
-    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
-        data-categories="data" hidden="true" is-selected="false">
-        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('vet') && 'is-selected'%> filterOption"
-            id="vet">
-            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                <img src="https://www.srperro.com/media/categoria/1e49faef-4aee-41fc-8634-e812b909a185.png"
-                    class="img-fluid">
-                <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
-            </div>
-        </a>
-    </li>
-    <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="alarm clock time" data-categories="devices"
-        hidden="true">
-        <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('tiendas') && 'is-selected'%> filterOption"
-            id="tiendas">
-            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                <img src="https://www.srperro.com/media/categoria/d5bc7c4e-58fc-44d4-89ff-b3146bca3de0.png"
-                    class="img-fluid">
-                <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
-            </div>
-        </a>
-    </li>
-    </li>
-</ul>
 
 <div class="container">
+    <div class="d-flex justify-content-end mt-3 mr-3">
+        <div class="row">
+            <label id="lblFiltros" for="dropdownFiltro">
+                Filtros
+            </label>
+            <!-- <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro" selected-types=<%=selectedTypes%>>
+                <option value="conMascota" selected>Con mi mascota</option>
+                <option value="paraMascota">Para mi mascota</option>
+            </select> -->
+        </div>
+    </div>
+    <div id="divFiltros" class="border mt-2" hidden>
+        <label class="mt-2 ml-4">Tipo de establecimiento:</label>
+        <div class="mx-auto d-flex py-2 m-2 justify-content-around border-1 border-gray-300 rounded-md" style="width: 75%">
+            <label> <input id="rbConMascota" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="conMascota" checked>
+                Con mi mascota </label>
+            <label> <input id="rbParaMascota" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="paraMascota"> Para mi mascota </label>
+            <label> <input id="rbTodos" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="todos"> Todos </label>
+        </div>
+        <div hidden id="divElementos">
+        <label class="mt-2 ml-4">Seleccione uno o varios:</label>
+            <!-- con -->
+            <div hidden id="divCon" class="grid grid-cols-2 mx-auto border-1 border-gray-300 rounded-md" style="width: 75%">
+                <label> <input id="rbByC" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="ByC"> Bares & Cafés </label>
+                <label> <input id="rbTer" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Ter"> Terrazas </label>
+                <label> <input id="rbPla" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Pla"> Playas </label>
+                <label> <input id="rbHot" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Hot"> Hoteles & Alojamientos </label>
+                <label> <input id="rbTie" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Tie"> Tiendas </label>
+                <label> <input id="rbPar" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Par"> Parques </label>
+                <label> <input id="rbCen" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Cen"> Centros de belleza </label>
+                <label> <input id="rbCli" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Cli"> Clínicas </label>
+                <label> <input id="rbTra" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Tra"> Transportes </label>
+                <label> <input id="rbOtr" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Otr"> Otros </label>
+            </div>
+            <!-- para -->
+            <div hidden id="divPara" class="mx-auto border-gray-300 rounded-md" style="width: 75%">
+                <label> <input id="rbSpa" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Spa"> Spa Mascotas </label>
+                <label> <input id="rbVet" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="Vet"> Veterinaria </label>
+                <label> <input id="rbTieM" class="form-check-input mb-2 mr-2" type="radio" name="tipo" value="TieM"> Tienda Mascotas </label>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--
+    <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
+        <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="numbers"
+            data-categories="typography" hidden="true">
+            <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('spa') && 'is-selected'%> filterOption"
+                id="spa" is-selected="false">
+                <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                    <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
+                </div>
+            </a>
+        </li>
+        <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
+            data-categories="data" hidden="true" is-selected="false">
+            <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('vet') && 'is-selected'%> filterOption"
+                id="vet">
+                <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                    <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
+                </div>
+            </a>
+        </li>
+        <li class="col mb-4 optionsParaMascota" style="width: 10em; cursor: pointer;" data-tags="alarm clock time"
+            data-categories="devices" hidden="true">
+            <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('tiendas') && 'is-selected'%> filterOption"
+                id="tiendas">
+                <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                    <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
+                </div>
+            </a>
+        </li>
+        </li>
+    </ul>   -->
     <% if(listado){ %>
         <%- include('establecimientos_listado') %>
             <% } else{ %>
@@ -84,9 +111,29 @@
     }
 </style>
 <script>
+    // para mostrar los filtros
+    document.getElementById('lblFiltros').addEventListener('click',toggleFiltros)
+    function toggleFiltros(){
+        var div = document.getElementById('divFiltros')
+        if(div.hidden) div.hidden = false
+        else div.hidden = true
+    }
+    // para mostrar opciones por tipo
+    document.getElementById('rbConMascota').addEventListener('click', mostrarOpciones)
+    document.getElementById('rbParaMascota').addEventListener('click', mostrarOpciones)
+    document.getElementById('rbTodos').addEventListener('click', mostrarOpciones)
+    function mostrarOpciones(){
+        if(document.getElementById('rbConMascota').checked) {
+
+        } else if (document.getElementById('rbParaMascota').checked) {
+
+        } else {
+
+        }
+    }
     // para cambiar el color de texto de la sección en el navbar
     highlightNavbar(2)
-    window.addEventListener('load', () => {
+    /*window.addEventListener('load', () => {
         document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
             window.location = '/establishments?tab=' + event.target.value
         }))
@@ -141,5 +188,5 @@
                 }
             })
         })
-    })
+    })*/
 </script>
