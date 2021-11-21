@@ -1,4 +1,4 @@
-const { Post, Pet, Report, User } = require('../models');
+const { Post, Pet, Report, User, ReportUserPost, UserPerson, UserShelter } = require('../models');
 
 module.exports = {
   /**
@@ -42,9 +42,22 @@ module.exports = {
     {    
       const post = await Post.findByPk(id,{include: { all: true }})
 
+      console.log(post.user.type)
+
+      if(post.user.type=="person"){
+        //get userperson
+        var user = await UserPerson.findOne({where:{user_id: post.user_id}})
+        var username = user.first_name + " " + user.last_name
+      }else if(post.user.type=="shelter"){
+        //get usershelter
+        var user = await UserShelter.findOne({where:{user_id: post.user_id}})
+        var username = user.name
+      }
+
       return res.render('reportar_anunciante' , {
         title : 'Reportar un anuncio', 
-        post:post
+        post:post,
+        username:username
       })
     }
     catch (err) {
@@ -58,22 +71,28 @@ module.exports = {
     console.log("================== "+id)
     try
     {
-      const {reason, comment, username_reportado} = req.body;
+      const {comment, username_reportado, id_reported_user} = req.body;
+      const photo = req.file? req.file.buffer : null;
 
       console.log(username_reportado)
-      const reporteCreado = await Report.create(
+      const reporteCreado = await ReportUserPost.create(
         {
-          reason : reason,
-          commet : comment,
+          desc : comment,
           //photo
-          post_id : id
+          user_id: id_reported_user,
+          userAdoptante_id: req.session.userId,
+          fecha: new Date(),
+          photo : photo
         }
-      )
+      ).then(function(_){
+        //Cambiamos flag de usuario reportado
+        const reportedUser = User.findOne({where : {id : id_reported_user}}).then(function(reportedUser){
+          reportedUser.status = 'reported';
+          reportedUser.save();
+        })
+      })
 
-      //Cambiamos flag de usuario reportado
-      User.update({
-        flagReportado : true
-      }, {where : {username : username_reportado}})
+      //get reported user by id
 
       /*
       const post = await Post.findByPk(id)

@@ -2,27 +2,35 @@
 
     <h2 class="mb-5">Reporte/Denuncia a anunciante</h2>
     
-    <form action="./reportar/done?id=<%=post.id%>" method="POST" class="row my-3 p-2 border-2 g-3">
+    <form action="./reportar/done?id=<%=post.id%>" method="POST" class="row my-3 p-2 border-2 g-3" enctype="multipart/form-data">
 
         <label for="" class="form-label">Usuario a reportar:</label>
-        <input type="text" class="form-control" value="<%=post.user.username%>" disabled>
+        <input type="text" class="form-control" value="<%=username%>" disabled>
         <input type="hidden" class="form-control" name="username_reportado" value="<%=post.user.username%>">
+        <input type="hidden" name="id_reported_user" value="<%=post.user.id%>" >
 
-        <label class="form-label" for="">Motivo del reporte:</label>
+        <!--<label class="form-label" for="">Motivo del reporte:</label>
         <select class="form-select" name="reason" id="" required>
             <option selected disabled value="">--Seleccione una opción--</option>
             <option value="1">Incentiva a la venta/trafico de animales</option>
             <option value="2">Hace promoción de negocios/marcas sin motivo</option>
             <option value="3">Genera violencia/odio a través del anuncio</option>
             <option value="4">El anuncio no tiene nada que ver con el propósito de la página</option>
-        </select>
+        </select>-->
 
         <label class="form-label" for="">Comentarios:</label>
         <textarea class="form-control" name="comment" id="" cols="30" rows="10" required></textarea>
 
         <label class="form-label" for="">Adjuntar evidencia:</label>
-        <input class="form-control" type="file">
-
+        <div class="">
+            <button class="rounded-3 bg-transparent px-0 border-0 bg-transparent" id="boton_selec_foto" type="button">
+              <img src="/img/petDefault.png" class="img-thumbnail border-2 rounded-3 position-relative" id="image-field"
+                width="200" height="200">
+            </button>
+            <input type="file" name="image" id="input_foto" onchange="handleIMG(this.files), previewImage(event)"
+              accept="image/*" style="display: none">
+          </div>
         <button class="btn btn-success" type="submit">Enviar reporte</button>
     </form>
 </main>
+<script src="/js/selectFoto.js"></script>
