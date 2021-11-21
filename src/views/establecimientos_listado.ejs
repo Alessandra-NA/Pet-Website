@@ -1,6 +1,10 @@
 <h3 class="mt-4">Establecimientos listado</h3>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row row-cols-1 row-cols-md-3 g-4 mt-2 pb-3">
+    
+    <% if (establecimientos.length == 0) {  %>
+        <h6>No hay resultados.</h6>
+    <% } else { %>
     <% establecimientos.forEach(function(establecimiento){ %>
         <div class="col">
             <div class="card text-center py-3" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'">
@@ -60,5 +64,6 @@
             </div>
         </div>
         <% }) %>
+    <% }%>
 </div>
     

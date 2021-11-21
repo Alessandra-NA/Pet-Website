@@ -1,16 +1,16 @@
 <h1>Establecimientos Petfriendly</h1>
 <div class="row">
 </div>
-<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
     <div class="btn-group" role="group">
         <% if(listado){ %>
-            <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1" checked>
+            <input type="radio" class="btn-check tab-selector" name="btnradio" value="list" id="btnradio1" checked>
             <label class="btn btn-outline-info disabled" for="btnradio1">Listado</label>
 
             <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2">
             <label class="btn btn-outline-info" for="btnradio2">Mapa</label>
             <% } else{ %>
-                <input type="radio" class="btn-check tab-selector" name="btnradio" value="listado" id="btnradio1">
+                <input type="radio" class="btn-check tab-selector" name="btnradio" value="list" id="btnradio1">
                 <label class="btn btn-outline-info" for="btnradio1">Listado</label>
 
                 <input type="radio" class="btn-check tab-selector" name="btnradio" value="mapa" id="btnradio2" checked>
@@ -47,46 +47,43 @@
 
 
 <ul hidden id="tiposPara" class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
-    <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="numbers" data-categories="typography">
+    <li class="col optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="numbers" data-categories="typography">
         <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('spa') && 'is-selected'%> filterOption"
             id="spa" is-selected="false">
-            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+            <div class="p-3 py-4 bg-light text-center rounded">
                 <img src="https://cdn-icons-png.flaticon.com/512/1499/1499544.png" class="img-fluid" style="width: 100%; height: 5vw; object-fit:contain">
                 <div class="name text-muted text-decoration-none text-center pt-1">Spa mascotas</div>
             </div>
         </a>
     </li>
-    <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
+    <li class="col optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
         data-categories="data" is-selected="false">
         <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('vet') && 'is-selected'%> filterOption"
             id="vet">
-            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+            <div class="p-3 py-4 bg-light text-center rounded">
                 <img src="https://www.srperro.com/media/categoria/1e49faef-4aee-41fc-8634-e812b909a185.png"
                 class="img-fluid" style="width: 100%; height: 5vw; object-fit:contain">
                 <div class="name text-muted text-decoration-none text-center pt-1">Veterinaria</div>
             </div>
         </a>
     </li>
-    <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="alarm clock time" data-categories="devices">
+    <li class="col optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="alarm clock time" data-categories="devices">
         <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('tiendas') && 'is-selected'%> filterOption"
             id="tiendas">
-            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+            <div class="p-3 py-4 bg-light text-center rounded">
                 <img src="https://www.srperro.com/media/categoria/d5bc7c4e-58fc-44d4-89ff-b3146bca3de0.png"
                 class="img-fluid" style="width: 100%; height: 5vw; object-fit:contain">
                 <div class="name text-muted text-decoration-none text-center pt-1">Tienda mascotas</div>
             </div>
         </a>
     </li>
-    </li>
 </ul>
-
 <div class="container">
     <% if(listado){ %>
         <%- include('establecimientos_listado') %>
             <% } else{ %>
                 <%- include('establecimientos_mapa') %>
                     <% } %>
-
 </div>
 
 <style>

@@ -9,6 +9,7 @@ module.exports = {
 
     getEstablishments: async (req, res) => {
         try {
+            //if req.query.type is array
             if (req.query.type) {
                 //if req.query.type is array
                 if (Array.isArray(req.query.type)) {
@@ -24,21 +25,21 @@ module.exports = {
                                 var filter = 'Tienda mascotas'
                                 break;
                         }
-                        return {type: filter}
+                        return { type: filter }
                     })
                     var establishments = await Establishment.findAll({
                         include: [
                             {
                                 model: Location,
                                 as: 'location',
-                                
+
                             }
                         ],
                         where: {
-                            [Op.or] : selectedTypes
+                            [Op.or]: selectedTypes
                         }
                     })
-                }else{
+                } else {
                     switch (req.query.type) {
                         case 'spa':
                             var selectedTypes = 'Spa mascotas'
@@ -62,7 +63,7 @@ module.exports = {
                         }
                     })
                 }
-                
+
             } else if (Object.keys(req.query).length > 1) {
                 var rbByC = ''
                 var rbTer = ''
@@ -82,7 +83,8 @@ module.exports = {
                 if (req.query.rbCen == 't') rbCen = 'Centros de belleza'
                 if (req.query.rbCli == 't') rbCli = 'Clínicas'
                 if (req.query.rbTra == 't') rbTra = 'Transportes'
-                var establishments = await Establishment.findAll({
+                var establishments = []
+                if ([rbByC, rbTer, rbPla, rbHot, rbTie, rbPar, rbCen, rbCli, rbTra].filter(e => e != '').length != 0) establishments = await Establishment.findAll({
                     include: [
                         {
                             model: Location,

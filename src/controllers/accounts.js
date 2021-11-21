@@ -137,6 +137,30 @@ module.exports = {
     }
   },
 
+  confirmarReporteComment : async (req, res) => {
+    try { 
+      const status = req.body.status
+      const id = req.body.id
+      const reporte_id = req.body.reporte_id
+
+      console.log(status) 
+      console.log(id)
+
+      User.update({
+        status : status
+      }, {where : {id : id}})
+
+      ReportUserComment.findByPk(reporte_id).then(response => {
+        response.destroy();
+      })
+
+      return res.redirect('/accounts/reporteComentario?user_id=' + id)
+
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
 
   getSugerencias : async (req,res) => {
     try {
@@ -334,7 +358,41 @@ module.exports = {
     catch (err) {
       console.log(err);
     }
-  }
+  },
+
+  getReportesComentarios : async(req,res) => {
+    try{
+      const user_id = req.query.user_id      
+      const reportedComments = await ReportUserComment.findAll({include : {all : true}})
+      const user_reportedComments = []
+      reportedComments.forEach(reportedComment => {
+        if(reportedComment.comment.userPerson_id == user_id){
+          user_reportedComments.push(reportedComment)
+        }          
+      });     
+      //Datos del usuario reportado
+      let userChild = null
+      const user = await User.findOne({include : {all : true}, where : {id : user_id}})
+      
+      if (user.type == "person"){
+        userChild = await UserPerson.findOne({include : {all : true}, where : {user_id : user_id}})
+      } else {
+        userChild = await UserShelter.findOne({include : {all : true}, where : {user_id : user_id}})
+      }
+
+      return res.render('verReportesComentario', {
+        title : 'Ver reportes comentarios',
+        reportes : user_reportedComments,
+        user : user,
+        userChild : imagesToBase644(userChild),
+      })
+    }
+
+    catch(err) {
+      console.log(err);
+    }
+  },
+
 };
 
 imagesToBase6455 = function (usuario) {
