@@ -19,21 +19,35 @@
 
     </div>
 </div>
-<div class="row">
+<div class="row ml-2">
     <label for="dropdownFiltro">
-        Qué buscas?
+        ¿Qué buscas?
     </label>
     <div class="col-3">
         <select class="form-select" aria-label="Qué buscas?" id="dropdownFiltro" selected-types=<%=selectedTypes%>>
-            <option value="conMascota" selected>Con mi mascota</option>
+            <option value="todos" selected>Todos</option>
+            <option value="conMascota">Con mi mascota</option>
             <option value="paraMascota">Para mi mascota</option>
         </select>
     </div>
 </div>
 
-<ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
-    <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="numbers" data-categories="typography"
-        hidden="true">
+<ul hidden id="tiposCon" class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
+    <li><div id="rbByC" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Bares & cafés</div></li>
+    <li><div id="rbRes" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Restaurantes</div></li>
+    <li><div id="rbTer" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Terrazas</div></li>
+    <li><div id="rbHot" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Hoteles & Alojamientos</div></li>
+    <li><div id="rbPla" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Playas</div></li>
+    <li><div id="rbTie" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Tiendas</div></li>
+    <li><div id="rbPar" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Parques</div></li>
+    <li><div id="rbTra" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Transportes</div></li>
+    <li><div id="rbCen" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Centros de belleza</div></li>
+    <li><div id="rbCli" class="d-block text-dark p-3 py-4 mb-2 bg-light text-center rounded text-muted conOpt">Clínicas</div></li>
+</ul>
+
+
+<ul hidden id="tiposPara" class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list border m-2 p-2">
+    <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="numbers" data-categories="typography">
         <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('spa') && 'is-selected'%> filterOption"
             id="spa" is-selected="false">
             <div class="p-3 py-4 mb-2 bg-light text-center rounded">
@@ -43,7 +57,7 @@
         </a>
     </li>
     <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="pulse heartbeat rhythm"
-        data-categories="data" hidden="true" is-selected="false">
+        data-categories="data" is-selected="false">
         <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('vet') && 'is-selected'%> filterOption"
             id="vet">
             <div class="p-3 py-4 mb-2 bg-light text-center rounded">
@@ -53,8 +67,7 @@
             </div>
         </a>
     </li>
-    <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="alarm clock time" data-categories="devices"
-        hidden="true">
+    <li class="col mb-4 optionsParaMascota" style="height: 10em; cursor: pointer;" data-tags="alarm clock time" data-categories="devices">
         <a class="d-block text-dark text-decoration-none <%=selectedTypes && selectedTypes.includes('tiendas') && 'is-selected'%> filterOption"
             id="tiendas">
             <div class="p-3 py-4 mb-2 bg-light text-center rounded">
@@ -86,20 +99,48 @@
 <script>
     // para cambiar el color de texto de la sección en el navbar
     highlightNavbar(2)
+    var strLocation = ''
+    if (window.location.toString().includes('list')) strLocation = '/establishments?tab=listado'
+    else strLocation = '/establishments?tab=mapa'
+    // filtros con mascota
+    document.querySelectorAll('.conOpt').forEach(elem => {
+        // cambiando bordes
+        if (window.location.toString().includes(elem.id)) {
+            document.getElementById('tiposCon').hidden = false
+            document.querySelector("#dropdownFiltro").value = "conMascota"
+            elem.classList.add('border', 'border-primary')
+            strLocation = strLocation + '&' + elem.id + '=t'
+        }
+        elem.addEventListener('click', (event) => {
+            if (event.target.classList.contains('border-primary')){
+                event.target.classList.remove('border', 'border-primary')
+                strLocation = strLocation.replace('&' + event.target.id + '=t', '')
+            } else {
+                event.target.classList.add('border', 'border-primary')
+                strLocation = strLocation + '&' + event.target.id + '=t'
+            }
+            window.location = strLocation
+        })
+    })
+    // cargando celda con bordes
+
     window.addEventListener('load', () => {
         document.querySelectorAll('.tab-selector').forEach(elem => elem.addEventListener('change', (event) => {
             window.location = '/establishments?tab=' + event.target.value
         }))
+    })
+        // filtros para mascota
         document.querySelector("#dropdownFiltro").addEventListener('change', (event) => {
             //unhide all elements of class 'optionsParaMascota'
             if (event.target.value == "paraMascota") {
-                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                    elem.hidden = false
-                })
+                document.getElementById('tiposPara').hidden = false
+                document.getElementById('tiposCon').hidden = true
+            } else if (event.target.value == "conMascota") {
+                document.getElementById('tiposPara').hidden = true
+                document.getElementById('tiposCon').hidden = false
             } else {
-                document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                    elem.hidden = true
-                })
+                if (window.location.toString().includes('list')) window.location = '/establishments?tab=listado'
+                else window.location = '/establishments?tab=mapa'
             }
         })
 
@@ -108,38 +149,43 @@
         //if selectedTypes contains 'vet', 'spa' or 'tiendas' then unhide all optionsParaMascota class elements
         if (selectedTypes.includes("vet")) {
             document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                elem.hidden = false
+                document.getElementById('tiposPara').hidden = false
                 //set corresponding value to dropdownFiltro
                 document.querySelector("#dropdownFiltro").value = "paraMascota"
             })
         }
         if (selectedTypes.includes("spa")) {
             document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                elem.hidden = false
+                document.getElementById('tiposPara').hidden = false
                 document.querySelector("#dropdownFiltro").value = "paraMascota"
             })
         }
         if (selectedTypes.includes("tiendas")) {
             document.querySelectorAll('.optionsParaMascota').forEach(elem => {
-                elem.hidden = false
+                document.getElementById('tiposPara').hidden = false
                 document.querySelector("#dropdownFiltro").value = "paraMascota"
             })
         }
-
+        var href = window.location.href
         document.querySelectorAll(".filterOption").forEach(function (elem) {
             elem.addEventListener("click", function (event) {
+                
+                document.querySelectorAll('.conOpt').forEach(elem => {
+                    href = href.replace('&' + elem.id + '=t', '')
+                    console.log(href)
+                })
                 if (elem.classList.contains("is-selected")) {
                     //set window location to current url without '&' or '?' + 'type' + elem.id
-                    window.location = window.location.href.indexOf("?"+'type='+elem.id) > -1 ? (window.location.href.indexOf('type='+elem.id+'&')>-1? window.location.href.replace('type='+elem.id+'&', ''):window.location.href.replace('?type='+elem.id, '')) : window.location.href.replace('&type='+elem.id, '')
+                    window.location = href.indexOf("?"+'type='+elem.id) > -1 ? (href.indexOf('type='+elem.id+'&')>-1? href.replace('type='+elem.id+'&', ''):href.replace('?type='+elem.id, '')) : href.replace('&type='+elem.id, '')
                 }else{
                     //if element doesn't contain 'is-selected' class, add type to url
                     if(window.location.href.includes("?")){
-                        window.location = window.location.href + '&type=' + elem.id
+                        window.location = href + '&type=' + elem.id
                     }else{
-                        window.location = window.location.href + '?type=' + elem.id
+                        window.location = href + '?type=' + elem.id
                     }
                 }
             })
         })
-    })
+    
 </script>

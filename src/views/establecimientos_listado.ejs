@@ -1,13 +1,13 @@
-<h3>Establecimientos listado</h3>
+<h3 class="mt-4">Establecimientos listado</h3>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row row-cols-1 row-cols-md-3 g-4 mt-2 pb-3">
     <% establecimientos.forEach(function(establecimiento){ %>
         <div class="col">
-            <div class="card text-center" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'">
+            <div class="card text-center py-3" role="button" onclick="location.href='establecimiento_detalle?id=<%=establecimiento.id%>'">
                 <h5 class="card-title fw-bold"> <%=establecimiento.name%> </h5>
                 <img role="" src="data:image/png;base64,<%=establecimiento.photo1?establecimiento.photo1:''%>" class="img-fluid"
                     style="width: 100%; object-fit:contain">
-                <div class="category-panel">
+                <div class="category-panel pb-4 mb-3">
                     <div class="icon-type ">
                         <!-- Con la mascota -->
                         <% if (establecimiento.type=='Bares & Cafés'){ %>
@@ -44,6 +44,11 @@
                     </div>
                 </div>
                 <div class="row align-items-center" style="min-height: 50px;">
+                    <div class="col-12 pt-3">  
+                        <p class="my-1 text-danger">
+                            <%=establecimiento.type%>
+                        </p>
+                    </div>
                     <div class="col-8">
                         <span class="align-middle"> <%=establecimiento.location.district%> </span>
                     </div>
