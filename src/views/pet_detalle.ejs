@@ -176,7 +176,7 @@
                                 <%=dueño.phone_number%>
                             </p>
                         </div>
-                        <% if (globalType.length>0 && !sameUser){ %>
+                        <% if (globalType.length>0 && globalType!='shelter' && !sameUser){ %>
                             <div class="row">
                                 <figure class="text-center">                            
                                     <a href="/anuncios/reportar?id=<%=post.pet_id%>" type="button"

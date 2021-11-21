@@ -43,33 +43,36 @@ module.exports = {
                     console.log('ingresó')
                     if (usuario.type == 'person')
                         await UserPerson.findOne({
-                            attributes: ['id'],
+                            attributes: ['id', 'user_id'],
                             raw: true,
                             where: {
                                 user_id: usuario.id
                             }
                         }).then(us => {
                             req.session.userId = us.id
+                            req.session.globalUserId = us.user_id
                         })
                     else if (usuario.type == 'shelter')
                         await UserShelter.findOne({
-                            attributes: ['id'],
+                            attributes: ['id', 'user_id'],
                             raw: true,
                             where: {
                                 user_id: usuario.id
                             }
                         }).then(us => {
                             req.session.userId = us.id
+                            req.session.globalUserId = us.user_id
                         })
                     else if (usuario.type == 'admin')
                         await UserAdmin.findOne({
-                            attributes: ['id'],
+                            attributes: ['id', 'user_id'],
                             raw: true,
                             where: {
                                 user_id: usuario.id
                             }
                         }).then(us => {
                             req.session.userId = us.id
+                            req.session.globalUserId = us.user_id
                         })
                     req.session.userType = usuario.type
                     break

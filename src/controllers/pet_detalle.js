@@ -41,19 +41,19 @@ module.exports = {
                 },
               ]
             }
-        ) 
+        )
       var sameUser = false;
       if (post.user.type == "shelter"){
         const dueño = await UserShelter.findOne({where:{user_id:post.user_id}})
         post.pet = imagesToBase645(post.pet)
-        if(req.session && req.session.userId == dueño.user_id){
+        if(req.session && req.session.globalUserId == dueño.user_id){
           sameUser = true;
         }
         return res.render('pet_detalle',{post:post,dueño:imagesToBase645(dueño),sameUser:sameUser});
       } else {
         const dueño = await UserPerson.findOne({where:{user_id:post.user_id}})
         post.pet = imagesToBase645(post.pet)
-        if(req.session && dueño.user_id == req.session.userId){
+        if(req.session && dueño.user_id == req.session.globalUserId){
           sameUser = true;
         }
         return res.render('pet_detalle',{post:post,dueño:imagesToBase645(dueño), sameUser:sameUser});
