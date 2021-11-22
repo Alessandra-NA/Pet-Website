@@ -231,7 +231,7 @@
               <label class="form-label fw-bold">Foto:</label>
             </div>
             <div class="row justify-content-center">
-              <img src="data:image/png;base64,<%=reporte.photo?reporte.photo:''%>" alt="No foto" style="width: 300px;">
+              <img src="data:image/png;base64,<%=reporte.photo?reporte.photo:''%>" alt="No foto" style="max-height: 158px;">
             </div>
           </div>
           <div class="card-footer pb-0">
@@ -241,8 +241,7 @@
                   <% if (people.user_id==reporte.userAdoptante_id) { %>
                     <div class="row d-flex align-items-center">
                       <div class="col-4">
-                        <img src="data:image/png;base64,<%=people.photo?people.photo:''%>" alt="avatar"
-                          class="rounded-circle img-fluid" style="width: 80px;">
+                        <img src="data:image/png;base64,<%=people.photo?people.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 80px;">
                       </div>
                       <div class="col-8">
                         <label class="fw-bold">Por:</label>

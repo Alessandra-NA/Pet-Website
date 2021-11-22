@@ -4,12 +4,13 @@
   </div>
   <!--ver el "border-2" mezcla de clase en Boostrap y Tailwind-->
   <form action="/adopcion/postAdopcion" method="post" enctype="multipart/form-data"
-    class="row my-3 p-2 border border-gray-500 g-3">
+    class="row my-3 p-2 border border-gray-500 g-3 needs-validation" novalidate="">
     <h3 class="fw-bold">1. Datos:</h3>
     <div class="row input-group mb-3">
       <div class="col-md-4">
         <label for="" class="form-label">Nombre:</label>
-        <input type="text" class="form-control" placeholder="Nombre de la mascota" name="name" value="" required>
+        <input type="text" maxlength="50" class="form-control" placeholder="Nombre de la mascota" name="name" value="" required>
+        <div class="invalid-feedback">Debe rellenar el campo</div>
       </div>
       <div class="col-md-4">
         <label for="" class="form-label">Especie:</label>
@@ -20,6 +21,7 @@
             </option>
             <% }) %>
         </select>
+        <div class="invalid-feedback">Debe seleccionar una especie </div>
       </div>
       <div class="col-md-4">
         <label for="" class="form-label">Sexo:</label>
@@ -30,13 +32,18 @@
             </option>
             <% }) %>
         </select>
+        <div class="invalid-feedback">Debe seleccionar un sexo</div>
       </div>
     </div>
-
     <div class="row input-group mb-3">
       <div class="col-md-4">
         <label for="" class="form-label">Fecha de nacimiento(Aprox.):</label>
-        <input type="date" class="form-control" name="birthdate" required>
+        <input type="date" id="fecha" class="form-control" max=""  name="birthdate" required>
+        <div class="invalid-feedback">Debe seleccionar una fecha </div>
+        <script>
+          var today = new Date().toISOString().split('T')[0];
+          document.getElementById("fecha").setAttribute("max", today);
+        </script>
       </div>
       <div class="col-md-4">
         <label for="" class="form-label">Tamaño:</label>
@@ -44,12 +51,12 @@
           <select class="form-select" name="size" required>
             <option selected disabled value="">Choose...</option>
             <% tamanhos.forEach(function(tamanho){ %>
-              <option value=<%=tamanho.id%> > <%=tamanho.name%>
-              </option>
-              <% }) %>
+              <option value=<%=tamanho.id%> > <%=tamanho.name%> </option>
+            <% }) %>
           </select>
-          <input type="number" class="form-control" placeholder="Peso" name="weight" required>
+          <input type="number" min=1 max="50" step="0.01" class="form-control" placeholder="Peso" name="weight" required>
           <span class="input-group-text">Kg</span>
+          <div class="invalid-feedback">Debe seleccionar un tamaño y el peso no debe ser mayor a 50 kg</div>
         </div>
       </div>
       <div class="col-md-4">
@@ -61,6 +68,7 @@
             </option>
             <% }) %>
         </select>
+        <div class="invalid-feedback">Debe seleccionar una actividad</div>
       </div>
     </div>
 
@@ -69,6 +77,7 @@
       <label for="" class="form-label">Descripción:</label>
       <textarea class="form-control" name="story" rows=4 maxlength="300" placeholder="Breve descripción de la mascota"
         style="resize: none;" required></textarea>
+        <div class="invalid-feedback">Debe rellenar el campo</div>
     </div>
 
     <h3 class="fw-bold">2. Se entrega:</h3>
@@ -117,12 +126,13 @@
         </button>
         <input type="file" name="image" id="input_foto" onchange="handleIMG(this.files), previewImage(event)"
           accept="image/*" required style="display: none">
+        <div class="invalid-feedback">Debe seleccionar una imagen</div>
       </div>
     </div>
 
     <div class="col-12">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
         <label class="form-check-label text-blue-700" for="invalidCheck2">
           Agree to terms and conditions
         </label>

@@ -32,20 +32,25 @@ function highlightNavbar(index) {
     navbarList.item(index).setAttribute("class", "nav-link active")
 }
 
-function test(){
-    
-    /*
-    (document).ready(function (e) {
-        ('#reportComment').on('show.bs.modal', function(e) {    
-            var id = (e.relatedTarget).data().id;
-            (e.currentTarget).find('#idComment').val(id);
-            console.log(id);
-        });
-    });
-    */
+function Validaciones(){
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+    'use strict'
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
 }
 
 var main = function(){
+    Validaciones()
     document.getElementById("button_navbar").onclick = OnclickNavbar;
     document.querySelectorAll(".listener-report").forEach(element => {
         element.addEventListener("click",function(e){
@@ -53,9 +58,6 @@ var main = function(){
             document.getElementById("idComment").setAttribute("value",id);
         })
     });
-    
-    
-    
 }
 window.addEventListener("load", main)
 

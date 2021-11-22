@@ -27,7 +27,7 @@ Pet.init(
             allowNull: true,
         },
         weight: {
-            type: DataTypes.FLOAT(50),
+            type: DataTypes.DECIMAL(4,2),
             allowNull: false,
         },
         story: {
