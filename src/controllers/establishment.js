@@ -66,6 +66,7 @@ module.exports = {
 
             } else if (Object.keys(req.query).length > 1) {
                 var rbByC = ''
+                var rbRes = ''
                 var rbTer = ''
                 var rbPla = ''
                 var rbHot = ''
@@ -75,8 +76,9 @@ module.exports = {
                 var rbCli = ''
                 var rbTra = ''
                 if (req.query.rbByC == 't') rbByC = 'Bares & cafés'
-                if (req.query.rbTer == 't') rbTer = 'Restaurantes'
-                if (req.query.rbPla == 't') rbPla = 'Terrazas'
+                if (req.query.rbRes == 't') rbRes = 'Restaurantes'
+                if (req.query.rbTer == 't') rbTer = 'Terrazas'
+                if (req.query.rbPla == 't') rbPla = 'Playas'
                 if (req.query.rbHot == 't') rbHot = 'Hoteles & Alojamientos'
                 if (req.query.rbTie == 't') rbTie = 'Tiendas'
                 if (req.query.rbPar == 't') rbPar = 'Parques'
@@ -84,7 +86,7 @@ module.exports = {
                 if (req.query.rbCli == 't') rbCli = 'Clínicas'
                 if (req.query.rbTra == 't') rbTra = 'Transportes'
                 var establishments = []
-                if ([rbByC, rbTer, rbPla, rbHot, rbTie, rbPar, rbCen, rbCli, rbTra].filter(e => e != '').length != 0) establishments = await Establishment.findAll({
+                if ([rbByC, rbRes, rbTer, rbPla, rbHot, rbTie, rbPar, rbCen, rbCli, rbTra].filter(e => e != '').length != 0) establishments = await Establishment.findAll({
                     include: [
                         {
                             model: Location,
@@ -92,7 +94,7 @@ module.exports = {
                         }
                     ],
                     where: {
-                        type: { [Op.or]: [rbByC, rbTer, rbPla, rbHot, rbTie, rbPar, rbCen, rbCli, rbTra].filter(e => e != '') }
+                        type: { [Op.or]: [rbByC, rbRes, rbTer, rbPla, rbHot, rbTie, rbPar, rbCen, rbCli, rbTra].filter(e => e != '') }
                     }
                 })
             } else {
