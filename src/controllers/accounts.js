@@ -363,13 +363,25 @@ module.exports = {
   getReportesComentarios : async(req,res) => {
     try{
       const user_id = req.query.user_id      
-      const reportedComments = await ReportUserComment.findAll({include : {all : true}})
+      const reportedComments = await ReportUserComment.findAll(
+        {
+          include : 
+          {
+            model: Comment,
+            as: 'comment',
+            include:{
+              all: true
+            }
+        }})
       const user_reportedComments = []
       reportedComments.forEach(reportedComment => {
         if(reportedComment.comment.userPerson_id == user_id){
           user_reportedComments.push(reportedComment)
         }          
-      });     
+      });
+      console.log(user_reportedComments[0].Comment)
+
+
       //Datos del usuario reportado
       let userChild = null
       const user = await User.findOne({include : {all : true}, where : {id : user_id}})
@@ -379,6 +391,8 @@ module.exports = {
       } else {
         userChild = await UserShelter.findOne({include : {all : true}, where : {user_id : user_id}})
       }
+
+      console.log(user_reportedComments[0].comment)
 
       return res.render('verReportesComentario', {
         title : 'Ver reportes comentarios',

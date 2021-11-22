@@ -1,6 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css">
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <main class="container">
   
@@ -179,42 +179,42 @@
     <% } %>
     
 <!--VIEW REPORTES-->
-
-    <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
-      <% reportes.forEach(function(reporte){ %>
-            <div style="width: 33%"; class="col">
-                <div id="cardReport" class="card">
-                    <div class="card-title">
-                        <h4 class="mt-3" style="font-weight: bold; text-align: center;">Reporte</h4>
-                    </div>
-                    <div class="card-body">
-                        <label for="" class="form-label" style="font-weight: bold;">Comentario</label>
-                        <p><%= reporte.comment.desc %></p>
-                        <div class="row mt-4">
-                          <div class="col-6">
-                              <label for="" style="font-weight: bold;">Fecha:</label>                                            
-                              <label for="" style="font-size:90%"; class="form-label"><%= reporte.fecha %></label>
-                          </div>
-                      </div>  
-                    </div>
-                    <div id="footerReport" class="card-footer">                  
-
-                      <form action="/accounts/cambiarStatus2" method="POST">
-                        <select id="changeStatus" class="form-select" name="status" id="" required>
-                            <option selected disabled value=""><%= user.status %></option>
-                            <option value="actived">Activo</option>
-                            <option value="reported">Reportado</option>
-                            <option value="blocked">Bloqueado</option>
-                        </select>
-                        <input type="text" value="<%= user.id %>" name="id" hidden>
-                        <input type="text" value="<%= reporte.id %>" name="reporte_id" hidden>
-                        <button id="reportButton" style="margin:0%"; type="submit" class="btn btn-success mt-3 mb-2">Ok</button>
-                      </form>
-
-                    </div>
+  <div class="row row-cols-1 row-cols-md-5 g-4 mt-2 mb-4">
+    <% reportes.forEach(function(reporte){ %>
+      <div class="col" style="width: 33%;">
+        <div id="cardReport" class="card">
+          <div class="card-title text-center py-3">
+              <h4 class="mt-3" style="font-weight: bold; text-align: center;">Reporte</h4>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                <div class="col-8">
+                  <div class="form-label" style="font-weight: bold;"><%= reporte.comment.establishment.name %></div>
+                  <div for="" style="font-weight: bold;"; class="form-label"><%= reporte.fecha %></div>
                 </div>
-            </div>
-      <% }) %>
-    
-    </div>
+                <div class="col-4">
+                  <span class="align-middle"> <%=reporte.comment.establishment.rating%>/5 </span>
+                  <span class="material-icons align-middle"> pets </span>
+                </div>
+              </div>
+              <p><%= reporte.comment.desc %></p>
+          </div>
+          <div id="footerReport" class="card-footer">
+            <form action="/accounts/cambiarStatus2" method="POST">
+              <select id="changeStatus" class="form-select" name="status" id="" required>
+                  <option selected disabled value=""><%= user.status %></option>
+                  <option value="actived">Activo</option>
+                  <option value="reported">Reportado</option>
+                  <option value="blocked">Bloqueado</option>
+              </select>
+              <input type="text" value="<%= user.id %>" name="id" hidden>
+              <input type="text" value="<%= reporte.id %>" name="reporte_id" hidden>
+              <button id="reportButton" style="margin:0%"; type="submit" class="btn btn-success mt-3 mb-2">Ok</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
 </main>
