@@ -38,6 +38,9 @@ module.exports = {
   getReportarAnuncios : async (req,res) =>{
     var id =req.query.id;
     console.log("================== "+id)
+    if(req.session.userType !== 'person'){
+      res.redirect('/anuncios')
+    }
     try
     {    
       const post = await Post.findByPk(id,{include: { all: true }})
