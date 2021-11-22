@@ -81,72 +81,44 @@ ul{
 	background-color: #ffffff;
 }
 
-#userImage {
-	margin-top: -2%;
-}
-
-#reportButton {
-	width: 100%;
-}
-
-#changeStatus {
-	text-align: center;
-}
-
-#reportOptions {
-	margin-top: -35%;
-}
-
-#imageReport {
-	width: 100%; 
-	margin-bottom: -25%;
-}
-
-
-#footerReport {
-	margin-top: 25%
-}
-
-
 /*responsive*/
 @media(max-width: 767px){
-  .footer-col{
-    width: 50%;
-    margin-bottom: 30px;
-}
-
-	#cardReport{
-	position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 0.25rem;
-    margin-right: -150%;
-	}
-
-}
-
-@media(max-width: 574px){
-  .footer-col{
-    width: 100%;
-}
-#cardReport{
-	position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 0.25rem;
-    margin-right: -200%;
+	.footer-col{
+	  width: 50%;
+	  margin-bottom: 30px;
 	}
 }
+
+  @media(max-width: 574px){
+	  .footer-col{
+		  width: 100%;
+	  }
+  }
+
+@media screen and (min-width: 768px) {
+    .card-border-report-adopcion {
+        min-height: 450px;
+    }
+} 
+
+@media screen and (min-width: 992px) {
+    .card-border-report-adopcion {
+        min-height: 380px;
+    }
+} 
+
+@media screen and (min-width: 1200px) {
+    .card-border-report-adopcion {
+        min-height: 480px;
+    }
+} 
+
+@media screen and (min-width: 1400px) {
+    .card-border-report-adopcion {
+        min-height: 380px;
+    }
+} 
+
 
 
 
