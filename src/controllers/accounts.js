@@ -379,7 +379,6 @@ module.exports = {
           user_reportedComments.push(reportedComment)
         }          
       });
-      console.log(user_reportedComments[0].Comment)
 
 
       //Datos del usuario reportado
@@ -391,8 +390,6 @@ module.exports = {
       } else {
         userChild = await UserShelter.findOne({include : {all : true}, where : {user_id : user_id}})
       }
-
-      console.log(user_reportedComments[0].comment)
 
       return res.render('verReportesComentario', {
         title : 'Ver reportes comentarios',
