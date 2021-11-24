@@ -45,7 +45,9 @@ module.exports = {
     {    
       const post = await Post.findByPk(id,{include: { all: true }})
 
-      console.log(post.user.type)
+      if(post.user.id === req.session.globalUserId){
+        res.redirect('/anuncios')
+      }
 
       if(post.user.type=="person"){
         //get userperson
