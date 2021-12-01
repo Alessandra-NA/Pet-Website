@@ -1,7 +1,7 @@
 <main class="container">
     
     <div>
-        <form action="/signup/crearPeople" enctype="multipart/form-data" method="POST" class="row my-3 p-2 border-2 g-3">
+        <form action="/signup/crearPeople" enctype="multipart/form-data" method="POST" class="row my-3 p-2 border-2 g-3 needs-validation" novalidate="">
             
             <h2 class="mb-4">Creación de nuevo usuario personal:</h2>
             
@@ -9,14 +9,15 @@
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombre de usuario:</label>
-                <input placeholder="Ingrese un nombre de usuario" name="nombre_de_usuario" type="text" class="form-control me-2" minlength="5" maxlength="20" required>
+                <input placeholder="Ingrese un nombre de usuario" name="nombre_de_usuario" type="text" class="form-control me-2" required>
+                <div class="invalid-feedback">Rellenar campo</div>
 
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Contraseña:</label>
 
-                <input placeholder="Ingrese una contraseña" name="contraseña" type="password" class="form-control me-2" minlength="5" maxlength="20" required>
+                <input placeholder="Ingrese una contraseña" name="contraseña" type="password" class="form-control me-2" required>
 
             </div>
 
@@ -25,14 +26,14 @@
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombres:</label>
 
-                <input placeholder="Ingrese sus nombres" name="nombres" type="text" class="form-control me-2" minlength="2" maxlength="30" required>
+                <input placeholder="Ingrese sus nombres" name="nombres" type="text" class="form-control me-2" required>
 
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Apellidos:</label>
 
-                <input placeholder="Ingrese sus apellidos" name="apellidos" type="text" class="form-control me-2" minlength="2" maxlength="30" required>
+                <input placeholder="Ingrese sus apellidos" name="apellidos" type="text" class="form-control me-2" required>
 
             </div>
             
@@ -58,7 +59,7 @@
 
             <div class="mb-4 col-md-6">
                 <label for="" class="form-label">Distrito:</label>
-                <select class="form-select" id="user_gender" name="distrito" required>
+                <select class="form-select" id="user_district" name="distrito" required>
                     <option selected disabled value="">--Seleccione una opción--</option>
                     <option value="Ancón">Ancón</option>
                     <option value="Ate Vitarte">Ate Vitarte</option>
@@ -108,7 +109,7 @@
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Dirección:</label>
-                <input placeholder="Ingrese su dirección" name="direccion" type="text" class="form-control me-2" minlength="8" maxlength="70" required>
+                <input placeholder="Ingrese su dirección" name="direccion" type="text" class="form-control me-2" required>
 
             </div>
 
@@ -126,10 +127,10 @@
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Email:</label>
-                <input placeholder="Ingrese su correo electrónico" name="correo" type="email" class="form-control me-2" minlength="8" maxlength="50" required>
+                <input placeholder="Ingrese su correo electrónico" name="correo" type="email" class="form-control me-2" required>
 
             </div>
-            
+
             <div class="mb-4 col-md-6">
                 <label class="form-label">Telefono celular:</label>
                 <input placeholder="Ingrese su número de telefono" name="celular" type="number" class="form-control me-2" required>
@@ -153,3 +154,5 @@
 </main>
 
 <script src="/js/selectFoto.js"></script>
+<script src="/js/index.js"></script>
+
