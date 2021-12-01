@@ -107,19 +107,19 @@
         <div style="width: 33%"; class="col">
             <div class="card">
                 <div class="card-body">
-                  <form action="/accounts/confirmarSugerencia" method="POST">
-                    
+                  <form action="/accounts/confirmarSugerencia" method="POST" class="needs-validation" novalidate=""> 
                     <div class="row mt-4"> 
                     <div class="col-6"> 
                     <label for="" class="form-label" style="font-weight: bold;">Nombre:</label>
-                    <% if (sugerencia.name == null){ %>
+                    <% if (sugerencia.name == ""){ %>
                     <input type="text" class="form-control" placeholder="No sugerido" disabled>
                     <% } else { %>
-                    <input type="text" class="form-control" value="<%=sugerencia.name%>" name="nombreS" required>
+                    <input type="text" class="form-control" value="<%=sugerencia.name%>" name="nombreS" maxlength="100" required>
+                    <div class="invalid-feedback">Debe rellenar el campo</div>
                     <% } %>
                       
                     <label for="" class="mt-3 form-label" style="font-weight: bold;">Tipo:</label>
-                    <% if (sugerencia.type == null){ %>
+                    <% if (sugerencia.type == ""){ %>
                     <input type="text" class="form-control" placeholder="No sugerido" disabled>
                     <% } else { %>
                     <select name="tipoS" class="form-select" required>
@@ -142,7 +142,7 @@
                     <% } %>
   
                     <label for="" class="mt-3 form-label" style="font-weight: bold;">Distrito:</label>
-                    <% if (sugerencia.district == null){ %>
+                    <% if (sugerencia.district == ""){ %>
                     <input type="text" class="form-control" placeholder="No sugerido" disabled>
                     <% } else { %>
                       
@@ -196,21 +196,21 @@
                     <% } %>
   
                     <label for="" class="mt-3 form-label" style="font-weight: bold;">Dirección exacta:</label>
-                    <% if (sugerencia.address == null){ %>
+                    <% if (sugerencia.address == ""){ %>
                     <input type="text" class="form-control" placeholder="No sugerido" disabled>
                     <% } else { %>
-                    <input type="text" class="form-control" value="<%=sugerencia.address%>" name="direccionS" required>
+                    <input type="text" class="form-control" value="<%=sugerencia.address%>" name="direccionS" maxlength="100" required>
+                    <div class="invalid-feedback">Debe rellenar el campo</div>
                     <% } %>
   
                     <label for="" class="mt-3 form-label" style="font-weight: bold;">Link:</label>
-                    <% if (sugerencia.link == null){ %>
+                    <% if (sugerencia.link == ""){ %>
                       <input type="text" class="form-control" placeholder="No sugerido" disabled>
                     <% } else { %>
-                      <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS" required>
+                      <input type="text" class="form-control" value="<%=sugerencia.link%>" name="linkS" maxlength="150">
+                      <div class="invalid-feedback">Debe rellenar el campo</div>
                     <% } %>
-                  
 
-                    <% if (sugerencia.user.type == "person") { %>
                       <% usuariosPeople.forEach(function(people){ %>
                         <% if (people.user_id == sugerencia.user.id) { %>
                           <div class="row mt-4">
@@ -223,27 +223,8 @@
                               <label for="" style="font-size:90%"; class="form-label"><%= sugerencia.fecha %></label>
                             </div>
                           </div>
-  
                         <% } %>
                       <% }) %>
-  
-                    <% } else if(sugerencia.user.type == "shelter") { %>
-                      <% usuariosShelter.forEach(function(shelter){ %>
-                        <% if (shelter.user_id == sugerencia.user.id) { %>
-                          <div class="row mt-4">
-                            <div class="col-6">
-                              <img src="data:image/png;base64,<%=shelter.photo?shelter.photo:''%>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                            </div>
-                            <div class="col-6">
-                              <label for="">Por:</label>
-                              <label for="" style="font-weight: bold;" class="form-label"><%= shelter.name %></label>
-                              <label for="" style="font-size:90%"; class="form-label"><%= sugerencia.fecha %></label>
-                            </div>
-                          </div>
-  
-                        <% } %>
-                      <% }) %>
-                    <% } %>
                   </div>
                     
 
@@ -256,17 +237,17 @@
                     <% } else { %>
                       <% if (sugerencia.photo1 != null) { %>
                         <img src="data:image/png;base64,<%=sugerencia.photo1%>" alt="avatar" class="rounded-circle img-fluid mt-2" style="width: 150px;">
-                        <input type="checkbox" name="img1" value=1>
+                        <input class="form-check-input" type="checkbox" name="img1" value=1>
                       <% } %>
       
                       <% if (sugerencia.photo2 != null) { %>
                         <img src="data:image/png;base64,<%=sugerencia.photo2%>" alt="avatar" class="rounded-circle img-fluid mt-2" style="width: 150px;">
-                        <input type="checkbox" name="img2" value=2>
+                        <input class="form-check-input" type="checkbox" name="img2" value=2>
                       <% } %>
       
                       <% if (sugerencia.photo3 != null) { %>
                         <img src="data:image/png;base64,<%=sugerencia.photo3%>" alt="avatar" class="rounded-circle img-fluid mt-2" style="width: 150px;">
-                        <input type="checkbox" name="img3" value=3>
+                        <input class="form-check-input" type="checkbox" name="img3" value=3>
                       <% } %>
       
                     <% } %>

@@ -140,7 +140,7 @@
 
 <div class="container">
     <div class="col d-grid gap-2 d-md-flex justify-content-end">
-        <% if (globalType.length>0 && globalType != 'admin') { %>
+        <% if (globalType.length>0 && globalType != 'admin' && globalType != 'shelter') { %>
             <button type="button" class="btn btn-primary" style="float: right;"
                 onclick="location.href='./suggestion_form?id=<%=establecimiento.id%>'">Dar Sugerencia</button>
         <% } %>
@@ -227,7 +227,7 @@
   </div>
 </div>
 
-<% if (globalType.length>0 && globalType != 'admin') { %>
+<% if (globalType.length>0 && globalType != 'admin' && globalType != 'shelter') { %>
     <div class="container">
         <form action="/establecimiento_detalle/nuevo_comentario?id=<%=establecimiento.id%>" method="post" class="row my-3">
             <div class="row">
@@ -240,7 +240,7 @@
                 </div>
                 <div class="col-5 align-self-center">
                     <div class="row">
-                        <p class="h4 text-center">¿Cuentas huellitas le pones?</p>
+                        <p class="h4 text-center">¿Cuantas huellitas le pones?</p>
                     </div>
                     <div class="my-3">
                         <div class="form-check form-check-inline">

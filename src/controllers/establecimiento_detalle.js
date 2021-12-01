@@ -37,59 +37,52 @@ module.exports = {
   },
 
   crearSugerencia: async (req, res) => {
-    var id = req.body.id;
-    var name = req.body.name;
-    var type = req.body.type;
-    var link = req.body.link;
-    var address = req.body.address;
-    var district = req.body.district;
-
-    const photo1 = req.files[0]?.buffer
-    const photo2 = req.files[1]?.buffer
-    const photo3 = req.files[2]?.buffer
-
-    const userType = req.session.userType
-    const idUser = req.session.userId
-    var userID = 0
-    if (userType == "person") {
-      currentUser = await UserPerson.findOne({ where: { id: idUser } })
-      userID = currentUser.user_id
-    } else if (userType == "shelter") {
-      currentUser = await UserShelter.findOne({ where: { id: idUser } })
-      userID = currentUser.user_id
-    }
-
-
-    var f = new Date();
-    var fecha = f.getFullYear() + "-" + f.getMonth() + "-" + f.getDate()
-    console.log(fecha)
-
-    console.log(name)
-    console.log(type)
-    console.log(link)
-    console.log(address)
-    console.log(district)
-
-    await Suggestion.create({
-      name: name,
-      photo1: photo1,
-      photo2: photo2,
-      photo3: photo3,
-      fecha: fecha,
-      type: type,
-      link: link,
-      address: address,
-      district: district,
-      establishment_id: id,
-      user_id: userID
-    });
-
-
     try {
+      var id = req.body.id;
+      var name = req.body.name;
+      var type = req.body.type;
+      var link = req.body.link;
+      var address = req.body.address;
+      var district = req.body.district;
+
+      const photo1 = req.files[0]?.buffer
+      const photo2 = req.files[1]?.buffer
+      const photo3 = req.files[2]?.buffer
+
+      const userType = req.session.userType
+      const idUser = req.session.userId
+      var userID = 0
+      console.log("==========>"+idUser)
+      if (userType == "person") {
+        currentUser = await UserPerson.findOne({ where: { id: idUser } })
+        userID = currentUser.user_id
+      } else if (userType == "shelter") {
+        currentUser = await UserShelter.findOne({ where: { id: idUser } })
+        userID = currentUser.user_id
+      }
+
+
+      var f = new Date();
+      var fecha = f.getFullYear() + "-" + f.getMonth() + "-" + f.getDate()
+      console.log("==========>"+userID)
+      await Suggestion.create({
+        name: name,
+        photo1: photo1,
+        photo2: photo2,
+        photo3: photo3,
+        fecha: fecha,
+        type: type,
+        link: link,
+        address: address,
+        district: district,
+        establishment_id: id,
+        userPerson_id: userID
+      });
+      console.log("==========> fin")
       res.redirect('/establecimiento_detalle?id=' + id);
     }
-    catch {
-
+    catch(error) {
+      console.log(error)
     }
 
   },
@@ -117,7 +110,12 @@ module.exports = {
         ],
         where: { id: idEstablecimiento }
       })
-      const newRating = Math.round((parseInt(establecimiento.rating) + parseInt(score))/2)
+      var newRating = 0
+      if(establecimiento.rating == 0 ){
+        newRating = parseInt(score)
+      }else {
+        newRating = Math.round((parseInt(establecimiento.rating) + parseInt(score))/2)
+      }
       establecimiento.update({
         rating: newRating
       })
