@@ -9,16 +9,16 @@
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombre de usuario:</label>
-                <input placeholder="Ingrese un nombre de usuario" name="nombre_de_usuario" type="text" class="form-control me-2" required>
-                <div class="invalid-feedback">Rellenar campo</div>
+                <input placeholder="Ingrese un nombre de usuario" minlength="5" maxlength="20" name="nombre_de_usuario" type="text" class="form-control me-2" required>
+                <div class="invalid-feedback">Rellenar campo con una username entre 5 a 20 caracteres</div>
 
             </div>
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Contraseña:</label>
 
-                <input placeholder="Ingrese una contraseña" name="contraseña" type="password" class="form-control me-2" required>
-                <div class="invalid-feedback">Rellenar campo</div>
+                <input placeholder="Ingrese una contraseña" minlength="5" maxlength="20" name="contraseña" type="password" class="form-control me-2" required>
+                <div class="invalid-feedback">Rellenar campo con una contraseña entre 5 a 20 caracteres</div>
 
             </div>
 
@@ -27,7 +27,7 @@
             <div class="mb-4 col-md-6">
                 <label class="form-label">Nombres:</label>
 
-                <input placeholder="Ingrese sus nombres" name="nombres" type="text" class="form-control me-2" required>
+                <input placeholder="Ingrese sus nombres" minlength="2" maxlength="30" name="nombres" type="text" class="form-control me-2" required>
                 <div class="invalid-feedback">Rellenar campo</div>
 
             </div>
@@ -35,7 +35,7 @@
             <div class="mb-4 col-md-6">
                 <label class="form-label">Apellidos:</label>
 
-                <input placeholder="Ingrese sus apellidos" name="apellidos" type="text" class="form-control me-2" required>
+                <input placeholder="Ingrese sus apellidos" minlength="2" maxlength="30" name="apellidos" type="text" class="form-control me-2" required>
                 <div class="invalid-feedback">Rellenar campo</div>
 
             </div>
@@ -117,7 +117,7 @@
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Dirección:</label>
-                <input placeholder="Ingrese su dirección" name="direccion" type="text" class="form-control me-2" required>
+                <input placeholder="Ingrese su dirección" minlength="8" maxlength="50" name="direccion" type="text" class="form-control me-2" required>
                 <div class="invalid-feedback">Rellenar campo</div>
 
             </div>
@@ -136,15 +136,15 @@
             
             <div class="mb-4 col-md-6">
                 <label class="form-label">Email:</label>
-                <input placeholder="Ingrese su correo electrónico" name="correo" type="email" class="form-control me-2" required>
-                <div class="invalid-feedback">Rellenar campo</div>
+                <input placeholder="Ingrese su correo electrónico" minlength="8" maxlength="50" name="correo" type="email" class="form-control me-2" required>
+                <div class="invalid-feedback">Rellenar campo con un correo válido (min. 8 caracteres)</div>
 
             </div>
 
             <div class="mb-4 col-md-6">
                 <label class="form-label">Telefono celular:</label>
                 <input placeholder="Ingrese su número de telefono" name="celular" type="number" class="form-control me-2" required>
-                <div class="invalid-feedback">Rellenar campo</div>
+                <div class="invalid-feedback">Rellenar campo con un número de teléfono válido</div>
 
             </div>
 
